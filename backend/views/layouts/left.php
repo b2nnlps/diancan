@@ -31,7 +31,97 @@
                     ['label' => 'Menu', 'options' => ['class' => 'header']],
                     ['label' => '控制面板', 'icon' => 'fa fa-dashboard',  'url' => ['/site/index'],'visible'=>Yii::$app->user->can('/site/index')],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                    ['label' => '会员管理', 'icon' => 'fa fa-user', 'url' => ['/sys/member/index'],'visible'=>Yii::$app->user->can('/sys/member/index')],
+                       [
+                        'label' => '分销商城',
+                        'icon' => 'fa fa-cubes',
+                        'url' => '/merchant/product/index',
+                        'items' => [
+                            [
+                                'label' => '商家中心',
+                                'icon' => 'fa fa-street-view',
+                                'url' => '/eshop/product/index',
+                                'items' => [
+                                    [
+                                        'label' => '代理商品',
+                                        'icon' => 'fa fa-circle-o',
+                                        'url' => ['/merchant/agent/index'],
+                                'visible'=>Yii::$app->user->can('/merchant/agent/index')
+                                    ],
+                                    [
+                                        'label' => '商品管理',
+                                        'icon' => 'fa fa-circle-o',
+                                        'url' => ['/merchant/product/index'],
+                                'visible'=>Yii::$app->user->can('/merchant/product/index')
+                                    ],
+                                    ['label' => '商品分类',
+                                        'icon' => 'fa fa-circle-o',
+                                        'url' => ['/merchant/category/index'],
+                                'visible'=>Yii::$app->user->can('/merchant/category/index')
+                                    ],
+                                    [
+                                        'label' => '商家信息',
+                                        'icon' => 'fa fa-circle-o',
+                                        'url' => ['/merchant/supplier/index'],
+                                'visible'=>Yii::$app->user->can('/merchant/supplier/index')
+                                    ],
+
+
+                                ],
+                                'visible'=>Yii::$app->user->can('/merchant/product/index')
+                            ],
+
+                            [
+                                'label' => '会员管理',
+                                'icon' => 'fa fa-user',
+                                'url' => ['/merchant/member/index'],
+                                'visible'=>Yii::$app->user->can('/merchant/member/index')
+                            ],
+                            [
+                                'label' => '收货地址',
+                                'icon' => 'fa fa-map-marker',
+                                'url' => ['/merchant/address/index'],
+                                'visible'=>Yii::$app->user->can('/merchant/address/index')
+                            ],
+                            [
+                                'label' => '订单管理',
+                                'icon' => 'fa fa-line-chart',
+                                'url' => '/merchant/order/index',
+                                'items' => [
+                                    [
+                                        'label' => '订单信息',
+                                        'icon' => 'fa fa-pie-chart',
+                                        'url' => ['/merchant/order/index'],
+                                        'visible'=>Yii::$app->user->can('/merchant/order/index')
+                                    ],
+                                    [
+                                        'label' => '订单商品',
+                                        'icon' => 'fa  fa-camera-retro',
+                                        'url' => ['/merchant/orderproduct/index'],
+                                        'visible'=>Yii::$app->user->can('/merchant/orderproduct/index')
+                                    ],
+                                    [
+                                        'label' => '订单状态',
+                                        'icon' => 'fa fa-truck',
+                                        'url' => ['/merchant/orderstatus/index'],
+                                        'visible'=>Yii::$app->user->can('/merchant/orderstatus/index')
+                                    ],
+                                    [
+                                        'label' => '购物车',
+                                        'icon' => 'fa fa-shopping-cart',
+                                        'url' => ['/merchant/cart/index'],
+                                        'visible'=>Yii::$app->user->can('/merchant/cart/index')
+                                    ],
+                                ],
+                                'visible'=>Yii::$app->user->can('/merchant/order/index')
+                            ],
+                        ],
+                        'visible'=>Yii::$app->user->can('/merchant/product/index')
+                    ],
+
+
+
+
+				   ['label' => '会员管理', 'icon' => 'fa fa-user', 'url' => ['/sys/member/index'],'visible'=>Yii::$app->user->can('/sys/member/index')],
                     ['label' => '收货地址', 'icon' => 'fa fa-map-marker', 'url' => ['/sys/address/index'],'visible'=>Yii::$app->user->can('/sys/address/index')],
                     [
                         'label' => '订单管理',
@@ -68,6 +158,27 @@
                         ],
                         'visible'=>Yii::$app->user->can('/eshop/depot/index')
                     ],
+					 [
+                        'label' => '资讯管理',
+                        'icon' => 'fa fa-database',
+                        'url' => '/news/info/index',
+                        'items' => [
+                            [
+                                'label' => '资讯信息',
+                                'icon' => 'fa fa-circle-o',
+                                'url' => ['/news/info/index'],
+                                'visible'=>Yii::$app->user->can('/news/info/index')
+                            ],
+                            [
+                                'label' => '资讯分类',
+                                'icon' => 'fa fa-circle-o',
+                                'url' => ['/news/category/index'],
+                                'visible'=>Yii::$app->user->can('/news/category/index')
+                            ],
+
+                        ],
+                        'visible'=>Yii::$app->user->can('/news/info/index')
+                    ],
 					  [
                         'label' => '活动管理',
                         'icon' => 'fa fa-hourglass-end',
@@ -90,8 +201,8 @@
                                 'icon' => 'fa fa-street-view',
                                 'url' => '#',
                                 'items' => [
-                                    ['label' => '活动管理', 'icon' => 'fa fa-circle-o', 'url' => ['#'],],
-                                    ['label' => '报名管理', 'icon' => 'fa fa-circle-o', 'url' => ['#'],],
+                                    ['label' => '活动管理', 'icon' => 'fa fa-circle-o', 'url' => ['/activitys/applyactivity/index'],],
+                                    ['label' => '报名管理', 'icon' => 'fa fa-circle-o', 'url' => ['/activitys/applyattend/index'],],
                                 ],
                             ],
 

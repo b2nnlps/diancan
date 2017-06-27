@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $product_id
  * @property integer $depot_id
+ * @property integer $supplier_id
  * @property integer $stock
  * @property integer $sales
  * @property integer $status
@@ -34,8 +35,8 @@ class Stock extends \common\components\base\BaseActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'depot_id'], 'required'],
-            [['product_id', 'depot_id', 'stock', 'sales', 'status'], 'integer'],
+            [['product_id', 'depot_id', 'supplier_id'], 'required'],
+            [['product_id', 'depot_id', 'supplier_id', 'stock', 'sales', 'status'], 'integer'],
             [['created_time', 'updated_time'], 'safe'],
             [['created_by', 'updated_by'], 'string', 'max' => 255],
         ];
@@ -48,10 +49,11 @@ class Stock extends \common\components\base\BaseActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => '商品ID',
             'depot_id' => '库房ID',
+            'supplier_id'=>'商家ID',
+            'product_id' => '商品ID',
             'stock' => '库存',
-            'sales' => '销售量',
+            'sales' => '出库量',
             'status' => '状态',
             'created_by' => '创建人',
             'updated_by' => '更新人',

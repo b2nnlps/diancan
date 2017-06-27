@@ -23,13 +23,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <!-- small box -->
             <div class="small-box bg-aqua">
                 <div class="inner">
-                    <h3><?=\member\modules\eshop\models\Order::find()->where(['!=','status',5])->count()?></h3>
+					<h3>3</h3>
                     <p>商品订单</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
                 </div>
-               <a target="_blank" href="<?=Yii::$app->urlManager->createAbsoluteUrl(['eshop/stat'])?>" class="small-box-footer">订单统计 <i class="fa fa-arrow-circle-right"></i></a>
+               <a target="_blank" href="#" class="small-box-footer">订单统计 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -37,13 +37,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3><?=\member\modules\eshop\models\Product::find()->count()?><sup style="font-size: 20px"></sup></h3>
+                    <h3>6<sup style="font-size: 20px"></sup></h3>
                     <p>商品信息</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['eshop/product'])?>" class="small-box-footer">更多<i class="fa fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer">更多<i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -51,13 +51,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <!-- small box -->
             <div class="small-box bg-yellow">
                 <div class="inner">
-                    <h3><?=\member\modules\sys\models\Member::find()->count()?></h3>
+                    <h3>966</h3>
                     <p>实名用户</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['sys/member'])?>" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -65,13 +65,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <!-- small box -->
             <div class="small-box bg-red">
                 <div class="inner">
-                    <h3><?=\member\modules\sys\models\WechatUser::find()->count()?></h3>
+                    <h3>889</h3>
                     <p>微信用户</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['sys/wechat'])?>" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer">更多 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -108,36 +108,57 @@ $this->params['breadcrumbs'][] = $this->title;
                             <th>收件人</th>
                             <th>手机号码</th>
                             <th>收货地址</th>
-<!--                            <th>备注</th>-->
                         </tr>
-                        <?php
-                        foreach ($order as $_v){
-                            $status=$_v['status'];
-                            if($status==1){
-                                $labelClass='warning';
-                            }else if($status==2){
-                                
-                                $labelClass='primary';
-                            }else if($status==3){
-                                $labelClass='info';
-                            } else if($status==4){
-                                $labelClass='success';
-                            }else{
-                                $labelClass='danger';
-                            }
-                        ?>
                         <tr>
-                            <td><?=$_v['id']?></td>
-                            <td><a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['eshop/order/view','id'=>$_v['id']])?>"><?=$_v['sn']?></a></td>
-                            <td><?=$_v['amount']?></td>
-                            <td><span class="label label-<?=$labelClass?>"><?=\member\modules\eshop\models\Order::status($status)?></span></td>
-                            <td><?=\member\modules\sys\models\Member::getMemberName($_v['user_id'])?></td>
-                            <td><?=$_v['consignee']?></td>
-						    <td><?=\common\models\ComModel::hidtel($_v['phone'])?></td>
-                            <td><?=$_v['address']?></td>
-<!--                            <td>--><?//=$_v['remark']?><!--</td>-->
+                            <td>1</td>
+                            <td><a href="">2017152347</a></td>
+                            <td>555.88</td>
+                            <td><span class="label label-warning">待支付</span></td>
+                            <td>张三</td>
+                            <td>李四</td>
+						    <td>1800555555</td>
+                            <td>海南琼海</td>
                         </tr>
-                    <?php }?>
+                            <tr>
+                                <td>2</td>
+                                <td><a href="">2017152347</a></td>
+                                <td>555.88</td>
+                                <td><span class="label label-primary">配送中</span></td>
+                                <td>张三</td>
+                                <td>李四</td>
+                                <td>1800555555</td>
+                                <td>海南琼海</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><a href="">2017152347</a></td>
+                                <td>555.88</td>
+                                <td><span class="label label-info">已下单</span></td>
+                                <td>张三</td>
+                                <td>李四</td>
+                                <td>1800555555</td>
+                                <td>海南琼海</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td><a href="">2017152347</a></td>
+                                <td>555.88</td>
+                                <td><span class="label label-success">已成交</span></td>
+                                <td>张三</td>
+                                <td>李四</td>
+                                <td>1800555555</td>
+                                <td>海南琼海</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td><a href="">2017152347</a></td>
+                                <td>555.88</td>
+                                <td><span class="label label-danger">已取消</span></td>
+                                <td>张三</td>
+                                <td>李四</td>
+                                <td>1800555555</td>
+                                <td>海南琼海</td>
+                            </tr>
                     </table>
                 </div>
                 <!-- /.box-body -->

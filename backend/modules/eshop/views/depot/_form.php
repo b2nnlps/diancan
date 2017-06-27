@@ -21,6 +21,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'addres')->textInput(['maxlength' => true]) ?>
+	
+	<?= $form->field($model, 'message')->textarea(['rows' => 7,''])->hint('请输入接收消息的OpenID，多个用英文状态下的“ , ”（逗号）分隔') ?>
 
     <?= $form->field($model, 'status')->dropDownList($model::status()) ?>
 

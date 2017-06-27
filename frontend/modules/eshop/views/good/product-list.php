@@ -110,11 +110,12 @@ $signPackage = $jssdk->GetSignPackage();
             <div class="list">
                 <?php
                 foreach ($model as $_v){
+					Yii::$app->session['step'] = 1;
                     $cart=Cart::find()->where(['product_id'=>$_v['id'],'session_id'=>Yii::$app->session->id])->one();
                     $number=$cart['number'];
-                    if ($number==null){
-                        $number=0;
-                    } ?>
+                    if ($number == null) {
+                        $number = 0;
+                    }?>
                         <dl>
 
                             <a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['eshop/good/commodity','id'=>$_v['id']])?>">
@@ -176,9 +177,9 @@ $signPackage = $jssdk->GetSignPackage();
     </div>
     <!--悬浮菜单：结束-->
 </div>
-<div class="personage">
+<div class="personages">
     <a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['eshop/personal/index'])?>">
-        <ins class="icon-5"></ins><p>个人中心</p>
+        <ins class="icon-5"></ins>
     </a>
 </div>
 <script type="text/javascript">

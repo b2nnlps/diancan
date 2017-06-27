@@ -176,7 +176,7 @@
                         window.location.href="javascript:history.go(-1)";
                     });
                 }else{
-                    $.dialog('confirm','提示','现在确认下单吗？',0,function(){
+                 //    $.dialog('confirm','提示','现在确认下单吗？',0,function(){
                         var data =csrfName + '='+crsfToken+"&address_id="+address_id+"&method="+method+"&remark="+remark.val()+"&supplier_id="+<?=$supplier_id?>;
 //                        alert(data);
                          if (!checkSubmitFlg) {
@@ -186,7 +186,7 @@
                             });
                         }
 						
-                    });
+                 //    });
                 }
                   return true;
             } else {

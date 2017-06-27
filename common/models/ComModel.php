@@ -25,14 +25,14 @@ class ComModel {
        $lastStr= mb_substr($user_name, -1, 1, 'utf-8');
        return $strlen==2?$firstStr.str_repeat('*',mb_strlen($user_name, 'utf-8') - 1):$firstStr.str_repeat("*",$strlen-2).$lastStr;
    }
-   
-     /**
-    * PHP简单的文章标题字符限制，一个汉字2个字符
-    * @param type $str
-    * @param type $len
-    * @param type $suffix
-    * @return string
-    */
+    
+    /**
+     * PHP简单的文章标题字符限制，一个汉字2个字符
+     * @param $str
+     * @param $len
+     * @param string $suffix
+     * @return string
+     */
     public static function cut_str($str,$len,$suffix="..."){
         // 此处设定从0开始截取，取N个追加...，使用utf8编码
         // 注意追加的...也会被计算到长度之内 
@@ -69,6 +69,12 @@ class ComModel {
 //            return $str;
 //        }         
 //    }
+
+    /**
+     * 隐藏手机中间几位数
+     * @param $phone
+     * @return mixed
+     */
   public static function hidtel($phone){
         $IsWhat = preg_match('/(0[0-9]{2,3}[-]?[2-9][0-9]{6,7}[-]?[0-9]?)/i',$phone); //固定电话
         if($IsWhat == 1){
@@ -77,4 +83,26 @@ class ComModel {
             return  preg_replace('/(1[358]{1}[0-9])[0-9]{4}([0-9]{4})/i','$1****$2',$phone);
         }
     }
+
+    /**
+     * 随机生成大小写数字的字符串
+     * echo createRandomStr(10);
+     * @param $length
+     * @return string
+     */
+    public static function createRandomStr($length){
+        $str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_';//64个字符
+        $strlen = 64;
+        while($length > $strlen){
+            $str .= $str;
+            $strlen += 64;
+        }
+        $str = str_shuffle($str);
+        return substr($str,0,$length);
+    }
+
+
+
+    
+    
 }

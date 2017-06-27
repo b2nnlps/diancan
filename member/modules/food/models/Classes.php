@@ -47,6 +47,7 @@ class Classes extends \yii\db\ActiveRecord
             'name' => '分类名字',
             'img' => '分类图片',
             'shop_id' => 'Shop ID',
+            'updated_time' => 'Updated Time',
             'created_time' => 'Created Time',
         ];
     }

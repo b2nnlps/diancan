@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'admin',
             'phone',
             'addres',
+			'message',
             [
                 'attribute' => 'status',
                 'value' =>$model::status($model->status),

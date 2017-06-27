@@ -14,10 +14,7 @@ $this->title = '订单商品';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="box-body table-responsive no-padding">
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-<!--    <p>-->
-<!--        --><?//= Html::a('新增订单商品', ['create'], ['class' => 'btn btn-success']) ?>
-<!--    </p>-->
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

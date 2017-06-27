@@ -74,9 +74,25 @@ use backend\modules\sys\models\Member;
                     <dd><?=$order['sn']?></dd>
                     <div class="clear"></div>
                 </dl>
+				  <dl>
+                    <dt>出库：</dt>
+                    <dd><?=\backend\modules\eshop\models\Sumpplier::getName($supplier_id)?></dd>
+                    <div class="clear"></div>
+                </dl>
+				 <dl>
+                    <dt>推荐人：</dt>
+                    <dd><?=\backend\modules\sys\models\Member::getMemberName($order['referrer'])?></dd>
+                    <div class="clear"></div>
+                </dl>
+             
 				 <dl>
                     <dt>下单人：</dt>
                     <dd><?=\backend\modules\sys\models\Member::getMemberName($order['user_id'])?></dd>
+                    <div class="clear"></div>
+                </dl>
+				   <dl>
+                    <dt>下单时间：</dt>
+                    <dd><?=$order['created_time']?></dd>
                     <div class="clear"></div>
                 </dl>
                 <dl>
@@ -153,7 +169,7 @@ use backend\modules\sys\models\Member;
                          <?php }else{?>
                         <dl>
                             <em></em>
-             <dt>【<?=Orderstatus::status($_v['status'])?>】<?=$_v['remark']?>&nbsp;&nbsp;[操作员：<a href="tel:<?=Member::getPhone($_v['user_id']);?>"><?=Member::getPhone($_v['user_id']);?></a>&nbsp;]</dt>
+							<dt>【<?=Orderstatus::status($_v['status'])?>】<?=$_v['remark']?>&nbsp;&nbsp;[操作员：<a href="tel:<?=Member::getPhone($_v['user_id']);?>"><?=Member::getPhone($_v['user_id']);?></a>&nbsp;]</dt>
                             <dd><?=$_v['created_time']?></dd>
                         </dl>
                         <?php } }?>
@@ -199,7 +215,7 @@ use backend\modules\sys\models\Member;
         var checkSubmitFlg = false;
         $('#conf').click(function() {
             if (!checkSubmitFlg) {
-                $.dialog('confirm', '提示', '现在更新订单状态吗？', 0, function () {
+               // $.dialog('confirm', '提示', '现在更新订单状态吗？', 0, function () {
                     var orderstatus = document.getElementById("orderstatus").value;
                     var remark = $('#remark');
                     var data = csrfName + '=' + crsfToken + "&orderid=" + orderid + "&orderstatus=" + orderstatus + "&remark=" + remark.val()+ "&supplier_id=" + supplier_id;
@@ -210,7 +226,7 @@ use backend\modules\sys\models\Member;
                             window.location.href = result;
                         });
                     }
-                });
+              //  });
                 return true;
             } else {
                 //重复提交

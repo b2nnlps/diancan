@@ -29,9 +29,40 @@
     </div>
     <div class="main">
         <div class="listbox">
+		<?php
+			$apply=\backend\modules\activitys\models\ApplyActivity::find()->where(['status'=>1])->orderBy('id desc')->all();
+			foreach ($apply as $_v){
+				$now_time=strtotime(date('Y-m-d H:i:s')); //当前时间
+				$start_time=strtotime($_v['start_time']); //活动开始时间
+				$end_time=strtotime($_v['end_time']); //活动结束时间
+				if($start_time>$now_time){//活动尚未开始
+					$bc='#F39D12;';
+					$status='未开始';
+				}elseif ($end_time<$now_time){//活动已结束
+					$bc='#DD4A38;';
+					$status='已结束';
+				}else{
+					$bc='#00A75A;';
+					$status='进行中';
+				}
 
+				?>
+				<a href="http://ms.n39.cn/activitys/default/apply?aid=<?=$_v['id']?>">
+					<dl>
+						<dt><img src="<?=$_v['imgurl']?>"></dt>
+						<dd>
+							<h3><?=$_v['title']?></h3>
+							<time><img src="<?=Yii::$app->view->theme->baseUrl?>/activity_v1/icon/time.png"><?=date('Y-m-d',$start_time)?>至<?=date('Y-m-d',$end_time)?></time>
+							<span><img src="<?=Yii::$app->view->theme->baseUrl?>/activity_v1/icon/browse.png"><?=$_v['pv']?></span>
+							<span><img src="<?=Yii::$app->view->theme->baseUrl?>/activity_v1/icon/person.png"><?=$_v['willnum']?></span>
+						</dd>
+						<div class="clear"></div>
+						<p style=" background-color:<?=$bc?>"><?=$status?></p>
+					</dl>
+				</a>
+			<?php }?>
               <?php
-            foreach ($activity as $_v){
+				foreach ($activity as $_v){
                 $id=$_v['id'];
                 if($id=='1'){
                     $url='http://micro.n39.cn/activity/default/index?id=1&openid=oW2yKjgaf8fAuYYdkjSMUEbZ2n7o&winzoom=1';
@@ -69,7 +100,7 @@
 						</dl>
 					</a>
 				<?php }?>
-
+	
         </div>
     </div>
 </div>

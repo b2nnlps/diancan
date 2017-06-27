@@ -38,8 +38,20 @@ class BaseController extends Controller
             ],
         ];
     }
-    public function beforeAction($action)
+	
+	  public function actions()
     {
+        return [
+            'ueditor' => [
+                'class' => 'crazyfd\ueditor\Upload',
+                'config'=>[
+                    'uploadDir'=>date('Y/m/d')
+                ]
+
+            ],
+        ];
+    }
+    public function beforeAction($action){
         $action ='/'.Yii::$app->controller->module->id .'/'.Yii::$app->controller->id .'/'. Yii::$app->controller->action->id;
         if(Yii::$app->user->can($action)){
             return true;

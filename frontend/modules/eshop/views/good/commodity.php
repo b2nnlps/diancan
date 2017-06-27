@@ -131,19 +131,28 @@ $sumpplier=\backend\modules\eshop\models\Sumpplier::findOne($model['supplier_id'
         <div id="woaicss_con2" style="display:none;">
             <div class="record">
                 <?php
-                $orderproduct=Orderproduct::find()->where(['product_id'=>$model['id'],'status'=>10])->asArray()->orderBy('id desc')->all();
-                foreach($orderproduct as $_v){?>
-                <dl>
-                    <dt><img src="<?=WechatUser::getHeadimgurl($_v['user_id'])?>"></dt>
-                    <dd>
-                        <h4><?=WechatUser::getNickname($_v['user_id'])?></h4>
-                       <span> <?=$_v['created_time']?>&nbsp;&nbsp;订购：<?=$_v['number']?> <?=$_v['sku']?></span>
-                    </dd>
-                    <div class="clear"></div>
-                </dl>
-                <?php }?>
-            </div>
-        </div>
+                $product_id=$model['id'];
+                $connection = Yii::$app->db;
+                $sql = "select * from  {{%eshop_orderproduct}} where product_id=$product_id and status=10  order by id desc limit 0,8";
+                $command=$connection->createCommand($sql);
+                $orderproduct=$command->queryAll();
+                foreach ($orderproduct as $_v){
+                    ?>
+                    <dl class="nm">
+                        <dt><img src="<?=WechatUser::getHeadimgurl($_v['user_id'])?>"></dt>
+                        <dd>
+                            <h4><?=WechatUser::getNickname($_v['user_id'])?></h4>
+                            <span> <?=$_v['created_time']?>&nbsp;&nbsp;订购：<?=$_v['number']?> <?=$_v['sku']?></span>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                <?php } ?>
+			</div>
+			 <?php if(count($orderproduct)!=0){?>
+                <div class="get_more">查看更多记录</div>
+            <?php }else{?>
+                <div class="null">没有相关记录</div>
+            <?php } ?>
     </div>
 
     <!--悬浮菜单：开始-->
@@ -178,6 +187,33 @@ $sumpplier=\backend\modules\eshop\models\Sumpplier::findOne($model['supplier_id'
 <script type="text/javascript">
     $('.spinnerExample').spinner({});
 </script>
+<script type="text/javascript">
+    $(function () {
+        $('.get_more').click(function () {
+            if($(this).text()=='没有更多了'){return false;} //停止加载
+
+            var csrfName = $('meta[name=csrf-param]').prop('content');
+            var crsfToken = $('meta[name=csrf-token]').prop('content');
+            var list_num = $('.nm').length;  //获取当前总条数
+            var amount = 8; //每次点击加载条数
+            var product_id ='<?=$product_id?>';
+            // alert(list_num);
+//            $(this).text('').append("<img src='<?//=Yii::$app->view->theme->baseUrl?>///more/loader.gif'>");
+            var data =csrfName + '='+crsfToken+"&list_num="+list_num+"&amount="+amount+"&product_id="+product_id;
+			//  alert(data);
+            $.post('<?=Yii::$app->urlManager->createAbsoluteUrl(['eshop/good/more'])?>',data, function (result){
+                if(result=='not_more'){
+                    $('.get_more').text('没有更多了');
+                }else{
+                    $('.get_more').text('查看更多记录');
+                    $('.record').append(result);
+                }
+            })
+
+        })
+    })
+</script>
+
 </body>
 </html>
 

@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "{{%eshop_kcsl}}".
  *
  * @property integer $id
- * @property integer $product_id
+ * @property integer $stock_id
  * @property integer $access_stock
  * @property integer $out_stock
  * @property integer $types
@@ -35,8 +35,8 @@ class Kcsl extends \common\components\base\BaseActiveRecord
     public function rules()
     {
         return [
-            [['product_id'], 'required'],
-            [['product_id', 'access_stock', 'out_stock', 'types', 'number', 'status'], 'integer'],
+            [['stock_id'], 'required'],
+            [['stock_id', 'access_stock', 'out_stock', 'types', 'number', 'status'], 'integer'],
             [['created_time', 'updated_time'], 'safe'],
             [['created_by', 'updated_by'], 'string', 'max' => 255],
         ];
@@ -49,7 +49,7 @@ class Kcsl extends \common\components\base\BaseActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => '商品ID',
+            'stock_id' => '库存ID',
             'access_stock' => '出库',
             'out_stock' => '进库',
             'types' => '类别',

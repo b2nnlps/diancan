@@ -18,7 +18,7 @@ class KcslSearch extends Kcsl
     public function rules()
     {
         return [
-            [['id', 'product_id', 'access_stock', 'out_stock', 'types', 'number', 'status'], 'integer'],
+            [['id', 'stock_id', 'access_stock', 'out_stock', 'types', 'number', 'status'], 'integer'],
             [['created_by', 'updated_by', 'created_time', 'updated_time'], 'safe'],
         ];
     }
@@ -60,7 +60,7 @@ class KcslSearch extends Kcsl
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'product_id' => $this->product_id,
+            'stock_id' => $this->stock_id,
             'access_stock' => $this->access_stock,
             'out_stock' => $this->out_stock,
             'types' => $this->types,

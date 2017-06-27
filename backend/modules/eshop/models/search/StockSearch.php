@@ -18,7 +18,7 @@ class StockSearch extends Stock
     public function rules()
     {
         return [
-            [['id', 'product_id', 'depot_id', 'stock', 'sales', 'status'], 'integer'],
+            [['id', 'product_id', 'depot_id', 'supplier_id',  'stock', 'sales', 'status'], 'integer'],
             [['created_by', 'updated_by', 'created_time', 'updated_time'], 'safe'],
         ];
     }
@@ -60,8 +60,9 @@ class StockSearch extends Stock
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'product_id' => $this->product_id,
             'depot_id' => $this->depot_id,
+            'supplier_id' => $this->supplier_id,
+            'product_id' => $this->product_id,
             'stock' => $this->stock,
             'sales' => $this->sales,
             'status' => $this->status,

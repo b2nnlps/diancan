@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>订单统计表</title>
+<link href="style/base.css" rel="stylesheet" type="text/css"/>
+
+<script src="script/jquery-1.8.2.min.js"></script>
+<script src="script/index.js"></script>
+
+
+</head>
+
+<body>
+<div class="wrapper"> 
+  <!--头部：开始-->
+  <div class="headline"><h1>订单统计表</h1><hr/></div>
+  <div class="headBox">
+    <ul class="clearfix">
+      <li>
+        <label for="meeting">时间：</label>
+        <input id="meeting" type="date" value="2014-01-13"/>
+        —
+        <label for="meeting"></label>
+        <input id="meeting" type="date" value="2014-01-13"/>
+      </li>
+      <li>
+        <select>
+          <option>王某某</option>
+          <option>李某某</option>
+          <option>张某某</option>
+        </select> 
+      </li>
+      <li>
+        <form class="clearfix" >
+          <input type="text" placeholder="请您输入">
+        </form>
+      </li>
+      <li> <a href="#"> <img src="images/search.png">搜用户 </a> </li>
+    </ul>
+  </div>
+  <div class="totalbox">
+     <span>总金额:100000</span>
+     <span>总数量：5000箱</span>
+     <span>未完成：250箱</span>
+     <span>交易成功：4750箱</span>
+  </div>
+  <!--头部：结束--> 
+  <!--主体内容：开始--> 
+  <!---->
+  <div style="background-color:#E8F5FB" class="accordion-container"> 
+    <!---->
+    <div class="container">
+      <div class="accordion"> 
+      <a href="#">
+        <table class="colourbox">
+          <tr>
+            <th style="width:5%">ID</th>
+            <th style="width:15%">订单号</th>
+            <th style="width:5%">推介人</th>
+            <th style="width:5%">用户号</th>
+            <th style="width:5%">收件人</th>
+            <th style="width:10%">手机号码</th>
+            <th style="width:5%">总额</th>
+            <th style=" width:5%">支付方式</th>
+            <th style=" width:10%">支付状态</th>
+            <th style=" width:5%">状态</th>
+            <th style=" width:10%">是否结算</th>
+            <th style=" width:20%">下单时间</th>
+          </tr>
+        </table>
+        </a> 
+        </div>
+    </div>
+    <!----> <!---->
+    <div class="container">
+      <div class="accordion acist"> <a href="#">
+        <table class="list">
+          <tr>
+            <th style="width:5%">1</th>
+            <th style="width:15%">888888888888888888</th>
+            <th style="width:5%">天海</th>
+            <th style="width:5%">周游</th>
+            <th style="width:5%">周游</th>
+            <th style="width:10%">139****8888</th>
+            <th style="width:5%">10000</th>
+            <th style=" width:5%">货到付款</th>
+            <th style=" width:10%">未付款</th>
+            <th style=" width:5%">订单已成交</th>
+            <th style=" width:10%">未结算</th>
+            <th style=" width:20%">2017-01-08 18:32:06</th>
+          </tr>
+        </table>
+        </a>
+         </div>
+      <div class="accordion-desc">
+               <table>
+                  <tr class="colour">
+                    <th style=" width:5%;">ID</th>
+                    <th style="">订单商品名称</th>
+                    <th style="">数量</th>
+                    <th style=" ">单位</th>
+                    <th style="">单价</th>
+                    <th style=" ">总额</th>
+                    <th style="">状态</th>
+                    <th style=" ">下单时间</th>
+                  </tr>
+                  <tr class="colourchange">
+                    <th style="">1</th>
+                    <th style="">欧洲风情庄园干葡萄酒</th>
+                    <th style="">10000</th>
+                    <th style="">100箱</th>
+                    <th style="">408.00</th>
+                    <th style=" ">40800.00</th>
+                    <th style=" ">可用</th>
+                    <th style=" ">2017-01-08 18:32:06</th>
+                  </tr>
+                </table>
+      </div>
+    </div>
+    <!----> 
+       <div style="background-color:#DFF4FC" class="container">
+      <div class="accordion  acist"> <a href="#">
+        <table class="list">
+          <tr>
+            <th style="width:5%">2</th>
+            <th style="width:15%">888888888888888888</th>
+            <th style="width:5%">天海</th>
+            <th style="width:5%">周游</th>
+            <th style="width:5%">周游</th>
+            <th style="width:10%">139****8888</th>
+            <th style="width:5%">10000</th>
+            <th style=" width:5%">货到付款</th>
+            <th style=" width:10%">未付款</th>
+            <th style=" width:5%">订单已成交</th>
+            <th style=" width:10%">未结算</th>
+            <th style=" width:20%">2017-01-08 18:32:06</th>
+          </tr>
+        </table>
+        </a> </div>
+      <div class="accordion-desc">
+               <table>
+                  <tr class="colour">
+                    <th style=" width:5%;">ID</th>
+                    <th style="">订单商品名称</th>
+                    <th style="">数量</th>
+                    <th style=" ">单位</th>
+                    <th style="">单价</th>
+                    <th style=" ">总额</th>
+                    <th style="">状态</th>
+                    <th style=" ">下单时间</th>
+                  </tr>
+                  <tr class="colourchange">
+                    <th style="">1</th>
+                    <th style="">欧洲风情庄园干葡萄酒</th>
+                    <th style="">10000</th>
+                    <th style="">100箱</th>
+                    <th style="">408.00</th>
+                    <th style=" ">40800.00</th>
+                    <th style=" ">可用</th>
+                    <th style=" ">2017-01-08 18:32:06</th>
+                  </tr>
+                </table>
+      </div>
+    </div>
+    <!---->  
+
+    <!-- end of container --> 
+  </div>
+  <!-- end of accordion-container --> 
+  <!----> 
+  <!--主体内容：结束-->
+  <!--分页器：开始-->
+    <!--分页器：结束--> 
+    <ul class="pagination">
+        <li><a href="#">上一页</a></li>
+        <li><a href="#">1</a></li>
+        <li class="active"><span>2</span></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">6</a></li>
+        <li class="disabled"><span>下一页</span></li>
+    </ul>
+      <!--分页器：结束--> 
+</div>
+</body>
+</html>

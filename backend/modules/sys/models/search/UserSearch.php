@@ -5,12 +5,12 @@ namespace backend\modules\sys\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\sys\models\user;
+use backend\modules\sys\models\User;
 
 /**
- * UserSearch represents the model behind the search form about `backend\modules\sys\models\user`.
+ * UserSearch represents the model behind the search form about `backend\modules\sys\models\User`.
  */
-class UserSearch extends user
+class UserSearch extends User
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class UserSearch extends user
      */
     public function search($params)
     {
-        $query = user::find()->orderBy('id desc');
+        $query = User::find()->orderBy('id desc');
 
         // add conditions that should always apply here
 

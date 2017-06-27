@@ -13,6 +13,7 @@ use Yii;
  * @property string $admin
  * @property string $phone
  * @property string $addres
+ * @property string $message
  * @property integer $status
  * @property string $created_by
  * @property string $updated_by
@@ -36,6 +37,7 @@ class Depot extends \common\components\base\BaseActiveRecord
     {
         return [
             [['name', 'admin'], 'required'],
+            [['message',], 'string'],
             [['status'], 'integer'],
             [['created_time', 'updated_time'], 'safe'],
             [['user_id', 'name', 'admin', 'phone', 'addres', 'created_by', 'updated_by'], 'string', 'max' => 255],
@@ -54,6 +56,7 @@ class Depot extends \common\components\base\BaseActiveRecord
             'admin' => '管理员',
             'phone' => '联系电话',
             'addres' => '地址',
+            'message'=> '消息推送',
             'status' => '状态',
             'created_by' => '创建人',
             'updated_by' => '修改人',

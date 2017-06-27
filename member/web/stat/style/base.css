@@ -1,0 +1,75 @@
+@charset "utf-8";
+/* CSS Document */
+/*==基础样式==*/
+*{margin:0; padding:0;font-family:"微软雅黑";}
+body{ font:16px/1.5 Helvetica,"微软雅黑",Arial,sans-serif; color:#333; font-family:"微软雅黑";}
+html { font-size:100%; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;}
+* html,* html body{background-image:url(about:blank);background-attachment:fixed;}
+ul,li{ list-style-type:none;}
+input,button,textarea{outline:none;}
+/*表单按钮重置居中兼容*/
+button::-moz-focus-inner, input[type=”reset”]::-moz-focus-inner, input[type=”button”]::-moz-focus-inner, input[type=”submit”]::-moz-focus-inner, input[type=”file”] > input[type=”button”]::-moz-focus-inner { 
+border:none /*去虚线框*/; 
+padding:0; 
+}
+/*===(清除浮动：开始)=====*/
+.clearfix:after{ content:"."; display:block; width:0; height:0; clear:both; visibility:hidden; overflow:hidden;}
+.clearfix{ display:block;}
+.clearfix{ clear:both;zoom: 1;}
+/*===(清除浮动：结束)=====*/
+a{ text-decoration:none; color:#333;}
+input,textaera,img{border:0; vertical-align:middle;}
+cite,em{ font-style:normal;}
+h1,h2,h3,h4,h5,h6{ font-weight:normal;}
+h1{ font-size:25px;}h4{ font-size:18px;}
+h2{ font-size:22px;}h5{ font-size:16px;}
+h3{ font-size:20px;}h6{ font-size:14px;}
+
+/*盒子*/
+.wrapper{ width:100%; margin:auto;}
+/*=============（全站公共样式部分：开始）===================*/
+.headline{ width:100%;}
+.headline h1{ text-align:center; height:50px; line-height:50px;}
+/*头部：开始*/
+.headBox{ width:100%; margin:10px auto;}
+.headBox h1{text-align:center; height:50px; line-height:50px; border-bottom:1px solid #F00;}
+.headBox ul{ height:50px; line-height:50px; }
+.headBox ul li{ float:left; margin:0 10px;}
+.headBox ul li #meeting{ height:30px; line-height:30px;margin:0 5px; text-indent:5px; border:1px solid #AAAAAA;}
+.headBox ul li select{ width:100px; height:30px; line-height:30px; text-align:center; text-indent:10px;}
+.headBox ul li  input{ width:150px; height:30px;  text-indent:10px; line-height:30px; border:1px solid #AAAAAA;}
+.headBox ul li .send { display:inline-block; height:30px;background-color:#5EB95E; color:#FFF;  line-height:30px; font-size:15px;}
+.headBox ul li div img{ width:15px; height:15px; padding:0 5px;}
+
+.totalbox{ text-align:center; height:40px; line-height:40px;}
+.totalbox span{ padding:0 30px; font-size:15px;}
+/*头部：结束*/
+
+
+.accordion-desc {
+	border-bottom:1px solid #CCC;
+	width:100%;
+  background-color:#FFF;
+  z-index:2;
+  position:relative;
+  font-size:14px;
+  color:#383838;
+}
+.colourbox{ background:#3C9DCF; color: #FFF; height:40px;}
+.colour{  background-color:#EDF1F5; height:40px; line-height:40px;}
+.colourchange{height:40px; line-height:40px;}
+.accordion table{ width:100%;}
+.accordion table tr{border:1px solid #F00;}
+.accordion-desc table{ width:100%;}
+.acist{ border-bottom:1px solid #FFF;  height:40px; line-height:40px; font-size:15px; color:#383838;}
+
+/*分页器 公用*/
+.pagination{ padding:35px 0; width:480px; margin:auto;}
+.pagination li{ float:left;color:#333; margin:0 5px;}
+.pagination a{ display:block; font-size:15px; line-height:35px; width:auto; padding:0 15px; text-align:center; border:1px solid #8E8E8E; border-radius:5px;}
+.pagination a:hover{ background-color:#5A99DF;  color: #FFF;}
+.active span{ display:block; font-size:15px; line-height:35px; width:auto; padding:0 15px; text-align:center; background-color:#5A99DF;  color: #FFF; border-radius:5px;}
+.disabled span{ display:block; font-size:15px; line-height:35px; width:auto; padding:0 15px; text-align:center; border-radius:5px; border:1px solid #8E8E8E;}
+
+.evenRow{background-color:#CCCCFF;}
+.oddRow{background-color: #FFFFFF;}

@@ -58,11 +58,8 @@
                             ['label' => '后台用户', 'icon' => 'fa fa-users', 'url' => ['/sys/user/index'],'visible'=>Yii::$app->user->can('/sys/user/index')],
                             ['label' => '微信用户', 'icon' => 'fa fa-weixin', 'url' => ['/sys/wechat/index'],'visible'=>Yii::$app->user->can('/sys/wechat/index')],
                             ['label' => '登录日志', 'icon' => 'fa fa-cloud', 'url' => ['/sys/loginlog/index'],'visible'=>Yii::$app->user->can('/sys/loginlog/index')],
-                            ['label' => '地区信息', 'icon' => 'fa fa-paper-plane', 'url' => ['/sys/district/index'],'visible'=>Yii::$app->user->can('/sys/district/index')],
-                            ['label' => '图文信息', 'icon' => 'fa fa-newspaper-o', 'url' => ['/sys/teletext/index'],'visible'=>Yii::$app->user->can('/sys/teletext/index')],
-                            ['label' => '验证信息', 'icon' => 'fa fa-cc-visa', 'url' => ['/sys/verification/index'],'visible'=>Yii::$app->user->can('/sys/verification/index')],
-                            ['label' => '站点设置', 'icon' => 'fa fa-cog', 'url' => ['/setting/default/index'],'visible'=>Yii::$app->user->can('/setting/default/index')],
-							['label' => 'Link信息', 'icon' => 'fa fa-newspaper-o', 'url' => ['/sys/link/index'],'visible'=>Yii::$app->user->can('/sys/link/index')],
+                            ['label' => '地区信息', 'icon' => 'fa fa-paper-plane', 'url' => ['/sys/district/index'],'visible'=>Yii::$app->user->can('/sys/district/index')],              
+                            ['label' => '站点设置', 'icon' => 'fa fa-cog', 'url' => ['/setting/default/index'],'visible'=>Yii::$app->user->can('/setting/default/index')],				
                             [
                                 'label' => '权限设置',
                                 'icon' => 'fa fa-key',

@@ -13,6 +13,8 @@ use backend\modules\eshop\models\Sumpplier;
 use frontend\components\Controller;
 use backend\modules\eshop\models\Product;
 use frontend\controllers\BaseController;
+use yii\web\NotFoundHttpException;
+use backend\modules\sys\models\WechatUser;
 
 //class GoodController extends  Controller
 class GoodController extends BaseController
@@ -24,7 +26,7 @@ class GoodController extends BaseController
     public function actionIndex(){
          $user_id=$this->openid;
         //  $user_id= 'oV1VUt6RUheAI-xfveukXdNW2ak8';
-        $sumpplier=Sumpplier::find()->where(['status'=>1])->all();
+        $sumpplier=Sumpplier::find()->where(['status'=>1])->orderBy('sort asc')->all();
         return $this->render('index',[
             'sumpplier'=>$sumpplier,
             'user_id'=>$user_id,
@@ -57,7 +59,34 @@ class GoodController extends BaseController
             'model'=> $this->findModel($id),
         ]);
     }
+  public function actionMore(){
+        $list_num = $_POST['list_num'];  //记录条数
+        $amount = $_POST['amount'];      //一次查询多少条
+        $product_id=$_POST['product_id'];
+        $connection = Yii::$app->db;
+        $sql = "select * from   {{%eshop_orderproduct}} where product_id=$product_id and status=10  order by id desc limit $list_num,$amount";
+        $command=$connection->createCommand($sql);
+        $orderproduct=$command->queryAll();
 
+        if(empty($orderproduct)) {
+            echo 'not_more';
+        }else {
+            for($i=0;$i<count($orderproduct);$i++) {
+                $headimgurl=WechatUser::getHeadimgurl($orderproduct[$i]['user_id']);
+                $nickname=WechatUser::getNickname($orderproduct[$i]['user_id']);
+                echo <<<Eof
+                 <dl class="nm">
+                        <dt><img src="{$headimgurl}"></dt>
+                        <dd>
+                            <h4>{$nickname}</h4>
+                            <span>{$orderproduct[$i]['created_time']}&nbsp;&nbsp;订购：{$orderproduct[$i]['number']} {$orderproduct[$i]['sku']}</span>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+Eof;
+            };
+        }
+    }
     /**
      * 商品
      * @param $id

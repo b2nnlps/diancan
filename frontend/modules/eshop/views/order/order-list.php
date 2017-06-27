@@ -42,7 +42,7 @@ use backend\modules\eshop\models\Order;
             <?php
             //  $order=Order::find()->where(['!=','status',4])->asArray()->orderBy('id desc')->all();
             $connection=Yii::$app->db;
-            $mess_array= array('oV1VUt0U0HE0F5T3sCry_LGaFuSA','oV1VUt7WZf6Ruscht-AonBlIZBQk','oV1VUtxN7VeqSpovbaYIfHX3Ymg0','oV1VUt6RUheAI-xfveukXdNW2ak8','oV1VUt5ctZOiWicBSV6hoWl0XHr0');
+            $mess_array= array('oV1VUt0U0HE0F5T3sCry_LGaFuSA','oV1VUt7WZf6Ruscht-AonBlIZBQk','oV1VUtxN7VeqSpovbaYIfHX3Ymg0','oV1VUt6RUheAI-xfveukXdNW2ak8','oV1VUt5ctZOiWicBSV6hoWl0XHr0','oV1VUt0-rX8Xcr_J-ZV5EqqQM_1c','oV1VUtxKZmChxJNkTjaOPS1n3kiw');
            // $mess=array_unique($mess_array);
             $isin = in_array($user_id,$mess_array);//php判断数组元素中是否存在某个字符串的方法in_array(value,array,type)
             if($isin){//存在
@@ -76,13 +76,14 @@ use backend\modules\eshop\models\Order;
                     $subtotal=$number*$price;//小计
                     $numbers += $number;
                     $total += $subtotal;
+				  $supplier_id=$val['supplier_id'];
                  } ?>
             <a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['eshop/order/order-detail','order_id'=>$_v['id']])?>">
                 <dl>
 <!--                    <dt> <img src="--><?//=Yii::$app->view->theme->baseUrl?><!--/eshop/images/88.png" alt="动态图片"></dt>-->
                     <dd>
                         <h3>订单编号：<?=$_v['sn']?></h3>
-<!--                        <h5>煲仔饭等4件商品煲仔饭等4件商品</h5>-->
+						  <h5><?=\backend\modules\eshop\models\Sumpplier::getName($supplier_id)?></h5>	
                         <h5>下单时间：<?=$_v['created_time']?><h5>
                                 <h4>数量：<span><?=$numbers?></span>实付<span>￥<?=$total?></span><em style="background-color:<?=$statusColor?>;"><?=Order::status($status)?></em></h4>
                     </dd>
@@ -99,7 +100,7 @@ use backend\modules\eshop\models\Order;
                 <?php
                 // $order=Order::find()->where(['status'=>4])->asArray()->orderBy('id desc')->all();
                 $connection=Yii::$app->db;
-                $mess_array= array('oV1VUt0U0HE0F5T3sCry_LGaFuSA','oV1VUt7WZf6Ruscht-AonBlIZBQk','oV1VUtxN7VeqSpovbaYIfHX3Ymg0','oV1VUt6RUheAI-xfveukXdNW2ak8','oV1VUt5ctZOiWicBSV6hoWl0XHr0');
+                $mess_array= array('oV1VUt0U0HE0F5T3sCry_LGaFuSA','oV1VUt7WZf6Ruscht-AonBlIZBQk','oV1VUtxN7VeqSpovbaYIfHX3Ymg0','oV1VUt6RUheAI-xfveukXdNW2ak8','oV1VUt5ctZOiWicBSV6hoWl0XHr0','oV1VUt0-rX8Xcr_J-ZV5EqqQM_1c','oV1VUtxKZmChxJNkTjaOPS1n3kiw');
                // $mess=array_unique($mess_array);
                 $isin = in_array($user_id,$mess_array);//php判断数组元素中是否存在某个字符串的方法in_array(value,array,type)
                 if($isin){//存在
@@ -132,13 +133,14 @@ use backend\modules\eshop\models\Order;
                         $subtotal=$number*$price;//小计
                         $numbers += $number;
                         $total += $subtotal;
+						  $supplier_id=$val['supplier_id'];
                     } ?>
                     <a href="<?=Yii::$app->urlManager->createAbsoluteUrl(['eshop/order/order-detail','order_id'=>$_v['id']])?>">
                         <dl>
                             <!--                    <dt> <img src="--><?//=Yii::$app->view->theme->baseUrl?><!--/eshop/images/88.png" alt="动态图片"></dt>-->
                             <dd>
                                 <h3>订单编号：<?=$_v['sn']?></h3>
-                                <!--                        <h5>煲仔饭等4件商品煲仔饭等4件商品</h5>-->
+								  <h5><?=\backend\modules\eshop\models\Sumpplier::getName($supplier_id)?></h5>		
                                 <h5>下单时间：<?=$_v['created_time']?><h5>
                                         <h4>数量：<span><?=$numbers?></span>实付<span>￥<?=$total?></span><em style="background-color:<?=$statusColor?>;"><?=Order::status($status)?></em></h4>
                             </dd>

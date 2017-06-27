@@ -19,7 +19,7 @@ class DepotSearch extends Depot
     {
         return [
             [['id', 'status'], 'integer'],
-            [['user_id', 'name', 'admin', 'phone', 'addres', 'created_by', 'updated_by', 'created_time', 'updated_time'], 'safe'],
+            [['user_id', 'name', 'admin', 'phone', 'addres','message', 'created_by', 'updated_by', 'created_time', 'updated_time'], 'safe'],
         ];
     }
 
@@ -70,6 +70,7 @@ class DepotSearch extends Depot
             ->andFilterWhere(['like', 'admin', $this->admin])
             ->andFilterWhere(['like', 'phone', $this->phone])
             ->andFilterWhere(['like', 'addres', $this->addres])
+            ->andFilterWhere(['like', 'message', $this->message])
             ->andFilterWhere(['like', 'created_by', $this->created_by])
             ->andFilterWhere(['like', 'updated_by', $this->updated_by]);
 

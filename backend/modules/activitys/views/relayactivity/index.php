@@ -10,7 +10,7 @@ use yii\grid\GridView;
 $this->title = '活动列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="relay-activity-index">
+<div class="box-body table-responsive no-padding">
 
     <p>
         <?= Html::a('添加活动', ['create'], ['class' => 'btn btn-success']) ?>

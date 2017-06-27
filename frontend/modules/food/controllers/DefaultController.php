@@ -126,6 +126,28 @@ class DefaultController extends Controller
             }
         }
     }
+	
+	public static function actionTcpSend($print_id,$order_id,$text){  //debug发送命令给打印机 打印机编号，订单编号，内容
+        $pass=false;
+        //  $host = "121.42.24.85";
+        $host = "127.0.0.1";
+        $port = 45613;
+		
+		$text=str_replace("<n>","\n",$text);
+		$text="#$order_id \n".$text."\n\n";
+        while($pass==false){
+            try{
+                $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+                $connection = socket_connect($socket, $host, $port);
+                socket_write($socket, '0-'.$print_id.'-'.$order_id.'-|'.$text);//十六进制
+                $pass=true;
+                socket_close($socket);
+                echo '下单成功 ';
+                //socket_shutdown($socket);
+            }catch(Exception $e){echo '失败';}
+        }
+        echo date("H:i:s");
+    }
 
     public static function TcpSend($print_id,$order_id,$text){  //发送命令给打印机 打印机编号，订单编号，内容
         $pass=false;
@@ -140,11 +162,11 @@ class DefaultController extends Controller
                 socket_write($socket, '0-'.$print_id.'-'.$order_id.'-|'.$text);//十六进制
                 $pass=true;
                 socket_close($socket);
-                echo '成功';
+                echo '下单成功';
                 //socket_shutdown($socket);
             }catch(Exception $e){echo '失败';}
         }
-        echo date("H:i:s").'<br>';
+        echo date("H:i:s");
     }
 
     public static function WechatMessage($openid,$a1,$a2,$a3,$a4,$remark)

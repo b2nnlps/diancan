@@ -178,7 +178,31 @@ class PushMessage {
         $data = json_encode($content);
         return  $access_token.self::do_post_request($url, $data);
     }
-    
+	
+	
+     public static function zctxMessage($openId,$gourl,$first,$realname,$phone,$time,$remark)
+    {
+        $access_token_2=new JSSDK();
+        $access_token=$access_token_2->getAccessToken();
+        $url  = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=$access_token";
+        $content=array(
+            "touser"=>$openId,
+//            "touser"=>"oozXjwOYTO6HDC1GKpKGQFuQ-R-U",
+            "template_id"=>"MTGU11-uzXQiT99_JvU9y7ye1wUpUTBlH4PYRZ_SrKQ",//注册提醒
+            "url"=>$gourl,
+            "topcolor"=>"#FF0000",
+            "data"=>array(
+                "first"=>array("value"=>$first,"color"=>"#CD453B"),
+                "keyword1"=>array("value"=>$realname,"color"=>"#2B9F65"),
+                "keyword2"=>array("value"=>$phone,"color"=>"#5785CF"),
+                "keyword3"=>array("value"=>$time,"color"=>"#D19B43"),
+                "remark"=>array("value"=>$remark,"color"=>"#008000")
+            )
+        );
+        $data = json_encode($content);
+        return  $access_token.self::do_post_request($url, $data);
+    }
+
     public static function do_post_request($url, $data, $optional_headers = null)
     {
         $params = array('http' => array(
