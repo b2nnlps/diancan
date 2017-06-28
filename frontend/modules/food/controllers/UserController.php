@@ -5,6 +5,7 @@ namespace frontend\modules\food\controllers;
 use Yii;
 use yii\web\Controller;
 use member\modules\food\models\Food;
+use member\modules\food\models\FoodInfo;
 use member\modules\food\models\Shop;
 use member\modules\food\models\Order;
 use member\modules\food\models\OrderInfo;
@@ -21,7 +22,7 @@ class UserController extends BaseController
      * Renders the index view for the module
      * @return string
      */
-
+    public $enableCsrfValidation = false;
     public $layout=false;
 
     public function actionIndex($shop=1,$table=0)
@@ -32,22 +33,51 @@ class UserController extends BaseController
         if($table)setcookie("table",$table,time()+86400*7,"/");
 
         $food = (new \yii\db\Query())
-            ->select(['a.id', 'a.name as fname','head_img','b.img','price','b.name as cname'])
+            ->select(['a.id', 'a.name as fname','head_img','b.img','c.price','b.name as cname','a.sold_number','a.status','c.id as iid','c.title'])
             ->from('n_food_food a')
+            ->leftJoin('n_food_food_info c','a.id=c.food_id')
             ->rightJoin('n_food_classes b','a.class_id = b.id')
-            ->where(['a.shop_id'=>$shop,'a.status'=>0])
+            ->where('a.shop_id=:shop_id AND (status=0 OR status=1)',[':shop_id'=>$shop])
             ->orderBy('class_id')
             ->all();
 
-        return $this->render('index',['food'=>$food]);
+        return $this->render('index2',['food'=>$food]);
     }
     public function actionDetail($id){
         $food=Food::findOne($id);
         setcookie("shop",$food['shop_id'],time()+86400*7,"/");
         return $this->render('detail',['food'=>$food]);
     }
-
     public function actionOrder(){//放cookie
+        $cookie=$_COOKIE['cart'];
+        $cookie=json_decode($cookie,true);
+        $cart=$cookie['cart'];
+        $total_price=0;
+        $total_number=0;
+        $text='';$foods=[];
+        for($i=0;$i<count($cart);$i++){
+            if($cart[$i]['num']<=0) continue;
+            $info=FoodInfo::findOne($cart[$i]['id']);
+            if($info){
+                if(!isset($food[$info['food_id']])){//免去重复查询数据库
+                    $foods[$info['food_id']]=Food::findOne($info['food_id']);
+                }
+                $food=$foods[$info['food_id']];
+                $total_number+=$cart[$i]['num'];
+                $total_price+=$info['price']*$cart[$i]['num'];
+                $text.='<dl class="clearfix"><dt>
+<h5>'.$food['name'].'-'.$info['title'].'</h5>
+<span>'.$cart[$i]['text'].'</span></dt><dd>
+<span class="amount_box">X'.$cart[$i]['num'].'</span>
+<span class="price_box">￥'.$info['price']*$cart[$i]['num'].'</span></dd></dl>';
+            }
+        }
+
+      //  if($food)setcookie("shop",$food['shop_id'],time()+86400*7,"/"); else return self::actionIndex();
+        $u=User::findOne($this->openid);
+        return $this->render('order2',['text'=>$text,'total_price'=>$total_price,'total_number'=>$total_number,'u'=>$u]);
+    }
+    public function actionOrder2(){//放cookie
         $cookie=$_COOKIE['cart'];
         $cookie=json_decode($cookie,true);
         $cart=$cookie['cart'];
@@ -65,7 +95,7 @@ class UserController extends BaseController
         return $this->render('order',['text'=>$text,'total_price'=>$total_price,'u'=>$u]);
     }
 
-    public $enableCsrfValidation = false;
+
     public function actionPayOrder(){//生成订单并支付
 
         $cookie=$_COOKIE['cart'];
