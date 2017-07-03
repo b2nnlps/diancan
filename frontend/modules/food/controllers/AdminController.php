@@ -38,10 +38,10 @@ class AdminController extends BaseController
                 if($staff['openid']==''){
                     $staff['openid']=$this->openid;
                     $staff->save();
-                    return '绑定成功，'.$staff['role_id'].' '.$staff['realname'];
-                }else return '该账户已经绑定过微信';
+                    return $this->render('hint',['mess'=>'绑定成功，'.$staff['role_id'].' '.$staff['realname']]);
+                }else return $this->render('hint',['mess'=>'该账户已经绑定过微信']);
             }
-            return '未找到合适用户';
+            return $this->render('hint',['mess'=>'未找到合适用户']);
         }else
             return $this->render('login');
     }
