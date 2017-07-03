@@ -12,7 +12,7 @@
 <div class="box">
     <div class="Favorites">
         <ul>
-            <li><a href="javascript:history.go(-1)"><img src="/static/627dc/images/fh.png" width="20" height="20"></a></li>
+            <li><a href="/food/user/cart"><img src="/static/627dc/images/fh.png" width="20" height="20"></a></li>
             <p>确认订单</p>
             <li><a href="#"></a></li>
             <div class="clear"></div>
@@ -28,12 +28,13 @@
                 <dd style=" text-align:right;">合计：<em style="color:#F32442; font-size:18px;">￥<?=$total_price?></em></dd>
             </dl>
         </div>
+        <form action="/food/user/pay-order" method="post" id="form">
         <div class="consumption_box">
             <div style=" background-color:#EDF1F1; height:10px;"></div>
             <h4><span>消费信息</span></h4>
             <ul>
-                <li><span>顾客姓名：</span><input placeholder="输入姓名【必填】" type="text" value="<?=$u['realname']?>" required></li>
-                <li><span>手机号码：</span><input placeholder="输入手机号码【必填】" type="text" maxlength="11" value="<?=$u['phone']?>" required></li>
+                <li><span>顾客姓名：</span><input placeholder="输入姓名【必填】" id="name" name="name" type="text" required="required" value="<?=$u['realname']?>"  ></li>
+                <li><span>手机号码：</span><input placeholder="输入手机号码【必填】" id="phone" name="phone" type="text" maxlength="11" required="required" value="<?=$u['phone']?>"></li>
                 <li class="clearfix">
                     <span class="span_box">就餐人数：</span>
                     <em>
@@ -45,11 +46,12 @@
                         <!--<a href="#">-</a><input value="1" type="text" /><a href="#">+</a>-->
                     </em>
                 </li>
-                <li><span>就餐桌号：</span><input placeholder="输入桌号" type="text" value="<?=isset($_COOKIE['table'])?$_COOKIE['table']:''?>" required></li>
-                <li><span>需求备注：</span><input placeholder="输入其他需求" type="text" value="<?=$u['notic']?>"></li>
+                <li><span>就餐桌号：</span><input placeholder="输入桌号" id="table" name="table" type="text" required="required" value="<?=isset($_COOKIE['table'])?$_COOKIE['table']:''?>" ></li>
+                <li><span>需求备注：</span><input placeholder="输入其他需求" id="notic" name="notic" type="text" value="<?=$u['notic']?>"></li>
                 <input type="hidden" value="<?php echo Yii::$app->request->csrfToken; ?>" name="_csrf" >
             </ul>
         </div>
+        </form>
         <div class="Payment_box">
             <div style=" background-color:#EDF1F1; height:10px;"></div>
             <h4><span>付款方式</span></h4>
@@ -75,8 +77,8 @@
     </div>
     <div class="submit">
         <dl class="clearfix">
-            <dt><a href="shopping_cart.html">返回购物车</a></dt>
-            <dd><a href="checkout_success.html">提交订单</a></dd>
+            <dt><a href="/food/user/cart">返回购物车</a></dt>
+            <dd><a href="#" onclick="post()">提交订单</a></dd>
         </dl>
     </div>
 </div>
@@ -105,4 +107,16 @@
             $(this).next().val(num);
         });
     })
+</script>
+<script>
+    function post(){
+        var name=$("#name");
+        var phone=$("#phone");
+        var table=$("#table");
+        if(name.val()=="") {name.focus(); alert("您的称呼"); return 0;}
+        if(phone.val()=="" || phone.val().length<8) {phone.focus(); alert("您的手机号码错误"); return 0;}
+        if(table.val()=="") {table.focus(); alert("请输入桌号"); return 0;}
+
+        $("form").submit();
+    }
 </script>

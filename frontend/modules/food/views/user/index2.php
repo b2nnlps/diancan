@@ -125,7 +125,7 @@ EOD;
             <li class="pitch_on"><a href="#"><img
                             src="/static/627dc/images/nav_11.png"/><span>菜类</span></a>
             </li>
-            <li><a href="shopping_cart.html"><img
+            <li><a href="/food/user/cart"><img
                             src="/static/627dc/images/nav_2.png"/><span>购物车</span></a>
                 <div class="data_box">0</div>
             </li>
@@ -178,10 +178,10 @@ EOD;
         </div>
         <div class="affirm_box">
             <dl class="clearfix">
-                <a href="#">
+                <a onclick="buy()">
                     <dt>加入购物车</dt>
                 </a>
-                <a onclick="buy()">
+                <a onclick="buy()" href="/food/user/order">
                     <dd>立即购买</dd>
                 </a>
             </dl>
