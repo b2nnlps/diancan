@@ -48,6 +48,14 @@ class UserController extends BaseController
         setcookie("shop",$food['shop_id'],time()+86400*7,"/");
         return $this->render('detail',['food'=>$food]);
     }
+    public function actionCart(){//购物车
+        $cookie=$_COOKIE['cart'];
+        $cookie=json_decode($cookie,true);
+        $cart=$cookie['cart'];
+
+        $u=User::findOne($this->openid);
+        return $this->render('cart',['cart'=>$cart,'u'=>$u]);
+    }
     public function actionOrder(){//放cookie
         $cookie=$_COOKIE['cart'];
         $cookie=json_decode($cookie,true);
@@ -115,7 +123,7 @@ class UserController extends BaseController
         $name=$request->post('name',' ');
         $phone=$request->post('phone',' ');
         $notic=$request->post('notic',' ');
-        $table=$request->post('table',$_COOKIE['table']);
+        $table=$request->post('table',isset($_COOKIE['table'])?$_COOKIE['table']:'');
 
         $u=User::findOne($this->openid);
         if(!$u){$u=new User();$u->openid=$this->openid;}
