@@ -34,7 +34,7 @@ class Shop extends \yii\db\ActiveRecord
             [['name'], 'required'],
             [['created_time'], 'safe'],
             [['name','device_id'], 'string', 'max' => 60],
-            [['contact', 'img'], 'string', 'max' => 255],
+            [['contact', 'img','description'], 'string', 'max' => 255],
             [['address'], 'string', 'max' => 80],
         ];
     }

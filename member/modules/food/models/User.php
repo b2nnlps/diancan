@@ -46,4 +46,12 @@ class User extends \yii\db\ActiveRecord
             'notic' => '备注',
         ];
     }
+    public static function newUser($openid,$realname,$phone,$notic){
+        $u=User::findOne($openid);
+        if(!$u){$u=new User();$u->openid=$openid;}
+        $u->realname=$realname;
+        $u->phone=$phone;
+        $u->notic=$notic;
+        return $u->save();
+    }
 }
