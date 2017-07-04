@@ -12,16 +12,17 @@
             src="/static/food/js/jquery.cookie.js"></script>
     <script type="text/javascript"
             src="/static/food/js/jquery.lazyload.js?v=1.9.1"></script>
+    <script src="/js/layer/layer.js"></script>
 </head>
 <body>
 <div class="box"><!--头部：开始--->
     <div class="list_top">
 
         <dl class="clearfix">
-            <dt><img src="/static/627dc/icon/rh_logo.png"></dt>
+            <dt><img src="<?=$shop['img']?$shop['img']:'/static/627dc/icon/rh_logo.png'?>"></dt>
             <dd>
-                <h4>指留香美味馆</h4>
-                <p>经典粤菜，传统美味，来店点餐优惠多多！还有积分消费哦·~~~~</p>
+                <h4><?=$shop['name']?></h4>
+                <p><?=$shop['description']?></p>
             </dd>
         </dl>
     </div>
@@ -96,7 +97,7 @@
                         $wei= '<div class="plus">
                                 <a href="javascript:void(0);">
                                     <span><img src="/static/627dc/images/wqw.png"/></span>
-                           
+                                    
                                 </a>
                                  <div class="guige_id" style="display:none">'. $guige_id[$_food['id']] . '</div>
                                  <div class="guige_name" style="display:none">'. $guige_name[$_food['id']] . '</div>
@@ -181,7 +182,7 @@ EOD;
                 <a onclick="buy()">
                     <dt>加入购物车</dt>
                 </a>
-                <a onclick="buy()" href="/food/user/order">
+                <a onclick="buyOne()">
                     <dd>立即购买</dd>
                 </a>
             </dl>
@@ -203,12 +204,17 @@ var food_id=0;
         var name=$('#food_name').html();
         var text=$('#xuqiu').val();
         if(num>0){
-//            alert(id)
-//            alert(num)
             updateCookie(id,num,price,name,text);
         }else{
             $('#gw_num').val("1").focus();
         }
+        layer.msg('加入购物车成功');
+        $('.show_box').hide();
+        $('#fade').hide();
+    }
+    function buyOne(){
+        buy();
+        window.location.href="/food/user/order?menu="+food_id+",";
     }
 
     function updateCookie(id, num, price, name,text) {	//输入商品id,数量，价格即可
