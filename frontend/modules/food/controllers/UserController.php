@@ -32,42 +32,45 @@ class UserController extends BaseController
         if($shop)setcookie("shop",$shop,time()+86400*7,"/");
         if($table)setcookie("table",$table,time()+86400*7,"/");
 
-        $food = (new \yii\db\Query())
-            ->select(['a.id', 'a.name as fname','head_img','b.img','c.price','b.name as cname','a.sold_number','a.status','c.id as iid','c.title'])
-            ->from('n_food_food a')
-            ->leftJoin('n_food_food_info c','a.id=c.food_id')
-            ->rightJoin('n_food_classes b','a.class_id = b.id')
-            ->where('a.shop_id=:shop_id AND (status=0 OR status=1)',[':shop_id'=>$shop])
-            ->orderBy('class_id')
-            ->all();
-
-        return $this->render('index2',['food'=>$food]);
+        $food = Food::getFoodList($shop);
+        $shop=Shop::findOne($shop);
+        return $this->render('index2',['food'=>$food,'shop'=>$shop]);
     }
     public function actionDetail($id){
         $food=Food::findOne($id);
+        $shop=Shop::findOne($food['shop_id']);
+        $stock=Food::getStock($id);
+        $order=Order::getFoodOrder($id);
         setcookie("shop",$food['shop_id'],time()+86400*7,"/");
-        return $this->render('detail',['food'=>$food]);
+        return $this->render('detail2',['food'=>$food,'shop'=>$shop,'order'=>$order,'stock'=>$stock]);
     }
     public function actionCart(){//购物车
-        $cookie=$_COOKIE['cart'];
-        $cookie=json_decode($cookie,true);
-        $cart=$cookie['cart'];
+       $cart=null;
+        if(isset($_COOKIE['cart'])) {
+            $cookie = $_COOKIE['cart'];
+            $cookie = json_decode($cookie, true);
+            $cart   = $cookie['cart'];
+        }
 
         $u=User::findOne($this->openid);
         return $this->render('cart',['cart'=>$cart,'u'=>$u]);
     }
-    public function actionOrder(){//放cookie
+    public function actionOrder($menu){//放cookie
+        if(!isset($_COOKIE['cart']))  return self::actionCart();
+
         $cookie=$_COOKIE['cart'];
         $cookie=json_decode($cookie,true);
         $cart=$cookie['cart'];
+        if(!count($cart))  return self::actionCart();
         $total_price=0;
         $total_number=0;
         $text='';$foods=[];
         for($i=0;$i<count($cart);$i++){
             if($cart[$i]['num']<=0) continue;
+            if(strpos($menu,$cart[$i]['id'].',')===false) continue;//如果没有选中，则跳过
             $info=FoodInfo::findOne($cart[$i]['id']);
             if($info){
-                if(!isset($food[$info['food_id']])){//免去重复查询数据库
+                if(!isset($foods[$info['food_id']])){//免去重复查询数据库
                     $foods[$info['food_id']]=Food::findOne($info['food_id']);
                 }
                 $food=$foods[$info['food_id']];
@@ -85,35 +88,12 @@ class UserController extends BaseController
         $u=User::findOne($this->openid);
         return $this->render('order2',['text'=>$text,'total_price'=>$total_price,'total_number'=>$total_number,'u'=>$u]);
     }
-    public function actionOrder2(){//放cookie
-        $cookie=$_COOKIE['cart'];
-        $cookie=json_decode($cookie,true);
-        $cart=$cookie['cart'];
-        $total_price=0;
-        $text='';$food=false;
-        for($i=0;$i<count($cart);$i++){
-            if($cart[$i]['num']<=0) continue;
-            $food=Food::findOne($cart[$i]['id']);
-            $total_price+=$food['price']*$cart[$i]['num'];
-            $text.=" <span>$food[name]</span><em>x".$cart[$i]['num']."</em><cite>￥".$food['price']*$cart[$i]['num'] ."</cite>";
-        }
-
-        if($food)setcookie("shop",$food['shop_id'],time()+86400*7,"/"); else return self::actionIndex();
-        $u=User::findOne($this->openid);
-        return $this->render('order',['text'=>$text,'total_price'=>$total_price,'u'=>$u]);
-    }
-
 
     public function actionPayOrder(){//生成订单并支付
 
         $cookie=$_COOKIE['cart'];
         $cookie=json_decode($cookie,true);
         $cart=$cookie['cart'];
-
-      /*  $foods=explode(',',$_COOKIE['foods_id']);
-        $nums=explode(',',$_COOKIE['nums']);
-        $types=explode(',',$_COOKIE['types']);
-        $texts=explode(',',$_COOKIE['texts']);*/
 
         if(count($cart)==0) return '您未选购菜品';
 
@@ -123,47 +103,28 @@ class UserController extends BaseController
         $name=$request->post('name',' ');
         $phone=$request->post('phone',' ');
         $notic=$request->post('notic',' ');
+        $menu=$request->post('menu',' ');
         $table=$request->post('table',isset($_COOKIE['table'])?$_COOKIE['table']:'');
 
-        $u=User::findOne($this->openid);
-        if(!$u){$u=new User();$u->openid=$this->openid;}
-        $u->realname=$name;
-        $u->phone=$phone;
-        $u->notic=$notic;
-        $u->save();
+        User::newUser($this->openid,$name,$phone,$notic);
 
-        $order=new Order();
-        $order->user=$this->openid;
-        $order->shop_id=$_COOKIE['shop'];
-        $order->orderno='0';
-        $order->realname=$name;
-        $order->phone=$phone;
-        $order->table=$table;
-        $order->text=$name . $phone."\n备注：$notic" ."\n桌号：" .$table;
         $staff=ShopStaff::findOne(['shop_id'=>$_COOKIE['shop'],'openid'=>$this->openid,'status'=>0]);
-        if($staff)  //如果是服务员就直接当做付款
-            $order->status=3;
-        else
-            $order->status=0;
+        $order=Order::newOrder($this->openid,$_COOKIE['shop'],'0',$name,$phone,$table,$staff,$notic);
 
-        $order->created_time=date("Y-m-d H:i:s");
-        $order->updated_time=date("Y-m-d H:i:s");
-        $order->save();
+        $foods=[];
         $total=0;
         for($i=0;$i<count($cart);$i++){
-            $food=Food::findOne($cart[$i]['id']);
-            if($food && $cart[$i]['num']>0) {
+            if(strpos($menu,$cart[$i]['id'].',')===false) continue;//如果没有选中，则跳过
+            $info=FoodInfo::findOne($cart[$i]['id']);
+            if($info && $cart[$i]['num']>0) {
+                if(!isset($foods[$info['food_id']])){//免去重复查询数据库
+                    $foods[$info['food_id']]=Food::findOne($info['food_id']);
+                }
+                $food=$foods[$info['food_id']];
                 $total_price += $food['price'] * $cart[$i]['num'];
                 $text .= $food['name'] . '   x' . $cart[$i]['num'] . '  ￥' . $food['price'] * $cart[$i]['num'] / 100 . '<br>';
                 $total+=$food['price'] * $cart[$i]['num'];
-                $info = new OrderInfo();
-                $info->order_id = $order->id;
-                $info->food_id = $food['id'];
-                $info->price=$food['price'];
-                $info->num=$cart[$i]['num'];
-                $info->type='*';
-                $info->text='*';
-                $info->save();
+                OrderInfo::newOrderInfo($order->id,$info['food_id'],$info['price']*100,$cart[$i]['num'],$cart[$i]['text']);
             }
         }
         $order->total=$total;
@@ -179,7 +140,8 @@ class UserController extends BaseController
             return $this->render('shop-success',['shop_id'=>$order['shop_id']]);
            // header("Location: http://ms.n39.cn/food/default/push-mess?orderno=$order->id");
         }else
-            header("Location: http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$order->id");
+         echo "Location: http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$order->id";
+         //   header("Location: http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$order->id");
         exit;
     }
     public function actionPaySuccess(){//支付完毕
