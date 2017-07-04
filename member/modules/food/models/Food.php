@@ -68,4 +68,20 @@ class Food extends \yii\db\ActiveRecord
         $category= Classes::findAll(['shop_id'=>$cookies->getValue('shop_id',1)]);
         return $category;
     }
+    public static function getFoodList($shop_id){
+        $food = (new \yii\db\Query())
+            ->select(['a.id', 'a.name as fname','head_img','b.img','c.price','b.name as cname','a.sold_number','a.status','c.id as iid','c.title'])
+            ->from('n_food_food a')
+            ->leftJoin('n_food_food_info c','a.id=c.food_id')
+            ->rightJoin('n_food_classes b','a.class_id = b.id')
+            ->where('a.shop_id=:shop_id AND (status=0 OR status=1)',[':shop_id'=>$shop_id])
+            ->orderBy('class_id')
+            ->all();
+        return $food;
+    }
+    public static function getStock($food_id){
+        $num = FoodInfo::find()->where(['food_id'=>$food_id])->sum('number');
+        if(!$num)$num=0;
+        return $num;
+    }
 }

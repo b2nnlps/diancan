@@ -32,7 +32,7 @@ class OrderInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'food_id', 'price', 'num', 'type', 'text'], 'required'],
+            [['order_id', 'food_id', 'price', 'num'], 'required'],
             [['order_id', 'food_id', 'price', 'num', 'status'], 'integer'],
             [['text'], 'string'],
             [['type'], 'string', 'max' => 255],
@@ -54,5 +54,16 @@ class OrderInfo extends \yii\db\ActiveRecord
             'text' => '要求备注',
             'status' => '0待上菜',
         ];
+    }
+    public static function newOrderInfo($order_id,$food_id,$price,$num,$text){
+        $info = new OrderInfo();
+        $info->order_id = $order_id;
+        $info->food_id = $food_id;
+        $info->price=$price;
+        $info->num=$num;
+        $info->type='*';
+        $info->text=$text;
+        if(!$info->save())var_dump($info->getErrors());
+        return $info;
     }
 }

@@ -10,6 +10,7 @@ use member\modules\food\models\Order;
 use member\modules\food\models\OrderInfo;
 use member\modules\food\models\ShopStaff;
 use frontend\controllers\BaseController;
+use yii\web\BadRequestHttpException;
 
 /**
  * Default controller for the `food` module
@@ -24,10 +25,10 @@ class AdminController extends BaseController
     public $layout=false;
     public $enableCsrfValidation = false; //莫名其妙不可以使用
 
-    public function Power(){//返回当前绑定的饭店
+    public function Power(){//返回当前绑定的店员
         $staff=ShopStaff::findOne(['openid'=>$this->openid,'status'=>0]);
         if($staff) return $staff;
-        return 0;
+        throw new BadRequestHttpException("您还没有绑定商家");
     }
 
     public function actionBind(){
@@ -43,7 +44,7 @@ class AdminController extends BaseController
             }
             return $this->render('hint',['mess'=>'未找到合适用户']);
         }else
-            return $this->render('login');
+            return $this->render('login2');
     }
 
     public function actionShopOrder($status=1){
@@ -82,7 +83,6 @@ class AdminController extends BaseController
         return 0;
 
     }
-
     public function actionAdmin(){
         $staff=self::Power();
         if($staff && $staff['role_id']==0){
@@ -112,6 +112,30 @@ class AdminController extends BaseController
                 }
             }
         }
+    }
+    public function actionShopSetting(){
+        $staff=self::Power();
+        $shop=Shop::findOne($staff['shop_id']);
+        if(Yii::$app->request->isPost){
+            $post=Yii::$app->request->post();
+            $shop->load($post);
+            $shop->save();
+        }
+        return $this->render('setting',['shop'=>$shop,'mess'=>Yii::$app->request->isPost]);
+    }
+    public function actionFoodList($name=false){
+        $staff=self::Power();
+        if($name){
+            $food=Food::find()->where(['shop_id'=>$staff['shop_id']])->andWhere(['like','name',$name])->all();
+        }else{
+            $food=Food::find()->where(['shop_id'=>$staff['shop_id']])->all();
+        }
+        return $this->render('food-list',['food'=>$food]);
+    }
+    public function actionFoodUpdate($food_id){
+            $staff=self::Power();
+            $food=Food::findOne(['shop_id'=>$staff['shop_id'],'id'=>$food_id]);
+        return $this->render('food-update',['food'=>$food]);
     }
 
 }

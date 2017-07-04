@@ -67,4 +67,32 @@ class Order extends \yii\db\ActiveRecord
             'updated_time' => 'Updated Time',
         ];
     }
+    public static function newOrder($openid,$shop_id,$orderno,$realname,$phone,$table,$staff,$text){
+        $order=new Order();
+        $order->user=$openid;
+        $order->shop_id=$shop_id;
+        $order->orderno=$orderno;
+        $order->realname=$realname;
+        $order->phone=$phone;
+        $order->table=$table;
+        $order->text=$realname . $phone."\n备注：$text" ."\n桌号：" .$table;
+        if($staff)  //如果是服务员就直接当做付款
+            $order->status=3;
+        else
+            $order->status=0;
+
+        $order->created_time=date("Y-m-d H:i:s");
+        $order->updated_time=date("Y-m-d H:i:s");
+        if(!$order->save())var_dump($order->getErrors());
+        return $order;
+    }
+    public static function getFoodOrder($food_id){
+        $food = (new \yii\db\Query())
+            ->select(['nickname','headimgurl','a.created_time','b.num'])
+            ->from('n_food_order a,n_food_order_info b,t_sys_wechat_user c')
+            ->where('a.id=b.order_id AND a.user=c.openid AND food_id=:food_id',[':food_id'=>$food_id])
+            ->orderBy('a.created_time')
+            ->all();
+        return $food;
+    }
 }
