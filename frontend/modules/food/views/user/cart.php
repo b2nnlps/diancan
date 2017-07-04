@@ -20,7 +20,7 @@ use member\modules\food\models\FoodInfo;
         <ul>
             <li><a href="/food/user/index"><img src="/static/627dc/images/fh.png" width="20" height="20"></a></li>
             <p>购物车</p>
-            <li><a href="#"></a></li>
+            <li><a onclick="edit()">编辑</a></li>
             <div class="clear"></div>
         </ul>
     </div>
@@ -30,6 +30,11 @@ use member\modules\food\models\FoodInfo;
             $total_price=0;
             $total_number=0;
             $text='';$foods=[];
+            if(!count($cart))
+                echo '<div class="zw_box">
+                  <img src="/static/627dc/images/zwjlimg.png">
+                  <p>暂无记录！</p>
+                </div>';
             for($i=0;$i<count($cart);$i++){
                 if($cart[$i]['num']<=0) continue;
                 $info=FoodInfo::findOne($cart[$i]['id']);
@@ -73,10 +78,7 @@ use member\modules\food\models\FoodInfo;
             }
             ?>
 
-		   <!--<div class="zw_box">
-                  <img src="images/zwjlimg.png">
-                  <p>暂无记录！</p>
-                </div>-->
+            <br><br><br><br>
 
         </div>
         <div class="clearing_box clearfix">
@@ -93,10 +95,10 @@ use member\modules\food\models\FoodInfo;
                         </div>
                     </div>
                     </dt>
-                    <dd>合计：<span id="total">￥<?=$total_price?></span></dd>
+                    <dd>合计：<span id="total">￥0</span></dd>
                 </dl>
             </div>
-            <a href="/food/user/order"><div class="clearing_right">前往结算</div></a>
+            <a onclick="post()"><div class="clearing_right">前往结算</div></a>
 
            <div class="delete_box">
               <dl class="clearfix">
@@ -104,13 +106,13 @@ use member\modules\food\models\FoodInfo;
                   <div class="demox">
                     <div class="col">
                         <div class="opt">
-                            <input class="magic-checkbox" type="checkbox" name="layout" onclick="check(this)" id="all">
+                            <input class="magic-checkbox" type="checkbox" name="layout" onclick="check(this)" id="all2">
                             <label for="all" class="all">全选</label>
                         </div>
                     </div>
                   </div>
                   </dt>
-                  <dd>删除</dd>
+                  <dd onclick="del()">删除</dd>
               </dl>
            </div>
 
@@ -137,10 +139,7 @@ $(".select_btn label").click(function() {
             var id=$(this).parent().find(".my_id").html();
             var price=$(this).parent().find(".my_price").html();
             updateCookie(id,num);
-            var total=$("#total").html();
-            total=parseFloat(total.replace("￥",""));
-            total+=parseFloat(price);
-            $("#total").html("￥"+total);
+            getTotal();
 		});
 		//减的效果
 		$(".jian").click(function(){
@@ -151,33 +150,100 @@ $(".select_btn label").click(function() {
             var my=$(this).parent().parent().parent().parent();
             if(num<=0){
                 if(confirm("要删除该商品吗？")){
-                    my.slideUp();
+                    my.slideUp(800,function(){
+                        my.remove();
+                    });
                 }else{
                     return;
                 }
             }
 		    $(this).next().val(num);
             updateCookie(id,num);
-            var total=$("#total").html();
-            total=parseFloat(total.replace("￥",""));
-            total+=-parseFloat(price);
-            $("#total").html("￥"+total);
+            getTotal();
 		});
 	})
-	
 	//全选
 function check(all) {
     if (all.checked) {
         $(".goods_list :checkbox").prop("checked", true);
-        $(".clearing_left").hide();
-        $(".clearing_right").hide();
         $(".all").prop("checked", true);
+        $("#all").prop("checked",true);
+        $("#all2").prop("checked",true);
     } else {
         $(".goods_list :checkbox").prop("checked", false);
-        $(".clearing_left").show();
-        $(".clearing_right").show();
         $(".all").prop("checked", false);
+        $("#all").prop("checked",false);
+        $("#all2").prop("checked",false);
     }
+}
+    $(".goods_list :checkbox").click(function(){
+        allchk();
+        getTotal();
+    });
+    function allchk(){
+        var chknum = $(".goods_list :checkbox").size();//选项总个数
+        var chk = 0;
+        $(".goods_list :checkbox").each(function () {
+            if($(this).prop("checked")==true){
+                chk++;
+            }
+        });
+        if(chknum==chk){//全选
+            $("#all").prop("checked",true);
+            $("#all2").prop("checked",true);
+        }else{//不全选
+            $("#all").prop("checked",false);
+            $("#all2").prop("checked",false);
+        }
+    }
+var ok=true;
+function edit(){
+	    if(ok){
+            $(".clearing_left").hide();
+            $(".clearing_right").hide();
+            ok=false;
+        }else{
+            $(".clearing_left").show();
+            $(".clearing_right").show();
+            ok=true;
+        }
+}
+function getTotal(){//统计选中的菜品的价格
+    var total=0;
+    $(".goods_list :checkbox").each(function () {
+        if($(this).prop("checked")==true){
+            var parent=$(this).parent().parent().parent().parent();
+            var my_price=parent.find(".my_price").html();
+            var my_num=parent.find(".num").val();
+            total+=parseFloat(my_price)*parseFloat(my_num);
+        }
+    });
+    $("#total").html("￥"+total);
+}
+function post(){//提交选中的菜品
+    var food='';
+    $(".goods_list :checkbox").each(function () {
+        if($(this).prop("checked")==true){
+            var parent=$(this).parent().parent().parent().parent();
+            var my_id=parent.find(".my_id").html();
+            food+=my_id+',';
+        }
+    });
+    if(food)
+        window.location.href='/food/user/order?menu='+food;
+}
+function del(){
+    $(".goods_list :checkbox").each(function () {
+        if($(this).prop("checked")==true){
+            var parent=$(this).parent().parent().parent().parent();
+            var id=parent.find(".my_id").html();
+                parent.slideUp(800,function(){
+                    parent.remove();
+                });
+                updateCookie(id, 0);
+        }
+    });
+    getTotal();
 }
     function updateCookie(id, num) {	//输入商品id,数量，价格即可
         var data = $.cookie('cart');
@@ -193,7 +259,8 @@ function check(all) {
         }
         $.cookie('cart', data, {expires: 1, path: '/'});
     }
-
+//防止重刷
+getTotal();
 </script>
 </body>
 </html>
