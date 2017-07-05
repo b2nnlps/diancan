@@ -8,11 +8,12 @@
     <title>容合点餐系统</title>
     <link href="/static/627dc/css/list.css" rel="stylesheet">
     <script src="/static/food/js/jquery-1.11.2.js"></script>
+    <script src="/js/layer/layer.js"></script>
     <script type="text/javascript"
             src="/static/food/js/jquery.cookie.js"></script>
     <script type="text/javascript"
             src="/static/food/js/jquery.lazyload.js?v=1.9.1"></script>
-    <script src="/js/layer/layer.js"></script>
+
 </head>
 <body>
 <div class="box"><!--头部：开始--->
@@ -120,21 +121,16 @@ EOD;
                 <!--第1个菜单-->
             </div>
         </div>
+        </div>
     </div>
     <div class="statement">
         <ul>
-            <li class="pitch_on"><a href="#"><img
-                            src="/static/627dc/images/nav_11.png"/><span>菜类</span></a>
-            </li>
-            <li><a href="/food/user/cart"><img
-                            src="/static/627dc/images/nav_2.png"/><span>购物车</span></a>
+            <li class="pitch_on"><a href="#"><img src="/static/627dc/images/nav_11.png"/><span>菜类</span></a></li>
+            <li><a href="/food/user/cart"><img src="/static/627dc/images/nav_2.png"/><span>购物车</span></a>
                 <div class="data_box">0</div>
             </li>
-            <li><a href="tel:18389957620"><img
-                            src="/static/627dc/images/nav_4.png"/><span>联系我们</span></a>
-            </li>
-            <li><a href="personal.html"><img
-                            src="/static/627dc/images/nav_3.png"/><span>个人中心</span></a>
+            <li><a href="tel:<?=$shop['contact']?>"><img src="/static/627dc/images/nav_4.png"/><span>联系我们</span></a></li>
+            <li><a href="/food/user/person"><img src="/static/627dc/images/nav_3.png"/><span>个人中心</span></a>
             </li>
         </ul>
     </div>

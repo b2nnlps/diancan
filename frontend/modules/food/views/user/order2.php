@@ -78,8 +78,8 @@
     </div>
     <div class="submit">
         <dl class="clearfix">
-            <dt><a href="/food/user/cart">返回购物车</a></dt>
-            <dd><a href="#" onclick="post()">提交订单</a></dd>
+            <a href="/food/user/cart"> <dt style="color:#fff">返回购物车</dt></a>
+            <a href="#" onclick="post()"> <dd style="color:#fff">提交订单</dd></a>
         </dl>
     </div>
 </div>
