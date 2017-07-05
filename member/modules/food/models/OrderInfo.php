@@ -66,4 +66,13 @@ class OrderInfo extends \yii\db\ActiveRecord
         if(!$info->save())var_dump($info->getErrors());
         return $info;
     }
+    public static function getOrderInfo($order_id){
+        $orderInfo = (new \yii\db\Query())
+            ->select(['b.text','b.price','b.num','a.name'])
+            ->from('n_food_food a,n_food_order_info b')
+            ->where('a.id=b.order_id AND order_id=:order_id',[':order_id'=>$order_id])
+            ->orderBy('a.created_time')
+            ->all();
+        return $orderInfo;
+    }
 }

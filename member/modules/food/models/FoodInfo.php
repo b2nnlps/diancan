@@ -30,7 +30,7 @@ class FoodInfo extends \yii\db\ActiveRecord
         return [
             [['title', 'price','number', 'food_id'], 'required'],
             [['price'], 'number'],
-            [['food_id','number'], 'integer'],
+            [['food_id','number','status'], 'integer'],
             [['title'], 'string', 'max' => 255],
         ];
     }
