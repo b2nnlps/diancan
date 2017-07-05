@@ -12,6 +12,7 @@ use member\modules\food\models\OrderInfo;
 use frontend\controllers\BaseController;
 use member\modules\food\models\ShopStaff;
 use member\modules\food\models\User;
+use member\modules\sys\models\WechatUser;
 
 /**
  * Default controller for the `food` module
@@ -144,30 +145,25 @@ class UserController extends BaseController
          //   header("Location: http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$order->id");
         exit;
     }
-    public function actionPaySuccess(){//支付完毕
-
+    public function actionMyOrder(){
+        $o=Order::find()->where(['user'=>$this->openid])->orderBy("id desc")->all();
+        return $this->render('my-order2',['o'=>$o]);
+    }
+    public function actionOrderDetail($order_id){
+        $o=Order::findOne($order_id);
+        $orderInfo=OrderInfo::getOrderInfo($order_id);
+        return $this->render('order-detail',['orderInfo'=>$orderInfo,'o'=>$o]);
+    }
+    public function actionPaySuccess($order_id){//支付完毕
         setcookie('cart','',time()-1,'/');
-
-        return $this->render('success');
-    }
-    public function actionMyOrder($status=1){
-        $o=Order::find()->where(['user'=>$this->openid,'status'=>$status])->orderBy("id desc")->all();
-
-        return $this->render('my-order',['o'=>$o,'status'=>$status]);
+        $o=Order::findOne($order_id);
+        return $this->render('success',['o'=>$o]);
     }
 
-/*
-    public function actionShopImg(){
-       $food=Food::find()->all();
-        foreach($food as $_food){
-            $imgs=explode(',', $_food['img']);
-            if($imgs[0]!=""){
-                $_food['head_img']=$imgs[0];
-                $_food->save();
-            }
-        }
-
-    }*/
+    public function actionPerson(){
+    $u=WechatUser::findOne($this->openid);
+    return $this->render('person',['u'=>$u]);
+}
 
 
 }
