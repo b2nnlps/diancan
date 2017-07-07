@@ -95,4 +95,13 @@ class Order extends \yii\db\ActiveRecord
             ->all();
         return $food;
     }
+    public static function getJFoodOrder($openid,$type=1){
+        $food = (new \yii\db\Query())
+            ->select(['a.created_time','name','total'])
+            ->from('n_food_order a,n_food_shop b')
+            ->where('a.shop_id=b.id AND a.user=:openid AND type=:type',[':openid'=>$openid,':type'=>$type])
+            ->orderBy('a.created_time')
+            ->all();
+        return $food;
+    }
 }
