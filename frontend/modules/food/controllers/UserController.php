@@ -37,6 +37,14 @@ class UserController extends BaseController
         $shop=Shop::findOne($shop);
         return $this->render('index2',['food'=>$food,'shop'=>$shop]);
     }
+    public function actionJIndex($shop=1){
+        if($shop)setcookie("shop",$shop,time()+86400*7,"/");
+
+        $u=User::findOne(['openid'=>$this->openid]);
+        $food = Food::getFoodList($shop);
+        $shop=Shop::findOne($shop);
+        return $this->render('jf_shop',['food'=>$food,'shop'=>$shop,'u'=>$u]);
+    }
     public function actionDetail($id){
         $food=Food::findOne($id);
         $shop=Shop::findOne($food['shop_id']);
@@ -44,6 +52,20 @@ class UserController extends BaseController
         $order=Order::getFoodOrder($id);
         setcookie("shop",$food['shop_id'],time()+86400*7,"/");
         return $this->render('detail2',['food'=>$food,'shop'=>$shop,'order'=>$order,'stock'=>$stock]);
+    }
+    public function actionJDetail($id){
+        $info=FoodInfo::findOne($id);
+        $food=Food::findOne($info['food_id']);
+        $shop=Shop::findOne($food['shop_id']);
+        $stock=Food::getStock($info['food_id']);
+        $order=Order::getFoodOrder($info['food_id']);//假装兑换的人很多
+        $u=User::findOne(['openid'=>$this->openid]);
+        setcookie("shop",$food['shop_id'],time()+86400*7,"/");
+        return $this->render('jf_detail',['food'=>$food,'shop'=>$shop,'u'=>$u,'stock'=>$stock,'info'=>$info,'order'=>$order]);
+    }
+    public function actionJRecord(){//积分记录
+        $record=Order::getJFoodOrder($this->openid,0);
+        return $this->render('jf_record',['record'=>$record]);
     }
     public function actionCart(){//购物车
        $cart=null;
