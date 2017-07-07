@@ -57,7 +57,7 @@ use member\modules\food\models\FoodInfo;
                     <dt> <img src="/static/627dc/icon/rh_logo.png"> </dt>
                     <dd>
                         <h4><?=$shop['name']?></h4>
-                        <p>请下单用户详读商品详情</p>
+                        <p><?=$shop['description']?></p>
                     </dd>
                     <div class="clear"></div>
                 </dl>
