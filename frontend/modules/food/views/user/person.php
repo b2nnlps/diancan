@@ -56,7 +56,7 @@
                <a href="order-list.html">
                     <li><img src="/static/627dc/icon/wdd.png"><em>微店订单</em></li>
                 </a>
-				<a href="jf_order.html">
+				<a href="/food/user/j-record">
                     <li><img src="/static/627dc/icon/dh.png"><em>兑换订单</em></li>
                 </a>
                 <a href="shop_gl.html">
