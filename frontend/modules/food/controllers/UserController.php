@@ -50,8 +50,10 @@ class UserController extends BaseController
         $shop=Shop::findOne($food['shop_id']);
         $stock=Food::getStock($id);
         $order=Order::getFoodOrder($id);
+        $foodInfo=FoodInfo::find()->where(['food_id'=>$id])->all();
+        $cartNum=Food::getCartNumber();
         setcookie("shop",$food['shop_id'],time()+86400*7,"/");
-        return $this->render('detail2',['food'=>$food,'shop'=>$shop,'order'=>$order,'stock'=>$stock]);
+        return $this->render('detail2',['food'=>$food,'shop'=>$shop,'order'=>$order,'stock'=>$stock,'foodInfo'=>$foodInfo,'cartNum'=>$cartNum]);
     }
     public function actionJDetail($id){
         $info=FoodInfo::findOne($id);
@@ -79,12 +81,10 @@ class UserController extends BaseController
         return $this->render('cart',['cart'=>$cart,'u'=>$u]);
     }
     public function actionOrder($menu){//放cookie
-        if(!isset($_COOKIE['cart']))  return self::actionCart();
-
-        $cookie=$_COOKIE['cart'];
-        $cookie=json_decode($cookie,true);
-        $cart=$cookie['cart'];
+        $cart=Food::getCart();
+        if(!$cart) return self::actionCart();
         if(!count($cart))  return self::actionCart();
+
         $total_price=0;
         $total_number=0;
         $text='';$foods=[];
@@ -113,10 +113,7 @@ class UserController extends BaseController
     }
 
     public function actionPayOrder(){//生成订单并支付
-
-        $cookie=$_COOKIE['cart'];
-        $cookie=json_decode($cookie,true);
-        $cart=$cookie['cart'];
+        $cart=Food::getCart();
 
         if(count($cart)==0) return '您未选购菜品';
 

@@ -129,7 +129,7 @@ EOD;
             <li><a href="/food/user/cart"><img src="/static/627dc/images/nav_2.png"/><span>购物车</span></a>
                 <div class="data_box">0</div>
             </li>
-            <li><a href="tel:<?=$shop['contact']?>"><img src="/static/627dc/images/nav_4.png"/><span>联系我们</span></a></li>
+            <li><a href="tel:<?=$shop['contact']?>" onclick="contactUs('<?=$shop['contact']?>')"><img src="/static/627dc/images/nav_4.png"/><span>联系我们</span></a></li>
             <li><a href="/food/user/person"><img src="/static/627dc/images/nav_3.png"/><span>个人中心</span></a>
             </li>
         </ul>
@@ -211,6 +211,9 @@ var food_id=0;
     function buyOne(){
         buy();
         window.location.href="/food/user/order?menu="+food_id+",";
+    }
+    function contactUs(text){
+        layer.msg(text);
     }
 
     function updateCookie(id, num, price, name,text) {	//输入商品id,数量，价格即可
