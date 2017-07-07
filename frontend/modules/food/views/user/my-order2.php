@@ -73,11 +73,13 @@ EOD;
                 foreach ($o as $_o){
                     if($_o['status']==1){
                         $i++;
+                        if($_o['type'])$str='积分';else $str='￥';
+                        if($_o['type'])$str2='待兑换';else $str2='已支付';
                         echo <<<EOD
     <a href="/food/user/order-detail?order_id=$_o[id]">
                     <ul>
-                        <li class="clearfix"><h4>订单ID：$_o[id]</h4><span class="unpaid_box">待支付</span></li>
-                        <li class="clearfix" style="border:none; margin-bottom:-10px;"><h4>桌号：$_o[table]</h4><span class="consume_box">￥$_o[total]</span></li>
+                        <li class="clearfix"><h4>订单ID：$_o[id]</h4><span class="unpaid_box">$str2</span></li>
+                        <li class="clearfix" style="border:none; margin-bottom:-10px;"><h4>桌号：$_o[table]</h4><span class="consume_box">$str$_o[total]</span></li>
                         <li class="clearfix"><h4 class="time_box">下单时间：$_o[created_time]</h4><span style="color:#A0A3A5; font-size:14px;"></span></li>
                         <div class="hint_box"><img src="/static/627dc/images/tishi.png" width="15" height="15">$_o[text]</div>
                     </ul>
@@ -98,10 +100,7 @@ EOD;
 				  
             </div>
              <div class="load_more"><a href="#">加载更多</a></div>
-              <!--<div class="zw_box">
-                  <img src="images/zwjlimg.png">
-                  <p>暂无记录！</p>
-                </div>-->
+
         </div>
         <!---->
         <div id="woaicss_con3" style="display:none;">
@@ -112,11 +111,13 @@ EOD;
                 foreach ($o as $_o){
                     if($_o['status']==2){
                         $i++;
+                        if($_o['type'])$str='积分';else $str='￥';
+                        if($_o['type'])$str2='已兑换';else $str2='已完成';
                         echo <<<EOD
     <a href="/food/user/order-detail?order_id=$_o[id]">
                     <ul>
-                        <li class="clearfix"><h4>订单ID：$_o[id]</h4><span class="unpaid_box">待支付</span></li>
-                        <li class="clearfix" style="border:none; margin-bottom:-10px;"><h4>桌号：$_o[table]</h4><span class="consume_box">￥$_o[total]</span></li>
+                        <li class="clearfix"><h4>订单ID：$_o[id]</h4><span class="unpaid_box">$str2</span></li>
+                        <li class="clearfix" style="border:none; margin-bottom:-10px;"><h4>桌号：$_o[table]</h4><span class="consume_box">$str$_o[total]</span></li>
                         <li class="clearfix"><h4 class="time_box">下单时间：$_o[created_time]</h4><span style="color:#A0A3A5; font-size:14px;"></span></li>
                         <div class="hint_box"><img src="/static/627dc/images/tishi.png" width="15" height="15">$_o[text]</div>
                     </ul>
@@ -135,10 +136,6 @@ EOD;
             
             </div>
              <div class="load_more"><a href="#">加载更多</a></div>
-              <!--<div class="zw_box">
-                  <img src="images/zwjlimg.png">
-                  <p>暂无记录！</p>
-                </div>-->
         </div>
 
     </div>
