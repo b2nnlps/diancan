@@ -1,6 +1,3 @@
-<?php
-use member\modules\food\models\FoodInfo;
-?>
 <!doctype html>
 <html>
 <head>
@@ -11,6 +8,8 @@ use member\modules\food\models\FoodInfo;
     <script type="text/javascript" src="/static/627dc/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/static/627dc/js/jquery.touchSlider.js"></script>
     <script type="text/javascript" src="/static/627dc/js/pictures.js"></script>
+    <script type="text/javascript" src="/static/food/js/jquery.cookie.js"></script>
+    <script src="/js/layer/layer.js"></script>
 </head>
 
 <body>
@@ -70,7 +69,7 @@ use member\modules\food\models\FoodInfo;
         </div>
         <div id="woaicss_con1" style="display:block;">
             <div class="describe">
-            <?=$food['description']?>
+                <?=$food['description']?>
             </div>
         </div>
         <div id="woaicss_con2" style="display:none;">
@@ -96,21 +95,37 @@ use member\modules\food\models\FoodInfo;
         <dl>
             <a href="#">
                 <dt><a href="tel:18389957620"><img src="/static/627dc/images/kefu.png">客服</a></dt>
-            </a> <a href="shopping_cart.html">
+            </a> <a href="/food/user/cart">
                 <dd> <img src="/static/627dc/images/gwc.png">购物车
-                    <div id="sing">55</div>
+                    <?php
+                    if($cartNum)
+                        echo "<div id=\"sing\">$cartNum</div>";
+                    else
+                        echo "<div id=\"sing\" style='display: none'></div>";
+                    ?>
                 </dd>
             </a>
         </dl>
         <ul>
-            <a href="#">
+            <a id="jiagouwu">
                 <li style=" background-color:#FF8854;">加入购物车</li>
             </a>
             <div class="plus">
-                <a href="javascript:void(0);">
+                <a >
                     <li>立即购买</li>
                 </a>
             </div>
+            <?php
+            $guige_id='';$guige_name='';$guige_price='';
+                foreach ($foodInfo as $_foodInfo){
+                    $guige_id.=$_foodInfo['id'].'|';
+                    $guige_name.=$_foodInfo['title'].'|';
+                    $guige_price.=$_foodInfo['price'].'|';
+                }
+            ?>
+            <div class="guige_id" style="display:none"><?=$guige_id?></div>
+            <div class="guige_name" style="display:none"><?=$guige_name?></div>
+            <div class="guige_price" style="display:none"><?=$guige_price?></div>
         </ul>
     </div>
     <!--悬浮菜单：结束-->
@@ -119,34 +134,16 @@ use member\modules\food\models\FoodInfo;
         <div class="close_box"><img src="/static/627dc/images/close3.png" /></div>
         <div class="greens_box">
             <dl class="clearfix">
-                <dt><img src="/static/627dc/images/greens_picture.png" /></dt>
+                <dt><img src="<?=$food['head_img']?>" /></dt>
                 <dd>
-                    <h3>欧洲风情庄园干红葡萄酒</h3>
-                    <span>￥68.50-98.00</span> </dd>
+                    <h3 id="food_name"><?=$food['name']?></h3>
+                    <span id="food_price">￥<?=$foodInfo[0]['price']?></span> </dd>
             </dl>
         </div>
         <div class="btn_box">
             <h4>规格</h4>
             <ul>
                 <div class="select_btn">
-                    <div class="norm">
-                        <label for="norm1">
-                            <input type="radio" name="sex" id="norm1" >大
-                        </label>
-                        <span class="btn">大</span>
-                    </div>
-                    <div class="norm">
-                        <label for="norm2">
-                            <input type="radio" name="sex" id="norm2" checked>中
-                        </label>
-                        <span class="btn active">中</span>
-                    </div>
-                    <div class="norm">
-                        <label for="norm3">
-                            <input type="radio" name="sex" id="norm3">小
-                        </label>
-                        <span class="btn">小</span>
-                    </div>
                 </div>
             </ul>
         </div>
@@ -156,7 +153,7 @@ use member\modules\food\models\FoodInfo;
                 <dd>
                     <div class="gw_num">
                         <em class="jian">-</em>
-                        <input type="text" value="1" class="num"/>
+                        <input type="text" value="1" class="num" id="gw_num"/>
                         <em class="add">+</em>
                     </div>
                     <!--<a href="#">-</a><input value="1" type="text" /><a href="#">+</a>-->
@@ -164,15 +161,42 @@ use member\modules\food\models\FoodInfo;
             </dl>
         </div>
         <div class="text_box">
-            <textarea placeholder="请您输入您的需求"></textarea>
+            <textarea placeholder="请您输入您的需求" id="xuqiu"></textarea>
         </div>
-        <div class="btn_box1">立即购买</div>
+        <div class="btn_box1" onclick="buyOne()">立即购买</div>
     </div>
     <div id="fade"></div>
 </div>
 </body>
 </html>
 <script>
+    var food_id=0;
+    var go=true;
+
+    function buy() {
+        var id = food_id;//菜品详情信息
+        var num=$('#gw_num').val();
+        var price=1;//摆设
+        var name=$('#food_name').html();
+        var text=$('#xuqiu').val();
+        if(num>0){
+                addCookie(id,num,price,name,text);
+                var add=$("#sing").html();
+                add=parseInt(add)+parseInt(num);
+                $("#sing").html(add);
+                $("#sing").show();
+        }else{
+            $('#gw_num').val("1").focus();
+        }
+        layer.msg('加入购物车成功');
+        $('.show_box').hide();
+        $('#fade').hide();
+    }
+    function buyOne(){
+        buy();
+        if(go)
+            window.location.href="/food/user/order?menu="+food_id+",";
+    }
 
     $(document).ready(function(){
         //加的效果
@@ -189,6 +213,7 @@ use member\modules\food\models\FoodInfo;
             if(num==0){ return}
             $(this).next().val(num);
         });
+
     })
 </script>
 <script>
@@ -219,5 +244,7 @@ use member\modules\food\models\FoodInfo;
             $(this).addClass("thisclass").siblings().removeClass("thisclass");
         });
     });
+
 </script>
-<script type="text/javascript" src="js/login.js"></script>
+
+<script type="text/javascript" src="/static/627dc/js/detail.js"></script>
