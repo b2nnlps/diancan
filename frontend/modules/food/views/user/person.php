@@ -34,15 +34,15 @@
                 <div class="recharge clearfix">
                     <a class="kf" href="#"><span><img src="/static/627dc/icon/djq.png">代金券</span></a>
                     |
-                    <a class="kf" href="jf_shop.html"><span><img src="/static/627dc/icon/jfsc.png">积分商城</span></a>
+                    <a class="" href="/food/user/j-index"><span><img src="/static/627dc/icon/jfsc.png">积分商城</span></a>
                 </div>
             </div>
             <!--功能列表-->
             <ul>
-                 <a href="index.html">
+                 <a href="/food/user/">
                     <li><img src="/static/627dc/icon/sy.png"><em>店铺首页</em></li>
                 </a>
-             <a href="order-list.html">
+             <a href="/food/user/my-order">
                     <li><img src="/static/627dc/icon/dd.png"><em>我的订单</em></li>
                 </a>
                 <div id="fgdiv"></div>
@@ -50,16 +50,16 @@
                 <a href="/food/admin/shop-setting">
                     <li><img src="/static/627dc/icon/wd.png"><em>微管理</em></li>
                 </a>
-				<a href="login.html">
+				<a href="/food/admin/bind">
                     <li><img src="/static/627dc/icon/bd.png"><em>店员绑定</em></li>
                 </a>
-               <a href="order-list.html">
+               <a href="/food/admin/shop-order">
                     <li><img src="/static/627dc/icon/wdd.png"><em>微店订单</em></li>
                 </a>
 				<a href="/food/user/j-record">
                     <li><img src="/static/627dc/icon/dh.png"><em>兑换订单</em></li>
                 </a>
-                <a href="shop_gl.html">
+                <a href="/food/admin/food-list">
                     <li><img src="/static/627dc/icon/cpimg.png"><em>商品管理</em></li>
                 </a>
            
