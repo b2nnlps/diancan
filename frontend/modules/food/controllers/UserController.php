@@ -35,7 +35,8 @@ class UserController extends BaseController
 
         $food = Food::getFoodList($shop);
         $shop=Shop::findOne($shop);
-        return $this->render('index2',['food'=>$food,'shop'=>$shop]);
+        $count=Food::getCartNumber();
+        return $this->render('index2',['food'=>$food,'shop'=>$shop,'count'=>$count]);
     }
     public function actionJIndex($shop=1){
         if($shop)setcookie("shop",$shop,time()+86400*7,"/");
