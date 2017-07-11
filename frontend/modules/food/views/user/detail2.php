@@ -101,7 +101,7 @@
                     if($cartNum)
                         echo "<div id=\"sing\">$cartNum</div>";
                     else
-                        echo "<div id=\"sing\" style='display: none'></div>";
+                        echo "<div id=\"sing\" style='display: none'>0</div>";
                     ?>
                 </dd>
             </a>
