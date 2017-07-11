@@ -127,7 +127,7 @@ EOD;
         <ul>
             <li class="pitch_on"><a href="#"><img src="/static/627dc/images/nav_11.png"/><span>菜类</span></a></li>
             <li><a href="/food/user/cart"><img src="/static/627dc/images/nav_2.png"/><span>购物车</span></a>
-                <div class="data_box">0</div>
+                <div class="data_box"><?=$count?></div>
             </li>
             <li><a href="tel:<?=$shop['contact']?>" onclick="contactUs('<?=$shop['contact']?>')"><img src="/static/627dc/images/nav_4.png"/><span>联系我们</span></a></li>
             <li><a href="/food/user/person"><img src="/static/627dc/images/nav_3.png"/><span>个人中心</span></a>
