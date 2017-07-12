@@ -3,7 +3,6 @@
 namespace frontend\modules\food\controllers;
 
 use Yii;
-use yii\web\Controller;
 use member\modules\food\models\Food;
 use member\modules\food\models\Shop;
 use member\modules\food\models\Order;
