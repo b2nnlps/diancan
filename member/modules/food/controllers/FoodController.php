@@ -2,6 +2,7 @@
 
 namespace member\modules\food\controllers;
 
+use member\modules\food\models\FoodInfo;
 use member\modules\food\models\Shop;
 use Yii;
 use member\modules\food\models\Food;
@@ -83,7 +84,7 @@ class FoodController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionChangeImg(){
+   /* public function actionChangeImg(){
         $webroot = Yii::getAlias('@webroot');
         $food=Food::find()->all();
         foreach($food as $_food){
@@ -95,6 +96,20 @@ class FoodController extends Controller
             }
         }
     }
+    public function actionChangeImg2(){//批量修改缩略图
+        $webroot = Yii::getAlias('@webroot');
+        $food=Food::find()->all();
+        foreach($food as $_food){
+           // $name=str_replace("http://foodimg.n39.cn/",$webroot.'/upload/',$_food['head_img']);
+           // if(file_exists($name)) {
+                $name_thumb = str_replace(".jpg", "_thumb.jpg", $_food['head_img']);
+               // \common\components\functional\ImageUtility::thumbs( $name, $name_thumb, 100, 100);//创建缩略图
+                $_food['head_img']=$name_thumb;
+                $_food->save();
+                echo $name_thumb . '<br>';
+           // }
+        }
+    }*/
     public function actionCreate()
     {
         $model = new Food();
@@ -109,10 +124,19 @@ class FoodController extends Controller
         $model->updated_time=date("Y-m-d H:i:s");
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $guigePrice=Yii::$app->request->post('guigePrice',[]);
+            $guigeNumber=Yii::$app->request->post('guigeNumber',[]);
+            $guigeTitle=Yii::$app->request->post('guigeTitle',[]);
+            foreach($guigePrice as $k=>$v){
+                if($v>=0){
+                    FoodInfo::newInfo($guigeTitle[$k],$guigePrice[$k],0,$guigeNumber[$k],$model->id);
+                }
+            }
             return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'foodInfo'=>[]
             ]);
         }
     }
@@ -128,11 +152,30 @@ class FoodController extends Controller
         $model = $this->findModel($id);
         $model->updated_time=date("Y-m-d H:i:s");
 
+        $foodInfo=FoodInfo::find()->where(['food_id'=>$id,'status'=>0])->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $guigePrice=Yii::$app->request->post('guigePrice',[]);
+            $guigeNumber=Yii::$app->request->post('guigeNumber',[]);
+            if(isset($guigePrice[-1])){//如果是新建规格
+                FoodInfo::updateAll(['status'=>1],['food_id'=>$id]);//停用之前的
+                $guigeTitle=Yii::$app->request->post('guigeTitle',[]);
+                foreach($guigePrice as $k=>$v){
+                    if($v>=0){
+                        FoodInfo::newInfo($guigeTitle[$k],$guigePrice[$k],0,$guigeNumber[$k],$id);
+                    }
+                }
+            }else{//修改已有的规格信息
+                foreach($guigePrice as $k=>$v){
+                    if($v>=0){
+                        FoodInfo::updateAll(['price'=>$guigePrice[$k],'number'=>$guigeNumber[$k]],['id'=>$k]);
+                    }
+                }
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'foodInfo'=>$foodInfo
             ]);
         }
     }

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model member\modules\food\models\Food */
+/* @var $foodInfo member\modules\food\models\Food */
 
 $this->title = '修改菜品: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Foods', 'url' => ['index']];
@@ -16,6 +17,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'foodInfo'=>$foodInfo
     ]) ?>
 
 </div>
