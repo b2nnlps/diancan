@@ -46,21 +46,27 @@
                     <li><img src="/static/627dc/icon/dd.png"><em>我的订单</em></li>
                 </a>
                 <div id="fgdiv"></div>
-
-                <a href="/food/admin/shop-setting">
-                    <li><img src="/static/627dc/icon/wd.png"><em>微管理</em></li>
-                </a>
+                <?php
+                if($staff) {
+                    ?>
+                    <a href="/food/admin/shop-setting">
+                        <li><img src="/static/627dc/icon/wd.png"><em>微管理</em>
+                        </li>
+                    </a>
+                    <a href="/food/admin/shop-order">
+                        <li><img src="/static/627dc/icon/wdd.png"><em>微店订单</em></li>
+                    </a>
+                    <a href="/food/admin/food-list">
+                        <li><img src="/static/627dc/icon/cpimg.png"><em>商品管理</em></li>
+                    </a>
+                    <?php
+                }
+                ?>
 				<a href="/food/admin/bind">
                     <li><img src="/static/627dc/icon/bd.png"><em>店员绑定</em></li>
                 </a>
-               <a href="/food/admin/shop-order">
-                    <li><img src="/static/627dc/icon/wdd.png"><em>微店订单</em></li>
-                </a>
 				<a href="/food/user/j-record">
                     <li><img src="/static/627dc/icon/dh.png"><em>兑换订单</em></li>
-                </a>
-                <a href="/food/admin/food-list">
-                    <li><img src="/static/627dc/icon/cpimg.png"><em>商品管理</em></li>
                 </a>
            
                 <div id="fgdiv"></div>
