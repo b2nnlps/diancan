@@ -12,7 +12,7 @@
 <div class="box"><!--头部：开始--->
     <div class="Favorites">
         <ul>
-            <li><a href="/food/user/person"><img src="/static/627dc/icon/return1.png" width="30" height="30"></a></li>
+            <li><a href="javascript:history.go(-1)"><img src="/static/627dc/icon/return1.png" width="30" height="30"></a></li>
             <p>店铺管理</p>
             <li id="save" style=" font-size:14px; color:#FF4A83; "></li>
             <div class="clear"></div>
