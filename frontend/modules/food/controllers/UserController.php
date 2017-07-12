@@ -26,11 +26,11 @@ class UserController extends BaseController
     public $enableCsrfValidation = false;
     public $layout=false;
 
-    public function actionIndex($shop=1,$table=0)
+    public function actionIndex($shop=0,$table=0)
     {
         if($shop && isset($_COOKIE['shop'])) if($shop!=$_COOKIE['shop']) setcookie('cart','',time()-1,'/');
 
-        if($shop)setcookie("shop",$shop,time()+86400*7,"/");
+        if($shop)setcookie("shop",$shop,time()+86400*7,"/");else $shop=$_COOKIE['shop'];
         if($table)setcookie("table",$table,time()+86400*7,"/");
 
         $food = Food::getFoodList($shop);
@@ -161,9 +161,12 @@ class UserController extends BaseController
             return $this->render('shop-success',['shop_id'=>$order['shop_id']]);
            // header("Location: http://ms.n39.cn/food/default/push-mess?orderno=$order->id");
         }else
-         echo "Location: http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$order->id";
-         //   header("Location: http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$order->id");
+        // echo "Location: http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$order->id";
+            header("Location: http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$order->id");
         exit;
+    }
+    public function Jorder(){
+
     }
     public function actionMyOrder(){
         $o=Order::find()->where(['user'=>$this->openid])->orderBy("id desc")->all();
@@ -181,8 +184,10 @@ class UserController extends BaseController
     }
 
     public function actionPerson(){
-    $u=WechatUser::findOne($this->openid);
-    return $this->render('person',['u'=>$u]);
+        $u=WechatUser::findOne($this->openid);
+        $staff=ShopStaff::findOne(['openid'=>$this->openid,'status'=>0]);
+
+    return $this->render('person',['u'=>$u,'staff'=>$staff]);
 }
 
 
