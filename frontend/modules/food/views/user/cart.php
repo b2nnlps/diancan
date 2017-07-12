@@ -12,6 +12,7 @@ use member\modules\food\models\FoodInfo;
     <link href="/static/627dc/css/demo.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="/static/627dc/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/static/food/js/jquery.cookie.js"></script>
+    <script src="/js/layer/layer.js"></script>
 </head>
 
 <body>
@@ -175,6 +176,7 @@ function check(all) {
         $("#all").prop("checked",false);
         $("#all2").prop("checked",false);
     }
+    getTotal();
 }
     $(".goods_list :checkbox").click(function(){
         allchk();
@@ -231,6 +233,8 @@ function post(){//提交选中的菜品
     });
     if(food)
         window.location.href='/food/user/order?menu='+food;
+    else
+        layer.msg('您还未勾选菜品');
 }
 function del(){
     $(".goods_list :checkbox").each(function () {
