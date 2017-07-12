@@ -38,8 +38,8 @@
                     if ($_food['cname'] != $t) {
                         $i++;
                         $str = $i == 1 ? 'li on' : 'li';
-                        echo '<div class="' . $str . '"><a href="#title' . $i
-                            . '">' . $_food['cname'] . '</a></div>';
+                        echo '<a href="#title' . $i
+                            . '"><div class="' . $str . '">' . $_food['cname'] . '</div></a>';
                         $t = $_food['cname'];
                     }
                 }
@@ -201,6 +201,9 @@ var food_id=0;
         var text=$('#xuqiu').val();
         if(num>0){
             updateCookie(id,num,price,name,text);
+            var my=$(".data_box").html();
+            my=parseInt(my)+parseInt(num);
+            $(".data_box").html(my);
         }else{
             $('#gw_num').val("1").focus();
         }
