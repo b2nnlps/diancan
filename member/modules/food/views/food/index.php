@@ -21,11 +21,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
+            [
+                'contentOptions'=>['style'=>'text-align:center;width:40px'],
+                'label' => '图像',
+                'format'=>'raw',
+                'value' => function ($model) {
+                    if ($model->head_img) {
+                        return "<img src='$model->head_img' width='40px'/>";
+                    } else {
+                        return '';
+                    }
+                },
+            ],
             'name',
-            'img',
             'price',
             // 'class_id',
             // 'created_time',
