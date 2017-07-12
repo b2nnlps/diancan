@@ -79,10 +79,26 @@ class Food extends \yii\db\ActiveRecord
             ->all();
         return $food;
     }
-    public static function getStock($food_id){
+    public static function getStock($food_id){//获取该商品所剩余的数量
         $num = FoodInfo::find()->where(['food_id'=>$food_id])->sum('number');
         if(!$num)$num=0;
         return $num;
+    }
+    public static function getCart(){//获取购物车内容
+        if(!isset($_COOKIE['cart']))  return false;
+
+        $cookie=$_COOKIE['cart'];
+        $cookie=json_decode($cookie,true);
+        return $cookie['cart'];
+    }
+    public static function getCartNumber(){//获取购物车商品数量
+        $cart=self::getCart();
+        if(!$cart) return 0;
+        $total=0;
+        for($i=0;$i<count($cart);$i++){
+            if($cart[$i]['num']>0) $total+=$cart[$i]['num'];
+        }
+        return $total;
     }
 
 }
