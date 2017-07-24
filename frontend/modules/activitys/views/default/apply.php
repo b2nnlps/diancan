@@ -55,8 +55,8 @@ $signPackage = $jssdk->GetSignPackage();
                 <img src="<?=Yii::$app->view->theme->baseUrl?>/hdb_v1.0/icon/money.png" width="20">
                 <?php
                 $charge=$applyActivity['charge'];
-                if($charge!=0){
-                    echo '￥'.$charge;
+                if($charge!=""){
+                    echo $charge;
                 }else{
                     echo '免费';
                 } ?>

@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-    <title>容合点餐系统</title>
+    <title>点餐系统</title>
     <link href="/static/627dc/css/list.css" rel="stylesheet">
     <script src="/static/food/js/jquery-1.11.2.js"></script>
     <script src="/js/layer/layer.js"></script>
@@ -90,7 +90,6 @@
                     }
                     $img = $_food['head_img'] == '' ? $_food['img']
                         : $_food['head_img'];
-                    $img = str_replace(".jpg", "_thumb.jpg", $img);
 
                     if ($_food['status'] == 1) {
                         $wei = '<div class="but no"> 已售完</div>';

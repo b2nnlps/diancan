@@ -26,7 +26,7 @@ use yii\helpers\ArrayHelper;
  * @property string $hedimg
  * @property string $url
  * @property string $intro
- * @property integer $charge
+ * @property string $charge
  * @property integer $restrict
  * @property integer $willnum
  * @property integer $pv
@@ -55,11 +55,11 @@ class ApplyActivity extends BaseActiveRecord
     {
         return [
             [['title', 'imgurl', 'start_time', 'end_time', 'address', 'merchant', 'initiator', 'phone', 'restrict', 'send_title', 'send_detail', 'content'], 'required'],
-            [['type', 'supplier_id', 'charge', 'restrict', 'willnum', 'pv', 'status'], 'integer'],
+            [['type', 'supplier_id',  'restrict', 'willnum', 'pv', 'status'], 'integer'],
             [['imgurl', 'content'], 'string'],
             [['start_time', 'end_time', 'created_time', 'updated_time'], 'safe'],
-            [['charge'],'default','value'=>0],
-            [['title', 'address', 'mapmove', 'merchant', 'initiator', 'phone', 'uid',  'hedimg','url', 'intro','message', 'send_title', 'send_detail', 'u_id'], 'string', 'max' => 255],
+            //[['charge'],'default','value'=>0],
+            [['title', 'address', 'mapmove','charge', 'merchant', 'initiator', 'phone', 'uid',  'hedimg','url', 'intro','message', 'send_title', 'send_detail', 'u_id'], 'string', 'max' => 255],
         ];
     }
 

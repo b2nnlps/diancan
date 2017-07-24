@@ -1,0 +1,237 @@
+@charset "utf-8";
+/* CSS Document */
+* {margin: 0;padding: 0;}
+ul, li {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+	outline: none; color:#000;
+}
+a:hover {
+	text-decoration: none;
+	outline: none;
+}
+input, ins, img {
+	vertical-align: middle;
+	border:none;
+}
+cite, em, i, b {
+	font-style: normal;
+	font-weight: normal;
+}
+body {
+	font-family:"微软雅黑";
+}
+textarea, button,select, input {
+	outline: none;
+}
+
+/*===(清除浮动：开始)=====*/
+.clearfix:after{ content:"."; display:block; width:0; height:0; clear:both; visibility:hidden; overflow:hidden;}
+.clearfix{ display:block;}
+.clearfix{ clear:both;zoom: 1;}
+/*===(清除浮动：结束)=====*/
+.box{
+	max-width:640px;
+	min-width: 320px;
+	margin: auto;
+	}/* CSS Document */
+
+
+/**点菜详情：开始**/
+.greens_picture{ width:100%; position:relative; top:-1px;}
+.greens_picture img{ width:100%; border:none;}
+.greens_picture .Dish_names{ width:95%; margin:auto;  padding-bottom:5px; font-size:16px; border-bottom:1px solid #F1F1F1;}
+.Dish_names h4{ height:30px; line-height:30px;}
+.Dish_names span{ color:#F52248;}
+.standard{ width:95%; margin:auto; padding-bottom:5px; border-bottom:1px solid #F1F1F1;}
+.standard h4{ margin:20px auto 10px;}
+.standard ul li a{ font-size:14px; padding:10px 5px; margin:5px 0 5px 0;  display:inline-block; background-color:#EFEFEF; border-radius:5px;}
+.standard ul li a:hover{ color:#FFF; background-color:#F5234A;}
+.standard ul li a:active{ color:#FFF; background-color:#F5234A;}
+/*数量增减开始*/
+.fied{width:100px; position:absolute; right:0%; top:10px;}
+.gw_num{width: 90px;line-height: 26px;overflow: hidden;}
+.gw_num em{display: block;height: 25px;width:25px; border-radius:100px; border:1px solid #B1B1B1; float: left; font-size:25px;color:#F5234A;text-align: center;cursor: pointer;}
+.gw_num .num{display: block;float: left;text-align: center;width:30px;font-style: normal; font-weight:bold;font-size:15px;line-height:26px;}
+.gw_num em.add{float: right;}
+/*数量增减结束*/
+.other{ width:95%; margin:0 auto  55px;}
+.other h4{  font-size:16px; font-weight:100; height:50px; line-height:50px;}
+.other p{ font-size:14px;}
+.affirm{ max-width:640px;min-width: 320px;margin: auto; width:100%; background-color:#2C4683; height:55px; line-height:55px; text-align:center; font-size:18px;  position:fixed; bottom:0;}
+.affirm a{ color:#FFF;}
+
+
+/**支付订单**/
+.pricebox{ width:100%;  background-color:#FFF;}
+.price{ width:95%; margin:auto;}
+.price p{ font-size:16px; padding:5px 0 15px;}
+.price ol{font-size:15px; line-height:30px;}
+.price ol span{ width:50%; display:block; float:left;}
+.price ol em{ width:20%; display:block; float:left; text-align:center;}
+.price ol cite{ width:30%; display:block; float:left; text-align:right;}
+.price h4{ text-align:right; font-size:16px; font-weight:100; color:#898989; line-height:30px;}
+.price h2{ text-align:right; font-size:17px; font-weight:100; color:#B55A65;line-height:40px;}
+.data{ background-color:#FFF;}
+.data .headline{ background-color:#EFEFF0; height:45px;}
+.headline h4{ width:95%; margin:auto; height:45px; border-bottom:1px solid #B3B3B4;}
+.headline h4 span{ width:25%; display:block; position:relative; top:-1px; height:46px; line-height:45px; z-index:2;font-size:16px; font-weight:bold; font-weight:100; border:1px solid #B3B3B4; background-color:#FFF; text-align:center; border-radius:5px 5px 0 0; border-bottom:none;}
+
+.data ul{ width:95%; margin:1px auto 0;}
+.data ul li label{ width:25%;  float:left; display:block; text-align:center; height:40px; line-height:40px; font-size:16px; font-weight:bold;}
+.data ul li input{ width:75%; float: right; display:block; height:40px; font-size:16px; line-height:40px; text-indent:10px; border-bottom:1px solid #B3B3B4; }
+.data ul li span{ width:50%; float:left; height:35px; line-height:35px; text-indent:10px; font-size:16px; background-color:#EFEFF0;  border-bottom:1px solid #B3B3B4;  margin:5px  0px;}
+.payment{ margin-bottom:60px;}
+.paymentbox h4{ height:40px; line-height:40px; font-weight:100; background-color:#EFEFF0;}
+.paymentbox h4 span{ width:95%; display:block; margin:auto;font-size:16px;} 
+.payment{ background-color:#FFF;}
+.payment p { height:55px; line-height:55px; width:95%; margin:auto;}
+.payment p span{ width:10px; height:10px; border:3px solid #0068B7; display:block;  border-radius:100px; margin:20px 10px; float:left;}
+.payment p em{ float:left;}
+.submit{ max-width:640px;min-width: 320px;margin: auto; width:100%;position:fixed; bottom:0px;} 
+.submit dl{ font-size:18px; color: #FFF;}
+.submit dl dt{ width:40%; height:50px; line-height:50px; float:left; background-color:#363636; text-align:center;}
+.submit dl dt a{ color:#FFF;}
+.submit dl dd{ width:60%; height:50px; line-height:50px; float:right; background-color:#F82048;text-align:center;}
+.submit dl dd a{ color:#FFF;}
+/*我的订单*/
+.navigation{ width:100%; border-bottom:1px solid #B3B3B4; }
+.navigation ul{ width:95%; margin:auto; padding-top:10px;}
+.navigation ul li{ width:32.5%; border:1px solid #959595; float:left; text-align:center; height:28px; line-height:28px; border-radius:5px;}
+.navigation ul li a{ display:block; font-size:15px;  border-radius:5px;}
+.navigation ul li a:hover{  background-color:#DCDCDC;}
+.navigation ul li a:active{ background-color:#DCDCDC;}
+.navigation dl{ width:95%; margin:20px auto; line-height:25px;}
+.navigation dl dt{width:80%;float:left; font-size:16px;}
+.navigation dl dt span{ background-color:#999; color:#FFF; padding:2px 5px; display:inline-block; margin:0 5px; border-radius:5px;}
+.navigation dl dd{ width:20%; float:right;  text-align:center; color:#A7403F;} 
+
+.details{ width:100%;  border-bottom:1px solid #B3B3B4; }
+.details dl{ width:95%; margin:10px auto;line-height:25px;}
+.details dl dt{ width:50%; float:left;}
+.details dl dd{ width:50%; float:right; text-align: right; }
+
+.operating_food{ width:100%;  padding:10px 0; border-bottom:10px solid #999999;}
+.operating_food a{ display:block; width:49.84%; float:left; text-align:center; font-size:18px;}
+
+
+/*图片转播：开始*/
+/*图片转播：开始*/
+.flexslider {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	zoom: 1; 
+	height:200px;
+}
+.flex-viewport {
+	max-height: 2000px;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	transition: all 1s ease;
+}
+.flexslider .slides {
+	zoom: 1;
+}
+.flex-direction-nav a {
+	width: 30px;
+	height: 50px;
+	line-height: 99em;
+	overflow: hidden;
+	margin: -25px 0 0;
+	display: block;
+	background: url(../icon/ad_ctr.png) no-repeat;
+	position: absolute;
+	top: 50%;
+	z-index: 10;
+}
+.flex-control-nav {
+	width:80px;
+	position: absolute; margin:auto;
+	bottom:0px;
+	right:0px;
+	text-align: center;
+}
+.flex-control-nav li {
+	margin: 0 2px;
+	display: inline-block;
+	zoom: 1;
+*display:inline;
+}
+.flex-control-paging li a {
+	display: block;
+	height: 10px;
+	overflow: hidden;
+	text-indent: -99em;
+	width: 10px;
+	background-color:#CCCCCC;
+	cursor: pointer; border-radius:100px;
+} 
+.flex-control-paging li a.flex-active {  background-color:#D00832;
+}
+.flexslider li img {
+	width: 100%;
+	
+}
+/*图片转播：结束*/
+
+/*下单成功*/
+.confirmation{ width:100%; padding:50px 0; border-bottom:1px solid #B7B7B8;text-align:center;  background-color:#FFF;}
+.confirmation img{ width:91px; height:86px;}
+.confirmation h3{ font-size:38px; padding:5px 0; font-weight:100; color:#427643;}
+.confirmation h4{ font-size:26px; font-weight:100; color:#B7B7B8;}
+.examine{ background-color:#FFF; padding:20px 0;}
+.examine a{ display:block; width:95%; margin:auto; height:45px; line-height:45px; background-color:#5CB85C; text-align:center; color:#FFF; border-radius:5px; font-size:18px;}
+.footer{ width:100%;  background-color:#EFEFF0; padding:10px 0;}
+.footer p{ text-align:center; line-height:25px;}
+
+
+/*下滑*/
+.container {margin: 0 auto;}
+.accordion {
+  position: relative;
+  display:inline-block;
+  width: 100%;
+  color: #74777b;
+  vertical-align: middle;
+}
+
+.accordion a {
+  position: relative;
+  display: block;
+  color: #74777b;
+  text-decoration: none;
+}
+
+.accordion a img{ width:30px; height:30px; display:block; margin:auto;}
+ 
+.accordion a:hover {
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.accordion-desc {
+  border-bottom:1px solid #CCC;
+  width:100%;
+  background-color:#FFF;
+  z-index:2;
+}
+.accordion-desc h3{ text-align:center; padding:10px 0;}
+.accordion-desc ul{ width:95%; margin:auto;}
+.accordion-desc ul li{ font-size:14px; padding:5px 0;}
+.accordion-desc ul span{ width:70%;  display:block; float:left; overflow: hidden; white-space: nowrap;  text-overflow: ellipsis;}
+.accordion-desc ul cite{ width:20%;display:block; float:left; text-align:right;}
+.accordion-desc ul em{ width:10%; display:block; float:left; text-align:right;}
+.accordion-desc ol{ width:95%; margin:10px auto 20px;}
+.accordion-desc ol li{ font-size:14px; padding:5px 0;}
+.accordion-desc ol li i{ width:45px; display:block; float:left;}
+.accordion-desc ol li b{ width:85%; display:block; float:left;}
+
+/*立即支付*/
+.paybox{ width:100%;}
+.paybox img{ width:100px; height:100px; display:block; margin:30px auto 20px;}
+.paybox h3{ font-size:16px; font-weight:100; text-align:center;}
+.paybox h4{ height:50px; margin:10px 0; line-height:50px; font-size:35px;text-align:center; background-color:#EFEFEF;}
+.paybox h4 span{ color:#B15A63;}

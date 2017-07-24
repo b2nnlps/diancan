@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta content="telephone=no" name="format-detection">
+<title>容合助力</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.touchSlider.js"></script>
+<script type="text/javascript" src="js/pictures.js"></script>
+<script type="text/javascript">
+    /*弹框JS内容*/
+    function showBg6() {
+        $("#indianaNumber").show();
+		 $(".login-bg").show();
+    }
+	    //关闭弹出框
+    function closeBg() {
+		$("#indianaNumber").hide();
+		$(".login-bg").hide();
+		    }
+</script>
+<script language="javascript">
+  function woaicssq(num){
+    for(var id = 1;id<=2;id++)
+    {
+      var MrJin="woaicss_con"+id;
+      if(id==num)
+        document.getElementById(MrJin).style.display="block";
+      else
+        document.getElementById(MrJin).style.display="none";
+    }
+    var zzsc = $(".Chikafusa a");
+    zzsc.click(function(){
+      $(this).addClass("thisclass").siblings().removeClass("thisclass");
+    });
+  }
+  $(function(){
+    var zzsc = $(".Chikafusa a");
+    zzsc.click(function(){
+      $(this).addClass("thisclass").siblings().removeClass("thisclass");
+    });
+  });
+</script>
+<script type="text/javascript" src="js/login.js"></script>
+</head>
+
+<body style="background-color:#3BD276;">
+<div class="box">
+   <div class="head">
+       <!--图片轮播 -->
+        <!--效果html开始-->
+        <div class="main_visual">
+            <div class="flicking_con"> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> </div>
+            <div class="main_image">
+                <ul>
+                    <li><span><a href="#"><img src="images/img.png"></a></span></li>
+                    <li><span><a href="#"><img src="images/img.png"></a></span></li>
+                    <li><span><a href="#"><img src="images/img.png"></a></span></li>
+                    <li><span><a href="#"><img src="images/img.png"></a></span></li>
+                    <li><span><a href="#"><img src="images/img.png"></a></span></li>
+                </ul>
+                <a href="javascript:;" id="btn_prev"></a>
+                <a href="javascript:;" id="btn_next"></a>
+            </div>
+        </div>
+
+        <!--效果html结束-->
+   </div>
+   <div class="logo"><img src="images/img1.png"></div>
+   <div class="Pageview">
+      <img src="images/img2.png">
+      <div class="activity_time">活动时间：2016.11.7-2016.12.16</div>
+      <div class="browse"><span>预览量：288888</span></div>
+      <div class="time"><span>16天20时25分25秒</span></div>
+   </div>
+   <div class="participantbox">
+      <img src="images/img3.png">
+      <div class="participant">
+         <h4>参赛人</h4>
+         <span>熊孩子（151*****995）</span>
+      </div>
+      <a class="one" href="javascript:showBg6();" onclick="_system._guide(true)">1000</a>
+      <a class="two" href="javascript:showBg6();" onclick="_system._guide(true)">2000</a>
+      <a class="three" href="javascript:showBg6();" onclick="_system._guide(true)">3000</a>
+      <a class="four" href="javascript:showBg6();" onclick="_system._guide(true)">4000</a>
+      <a class="five" href="javascript:showBg6();" onclick="_system._guide(true)">5000</a>
+      <a class="six" href="javascript:showBg6();" onclick="_system._guide(true)">6000</a>
+   </div>
+   <div id="indianaNumber">
+      <div class="indianaNumber">
+         <div class="divimg"><img src="images/img7.png" width="275" height="70"></div>
+         <div class="cd-buttons">
+          <ul>
+             <li><em>赞助商：</em><span>玲珑网络科技有限公司</span><div class="clear"></div></li>
+             <li><em>赞助奖品：</em><span>欧洲干红葡萄酒</span><div class="clear"></div></li>
+             <img src="images/img.png">
+          </ul>
+         </div>
+      </div>
+        <a href="#0" class="cd-popup-close" onclick="closeBg()"></a>
+    </div>
+   <div class="join">
+      <img src="images/img4.png">
+      <div class="kilometre">
+         <ul>
+           <li><img src="images/img6.png"></li>
+           <li style="width:40%"><span>265</span>公里</li>
+           <li><img src="images/img6.png"></li>
+           <div class="clear"></div>
+         </ul>
+      </div>
+      <div class="play login-header"><a href="javascript:void(0);"><img src="icon/medal6.png"></a></div>
+      <div class="refuel login-header-one"><a href="javascript:void(0);"><img src="icon/medal7.png"></a></div>
+      <div class="login">
+          <div class="login-title">报名参赛<span><a href="javascript:void(0);" class="close-login"><img src="icon/medal8.png"></a></span></div>
+          <div class="login-input-content">
+            <div class="login-input">
+              <label>姓名：</label>
+              <input type="text" placeholder="请输入您的姓名"  name="info[username]" id="username" class="list-input"/>
+            </div>
+            <div class="login-input">
+              <label>手机号：</label>
+              <input type="text" placeholder="请输入您的手机号码" name="info[password]" id="password" class="list-input"/>
+            </div>
+          </div>
+          <div class="login-button"><a href="javascript:void(0);" id="login-button-submit">登录</a></div>
+        </div>
+    </div>
+    <div class="login-one">
+      <div class="login-title small"><span><a href="javascript:void(0);" class="close-login"><img src="icon/medal9.png"></a></span></div>
+      <h3>加 油 成 功！</h3>
+    </div>
+    <div class="login-bg"></div>
+   <div class="rankingbox">
+     <div class="Chika">
+         <div class="Chikafusa"><a href="javascript:void(-1);" onclick="woaicssq(1)" id="woaicsstitle" class="thisclass">参加人员（6666人）</a> <a href="javascript:void(-1);" onclick="woaicssq(2)" id="woaicsstitle" class="">参赛规则</a> </div>
+     </div>
+     <div id="woaicss_con1" style="display:block;">
+      <img src="images/img5.png">
+      <div class="ranking">
+        <ul>
+          <li><span style="font-size:16px;color:#FFF;" class="xh">序号</span><span style="font-size:16px;color:#FFF;" class="xm">姓名</span><span style="font-size:16px; color:#FFF;" class="sjh">手机号</span><span style="font-size:16px; color:#FFF;" class="zlz">助力值</span></li>
+
+          <li style="color:#ffd200;"><span class="xh"><img src="icon/medal1.png" width="28" height="33"></span><span class="xm">黄晓明</span><span class="sjh">13976888888</span><span class="zlz">99999</span></li>
+          <li style="color:#ffd200;"><span class="xh"><img src="icon/medal2.png" width="28" height="32"></span><span class="xm">黄晓明</span><span class="sjh">13976888888</span><span class="zlz">88888</span></li>
+          <li style="color:#ffd200;"><span class="xh"><img src="icon/medal3.png" width="28" height="32"></span><span class="xm">黄晓明</span><span class="sjh">13976888888</span><span class="zlz">77777</span></li>
+          <li><span class="xh">4</span><span class="xm">黄晓明</span><span class="sjh">13976888888</span><span class="zlz">66666</span></li>
+
+        </ul>
+      </div>
+     </div>
+     <div id="woaicss_con2" style="display:none;">
+        <div class="inlinebox">
+            <div class="rules">
+              <h4>参赛规则</h4>
+              <img src="images/img.png">
+              <p>玲珑网络科技有限公司玲珑网络科技有限公司玲珑网络科技有限公司玲珑网络科技有限公司玲珑网络科技有限公司玲珑网络科技有限公司玲珑网络科技有限公司玲珑网络科技有限公司玲珑网络科技有限公司</p>
+            </div>
+	     </div>
+     </div>
+   </div>
+</div>
+</body>
+</html>

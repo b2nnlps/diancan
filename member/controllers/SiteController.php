@@ -121,11 +121,11 @@ class SiteController extends Controller
         $dataUser['thisYearCount'] = $result['count'];
 
         $login_log=Loginlog::find()->where(['u_id' =>$u_id])->limit(5)->asArray()->orderBy('id desc')->all();
-        $order=Order::find()->asArray()->limit(10)->orderBy('id desc')->all();
+      //  $order=Order::find()->asArray()->limit(10)->orderBy('id desc')->all();
         return $this->render('index',[
             'login_log'=>$login_log,
             'dataUser' => $dataUser,
-            'order' => $order,
+         //   'order' => $order,
         ] );
     }
 

@@ -1,2 +1,4 @@
-*
-!.gitignore
+/index.php
+/index-test.php
+/wxpayapi
+/wapayapi2

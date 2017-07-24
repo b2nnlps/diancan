@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>候鸟一家</title>
+    <?= Html::csrfMetaTags()?>
+    <link href="css/registe.css" rel="stylesheet" type="text/css">
+    <link href="css/fontico.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="font1/xiaogan.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="box">
+    <div class="Favorites">
+    <ul>
+      <li><a href="javascript:history.go(-1)"><ins class="icon-52"></ins></a></li>
+      <p>注册页面</p>
+      <li><a href="#"></a></li>
+      <div class="clear"></div>
+    </ul>
+  </div>
+  <div class="main">
+    <form id="registe_form" name="registe_form">
+        <div class="input_div">
+            <label><img src="images/login1.png" width="25" height="25"></label>
+            <input class="input_text" type="search" name="name" id="realname" placeholder="真实姓名" />
+        </div>
+        <div class="input_div">
+            <label><img src="images/login2.png" width="25" height="25"></label>
+            <input class="input_text" name="picVercode" id="phone" placeholder="常用手机号码" />
+
+        </div>
+        <div class="input_div">
+            <label><img src="images/login5.png" width="25" height="25"></label>
+            <input class="input_text" type="search" name="name" id="realname" placeholder="详细地址" />
+        </div>
+        <div class="input_div">
+            <label><img src="images/login4.png" width="25" height="25"></label>
+            <input class="input_text" type="search" name="name" id="verifycode" placeholder="短信验证码" />
+            <input type="button" style="background:#FF4683; color:#FFF; border:0; padding:0 15px;" id="subBtn" value="获取验证码"/>
+        </div>
+        <div class="input_div">
+            <label><img src="images/login3.png" width="25" height="25"></label>
+            <input class="input_text" type="password" name="pw" id="pw1" placeholder="密码最少6个字符" />
+        </div>
+        <div class="input_div">
+            <label><img src="images/login3.png" width="25" height="25"></label>
+            <input class="input_text" type="password" name="pw" id="pw2"  placeholder="确认密码" />
+        </div>
+        <div class="agree">
+            <input type="checkbox" id="fwtk" value="1">
+            <a href="#">同意《候鸟一家服务条款》</a>
+        </div>
+        <input type="button" name="registeBtn" id="registeBtn" class="btn" value="注册" />
+    </form>
+    </div>
+</div>
+</body>
+</html>
+

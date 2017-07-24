@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>容合快餐</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="font1/xiaogan.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="box" style=" background:#F4F6F5"><!--头部：开始--->
+  <div class="Favorites">
+    <ul>
+      <li><a href="javascript:history.go(-1)"><ins class="icon-52"></ins></a></li>
+      <p>容合外卖</p>
+      <li><a href="#"></a></li>
+      <div class="clear"></div>
+    </ul>
+  </div>
+  <div class="main">
+    <div class="Chika">
+      <div class="Chikafusa"> <a href="#" onclick="woaicssq(1)" id="woaicsstitle" class="thisclass">商品</a> <a href="#" onclick="woaicssq(2)" id="woaicsstitle" class="">商户详情</a> </div>
+    </div>
+    <!---->
+    <div id="woaicss_con1" style="display:block;">
+      <div class="pecifics"> 
+        <!--跟踪-->
+        <div class="tailAfter"> <cite></cite>
+          <dl>
+            <em></em>
+            <dt class="signFor">已签收，签收人是本人
+              派送业务员：王先生；联系电话：00000000000</dt>
+            <dd>2015-09-28 10:01:38</dd>
+          </dl>
+          <dl>
+            <em></em>
+            <dt>【海南琼海公司】的派件员【欧阳平】正在派件，快件将很快进
+              行派送</dt>
+            <dd>2015-09-28 10:01:38</dd>
+          </dl>
+          <dl>
+            <em></em>
+            <dt>【海南琼海公司】的派件员【沙青】正在派件，快件将很快进
+              行派送</dt>
+            <dd>2015-09-28 10:01:38</dd>
+          </dl>
+          <dl>
+            <em></em>
+            <dt>【海南琼海公司】的派件员【沙青】正在派件，快件将很快进
+              行派送</dt>
+            <dd>2015-09-28 10:01:38</dd>
+          </dl>
+        </div>
+      </div>
+      <!--货物详情：结束--> 
+    </div>
+  </div>
+  <!---->
+  <div id="woaicss_con2" style="display:none;">
+    <div class="pecifics">
+      <div class="details">
+        <h4>海南煲仔饭（富海路）</h4>
+        <dl>
+          <dt>啤酒烧鸭煲仔饭</dt>
+          <dd> <span>x1</span> <span>￥1300</span> </dd>
+          <div class="clear"></div>
+        </dl>
+        <dl>
+          <dt>啤酒烧鸭煲仔饭</dt>
+          <dd> <span>x1</span> <span>￥1300</span> </dd>
+          <div class="clear"></div>
+        </dl>
+        <dl>
+          <dt>啤酒烧鸭煲仔饭</dt>
+          <dd> <span>x1</span> <span>￥1300</span> </dd>
+          <div class="clear"></div>
+        </dl>
+        <dl>
+          <dt>啤酒烧鸭煲仔饭</dt>
+          <dd> <span>x1</span> <span>￥1300</span> </dd>
+          <div class="clear"></div>
+        </dl>
+        <dl>
+          <dt>啤酒烧鸭煲仔饭</dt>
+          <dd> <span>x1</span> <span>￥1300</span> </dd>
+          <div class="clear"></div>
+        </dl>
+        <dl>
+          <dt>啤酒烧鸭煲仔饭</dt>
+          <dd> <span>x1</span> <span>￥1300</span> </dd>
+          <div class="clear"></div>
+        </dl>
+      </div>
+      <div class="Amount">
+        <dl>
+          <dt> 订单￥35 </dt>
+          <dd>总计<span>￥35</span></dd>
+          <div class="clear"></div>
+        </dl>
+      </div>
+      <div class="delivery">
+         <dl>
+            <dt>配送方：</dt>
+            <dd>海南煲仔饭（富海路）配送</dd>
+            <div class="clear"></div> 
+         </dl>
+         <dl>
+            <dt>订单号：</dt>
+            <dd>166888388451162</dd>
+            <div class="clear"></div> 
+         </dl>
+         <dl>
+            <dt>配送时间：</dt>
+            <dd>立即配送</dd>
+            <div class="clear"></div> 
+         </dl>
+         <dl>
+            <dt>收货信息：</dt>
+            <dd>阙君猛 183*****620 海南汽车试验场兴海中路加油站对面</dd>
+            <div class="clear"></div> 
+         </dl>
+         <dl>
+            <dt>支付方式：</dt>
+            <dd>货到付款</dd>
+            <div class="clear"></div> 
+         </dl>
+         <dl>
+            <dt>订单状态：</dt>
+            <dd><select>
+              <option>已发货</option>
+              <option>未发货</option>
+              <option>待发货</option>
+            </select></dd>
+            <div class="clear"></div> 
+         </dl>
+         <dl>
+            <dt style=" padding-top:15px;">订单备注：</dt>
+            <dd><textarea rows="3"></textarea></dd>
+            <div class="clear"></div> 
+         </dl>
+      </div>
+      <div class="submit"><button>提交</button></div>
+    </div>
+  </div>
+  <!----> 
+</div>
+</div>
+<script src="js/jquery.min.js"></script> 
+<script language="javascript">
+    function woaicssq(num){
+        for(var id = 1;id<=2;id++)
+        {
+            var MrJin="woaicss_con"+id;
+            if(id==num)
+                document.getElementById(MrJin).style.display="block";
+            else
+                document.getElementById(MrJin).style.display="none";
+        }
+        var zzsc = $(".Chikafusa a");
+        zzsc.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    }
+    $(function(){
+        var zzsc = $(".Chikafusa a");
+        zzsc.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>容合快餐</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="font1/xiaogan.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.spinner.js"></script>
+</head>
+
+<body>
+<div class="box"><!--头部：开始--->
+  <div class="Favorites">
+    <ul>
+      <li><a href="javascript:history.go(-1)"><ins class="icon-52"></ins></a></li>
+      <p>快餐列表</p>
+      <li><a href="#"></a></li>
+      <div class="clear"></div>
+    </ul>
+  </div>
+  <div class="main">
+
+    <div class="Chika">
+      <div class="Chikafusa"> <a href="#" onclick="woaicssq(1)" id="woaicsstitle" class="thisclass">商品</a> <a href="#" onclick="woaicssq(2)" id="woaicsstitle" class="">商户详情</a> </div>
+    </div>
+
+    <div id="woaicss_con1" style="display:block;">
+    <div class="list">
+
+      <a href="#">
+      <dl>
+        <dt><img src="images/qq.png" alt="动态图片"></dt>
+        <dd>
+          <h3>指留香（琼海店）</h3>
+          <span>销售量：250份</span><span>剩余：150份</span>
+          <h5>￥20</h5>
+        </dd>
+        <div class="clear"></div>
+        <div class="plusminus">
+          <div class="gw_num">
+            <em class="jian">-</em>
+            <input type="text" value="1" class="num"/>
+            <em class="add">+</em>
+          </div>
+        </div>
+      </dl>
+      </a>
+
+    </div>
+    </div>
+      <!---->
+      <div id="woaicss_con2" style="display:none;">
+        <div class="pecifics">
+          <ol>
+            <li><ins class="icon-45"></ins>营业时间:10:30-21:30</li>
+            <li><ins class="icon-1"></ins>海南省东方市四更镇</li>
+            <li><ins class="icon-7"></ins>88888888</li>
+            <li><ins class="icon-47"></ins><span>本店欢迎您下单，用餐高峰请提前下单，谢谢!本店欢迎您下单，用餐高峰请提前下单，谢谢!本店欢迎您下单，用餐高峰请提前下单，谢谢!</span>
+              <div class="clear"></div>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <!---->
+
+    </div>
+  <!--悬浮菜单：开始-->
+  <!--<div class="bottomMenu">
+   <dl>
+     <dt><a href="#"><img src="images/qwe.png">购物车</a></dt>
+     <dd>立即下单</dd>
+     <div class="clear"></div>
+   </dl>
+  </div>-->
+  <!--悬浮菜单：结束--> 
+   <!--悬浮菜单：开始-->
+  <div class="bottomMenu">
+   <dl>
+     <dt><a href="#"><img src="images/wqw.png">共<span>￥50</span></a></dt>
+     <dd><a href="Product.html">加入</a></dd>
+     <div class="clear"></div>
+   </dl>
+   <div class="sing">1</div>
+  </div>
+  <!--悬浮菜单：结束--> 
+</div>
+<script type="text/javascript">
+    $('.spinnerExample').spinner({});
+</script>
+</body>
+</html>
+<script language="javascript">
+  function woaicssq(num){
+    for(var id = 1;id<=2;id++)
+    {
+      var MrJin="woaicss_con"+id;
+      if(id==num)
+        document.getElementById(MrJin).style.display="block";
+      else
+        document.getElementById(MrJin).style.display="none";
+    }
+    var zzsc = $(".Chikafusa a");
+    zzsc.click(function(){
+      $(this).addClass("thisclass").siblings().removeClass("thisclass");
+    });
+  }
+  $(function(){
+    var zzsc = $(".Chikafusa a");
+    zzsc.click(function(){
+      $(this).addClass("thisclass").siblings().removeClass("thisclass");
+    });
+  });
+</script>

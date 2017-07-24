@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+        <title>演示：PHP生成图片验证码</title>
+        <meta name="keywords" content="验证码,PHP验证码" />
+        <meta name="description" content="本文以实例演示5种验证码，并介绍生成验证码的函数。PHP生成验证码的原理：通过GD库，生成一张带验证码的图片，并将验证码保存在Session中。" />
+        <style type="text/css">
+            .demo{width:500px; margin:20px auto}
+            h3{height:28px; line-height:28px;font-size:14px}
+            .demo p{height:32px; line-height:32px; position:relative}
+            .demo p img{position:absolute; top:4px; left:125px; cursor:pointer}
+            .demo p img#getcode_zh{width:150px; height:50px; z-index:1001}
+            .input{width:68px; height:20px; line-height:20px; padding:1px; border:1px solid #d3d3d3}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="demo">
+                <h3>1、数字验证码</h3>
+                <p>验证码：<input type="text" class="input" id="code_num" name="code_num" maxlength="4" /> <img src="code_num.php" id="getcode_num" title="看不清，点击换一张" align="absmiddle"></p>
+                <p><input type="button" class="btn" id="chk_num" value="提交" /></p>
+            </div>
+            <div class="demo">
+                <h3>2、数字+字母验证码</h3>
+                <p>验证码：<input type="text" class="input" id="code_char" maxlength="4" /> <img src="code_char.php" id="getcode_char" title="看不清，点击换一张" align="absmiddle"></p>
+                <p><input type="button" class="btn" id="chk_char" value="提交" /></p>
+            </div>
+            <div class="demo">
+                <h3>3、中文验证码</h3>
+                <p>验证码：<input type="text" class="input" id="code_zh" maxlength="4" /> <img src="code_zh.php" id="getcode_zh" title="看不清，点击换一张" align="absmiddle"></p>
+                <p><input type="button" class="btn" id="chk_zh" value="提交" /></p>
+            </div>
+            <div class="demo">
+                <h3>4、仿google验证码</h3>
+                <p>验证码：<input type="text" class="input" id="code_gg" maxlength="4" /> <img src="code_gg.php" id="getcode_gg" title="看不清，点击换一张" align="absmiddle"></p>
+                <p><input type="button" class="btn" id="chk_gg" value="提交" /></p>
+            </div>
+            <div class="demo">
+                <h3>5、算术验证码</h3>
+                <p>验证码：<input type="text" class="input" id="code_math" maxlength="4" /> <img src="code_math.php" id="getcode_math" title="看不清，点击换一张" align="absmiddle"></p>
+                <p><input type="button" class="btn" id="chk_math" value="提交" /></p>
+            </div>
+        </div>
+        <div class="foot">
+            Powered by sucaihuo.com  本站皆为作者原创，转载请注明原文链接：<a href="http://www.sucaihuo.com" target="_blank">www.sucaihuo.com</a>
+        </div>
+        <script type="text/javascript" src="http://www.sucaihuo.com/Public/js/other/jquery.js"></script> 
+        <script type="text/javascript">
+            $(function() {
+                //数字验证
+                $("#getcode_num").click(function() {
+                    $(this).attr("src", 'code_num.php?' + Math.random());
+                });
+                $("#chk_num").click(function() {
+                    var code_num = $("#code_num").val();
+                    $.post("chk_code.php?act=num", {code: code_num}, function(msg) {
+                        if (msg == 1) {
+                            alert("验证码正确！");
+                        } else {
+                            alert("验证码错误！");
+                        }
+                    });
+                });
+                //数字+字母验证
+                $("#getcode_char").click(function() {
+                    $(this).attr("src", 'code_char.php?' + Math.random());
+                });
+                $("#chk_char").click(function() {
+                    var code_char = $("#code_char").val();
+                    $.post("chk_code.php?act=char", {code: code_char}, function(msg) {
+                        if (msg == 1) {
+                            alert("验证码正确！");
+                        } else {
+                            alert("验证码错误！");
+                        }
+                    });
+                });
+                //中文验证码
+                $("#getcode_zh").click(function() {
+                    $(this).attr("src", 'code_zh.php?' + Math.random());
+                });
+                $("#chk_zh").click(function() {
+                    var code_zh = escape($("#code_zh").val());
+                    $.post("chk_code.php?act=zh", {code: code_zh}, function(msg) {
+                        if (msg == 1) {
+                            alert("验证码正确！");
+                        } else {
+                            alert("验证码错误！");
+                        }
+                    });
+                });
+                //google验证
+                $("#getcode_gg").click(function() {
+                    $(this).attr("src", 'code_gg.php?' + Math.random());
+                });
+                $("#chk_gg").click(function() {
+                    var code_gg = $("#code_gg").val();
+                    $.post("chk_code.php?act=gg", {code: code_gg}, function(msg) {
+                        if (msg == 1) {
+                            alert("验证码正确！");
+                        } else {
+                            alert("验证码错误！");
+                        }
+                    });
+                });
+                //算术验证
+                $("#getcode_math").click(function() {
+                    $(this).attr("src", 'code_math.php?' + Math.random());
+                });
+                $("#chk_math").click(function() {
+                    var code_math = $("#code_math").val();
+                    $.post("chk_code.php?act=math", {code: code_math}, function(msg) {
+                        if (msg == 1) {
+                            alert("验证码正确！");
+                        } else {
+                            alert("验证码错误！");
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,118 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	background: #f1f1f1
+}
+.box{
+	max-width:640px;
+	min-width: 320px;
+	margin: auto;
+	}
+#myTitle{ 
+/*    background:#2AABE4; */
+    height:50px; 
+    text-align:center; 
+    box-shadow:0 1px 1px rgba(0,0,0,0.1);
+    position:relative;
+    
+/*    width:100%;*/
+    background:#30436E; 
+/*    position:fixed; 
+    top:0; 
+    z-index:999999;*/
+/*    max-width:640px;
+    min-width: 320px; */
+    background: linear-gradient(to right, rgba(50,76,115,1), rgba(91,157,178,1));
+	/*FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#324C73,endColorStr=#5B9DB2); !*IE 6 7 8*!*/
+	background: -ms-linear-gradient(left, #324C73,  #5B9DB2);        /* IE 10 */
+	background:-moz-linear-gradient(left,#324C73,#5B9DB2);/*火狐*/
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#324C73), to(#5B9DB2));/*谷歌*/
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#324C73), to(#5B9DB2));      /* Safari 4-5, Chrome 1-9*/
+	background: -webkit-linear-gradient(left, #324C73, #5B9DB2);   /*Safari5.1 Chrome 10+*/
+	background: -o-linear-gradient(left, #324C73, #5B9DB2);  /*Opera 11.10+*/
+}
+#myTitle h1{ font-size:16px; font-weight:bold; color:#fff; line-height:50px;}
+#myTitle a {
+	position: absolute;
+	display: block;
+	left:1rem;
+	height: 5rem;
+	font: 2.2rem/5rem 'wxydigua';
+	color: #fff;
+}
+ #registe_form {
+	padding: 0 1rem 1rem 1rem;
+	font-size: 1.4rem;
+	overflow: hidden
+}
+.input_div {
+	padding: 0 1rem 0 8rem;
+	margin-top:1rem;
+	height:5rem;
+	line-height: 5rem;
+	box-shadow: 0 0 4px rgba(0,0,0,0.15);
+	border-radius: 4px;
+	background: #fff;
+	position: relative;
+}
+.input_div label {
+	position: absolute;
+	left: 0.5rem;
+	top: 0;
+}
+.input_text {
+	width: 100%;
+	color: #333;
+	border: 0 none;
+	font-size:14px;
+}
+
+
+.btn {
+	color: #fff;
+	border: 0 none;
+	border-radius: 4px
+}
+#registeBtn,#registerBtn {
+	height: 4rem;
+	width: 100%;
+	background:#FF4683;
+	margin: 1rem 0;
+	font-size: 1.5rem;
+	font-weight: bold;
+	letter-spacing: 0.3rem
+}
+.input_div {
+	padding-left: 12rem
+}
+
+.certify_div .input_div {
+	box-shadow: none;
+	height: 2rem;
+	line-height: 2rem;
+	background: none
+}
+#registe_form .input_div label,.input_div label {
+	font-family: 'wxydigua';
+	font-size: 2.2rem;
+	padding-left: 0.5rem;
+	color: #707070
+}
+#registe_form .input_div, #register_form .input_div {
+	padding-left: 4.5rem
+}
+.subBtn, #subBtn {
+	position: absolute;
+	right: 0rem;
+	top: 0rem;
+	width: 9rem;
+	text-align: center;
+	height: 3rem;
+        margin-top: 10px;
+        margin-right: 5px;
+	border-radius: 4px;
+	box-shadow: -1px 0 1px rgba(0,0,0,0.1)
+}
+
+.agree{width:100%; text-align:center; margin:2rem 0 1rem 0; }
+.agree a{ font-size:14px; color:#F60;}

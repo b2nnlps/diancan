@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>容合商圈</title>
+    <link href="css/shop.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="box">
+    <div class="Favorites">
+        <ul>
+            <li><a href="javascript:history.go(-1)"><img src="icon/return1.png"></a></li>
+            <p>订单列表</p>
+            <li><a href="#"></a></li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="main">
+        <div class="seek_box">
+          <div class="seek clearfix">
+           <input type="text" placeholder="请输入您查询的订单号">
+           <a href="#"><img src="icon/ssimg.png"></a>
+          </div>
+        </div>
+        <div class="Chika">
+            <div class="Chikafusa">
+                <a href="javascript:void(-1);" onClick="woaicssq(1)" id="woaicsstitle" class="thisclass">未成交</a>
+                <a href="javascript:void(-1);" onClick="woaicssq(2)" id="woaicsstitle" >已成交</a>
+            </div>
+        </div>
+        <div id="woaicss_con1" style="display:block;">
+
+            <div class="indent">
+                <a href="order-detail.html">
+                    <dl>
+                        <dd>
+                            <h3>订单编号：201704122303408321</h3>
+                            <h5>下单人：张三</h5>
+                            <h5>下单时间：2017-04-12 23:03:40</h5>
+                            <h4>数量：<span>1</span>实付<span>￥600</span><em style="background-color:#3C8DBD;">已接单</em></h4>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                </a>
+                <a href="order-detail?order_id=470">
+                    <dl>
+                        <dd>
+                            <h3>订单编号：201704121254589333</h3>
+                            <h5>下单人：李四</h5>
+                            <h5>下单时间：2017-04-12 12:54:58</h5>
+                            <h4>数量：<span>3</span>实付<span>￥1800</span><em style="background-color:#DD4A38;">已取消</em></h4>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                </a>
+                <a href="order-detail?order_id=62">
+                    <dl>
+                        <dd>
+                            <h3>订单编号：201609091041308249</h3>
+                            <h5>下单人：李四</h5>
+                            <h5>下单时间：2016-09-09 10:41:30</h5>
+                            <h4>数量：<span>2</span>实付<span>￥3936</span><em style="background-color:#F39D12;">待接单</em></h4>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                </a>
+            </div>
+
+        </div>
+        <!---->
+        <div id="woaicss_con2" style="display:none;">
+            <div class="indent">
+                <a href="order-detail?order_id=475">
+                    <dl>
+
+                        <dd>
+                            <h3>订单编号：201704141901196910</h3>
+                            <h5>下单人：李四</h5>
+                            <h5>下单时间：2017-04-14 19:01:19</h5>
+                            <h4>数量：<span>2</span>实付<span>￥1200</span><em style="background-color:#00A75A;">已成交</em></h4>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                </a>
+                <a href="order-detail?order_id=474">
+                    <dl>
+
+                        <dd>
+                            <h3>订单编号：201704141821295437</h3>
+                            <h5>下单人：张三</h5>
+                            <h5>下单时间：2017-04-14 18:21:29</h5>
+                            <h4>数量：<span>5</span>实付<span>￥3000</span><em style="background-color:#00A75A;">已成交</em></h4>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                </a>
+                <a href="order-detail?order_id=60">
+                    <dl>
+
+                        <dd>
+                            <h3>订单编号：201609091037321848</h3>
+                            <h5>下单人：李四</h5>
+                            <h5>下单时间：2016-09-09 10:37:32</h5>
+                            <h4>数量：<span>3</span>实付<span>￥5544</span><em style="background-color:#00A75A;">已成交</em></h4>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                </a>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
+<script src="js/jquery-1.9.1.min.js"></script>
+<script language="javascript">
+    function woaicssq(num){
+        for(var id = 1;id<=2;id++)
+        {
+            var MrJin="woaicss_con"+id;
+            if(id==num)
+                document.getElementById(MrJin).style.display="block";
+            else
+                document.getElementById(MrJin).style.display="none";
+        }
+        var zzsc = $(".Chikafusa a");
+        zzsc.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    }
+    $(function(){
+        var zzsc = $(".Chikafusa a");
+        zzsc.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    });
+</script>

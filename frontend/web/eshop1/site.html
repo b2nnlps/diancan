@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>容合快餐</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/qqq.css" rel="stylesheet" type="text/css">
+<link href="font1/xiaogan.css" rel="stylesheet" type="text/css">
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+function show(a){
+		if(a){$(".contentt").fadeOut(500);$(".fix_mask").fadeOut(500);}else{$(".contentt").fadeIn(500);$(".fix_mask").fadeIn(500);}
+	}
+</script>
+</head>
+<body>
+<div class="box"><!--头部：开始--->
+  <div class="Favorites">
+    <ul>
+      <li><a href="javascript:history.go(-1)"><ins class="icon-52"></ins></a></li>
+      <p>新增地址</p>
+      <li style=" font-size:14px;"><a href="#">保存</a></li>
+      <div class="clear"></div>
+    </ul>
+  </div>
+  <div class="main">
+    <div class="contacts"><span>联系人</span><input type="text" placeholder="您的姓名" /></div>
+    <!--送货方式：开始-->
+    <div class="demox"> 
+      <!--自提-->
+      <ul>
+        <li class="person"> <cite>
+          <input type="radio" id="radio-2-2" name="radio-2-set" class="regular-radio big-radio" />
+          <label for="radio-2-2"></label>
+          </cite> <a href="#">先生</a> </li>
+      </ul>
+      <!--货到付款-->
+      <ul>
+        <li class="person"> <cite>
+          <input type="radio" id="radio-2-3" name="radio-2-set" class="regular-radio big-radio" />
+          <label for="radio-2-3"></label>
+          </cite> <a href="#">女士</a> </li>
+      </ul>
+      <div class="clear"></div>
+    </div><div class="clear"></div>
+    <div class="site">
+     <span>地址</span> 
+     <select>
+        <option>海南省</option>
+        <option>海南省</option>
+        <option>海南省</option>
+     </select>
+     <select>
+        <option>琼海市</option>
+        <option>海口市</option>
+        <option>东方市</option>
+     </select>
+     <select>
+        <option>琼海市</option>
+        <option>海口市</option>
+        <option>东方市</option>
+     </select>
+    </div>
+    <div class="cellphone"><span>地址详情</span><input type="text" placeholder="您的地址详情" /></div>
+    <div class="cellphone"><span>手机号码</span><input type="text" placeholder="您的手机号码" /></div>
+  </div>
+</div>
+</body>
+</html>

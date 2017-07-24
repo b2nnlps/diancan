@@ -18,8 +18,8 @@ class ApplyactivitySearch extends ApplyActivity
     public function rules()
     {
         return [
-            [['id', 'type', 'supplier_id', 'charge', 'restrict', 'willnum', 'pv', 'status'], 'integer'],
-            [['title', 'imgurl', 'uid',  'hedimg','url', 'intro', 'start_time', 'end_time', 'address', 'mapmove', 'merchant', 'initiator', 'phone', 'message', 'send_title', 'send_detail', 'content', 'u_id', 'created_time', 'updated_time'], 'safe'],
+            [['id', 'type', 'supplier_id',  'restrict', 'willnum', 'pv', 'status'], 'integer'],
+            [['title', 'imgurl', 'uid', 'charge', 'hedimg','url', 'intro', 'start_time', 'end_time', 'address', 'mapmove', 'merchant', 'initiator', 'phone', 'message', 'send_title', 'send_detail', 'content', 'u_id', 'created_time', 'updated_time'], 'safe'],
         ];
     }
 
@@ -64,7 +64,7 @@ class ApplyactivitySearch extends ApplyActivity
             'start_time' => $this->start_time,
             'end_time' => $this->end_time,
             'supplier_id' => $this->supplier_id,
-            'charge' => $this->charge,
+          
             'restrict' => $this->restrict,
             'willnum' => $this->willnum,
             'pv' => $this->pv,
@@ -80,8 +80,8 @@ class ApplyactivitySearch extends ApplyActivity
             ->andFilterWhere(['like', 'merchant', $this->merchant])
             ->andFilterWhere(['like', 'initiator', $this->initiator])
             ->andFilterWhere(['like', 'phone', $this-> phone])
-
-            ->andFilterWhere(['like', 'uid', $this->uid])
+			->andFilterWhere(['like', 'uid', $this->uid])
+            ->andFilterWhere(['like', 'charge', $this->charge])
             ->andFilterWhere(['like', 'hedimg', $this-> hedimg])
             ->andFilterWhere(['like', 'url', $this->url])
             ->andFilterWhere(['like', 'intro', $this-> intro])

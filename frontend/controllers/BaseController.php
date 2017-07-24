@@ -20,7 +20,7 @@ class BaseController extends Controller
 {
 //    public $layout='main';
     public $isWxBrowser = false;
-    public $openid='oV1VUt4afZFI4SlK4Qiqam_VXVR0';
+    public $openid=null;
 	public $rh_openid=null;
     public $wx_openid=null;
     /**
@@ -38,7 +38,6 @@ class BaseController extends Controller
     }
 
     public static function isGuest(){//是否登录
-        return false;
         if(isset($_COOKIE['wechat'])){
             if(isset($_COOKIE[$_COOKIE['wechat'].'_openid']) && isset($_COOKIE[$_COOKIE['wechat'].'_hash'])){
                 if(self::encode($_COOKIE['wechat'],$_COOKIE[$_COOKIE['wechat'].'_openid'],$_COOKIE[$_COOKIE['wechat'].'_hash'])){
@@ -56,7 +55,7 @@ class BaseController extends Controller
             if(strpos($agent,"micromessenger")) {
                 $this->isWxBrowser =true;
             }else{
-               // throw new BadRequestHttpException("只能在微信客户端访问");
+                throw new BadRequestHttpException("只能在微信客户端访问");
             }
         }
 
@@ -76,14 +75,14 @@ class BaseController extends Controller
             exit;
         }
 
-       /* $this->openid=$_COOKIE[$_COOKIE['wechat'].'_openid'];
+        $this->openid=$_COOKIE[$_COOKIE['wechat'].'_openid'];
 		$this->openid=$_COOKIE[$_COOKIE['wechat'].'_openid'];
         $wx_openid=$_COOKIE[$_COOKIE['wechat'].'_openid'];
         $member=Member::find()->where(['wx_openid'=>$wx_openid])->one();
         if(!empty($member)){
             $this->rh_openid=$member['rh_openid'];
         }
-        $this->wx_openid=$wx_openid;*/
+        $this->wx_openid=$wx_openid;
         return parent::beforeAction($action);
     }
 

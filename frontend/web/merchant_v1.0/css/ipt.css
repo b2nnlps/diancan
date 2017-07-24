@@ -1,0 +1,162 @@
+@charset "utf-8";
+/* CSS Document */
+/*拿货方式选项*/
+.youji{ font-size:15px; margin:auto; height:auto;position:relative; padding:15px 0;}
+.youji span{ position:absolute; top:20px; left:70px; font-size:14px;}
+.youji a{display:inline-block; margin-left:35px;}
+.youji em{ display:block;  padding:5px 0;padding-left:35px;  font-size:13px; color:#999;}
+.youji cite{ display:block; left:5px;position:absolute; top:35%; margin:auto;}
+.demo {
+	margin:10px auto;
+	background:#FFF; border-top:1px solid  #E0DFDF; border-bottom:1px solid  #E0DFDF;
+}
+.demo ul{ width:95%; margin:auto;}
+
+
+/*==单选按钮：开始==*/
+.regular-radio {
+	display: none;
+}
+
+.regular-radio + label {
+	-webkit-appearance: none;
+	background-color: #fafafa;
+	border: 2px solid #cacece;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	padding: 9px;
+	border-radius: 50px;
+	display: inline-block;
+	position: relative;
+}
+
+.regular-radio:checked + label:after {
+	content: ' ';
+	width: 12px;
+	height: 12px;
+	border-radius: 50px;
+	position: absolute;
+	top: 3px;
+	background:#FE4543;
+	text-shadow: 0px;
+	left: 3px;
+	font-size: 32px;
+}
+
+.regular-radio:checked + label {
+	background-color:#FE4543;
+	color: #8FC31E;
+	border: 1px solid #DB0000;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1), inset 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.regular-radio + label:active, .regular-radio:checked + label:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.big-radio + label {
+	padding: 6px;
+}
+
+.big-radio:checked + label:after {
+	width: 6px;
+	height: 6px;
+	left: 4px;
+	top: 4px;
+}
+/*==单选按钮结束==*/
+/*男士女士*/
+.demox{ width:80%;float:right; border-top:1px solid  #E0DFDF;}
+.demox ul{ float:left; width:30%;}
+.person{ font-size:15px; margin:auto; height:auto;position:relative; padding:10px 0;}
+.person span{ position:absolute; top:20px; left:70px; font-size:14px;}
+.person a{display:inline-block; margin-left:35px;}
+.person em{ display:block;  padding:5px 0;padding-left:35px;  font-size:13px; color:#999;}
+.person cite{ display:block; left:5px;position:absolute; top:35%; margin:auto;}
+
+/*新增地址*/
+.address dl{ width:95%; margin:auto; padding:10px 0; border-top:1px solid  #E0DFDF; position:relative;}
+.address dl dt{ float:left; padding-right:15px; margin-top:10px;}
+.address dl dd{ float:left;}
+.address dl dd h6{ font-size:12px; font-weight:100;}
+.address dl dd span{ line-height:25px; font-size:14px;}
+
+.wrap {float: right; margin-top:10px;}
+/*滚动*/
+.chk_3{
+	display: none;
+}
+/*******STYLE 3*******/
+
+.chk_3 + label {
+	background-color:#ECECEC;
+	padding: 9px;
+	border-radius: 50px;
+	display: inline-block;
+	position: relative;
+	margin-right: 30px;
+	-webkit-transition: all 0.1s ease-in;
+	transition: all 0.1s ease-in;
+	width: 40px;
+	height: 13px;
+}
+
+.chk_3  + label:after {
+	content: ' ';
+	position: absolute;
+	top: 0;
+	-webkit-transition: box-shadow 0.1s ease-in;
+	transition: box-shadow 0.1s ease-in;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 100px;
+	box-shadow: inset 0 0 0 0 #eee, 0 0 1px rgba(0,0,0,0.4);
+}
+
+.chk_3  + label:before {
+	content: ' ';
+	position: absolute;
+	background: white;
+	top: 0px;
+	left: 1px;
+	right:2px;
+	z-index: 999999;
+	width: 30px;
+	-webkit-transition: all 0.1s ease-in;
+	transition: all 0.1s ease-in;
+	height:30px;
+	border-radius: 100px;
+	box-shadow: 0 3px 1px rgba(0,0,0,0.05), 0 0px 1px rgba(0,0,0,0.3);
+}
+
+.chk_3:active + label:after {
+	box-shadow: inset 0 0 0 20px #eee, 0 0 1px #eee;
+}
+
+.chk_3:active + label:before {
+	width: 37px;
+}
+
+.chk_3:checked:active + label:before {
+	width: 37px;
+	left: 20px;
+}
+
+.chk_3  + label:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.chk_3:checked + label:before {
+	content: ' ';
+	position: absolute;
+	left: 26px;
+	border-radius: 100px;
+}
+
+.chk_3:checked + label:after {
+	content: ' ';
+	font-size: 1.5em;
+	position: absolute;
+	background: #FE4543;
+	box-shadow: 0 0 1px #FE4543;
+}

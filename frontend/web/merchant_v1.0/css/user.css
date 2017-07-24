@@ -1,0 +1,162 @@
+@charset "utf-8";
+/* CSS Document */
+* {margin: 0;padding: 0;}
+ul, li {
+	list-style: none;
+	
+}
+.clear {
+	clear: both;
+}
+a {
+	text-decoration: none;
+	outline: none;
+	 color:#000;
+}
+a:hover {
+	text-decoration: none;
+	outline: none;
+}
+input, ins, img {
+	vertical-align: middle;
+	border:none;
+}
+cite, em, i, b {
+	font-style: normal;
+	font-weight: normal;
+}
+body {
+	color: #333;
+	font-family:"微软雅黑";
+}
+textarea, button,select, input {
+	outline: none;
+}
+#fgdiv{ width:100%; height:5px; background-color:#F5F5F5;}
+/*===(清除浮动：开始)=====*/
+.clearfix:after{ content:"."; display:block; width:0; height:0; clear:both; visibility:hidden; overflow:hidden;}
+.clearfix{ display:block;}
+.clearfix{ clear:both;zoom: 1;}
+/*===(清除浮动：结束)=====*/
+.box{
+	max-width:640px;
+	min-width: 320px;
+	margin: auto;
+	}
+.Favorites{width:100%;position:fixed; background-color:#FFF;  top:0; z-index:999999;max-width:640px;min-width: 320px;}
+.Favorites ul{width:100%; line-height:50px; border-bottom:1px solid #D6D6D6;}
+.Favorites li{ float:left; width:13%; text-align:center; font-size:16px;}
+.Favorites .Font{font-size:14px;}
+.Favorites li a{ color:#FE4543;}
+.Favorites li img{ width:30px; height:30px;}
+.fdiv a{ color:#FE4543;}
+.Favorites p{ float:left ; width:74%; text-align:center;font-size:16px; }
+
+
+/*导航：结束*/
+.main{ width:100%;margin-top:50px;}
+
+.blank{ width:100%; height:50px;}
+
+/**个人中心**/
+header{ width:100%; background: url(../image/grzx_bg.png) no-repeat;background-size:100%;}
+header  dl{ width:95%;  margin:auto;}
+header  dl dt{ width:100px;  float:left; padding:10px 0;}
+header dl dt img{ width:90px; height:90px; border-radius:100px;}
+header  dl dd{width:62.5%; float:left; padding-top:30px; color:#FFF;}
+header  dl dd h4{ font-size:14px; text-indent:5px;}
+header  dl dd p{ font-size:12px; line-height:25px;overflow: hidden; white-space: nowrap;  text-overflow: ellipsis;}
+/*==个人中心：开始==*/
+.recharge_box{ background-color:#F5F5F5; padding:10px 0;}
+.recharge{ background:#FFF; color:#999;border-top:1px #EEE solid;border-bottom:1px #EEE solid; padding:10px 0;}
+.recharge span{ width:47.5%;color:#333; line-height:25px; letter-spacing:0.1em; font-size:14px; display:inline-block; text-align:center;}
+.recharge span img{ width:25px; height:25px; margin-right:10px;}
+/*功能列表*/
+.personalCenter ul{background:#FFF;}
+.personalCenter li{ background:url(../icon/right.png) no-repeat 96% 50%; background-size:20px; font-size:12px; line-height:50px;height:50px; border-bottom:1px #E9E9E9 solid; padding:0 10px; position:relative; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+.personalCenter li img{ width:25px; height:25px;}
+.personalCenter li em{ margin-left:10px;}
+.personalCenter li em img{ width:11px; height:11px; position:absolute; top:40%; left:85%;}
+.personalCenter li:hover{ background:#F2F2F2 url(../icon/right.png) no-repeat 96% 50%;background-size:20px;}
+/*==个人中心：结束==*/
+/**个人资料**/
+.data_box{ width:95%; margin:auto; padding:10px 0; border-bottom:1px solid #E0DFDF;} 
+.data_box span{ width:70px; display:inline-block; font-size:14px;}
+.data_box em{font-size:14px;}
+.data_box textarea{ width:95%; height:50px; padding:5px}
+#bzdiv span{ display:block; width:70px; float:left;}
+#bzdiv em{ display:block; width:76%; float:left;}
+.data_box select{ width:80px; height:30px; line-height:30px; text-indent:5px;}
+
+/*选择地址*/
+.selectaddress{ width:100%;}
+.colour{ color:#999999;}
+.selectaddress  ul{ padding:10px 0;  border-bottom:1px solid #E0DFDF; position:relative;}
+.selectaddress  ul li{ width:95%; margin:auto; font-size:14px; line-height:25px;}
+.selectaddress  ul img{width:20px; height:20px; position:absolute; top:20px; right:5%;}
+
+/**新增地址**/
+
+.contacts{ width:95%; margin:auto;} 
+.contacts span{ width:20%; display:inline-block; height:40px; line-height:40px; font-size:14px;}
+.contacts input{ height:40px; line-height:40px; font-size:14px;}
+/**/
+.site{ width:95%; margin:auto; border-top:1px solid  #E0DFDF; border-bottom:1px solid  #E0DFDF;}
+.site span{width:20%; display:inline-block; height:40px; line-height:40px; font-size:14px;}
+.site select{width:25%; height:30px; margin:auto;}
+.site select option{ width:100%; }
+.site input{ height:50px; width:51%; line-height:50px; font-size:14px; background-color:#F5F5F5;}
+.cellphone{ width:95%; margin:auto; border-bottom:1px solid #E0DFDF;} 
+.cellphone span{ width:20%; display:inline-block; height:40px; line-height:40px; font-size:14px;}
+.cellphone input{ height:40px; line-height:40px; font-size:14px; width:78%;}
+.cellphone em{ height:40px; line-height:40px; font-size:14px; width:78%;}
+/*==单选按钮：开始==*/
+
+.demox{ width:80%;float:right; border-top:1px solid  #E0DFDF; font-size:14px; padding:10px 0 5px;}
+.demox label{width:100%; }
+/*新增地址*/
+.address dl{ width:95%; margin:auto; padding:10px 0; border-top:1px solid  #E0DFDF; position:relative;}
+.address dl dt{ float:left; padding-right:15px; margin-top:10px;}
+.address dl dd{ float:left;}
+.address dl dd h6{ font-size:12px; font-weight:100;}
+.address dl dd span{ line-height:25px; font-size:14px;}
+
+.wrap {float: right; margin-top:10px;}
+
+/**会员列表**/
+.seek_box{ width:100%; padding:10px 0; background-color:#F5F5F5;margin:auto;}
+.seek{ width:95%; margin:auto; background-color:#FFF; height:40px; border-radius:5px;}
+.seek input{ width:80%; float:left; display:block; height:40px; line-height:40px;  text-indent:10px; border-radius:5px;}
+.seek a{ width:18%; float:right; display:block;line-height:40px;font-size:14px;display:inline-block; text-align:center;}
+.seek a img{ width:20px; height:20px;}
+
+.user_list_box{ }
+.user_list{ width:100%; position:relative;}
+.user_list dl{ border-bottom:1px solid #F4F4F4;}
+.user_list dl dt{float:left;}
+.user_list dl dt img{ width:50px; height:50px; margin:5px 10px; border-radius:100px;}
+.user_list dl dd{padding:10px 0;}
+.user_list h5{font-size:14px; }
+.user_list h5 em{ display:inline-block; font-weight:bold;}
+.user_list h5 span{font-weight:100; font-size:12px; padding-left:1%;}
+.user_list h6{padding-top:8px; color:#666; font-weight:600; }
+.user_list h6 cite{font-size:12px;}
+.tomer h6 span{ padding:0 1%}
+
+.qjdiv{ width:40%; height:60px; position:absolute; top:0; right:5%; background: url(../icon/right.png) no-repeat  100%; background-size:18px; }
+.qjdiv img{ width:50px; height:30px; }
+
+.btudiv{ border:1px solid #C00; width:100px; height:30px; line-height:30px; border-radius:5px; text-align:center; margin:20px auto;}
+
+
+/**个人资料通用版**/
+.data_box #yzmdiv{float:right; margin-right:15px; margin-top:-4.5px; border-radius:5px; background-color:#FFF; color:#FE4543;  border:1px solid #FE4543; padding:5px; }
+.dxdiv select{width:24%;}
+
+/**提交最新**/
+.refer1{width:100%; padding:10px 0;}
+.refer1 .btn{width:60%; height:40px; display:block; margin:auto; border:none;  background-color:#FE4543; border-radius:5px; font-weight:bold; font-size:16px; color:#FFF; box-shadow:0 3px 1px #EB2539;}
+
+/**返回按钮**/
+.fhdiv{ width:100%;}
+.fhdiv a{ width:30%;  height:30px; color:#FE4543; line-height:30px; font-size:14px;  margin:10px auto; display:block; border:1px solid #FE4543;border-radius:5px;  text-align:center;}

@@ -1,0 +1,144 @@
+@font-face {
+  font-family: 'xiaogan';
+  src: url('xiaogan.eot?25820029');
+  src: url('xiaogan.eot?25820029#iefix') format('embedded-opentype'),
+       /*url('xiaogan.woff?25820029') format('woff'),*/
+       /*url('xiaogan.svg?25820029#xiaogan') format('svg'),*/
+       url('xiaogan.ttf?25820029') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'xiaogan';
+    src: url('xiaogan.svg?25820029#xiaogan') format('svg');
+ }
+}
+*/
+/*==========================================*/
+.animate-spin {-moz-animation: spin 2s infinite linear;-o-animation: spin 2s infinite linear;-webkit-animation: spin 2s infinite linear;animation: spin 2s infinite linear;display: inline-block;}@-moz-keyframes spin {0%{-moz-transform: rotate(0deg);-o-transform: rotate(0deg); -webkit-transform: rotate(0deg);transform: rotate(0deg);}100%{-moz-transform: rotate(359deg);-o-transform: rotate(359deg);-webkit-transform: rotate(359deg);transform: rotate(359deg);}}@-webkit-keyframes spin {0%{-moz-transform: rotate(0deg);-o-transform: rotate(0deg);-webkit-transform: rotate(0deg);transform: rotate(0deg);}100%{-moz-transform: rotate(359deg);-o-transform: rotate(359deg);-webkit-transform: rotate(359deg);transform: rotate(359deg);}}@-o-keyframes spin {0%{-moz-transform: rotate(0deg);-o-transform: rotate(0deg);-webkit-transform: rotate(0deg);transform: rotate(0deg);}100%{-moz-transform: rotate(359deg);-o-transform: rotate(359deg);-webkit-transform: rotate(359deg);transform: rotate(359deg);}}@-ms-keyframes spin {0%{-moz-transform: rotate(0deg);-o-transform: rotate(0deg);-webkit-transform: rotate(0deg);transform: rotate(0deg);}100%{-moz-transform: rotate(359deg);-o-transform: rotate(359deg);-webkit-transform: rotate(359deg);transform: rotate(359deg);}}@keyframes spin {0%{-moz-transform: rotate(0deg);-o-transform: rotate(0deg);-webkit-transform: rotate(0deg);transform: rotate(0deg);}100%{-moz-transform: rotate(359deg);-o-transform: rotate(359deg);-webkit-transform: rotate(359deg);transform: rotate(359deg);}}
+/*==========================================*/
+a:hover ins{ text-decoration:none !important;}
+ins{
+font-family: "xiaogan";font-style: normal;font-weight: normal;speak: none;
+display: inline-block;text-decoration: inherit;width:1.5em;margin:0;text-align: center;font-variant: normal;text-transform: none;
+}
+
+.icon-51:before { content: '\e800'; } /* '' */
+.icon-52:before { content: '\e801'; } /* '' */
+.icon-1:before { content: '\e802'; } /* '' */
+.icon-45:before { content: '\e803'; } /* '' */
+.icon-2:before { content: '\e804'; } /* '' */
+.icon-3:before { content: '\e805'; } /* '' */
+.icon-4:before { content: '\e806'; } /* '' */
+.icon-5:before { content: '\e807'; } /* '' */
+.icon-19:before { content: '\e808'; } /* '' */
+.icon-7:before { content: '\e809'; } /* '' */
+.icon-8:before { content: '\e80a'; } /* '' */
+.icon-9:before { content: '\e80b'; } /* '' */
+.icon-10:before { content: '\e80c'; } /* '' */
+.icon-34:before { content: '\e80d'; } /* '' */
+.icon-27:before { content: '\e80e'; } /* '' */
+.icon-11:before { content: '\e80f'; } /* '' */
+.icon-12:before { content: '\e810'; } /* '' */
+.icon-13:before { content: '\e811'; } /* '' */
+.icon-14:before { content: '\e812'; } /* '' */
+.icon-15:before { content: '\e813'; } /* '' */
+.icon-36:before { content: '\e814'; } /* '' */
+.icon-33:before { content: '\e815'; } /* '' */
+.icon-32:before { content: '\e816'; } /* '' */
+.icon-31:before { content: '\e817'; } /* '' */
+.icon-30:before { content: '\e818'; } /* '' */
+.icon-26:before { content: '\e819'; } /* '' */
+.icon-25:before { content: '\e81a'; } /* '' */
+.icon-39:before { content: '\e81b'; } /* '' */
+.icon-40:before { content: '\e81c'; } /* '' */
+.icon-41:before { content: '\e81d'; } /* '' */
+.icon-43:before { content: '\e81e'; } /* '' */
+.icon-44:before { content: '\e81f'; } /* '' */
+.icon-24:before { content: '\e820'; } /* '' */
+.icon-21:before { content: '\e821'; } /* '' */
+.icon-35:before { content: '\e822'; } /* '' */
+.icon-20:before { content: '\e823'; } /* '' */
+.icon-18:before { content: '\e824'; } /* '' */
+.icon-17:before { content: '\e825'; } /* '' */
+.icon-42:before { content: '\e826'; } /* '' */
+.icon-16:before { content: '\e827'; } /* '' */
+.icon-37:before { content: '\e828'; } /* '' */
+.icon-38:before { content: '\e829'; } /* '' */
+.icon-47:before { content: '\e82a'; } /* '' */
+.icon-46:before { content: '\e82b'; } /* '' */
+.icon-48:before { content: '\e82c'; } /* '' */
+.icon-49:before { content: '\e82d'; } /* '' */
+.icon-50:before { content: '\e82e'; } /* '' */
+.icon-28:before { content: '\e82f'; } /* '' */
+.icon-29:before { content: '\e830'; } /* '' */
+.icon-22:before { content: '\e831'; } /* '' */
+.icon-23:before { content: '\e832'; } /* '' */
+.icon-6:before { content: '\e833'; } /* '' */
+.icon-66:before { content: '\e834'; } /* '' */
+.icon-53:before { content: '\e835'; } /* '' */
+.icon-54:before { content: '\e836'; } /* '' */
+.icon-55:before { content: '\e837'; } /* '' */
+.icon-56:before { content: '\e838'; } /* '' */
+/**/
+.icon-51{ before: '\e800'; } /* '' */
+.icon-52{ before: '\e801'; } /* '' */
+.icon-1{ before: '\e802'; } /* '' */
+.icon-45{ before: '\e803'; } /* '' */
+.icon-2{ before: '\e804'; } /* '' */
+.icon-3{ before: '\e805'; } /* '' */
+.icon-4{ before: '\e806'; } /* '' */
+.icon-5{ before: '\e807'; } /* '' */
+.icon-19{ before: '\e808'; } /* '' */
+.icon-7{ before: '\e809'; } /* '' */
+.icon-8{ before: '\e80a'; } /* '' */
+.icon-9{ before: '\e80b'; } /* '' */
+.icon-10{ before: '\e80c'; } /* '' */
+.icon-34{ before: '\e80d'; } /* '' */
+.icon-27{ before: '\e80e'; } /* '' */
+.icon-11{ before: '\e80f'; } /* '' */
+.icon-12{ before: '\e810'; } /* '' */
+.icon-13{ before: '\e811'; } /* '' */
+.icon-14{ before: '\e812'; } /* '' */
+.icon-15{ before: '\e813'; } /* '' */
+.icon-36{ before: '\e814'; } /* '' */
+.icon-33{ before: '\e815'; } /* '' */
+.icon-32{ before: '\e816'; } /* '' */
+.icon-31{ before: '\e817'; } /* '' */
+.icon-30{ before: '\e818'; } /* '' */
+.icon-26{ before: '\e819'; } /* '' */
+.icon-25{ before: '\e81a'; } /* '' */
+.icon-39{ before: '\e81b'; } /* '' */
+.icon-40{ before: '\e81c'; } /* '' */
+.icon-41{ before: '\e81d'; } /* '' */
+.icon-43{ before: '\e81e'; } /* '' */
+.icon-44{ before: '\e81f'; } /* '' */
+.icon-24{ before: '\e820'; } /* '' */
+.icon-21{ before: '\e821'; } /* '' */
+.icon-35{ before: '\e822'; } /* '' */
+.icon-20{ before: '\e823'; } /* '' */
+.icon-18{ before: '\e824'; } /* '' */
+.icon-17{ before: '\e825'; } /* '' */
+.icon-42{ before: '\e826'; } /* '' */
+.icon-16{ before: '\e827'; } /* '' */
+.icon-37{ before: '\e828'; } /* '' */
+.icon-38{ before: '\e829'; } /* '' */
+.icon-47{ before: '\e82a'; } /* '' */
+.icon-46{ before: '\e82b'; } /* '' */
+.icon-48{ before: '\e82c'; } /* '' */
+.icon-49{ before: '\e82d'; } /* '' */
+.icon-50{ before: '\e82e'; } /* '' */
+.icon-28{ before: '\e82f'; } /* '' */
+.icon-29{ before: '\e830'; } /* '' */
+.icon-22{ before: '\e831'; } /* '' */
+.icon-23{ before: '\e832'; } /* '' */
+.icon-6{ before: '\e833'; } /* '' */
+.icon-66{ before: '\e834'; } /* '' */
+.icon-53{ before: '\e835'; } /* '' */
+.icon-54{ before: '\e836'; } /* '' */
+.icon-55{ before: '\e837'; } /* '' */
+.icon-56{ before: '\e838'; } /* '' */

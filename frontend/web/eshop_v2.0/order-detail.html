@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>容合订单管理系统</title>
+    <meta name="csrf-param" content="_csrf-frontend">
+    <meta name="csrf-token" content="ZUNZSmR4YW8HDwkiLk8TPQsiEXg.FzcYXTYGAQghCFwpNmwLExIiDQ==">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="font/xiaogan.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="box" style=" background:#F4F6F5"><!--头部：开始--->
+    <div class="Favorites">
+        <ul>
+            <li><a href="javascript:history.go(-1)"><ins class="icon-52"></ins></a></li>
+            <p>订单详情</p>
+            <li><a href="#"></a></li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="main">
+        <div class="Chika">
+            <div class="Chikafusa">
+                <a href="#" onclick="woaicssq(1)" id="woaicsstitle" class="thisclass">订单详情</a>
+                <a href="#" onclick="woaicssq(2)" id="woaicsstitle" >订单状态</a>
+            </div>
+        </div>
+
+        <div id="woaicss_con1" style="display:block;">
+            <div class="pecifics">
+                <div class="details">
+                    <h4>订购商品</h4>
+                    <a href="commodity.html">
+                        <dl>
+                            <dt>盐焗鸡套餐</dt>
+                            <dd> <span>x5</span> <span>￥115</span> </dd>
+                            <div class="clear"></div>
+                        </dl>
+                    </a>
+                    <a href="commodity.html">
+                        <dl>
+                            <dt>烧鹅套餐</dt>
+                            <dd> <span>x3</span> <span>￥68</span> </dd>
+                            <div class="clear"></div>
+                        </dl>
+                    </a>
+                </div>
+                <div class="Amount">
+                    <dl>
+                        <dt>数量：5 </dt>
+                        <dd>总计<span>￥115</span></dd>
+                        <div class="clear"></div>
+                    </dl>
+                </div>
+                <div class="delivery">
+                    <dl>
+                        <dt>订单号：</dt>
+                        <dd>201703271227122143</dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <dl>
+                        <dt>店家：</dt>
+                        <dd>天海</dd>
+                        <div class="clear"></div>
+                    </dl>
+
+                    <dl>
+                        <dt>下单人：</dt>
+                        <dd>阙君猛</dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <dl>
+                        <dt>下单时间：</dt>
+                        <dd>2017-03-27 12:27:12</dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <dl>
+                        <dt>收货信息：</dt>
+                        <dd>阙君猛【18389957620】琼海玲珑软件有限公司</dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <dl>
+                        <dt>支付方式：</dt>
+                        <dd>货到付款</dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <dl>
+                        <dt>下单备注：</dt>
+                        <dd>暂无！</dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <dl>
+                        <dt>当前状态：</dt>
+                        <dd>商家已接单</dd>
+                        <div class="clear"></div>
+                    </dl>
+
+                    <dl>
+                        <dt>订单状态：</dt>
+                        <dd>
+                            <select id='orderstatus'>
+                                <option value="3">订单已配送</option>
+                                <option value="4">订单已成交</option>
+                                <option value="5">订单已取消</option>
+                            </select>
+                        </dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <dl>
+                        <dt style=" padding-top:15px;">状态备注：</dt>
+                        <dd><textarea id="remark" rows="3"></textarea></dd>
+                        <div class="clear"></div>
+                    </dl>
+                    <div class="submit"><button id="conf">提交</button></div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---->
+    <div id="woaicss_con2" style="display:none;">
+        <div class="pecifics">
+
+            <div class="tailAfter"> <cite></cite>
+                <dl>
+                    <em></em>
+                    <dt class="signFor">【商家已接单】&nbsp;&nbsp;[操作员：<a href="tel:13976762388">13976762388</a>&nbsp;]</dt>
+                    <dd>2017-03-27 12:32:36</dd>
+                </dl>
+                <dl>
+                    <em></em>
+                    <dt>【待商家接单】订单提交成功，待商家接单&nbsp;&nbsp;[操作员：<a href="tel:18389957620">18389957620</a>&nbsp;]</dt>
+                    <dd>2017-03-27 12:27:12</dd>
+                </dl>
+            </div>
+        </div>
+        <!--货物详情：结束-->
+    </div>
+</div>
+</div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script language="javascript">
+    function woaicssq(num){
+        for(var id = 1;id<=2;id++)
+        {
+            var MrJin="woaicss_con"+id;
+            if(id==num)
+                document.getElementById(MrJin).style.display="block";
+            else
+                document.getElementById(MrJin).style.display="none";
+        }
+        var zzsc = $(".Chikafusa a");
+        zzsc.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    }
+    $(function(){
+        var zzsc = $(".Chikafusa a");
+        zzsc.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    });
+</script>
+</body>
+</html>
+<script src="hDialog/js/jquery.hDialog.js"></script>
+<script>
+    $(function(){
+        var csrfName = $('meta[name=csrf-param]').prop('content');
+        var crsfToken = $('meta[name=csrf-token]').prop('content');
+        var orderid =400;
+        var supplier_id =2;
+        var checkSubmitFlg = false;
+        $('#conf').click(function() {
+            if (!checkSubmitFlg) {
+                // $.dialog('confirm', '提示', '现在更新订单状态吗？', 0, function () {
+                var orderstatus = document.getElementById("orderstatus").value;
+                var remark = $('#remark');
+                var data = csrfName + '=' + crsfToken + "&orderid=" + orderid + "&orderstatus=" + orderstatus + "&remark=" + remark.val()+ "&supplier_id=" + supplier_id;
+                //    alert(data);
+                if (!checkSubmitFlg) {
+                    checkSubmitFlg = true;// 第一次提交
+                    $.post("order/order-status", data, function (result) {
+                        window.location.href = result;
+                    });
+                }
+                //  });
+                return true;
+            } else {
+                //重复提交
+                $.tooltip('请勿重复提交！');
+                return false;
+            }
+
+        });
+    });
+</script>
+
+

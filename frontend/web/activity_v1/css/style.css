@@ -1,0 +1,59 @@
+@charset "utf-8";
+/* CSS Document */
+* {margin: 0;padding: 0;}
+ul, li {
+	list-style: none;
+}
+.clear {
+	clear: both;
+}
+a {
+	text-decoration: none;
+	outline: none; color:#000;
+}
+a:hover {
+	text-decoration: none;
+	outline: none;
+}
+input, ins, img {
+	vertical-align: middle;
+	border:none;
+}
+cite, em, i, b {
+	font-style: normal;
+	font-weight: normal;
+}
+body {
+	font-family:"微软雅黑";
+}
+textarea, button,select, input {
+	outline: none;
+}
+.box{
+	max-width:640px;
+	min-width: 320px;
+	margin: auto;
+	}/* CSS Document */
+
+/*导航：开始*/
+.Favorites{width:100%; position:fixed; top:0; z-index:100; max-width:640px;min-width: 320px;background:#FFF; border-bottom:1px solid #E0DFDF;}
+.Favorites ul{width:100%; line-height:50px;}
+.Favorites li{ float:left; width:13%; text-align:center; font-size:24px;}
+.Favorites li img{ width:25px; height:25px;}
+.Favorites .Font{font-size:14px;}
+.Favorites li a{color:#FF4683;}
+.Favorites p{ float:left ; width:74%; text-align:center;color: #000; font-size:14px;overflow: hidden; white-space: nowrap;  text-overflow: ellipsis;  }
+/*导航：结束*/
+.main{ width:100%;margin-top:52px;}
+
+.listbox{ width:100%; background:#FFF; padding-bottom:50px;}
+.listbox dl{ width:100%;border-bottom:1px solid #E0DFDF; position:relative;}
+.listbox dl dt{ width:100px; float:left; padding:10px;}
+.listbox dl dt img{ width:100%; height:90px;}
+.listbox dl dd{ width:55%; float:left;padding:10px 0;}
+.listbox dl dd h3{width:100%; overflow: hidden; white-space: nowrap; color:#333;  text-overflow: ellipsis; font-size:16px; height:25px; line-height:25px;}
+.listbox dl dd time{ font-size:12px; height:25px; line-height:25px; display:block; color:#989A99;}
+.listbox dl dd time img{ width:15px; height:15px; padding-right:5px;}
+.listbox dl dd span{ font-size:12px;height:25px; line-height:25px; padding-right:20px; color:#989A99;}
+.listbox dl dd span img{ width:15px; height:15px;padding-right:5px;}
+.listbox dl p{width:60px; height:20px;font-size:12px; text-align:center; line-height:20px; position:absolute; color:#FFF; right:10px; top:62px;}

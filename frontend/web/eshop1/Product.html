@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>容合快餐</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="font1/xiaogan.css" rel="stylesheet" type="text/css">
+    <!--图片却换-->
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery.touchSlider.js"></script>
+    <script type="text/javascript" src="js/pictures.js"></script>
+    <script type="text/javascript" src="js/message.js"></script>
+    <script type="text/javascript" src="js/jquery.spinner.js"></script>
+</head>
+
+<body>
+<div class="box"><!--头部：开始--->
+    <div class="Favorites">
+        <ul>
+            <li><a href="javascript:history.go(-1)"><ins class="icon-52"></ins></a></li>
+            <p>海南煲仔饭</p>
+            <li><a href="#"></a></li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="main">
+        <!--图片轮播 -->
+        <!--效果html开始-->
+        <div class="main_visual">
+            <div class="flicking_con"> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> </div>
+            <div class="main_image">
+                <ul>
+                    <li><span><img src="images/01s.png"></span></li>
+                    <li><span><img src="images/02s.png"></span></li>
+                    <li><span><img src="images/03s.png"></span></li>
+                </ul>
+                <a href="javascript:;" id="btn_prev"></a>
+                <a href="javascript:;" id="btn_next"></a>
+            </div>
+        </div>
+
+        <!--效果html结束-->
+        <div class="product">
+            <h4>海南煲仔饭</h4>
+            <h5>月售500份</h5>
+            <dl>
+                <dt>￥50</dt>
+                <dd>
+                    <center>
+                        <input type="text" class="spinnerExample">
+                        <div class="clear"></div>
+                    </center>
+                </dd>
+                <div class="clear"></div>
+            </dl>
+        </div>
+        <div class="Business">
+            <dl>
+                <dt> <img src="images/qq.png"> </dt>
+                <dd>
+                    <h4>海南煲仔饭店</h4>
+                    <p>不要墨迹，很烦的买的就速度不要墨迹，很烦买的就速度不要墨迹，很烦买的就速度不要墨</p>
+                </dd>
+                <div class="clear"></div>
+            </dl>
+        </div>
+        <!---->
+        <div class="Chika">
+            <div class="Chikafusa"> <a href="#" onclick="woaicssq(1)" id="woaicsstitle" class="thisclass">商品详情</a> <a href="#" onclick="woaicssq(2)" id="woaicsstitle" class="">销售记录</a> </div>
+        </div>
+        <!---->
+        <!---->
+        <div id="woaicss_con1" style="display:block;">
+
+            <div class="describe">
+                <h4>商品描述</h4>
+                <p> <img src="images/01s.png"></p>
+                <p> 温馨提示：买的就速度不要墨迹，很烦的买的就速度不要墨迹，很烦买的就速度不要墨迹，很烦买的就速度不要墨迹，很烦买的就速度不要墨迹，很烦！ </p>
+            </div>
+        </div>
+
+    <!---->
+    <div id="woaicss_con2" style="display:none;">
+        <div class="record">
+            <dl>
+                <dt><img src="images/qq.png"></dt>
+                <dd>
+                    <h4>黄晓明黄晓明黄晓明</h4>
+                    购买：<span>5次</span>
+                </dd>
+                <div class="clear"></div>
+            </dl>
+
+            <dl>
+                <dt><img src="images/qq.png"></dt>
+                <dd>
+                    <h4>黄晓黄晓明黄晓明黄晓明明</h4>
+                    购买：<span>5次</span>
+                </dd>
+                <div class="clear"></div>
+            </dl>
+            <dl>
+                <dt><img src="images/qq.png"></dt>
+                <dd>
+                    <h4>黄晓黄晓明黄晓明黄晓明明</h4>
+                    购买：<span>5次</span>
+                </dd>
+                <div class="clear"></div>
+            </dl>
+
+        </div>
+    </div>
+    <!---->
+    <!--悬浮菜单：开始-->
+    <!--<div class="bottomMenu">
+     <dl>
+       <dt><a href="#"><img src="images/qwe.png">购物车</a></dt>
+       <dd>立即下单</dd>
+       <div class="clear"></div>
+     </dl>
+    </div>-->
+    <!--悬浮菜单：结束-->
+    <!--悬浮菜单：开始-->
+    <div class="bottomMenu">
+        <dl>
+            <dt><a href="#"><img src="images/wqw.png">共<span>￥50</span></a></dt>
+            <dd><a href="Order.html">立即下单</a></dd>
+            <div class="clear"></div>
+        </dl>
+        <div class="sing">1</div>
+    </div>
+    <!--悬浮菜单：结束-->
+</div>
+<script type="text/javascript">
+    $('.spinnerExample').spinner({});
+</script>
+<script language="javascript">
+    function woaicssq(num){
+        for(var id = 1;id<=2;id++)
+        {
+            var MrJin="woaicss_con"+id;
+            if(id==num)
+                document.getElementById(MrJin).style.display="block";
+            else
+                document.getElementById(MrJin).style.display="none";
+        }
+        var zzsc = $(".Chikafusa a");
+        zzsc.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    }
+    $(function(){
+        var zzsc = $(".Chikafusa a");
+        zzsc.click(function(){
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    });
+</script>
+</body>
+</html>

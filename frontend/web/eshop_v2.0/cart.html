@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>容合订单管理系统</title>
+    <meta name="csrf-param" content="_csrf-frontend">
+    <meta name="csrf-token" content="SVZvS1VDc1YrGj8jH3QBBCc3J3kPLCUhcSMwADkaGmUFI1oKIikwNA==">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/qqq.css" rel="stylesheet" type="text/css">
+    <link href="font/xiaogan.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="hDialog/js/jquery-1.9.1.min.js"></script>
+    <script language="javascript">
+        function show(a){
+            if(a){$(".contentt").fadeOut(500);$(".fix_mask").fadeOut(500);}else{$(".contentt").fadeIn(500);$(".fix_mask").fadeIn(500);}
+        }
+    </script>
+</head>
+<body>
+<div class="box" style="background:#F3F6F5;"><!--头部：开始--->
+    <div class="Favorites">
+        <ul>
+            <li><a href="javascript:history.go(-1)"><ins class="icon-52"></ins></a></li>
+            <p>提交订单</p>
+            <li><a href="#"></a></li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="main">
+        <div class="div"></div>
+
+        <div class="address">
+            <div class="addres"><a href="add-region.html"> <ins class="icon-23"></ins> 新增地址</a></div>
+
+            <dl>
+                <dt>
+                    <cite>
+                        <input type="radio" id="radio-3-2" name="radio-3-set" class="regular-radio big-radio" checked/>
+                        <label for="radio-3-2"></label>
+                    </cite>
+                </dt>
+                <a href="address">
+                    <dd><h6>阙君猛  18389957620</h6>
+                        <span>琼海玲珑软件有限公司</span>
+                    </dd>
+                    <div class="clear"></div>
+                    <div class="edit">
+                        <img src="images/right.png">
+                    </div>
+                </a>
+            </dl>
+        </div>
+        <!--送货方式：开始-->
+        <div class="demo">
+
+            <ul  style="border-bottom:1px solid #E0DFDF;">
+                <li class="youji"> <cite>
+                    <input type="radio" id="radio-2-2" name="radio-2-set" class="regular-radio big-radio" />
+                    <label for="radio-2-2"></label>
+                </cite> <a href="#">在线支付</a> </li>
+            </ul>
+            <ul>
+                <li class="youji"> <cite>
+                    <input type="radio" id="radio-2-3" name="radio-2-set" class="regular-radio big-radio" checked/>
+                    <label for="radio-2-3"></label>
+                </cite> <a href="#">货到付款</a> </li>
+            </ul>
+        </div>
+
+        <div class="memu">
+            <h4>订单商品</h4>
+
+            <dl>
+                <dt><h5>黑马堡干红葡萄酒</h5>
+                <span>x2</span><em>￥1200</em>
+                </dt>
+                <dd>
+                    <a class="btn">删除</a>
+                    <input type="hidden" value="694" class="productid"/>
+                </dd>
+                <Div class="clear"></Div>
+                <div class="fied">
+                    <div class="gw_num">
+                        <em class="min">-</em>
+                        <input type="hidden" value="694" class="productid"/>
+                        <input type="text" disabled="disabled" value="2" class="num"/>
+                        <em class="add">+</em>
+                    </div>
+                </div>
+            </dl>
+
+            <dl>
+                <dt><h5>卡特尔法国红酒</h5>
+                <span>x2</span><em>￥536</em>
+                </dt>
+                <dd>
+                    <a class="btn">删除</a>
+                    <input type="hidden" value="695" class="productid"/>
+                </dd>
+                <Div class="clear"></Div>
+                <div class="fied">
+                    <div class="gw_num">
+                        <em class="min">-</em>
+                        <input type="hidden" value="695" class="productid"/>
+                        <input type="text" disabled="disabled" value="2" class="num"/>
+                        <em class="add">+</em>
+                    </div>
+                </div>
+            </dl>
+        </div>
+        <div class="remark">
+            <dl>
+                <dt>备注</dt>
+                <dd class="topBarx"><textarea id="remark" placeholder="欢迎留言！！"></textarea></dd>
+                <div class="clear"></div>
+            </dl>
+        </div>
+    </div>
+
+    <!--悬浮菜单：开始-->
+    <div class="bottomMenu">
+        <dl>
+            <dt><a href="#"><img src="images/wqw.png">共<span>￥1736</span></a></dt>
+            <dd id="conf">确认下单</dd>
+            <div class="clear"></div>
+        </dl>
+        <div id="sing">4</div>
+    </div>
+    <!--悬浮菜单：结束-->
+</div>
+
+</body>
+</html>
+<script src="hDialog/js/jquery.hDialog.js"></script>
+<script>
+    var csrfName = $('meta[name=csrf-param]').prop('content');
+    var crsfToken = $('meta[name=csrf-token]').prop('content');
+    $('.btn').click(function() {
+        var productid=$(this).parent().find('input[class*=productid]');
+        var data =csrfName + '='+crsfToken+"&productId="+productid.val();
+        $.dialog('confirm','提示','您确定要删除<br>该条选购的商品吗？',0,function(){
+//                alert(data);
+            $.post("order/delete-cart", data, function (result) {
+                window.location.href="http://localhostorder/cart?supplier_id=1";
+            });
+        });
+    });
+    var checkSubmitFlg = false;
+    $('#conf').click(function() {
+        if (!checkSubmitFlg) {
+            var addressCounts='14';
+            var address_id='49';
+            var method=1;
+            var cart='2';
+            var remark= $('#remark');
+            if(addressCounts==0){
+                $.dialog('confirm','提示','您还没填写收货地址呢!<br>确认前往填写？',0,function(){
+                    window.location.href="http://localhostpersonal/add-region";
+                });
+            }else if(!$('#radio-3-2').attr("checked")){
+                $.tooltip('还没选择收货地址呢');
+            } else if(!$('#radio-2-3').attr("checked")){
+                $.tooltip('还没选择付款方式呢...');
+            }else  if(cart==0){
+                $.dialog('confirm','提示','您还没选购商品呢!<br>确认前往选购？',0,function(){
+                    window.location.href="javascript:history.go(-1)";
+                });
+            }else{
+                //    $.dialog('confirm','提示','现在确认下单吗？',0,function(){
+                var data =csrfName + '='+crsfToken+"&address_id="+address_id+"&method="+method+"&remark="+remark.val()+"&supplier_id="+1;
+//                        alert(data);
+                if (!checkSubmitFlg) {
+                    checkSubmitFlg = true;// 第一次提交
+                    $.post("order/save-order", data, function (result) {
+                        window.location.href=result;
+                    });
+                }
+
+                //    });
+            }
+            return true;
+        } else {
+            //重复提交
+            $.tooltip('请勿重复提交！');
+            return false;
+        }
+    });
+
+</script>
+
