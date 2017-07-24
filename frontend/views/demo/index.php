@@ -18,7 +18,6 @@
 
 <body>
 <div id="container">
-    1234556
     <?php
     $connection = Yii::$app->db;
     $sql = "select * from  {{%sys_member}} order by created_time desc limit 0,20";
