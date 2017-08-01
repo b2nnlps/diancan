@@ -75,7 +75,7 @@ class Order extends \yii\db\ActiveRecord
         $order->realname=$realname;
         $order->phone=$phone;
         $order->table=$table;
-        $order->text=$realname . $phone."\n备注：$text" ."\n桌号：" .$table;
+        $order->text=$text;
         if($staff)  //如果是服务员就直接当做付款
             $order->status=3;
         else
@@ -86,7 +86,7 @@ class Order extends \yii\db\ActiveRecord
         if(!$order->save())var_dump($order->getErrors());
         return $order;
     }
-    public static function getFoodOrder($food_id){
+    public static function getFoodOrder($food_id){//获取该商品的销售信息
         $food = (new \yii\db\Query())
             ->select(['nickname','headimgurl','a.created_time','b.num'])
             ->from('n_food_order a,n_food_order_info b,t_sys_wechat_user c')
@@ -103,5 +103,15 @@ class Order extends \yii\db\ActiveRecord
             ->orderBy('a.created_time')
             ->all();
         return $food;
+    }
+    public static function getOrderInfo($shop_id,$status=false){
+        if($status===false)$status=''; else $status=' AND b.status='.$status;
+        $order=(new \yii\db\Query())
+            ->select(['a.text','a.table','b.food_id','b.info_id','b.num','b.status','a.created_time'])
+            ->from('n_food_order a,n_food_order_info b')
+            ->where('a.id=b.order_id AND a.shop_id=:shop_id'.$status,[':shop_id'=>$shop_id])
+            ->orderBy('a.created_time')
+            ->all();
+        return $order;
     }
 }

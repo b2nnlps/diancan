@@ -101,4 +101,5 @@ class Food extends \yii\db\ActiveRecord
         return $total;
     }
 
+
 }

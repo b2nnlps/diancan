@@ -143,9 +143,9 @@ class UserController extends BaseController
                 }
                 $food=$foods[$info['food_id']];
                 $total_price += $food['price'] * $cart[$i]['num'];
-                $text .= $food['name'] . '   x' . $cart[$i]['num'] . '  ￥' . $food['price'] * $cart[$i]['num'] / 100 . '<br>';
+                $text .= $food['name'] . $info['title'].'   x' . $cart[$i]['num'] . '  ￥' . $food['price'] * $cart[$i]['num'] / 100 . '<br>';
                 $total+=$food['price'] * $cart[$i]['num'];
-                OrderInfo::newOrderInfo($order->id,$info['food_id'],$info['price']*100,$cart[$i]['num'],$cart[$i]['text']);
+                OrderInfo::newOrderInfo($order->id,$info['food_id'],$info['id'],$info['price']*100,$cart[$i]['num'],$cart[$i]['text']);
             }
         }
         $order->total=$total;
