@@ -17,7 +17,7 @@ use common\wechat\JSSDK;
  */
 class ApiController extends BaseApiController
 {
-    public function actionGetOrder($status=false){
+    public function actionGetOrder($status=false){//获取不同状态的菜品订单
         $this->isLogin();
         $order=Order::getOrderInfo($this->shopId,$status);
         for($i=0;$i<count($order);$i++){
@@ -26,7 +26,7 @@ class ApiController extends BaseApiController
         }
         return $this->response($order);
     }
-    public function actionCheckOrder($info_id,$status){
+    public function actionCheckOrder($info_id,$status){//更新订单菜品状态
         $this->isLogin();
         $orderInfo=OrderInfo::findOne($info_id);
         $o=Order::findOne($orderInfo['order_id']);
@@ -41,6 +41,15 @@ class ApiController extends BaseApiController
             }
         }
 
+        return $this->response($return);
+    }
+    public function actionUserInfo(){//获取店员信息
+        $this->isLogin();
+        $staff=$this->staff;
+        $return['role_id']=$staff['role_id'];
+        $return['shop_id']=$staff['shop_id'];
+        $return['realname']=$staff['realname'];
+        $return['status']=$staff['status'];
         return $this->response($return);
     }
 }
