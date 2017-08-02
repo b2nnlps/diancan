@@ -148,12 +148,8 @@ class FoodController extends Controller
 
     public function actionLists($id)
     {
-        $countClasses = Classes::find()
-            ->where(['shop_id' => $id])
-            ->count();
-        $classes = Classes::find()
-            ->where(['shop_id' => $id])
-            ->all();
+        $countClasses = Classes::find()->where(['shop_id' => $id])->count();
+        $classes = Classes::find()->where(['shop_id' => $id])->all();
         if ($countClasses > 0) {
             foreach ($classes as $_v) {
                 echo "<option value='" . $_v->shop_id . "'>" . $_v->name . "</option>";
