@@ -50,17 +50,17 @@ class FoodController extends Controller
      * Lists all Food models.
      * @return mixed
      */
-    public function actionIndex($shop_id=0)
+    public function actionIndex()
     {
         $searchModel = new FoodSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$shop_id);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        if($shop_id) {
-            $shop = Shop::findOne($shop_id);
-            $cookies = Yii::$app->response->cookies;        //增加密文
-            $cookies->add(new \yii\web\Cookie(['name' => 'shop_id', 'value' => $shop_id, 'expire' => time() + 3600]));
-            $cookies->add(new \yii\web\Cookie(['name' => 'shop_name', 'value' => $shop['name'], 'expire' => time() + 3600]));
-        }
+//        if($shop_id) {
+//            $shop = Shop::findOne($shop_id);
+//            $cookies = Yii::$app->response->cookies;        //增加密文
+//            $cookies->add(new \yii\web\Cookie(['name' => 'shop_id', 'value' => $shop_id, 'expire' => time() + 3600]));
+//            $cookies->add(new \yii\web\Cookie(['name' => 'shop_name', 'value' => $shop['name'], 'expire' => time() + 3600]));
+//        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -125,7 +125,6 @@ class FoodController extends Controller
             $model->shop_id = $shopId;
         }
 
-
         $model->created_time=date("Y-m-d H:i:s");
         $model->updated_time=date("Y-m-d H:i:s");
 
@@ -158,7 +157,7 @@ class FoodController extends Controller
         $classes = Classes::find()->where(['shop_id' => $id])->all();
         if ($countClasses > 0) {
             foreach ($classes as $_v) {
-                echo "<option value='" . $_v->shop_id . "'>" . $_v->name . "</option>";
+                echo "<option value='" . $_v->id . "'>" . $_v->name . "</option>";
             }
         } else {
             echo "<option>-</option>";
