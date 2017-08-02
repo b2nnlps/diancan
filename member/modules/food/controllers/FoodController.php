@@ -61,7 +61,7 @@ class FoodController extends Controller
             $cookies->add(new \yii\web\Cookie(['name' => 'shop_id', 'value' => $shop_id, 'expire' => time() + 3600]));
             $cookies->add(new \yii\web\Cookie(['name' => 'shop_name', 'value' => $shop['name'], 'expire' => time() + 3600]));
         }
-        echo 1;
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -151,12 +151,12 @@ class FoodController extends Controller
         $countClasses = Classes::find()
             ->where(['shop_id' => $id])
             ->count();
-        $branches = Classes::find()
+        $classes = Classes::find()
             ->where(['shop_id' => $id])
             ->all();
         if ($countClasses > 0) {
-            foreach ($branches as $branche) {
-                echo "<option value='" . $branche->shop_id . "'>" . $branche->name . "</option>";
+            foreach ($classes as $_v) {
+                echo "<option value='" . $_v->shop_id . "'>" . $_v->name . "</option>";
             }
         } else {
             echo "<option>-</option>";
