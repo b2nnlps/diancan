@@ -33,7 +33,9 @@ class BaseApiController extends Controller
         //    header("Access-Control-Allow-Origin: *");
          //   header("Access-Control-Allow-Headers: content-type");
         }*/
-
+        $url      = Yii::$app->request->getHostInfo()
+            . Yii::$app->request->url;
+        file_put_contents("from.txt", date("H:i:s ").$url, FILE_APPEND);
         return parent::beforeAction($action);
     }
 
