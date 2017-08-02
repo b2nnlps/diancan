@@ -122,7 +122,7 @@ class FoodController extends Controller
 //        $shop_id=$cookies->getValue('shop_id',false);
 //        if(!$shop_id)return self::actionIndex();
 
-        $model->shop_id = $shopId;
+//        $model->shop_id = $shopId;
 
         $model->created_time=date("Y-m-d H:i:s");
         $model->updated_time=date("Y-m-d H:i:s");
