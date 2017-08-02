@@ -66,7 +66,14 @@ class Shop extends \yii\db\ActiveRecord
 
     public static function getShopList()
     {
-        $model = ArrayHelper::map(self::find()->all(), 'id', 'name');
+        $shopId = Yii::$app->user->identity->shop_id;
+        $role = Yii::$app->user->identity->role;
+        if ($role < 3) {
+            $list = self::find()->all();
+        } else {
+            $list = self::find()->where(['id' => $shopId])->all();
+        }
+        $model = ArrayHelper::map($list, 'id', 'name');
         return $model;
     }
 }
