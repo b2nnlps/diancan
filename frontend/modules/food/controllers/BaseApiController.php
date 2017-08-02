@@ -9,7 +9,7 @@ use member\modules\food\models\ShopStaff;
 
 class BaseApiController extends Controller
 {
-    public $shopId=1;
+    public $shopId;
     public $staff;
 
     /**
@@ -20,7 +20,7 @@ class BaseApiController extends Controller
      */
     public function beforeAction($action)
     {
-        if (isset($_SERVER["HTTP_REFERER"])) {
+       /* if (isset($_SERVER["HTTP_REFERER"])) {
             $url       = $_SERVER["HTTP_REFERER"];   //获取完整的来路URL
             $str   = str_replace("http://", "", $url);  //去掉http://
             $strdomain = explode("/", $str);               // 以“/”分开成数组
@@ -29,10 +29,10 @@ class BaseApiController extends Controller
             header("Access-Control-Allow-Origin: http://".$domain);
             header("Access-Control-Allow-Headers: content-type");
         } else {
-            header("Access-Control-Allow-Credentials: true");
-            header("Access-Control-Allow-Origin: *");
-            header("Access-Control-Allow-Headers: content-type");
-        }
+          //  header("Access-Control-Allow-Credentials: true");
+        //    header("Access-Control-Allow-Origin: *");
+         //   header("Access-Control-Allow-Headers: content-type");
+        }*/
 
         return parent::beforeAction($action);
     }
@@ -70,6 +70,7 @@ class BaseApiController extends Controller
             $response=Yii::$app->response;
             $response->format=Response::FORMAT_JSON;
             $response->data=$return;
+
             echo $_GET['callback'].'('.json_encode($return).')';
             die;
         }
