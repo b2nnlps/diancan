@@ -45,9 +45,9 @@ class FoodSearch extends Food
         $shopId = Yii::$app->user->identity->shop_id;
         $role = Yii::$app->user->identity->role;
         if ($role == 2) {
-            $query = Food::find();
+            $query = Food::find()->orderBy('id desc');
         } else {
-            $query = Food::find()->where(['shop_id' => $shopId]);
+            $query = Food::find()->where(['shop_id' => $shopId])->orderBy('id desc');
         }
         // add conditions that should always apply here
 
@@ -62,12 +62,12 @@ class FoodSearch extends Food
             // $query->where('0=1');
             return $dataProvider;
         }
-        if(!$shop_id) $shop_id=$this->shop_id;
+//        if(!$shop_id) $shop_id=$this->shop_id;
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'price' => $this->price,
-            'shop_id' => $shop_id,
+            'shop_id' => $this->shop_id,
             'class_id' => $this->class_id,
             'status' => $this->status,
             'created_time' => $this->created_time,
