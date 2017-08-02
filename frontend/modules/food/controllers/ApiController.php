@@ -23,6 +23,22 @@ class ApiController extends BaseApiController
             $order[$i]['food_name']=Food::findOne($order[$i]['food_id'])['name'];
             $order[$i]['food_info']=FoodInfo::findOne($order[$i]['info_id'])['title'];
         }
-        return $order;
+        return $this->response($order);
+    }
+    public function actionCheckOrder($info_id,$status){
+        $orderInfo=OrderInfo::findOne($info_id);
+        $o=Order::findOne($orderInfo['order_id']);
+        $return=false;
+        if($this->shopId==$o['shop_id']) {
+            $orderInfo->status = $status;
+            $return = $orderInfo->save();
+            $num = OrderInfo::find()->where('order_id=:order_id AND (status=0 or status=1)', [':order_id' => $orderInfo['order_id']])->count();
+            if ($num == 0) {        //如果订单菜品已经出完
+                $o['status'] = '2';
+                $o->save(); //这里还可以加通知；
+            }
+        }
+
+        return $this->response($return);
     }
 }
