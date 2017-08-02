@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>容合点餐系统</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="box">
+    <div class="main">
+        <div class="seek_box">
+            <div class="seek clearfix">
+                <input type="text" placeholder="请输入您查询订单ID">
+                <a href="#"><img src="icon/ssimg.png"></a>
+            </div>
+        </div>
+        <div class="Chika">
+            <div class="Chikafusa">
+                <a href="#" onClick="woaicssq(1)" id="woaicsstitle" class="thisclass">进行中</a>
+                <a href="#" onClick="woaicssq(2)" id="woaicsstitle">已完成</a>
+            </div>
+        </div>
+        <div class="blank_box"></div>
+        <div id="woaicss_con1" style="display:block;">
+            <div class="indent">
+
+                <a>
+                    <ul>
+                        <li class="clearfix"><h4>订单ID：20170107008</h4><span class="unpaid_box"
+                                                                            style="color:#00A75A; border:1px solid #00A75A;">打印</span><span
+                                class="unpaid_box" style="color:#3C8DBD; border:1px solid #3C8DBD; margin:0 5px; "
+                                onClick="detail()">查看</span></li>
+                        <li class="clearfix" style="border:none;margin-bottom:-10px;"><h4>桌号：A1</h4><span
+                                class="consume_box">￥226</span></li>
+                        <li class="clearfix"><h4 class="time_box">下单时间：2017-6-21 11:16</h4><span
+                                style="color:#A0A3A5; font-size:14px;">8人就餐</span></li>
+                        <div class="hint_box"><img src="images/tishi.png" width="15" height="15">配料为辣椒和酱油</div>
+                    </ul>
+                </a>
+
+                <div class="blank_box"></div>
+
+
+            </div>
+            <div class="load_more"><a href="#" onClick="detail()">加载更多</a></div>
+            <!--<div class="zw_box">
+                  <img src="images/zwjlimg.png">
+                  <p>暂无记录！</p>
+                </div>-->
+
+        </div>
+        <!---->
+        <div id="woaicss_con2" style="display:none;">
+            <div class="indent">
+                <a href="order_details.html">
+                    <ul>
+                        <li class="clearfix"><h4>订单ID：20170107008</h4><span class="unpaid_box"
+                                                                            style="color:#3C8DBD; border:1px solid #3C8DBD;">进行中</span>
+                        </li>
+                        <li class="clearfix" style="border:none; margin-bottom:-10px;"><h4>桌号：A1</h4><span
+                                class="consume_box">￥388</span></li>
+                        <li class="clearfix"><h4 class="time_box">下单时间：2017-6-21 11:16</h4><span
+                                style="color:#A0A3A5; font-size:14px;">11人就餐</span></li>
+
+                    </ul>
+                </a>
+
+                <div class="blank_box"></div>
+                <a href="order_details.html">
+                    <ul>
+                        <li class="clearfix"><h4>订单ID：20170107008</h4><span class="unpaid_box"
+                                                                            style="color:#3C8DBD; border:1px solid #3C8DBD;">进行中</span>
+                        </li>
+                        <li class="clearfix" style="border:none; margin-bottom:-10px;"><h4>桌号：A1</h4><span
+                                class="consume_box">￥388</span></li>
+                        <li class="clearfix"><h4 class="time_box">下单时间：2017-6-21 11:16</h4><span
+                                style="color:#A0A3A5; font-size:14px;">11人就餐</span></li>
+
+                    </ul>
+                </a>
+            </div>
+            <div class="load_more"><a href="#">加载更多</a></div>
+            <!--<div class="zw_box">
+                <img src="images/zwjlimg.png">
+                <p>暂无记录！</p>
+              </div>-->
+        </div>
+
+
+    </div>
+</div>
+
+</body>
+</html>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/layer/layer.js"></script>
+<script language="javascript">
+    function detail() {
+        var index = layer.open({
+            type: 2,
+            title: "桌号：A1",
+            content: 'order_details.html'
+        });
+        layer.full(index);
+    }
+    function woaicssq(num) {
+        for (var id = 1; id <= 3; id++) {
+            var MrJin = "woaicss_con" + id;
+            if (id == num)
+                document.getElementById(MrJin).style.display = "block";
+            else
+                document.getElementById(MrJin).style.display = "none";
+        }
+        var zzsc = $(".Chikafusa a");
+        zzsc.click(function () {
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    }
+    $(function () {
+        var zzsc = $(".Chikafusa a");
+        zzsc.click(function () {
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    });
+</script>
