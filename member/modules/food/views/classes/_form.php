@@ -16,7 +16,20 @@ use yii\widgets\ActiveForm;
     <div style="width: 30%">
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'shop_id')->dropDownList(\member\modules\food\models\Shop::getShopList())->label('所属商家') ?>
+    <?php
+    $role = Yii::$app->user->identity->role;
+    if ($role < 3) {
+        echo $form->field($model, 'shop_id')->dropDownList(\member\modules\food\models\Shop::getShopList(),
+            [
+                'prompt' => '请选择商家',
+                'onchange' => '
+                         $.post("lists?id=' . '"+$(this).val(),function(data){
+                           $("select#food-class_id").html(data);
+                     });',
+            ]
+        )->label('所属商家');
+    }
+    ?>
     </div>
 
     <div class="form-group">
