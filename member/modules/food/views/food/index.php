@@ -2,17 +2,17 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use member\modules\food\models\Classes;
+use member\modules\food\models\Shop;
 /* @var $this yii\web\View */
 /* @var $searchModel member\modules\food\models\search\FoodSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-$cookies = Yii::$app->request->cookies;
-$this->title = $cookies->getValue('shop_name','空').'的菜品';
+
+$this->title = '菜品列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="food-index">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('新❤菜品', ['create'], ['class' => 'btn btn-success']) ?>
@@ -22,7 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
 
-            'id',
             [
                 'contentOptions'=>['style'=>'text-align:center;width:40px'],
                 'label' => '图像',
@@ -35,10 +34,50 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 },
             ],
+            [
+                'attribute' => 'id',
+                'headerOptions' => ["width" => "20"],
+            ],
+            [
+                'label' => '商家名称',
+                'attribute' => 'shop_id',
+                'value' => function ($model) {
+                    return Shop::getShopName($model->shop_id);
+                },
+                'filter' => Html::activeDropDownList(
+                    $searchModel,
+                    'shop_id',
+                    Shop::getShopList($searchModel->shop_id),
+                    ['class' => 'form-control', 'prompt' => '请筛选']
+                )
+
+            ],
             'name',
-            'price',
-            // 'class_id',
-            // 'created_time',
+//            'price',
+            [
+                'label' => '所属分类',
+                'attribute' => 'class_id',
+                'value' => function ($model) {
+                    return Classes::getClassesName($model->class_id);
+                },
+                'filter' => Html::activeDropDownList(
+                    $searchModel,
+                    'class_id',
+                    Classes::getClassesList($searchModel->class_id),
+                    ['class' => 'form-control', 'prompt' => '请筛选']
+                )
+            ],
+            'sold_number',
+            [
+                'attribute' => 'status',
+//                "headerOptions" => ["width" => "80"],
+                'filter' => \member\modules\food\models\Food::status(),
+                'value' => function ($model) {
+                    return $model->status($model->status);
+                },
+            ],
+
+            'created_time',
             // 'updated_time',
 
             ['class' => 'yii\grid\ActionColumn'],

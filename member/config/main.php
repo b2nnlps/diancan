@@ -50,7 +50,8 @@ return [
         'allowActions' => [
             //这里是允许访问的action
             //controller/action
-            '*'//允许所有人访问
+            'site/*',
+            // '*'//允许所有人访问
         ]
     ],
     'components' => [

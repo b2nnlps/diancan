@@ -2,18 +2,16 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use member\modules\food\models\Shop;
 /* @var $this yii\web\View */
 /* @var $searchModel member\modules\food\models\search\ClassesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '菜类';
+$this->title = '菜类列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="classes-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('新菜类', ['create'], ['class' => 'btn btn-success']) ?>
@@ -22,11 +20,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+//            ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            [
+                'attribute' => 'id',
+                "headerOptions" => ["width" => "80"],
+
+            ],
             'name',
-            'shop_id',
+            [
+                'label' => '所属商家',
+                'attribute' => 'shop_id',
+                'value' => function ($model) {
+                    return Shop::getShopName($model->shop_id);
+                },
+                'filter' => Html::activeDropDownList(
+                    $searchModel,
+                    'shop_id',
+                    Shop::getShopList($searchModel->shop_id),
+                    ['class' => 'form-control', 'prompt' => '请筛选']
+                )
+
+            ],
             'updated_time',
             // 'created_time',
 

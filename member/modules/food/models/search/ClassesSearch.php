@@ -41,8 +41,14 @@ class ClassesSearch extends Classes
      */
     public function search($params,$shop_id=0)
     {
-        $query = Classes::find();
 
+        $shop_id = Yii::$app->user->identity->shop_id;
+        $role = Yii::$app->user->identity->role;
+        if ($role == 2) {
+            $query = Classes::find();
+        } else {
+            $query = Classes::find()->where(['shop_id' => $shop_id]);
+        }
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

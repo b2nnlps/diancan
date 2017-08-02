@@ -41,7 +41,14 @@ class ShopSearch extends Shop
      */
     public function search($params)
     {
-        $query = Shop::find();
+        $shop_id = Yii::$app->user->identity->shop_id;
+        $role = Yii::$app->user->identity->role;
+        if ($role == 2) {
+            $query = Shop::find();
+        } else {
+            $query = Shop::find()->where(['id' => $shop_id]);
+        }
+
 
         // add conditions that should always apply here
 

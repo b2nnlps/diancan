@@ -2,6 +2,7 @@
 
 namespace member\modules\food\controllers;
 
+use member\modules\food\models\Classes;
 use member\modules\food\models\FoodInfo;
 use member\modules\food\models\Shop;
 use Yii;
@@ -113,12 +114,15 @@ class FoodController extends Controller
     public function actionCreate()
     {
         $model = new Food();
+        $shopId = Yii::$app->user->identity->shop_id;
+        $role = Yii::$app->user->identity->role;
 
-        $cookies = Yii::$app->request->cookies;
-        $shop_id=$cookies->getValue('shop_id',false);
-        if(!$shop_id)return self::actionIndex();
 
-        $model->shop_id=$shop_id;
+//        $cookies = Yii::$app->request->cookies;
+//        $shop_id=$cookies->getValue('shop_id',false);
+//        if(!$shop_id)return self::actionIndex();
+
+        $model->shop_id = $shopId;
 
         $model->created_time=date("Y-m-d H:i:s");
         $model->updated_time=date("Y-m-d H:i:s");
@@ -141,6 +145,23 @@ class FoodController extends Controller
         }
     }
 
+
+    public function actionLists($id)
+    {
+        $countBranches = Classes::find()
+            ->where(['shop_id' => $id])
+            ->count();
+        $branches = Classes::find()
+            ->where(['shop_id' => $id])
+            ->all();
+        if ($countBranches > 0) {
+            foreach ($branches as $branche) {
+                echo "<option value='" . $branche->shop_id . "'>" . $branche->name . "</option>";
+            }
+        } else {
+            echo "<option>-</option>";
+        }
+    }
     /**
      * Updates an existing Food model.
      * If update is successful, the browser will be redirected to the 'view' page.

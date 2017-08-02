@@ -18,7 +18,7 @@ class FoodSearch extends Food
     public function rules()
     {
         return [
-            [['id', 'shop_id', 'class_id'], 'integer'],
+            [['id', 'shop_id', 'status', 'class_id'], 'integer'],
             [['name', 'img', 'created_time', 'updated_time'], 'safe'],
             [['price'], 'number'],
         ];
@@ -42,8 +42,13 @@ class FoodSearch extends Food
      */
     public function search($params,$shop_id=0)
     {
-        $query = Food::find();
-
+        $shopId = Yii::$app->user->identity->shop_id;
+        $role = Yii::$app->user->identity->role;
+        if ($role == 2) {
+            $query = Food::find();
+        } else {
+            $query = Food::find()->where(['shop_id' => $shopId]);
+        }
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -64,6 +69,7 @@ class FoodSearch extends Food
             'price' => $this->price,
             'shop_id' => $shop_id,
             'class_id' => $this->class_id,
+            'status' => $this->status,
             'created_time' => $this->created_time,
             'updated_time' => $this->updated_time,
         ]);

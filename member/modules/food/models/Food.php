@@ -52,14 +52,25 @@ class Food extends \yii\db\ActiveRecord
             'name' => '菜名',
             'img' => '图片',
             'price' => '价格',
+            'sold_number' => '已售',
             'type' => '款式',
             'description' => '详细描述',
             'shop_id' => '所属商店',
             'class_id' => '所属分类',
             'status' => '状态',
-            'created_time' => 'Created Time',
-            'updated_time' => 'Updated Time',
+            'created_time' => '创建时间',
+            'updated_time' => '更新时间',
         ];
+    }
+
+    public static function status($key = null)
+    {
+        $arr = [
+            '0' => '正常',
+            '1' => '售完',
+            '2' => '下架',
+        ];
+        return $key === null ? $arr : (isset($arr[$key]) ? $arr[$key] : '');
     }
     public static function getCategory()
     {
@@ -100,6 +111,5 @@ class Food extends \yii\db\ActiveRecord
         }
         return $total;
     }
-
 
 }

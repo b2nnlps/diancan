@@ -3,6 +3,7 @@
 namespace member\modules\food\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "n_food_shop".
@@ -49,9 +50,23 @@ class Shop extends \yii\db\ActiveRecord
             'name' => '店名',
             'contact' => '联系人',
             'address' => '地址',
+            'description' => '商家简介',
             'img' => '店头像',
             'device_id' => '打印机编号',
-            'created_time' => 'Created Time',
+            'created_time' => '创建时间',
         ];
+    }
+
+    public static function getShopName($shop_id)
+    {
+        $model = self::findOne($shop_id);
+        $name = $model['name'];
+        return $name ? $name : "暂无";
+    }
+
+    public static function getShopList()
+    {
+        $model = ArrayHelper::map(self::find()->all(), 'id', 'name');
+        return $model;
     }
 }

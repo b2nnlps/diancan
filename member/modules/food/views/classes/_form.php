@@ -12,9 +12,12 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+
+    <div style="width: 30%">
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'img')->widget(\common\widgets\FileInput::className(),['dir'=>'upload/food','maxnum'=>1])->label('分类图片')?>
+    <?= $form->field($model, 'shop_id')->dropDownList(\member\modules\food\models\Shop::getShopList())->label('所属商家') ?>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? '新建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

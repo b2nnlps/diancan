@@ -92,6 +92,7 @@ class User extends \common\models\User
             'realname' => '真实姓名',
             'phone' => '联系电话',
             'modules' => '所属模块',
+            'shop_id' => '商家ID',
             'role' => '角色等级',
             'email' => 'Email',
             'description' => '备注',

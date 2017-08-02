@@ -42,8 +42,14 @@ class FoodInfoSearch extends FoodInfo
      */
     public function search($params)
     {
-        $query = FoodInfo::find();
 
+        $shop_id = Yii::$app->user->identity->shop_id;
+        $role = Yii::$app->user->identity->role;
+        if ($role == 2) {
+            $query = FoodInfo::find();
+        } else {
+            $query = FoodInfo::find()->where(['shop_id' => $shop_id]);
+        }
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

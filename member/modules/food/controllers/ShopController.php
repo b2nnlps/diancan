@@ -35,6 +35,8 @@ class ShopController extends Controller
      */
     public function actionIndex()
     {
+
+//       echo $shop_id=Yii::$app->user->identity->shop_id;;
         $searchModel = new ShopSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

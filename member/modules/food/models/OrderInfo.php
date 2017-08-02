@@ -45,11 +45,11 @@ class OrderInfo extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'order_id' => 'Order ID',
-            'food_id' => 'Food ID',
+            'order_id' => '订单id',
+            'food_id' => '菜品id',
             'price' => '价格（分）',
             'num' => '数量',
-            'type' => '类型',
+            'info_id' => '规格id',
             'text' => '要求备注',
             'status' => '0待上菜',
         ];

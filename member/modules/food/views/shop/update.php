@@ -6,13 +6,12 @@ use yii\helpers\Html;
 /* @var $model member\modules\food\models\Shop */
 
 $this->title = '修改店家: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Shops', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '商家列表', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = '更新';
 ?>
 <div class="shop-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

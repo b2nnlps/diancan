@@ -33,17 +33,17 @@
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
 
                     [
-                        'label' => '菜单系统',
+                        'label' => '餐饮系统',
                         'icon' => 'fa fa-hourglass-end',
                         'url' => '/food/food/index',
                         'items' => [
 
-                            ['label' => '菜品管理', 'icon' => 'fa fa-users', 'url' => ['/food/food/index'],'visible'=>Yii::$app->user->can('/food/food/index')],
-                            ['label' => '分类管理', 'icon' => 'fa fa-users', 'url' => ['/food/classes/index'],'visible'=>Yii::$app->user->can('/food/classes/index')],
-                            ['label' => '商店管理', 'icon' => 'fa fa-users', 'url' => ['/food/shop/index'],'visible'=>Yii::$app->user->can('/food/shop/index')],
+                            ['label' => '菜品管理', 'icon' => 'fa fa-cubes', 'url' => ['/food/food/index'], 'visible' => Yii::$app->user->can('/food/food/index')],
+                            ['label' => '菜品分类', 'icon' => 'fa fa-server', 'url' => ['/food/classes/index'], 'visible' => Yii::$app->user->can('/food/classes/index')],
+                            ['label' => '店家信息', 'icon' => 'fa fa-institution', 'url' => ['/food/shop/index'], 'visible' => Yii::$app->user->can('/food/shop/index')],
 
-                            ['label' => '员工管理', 'icon' => 'fa fa-users', 'url' => ['/food/shop-staff/index'],'visible'=>Yii::$app->user->can('/food/shop-staff/index')],
-                            ['label' => '订单管理', 'icon' => 'fa fa-users', 'url' => ['/food/order/index'],'visible'=>Yii::$app->user->can('/food/order/index')],
+                            ['label' => '员工信息', 'icon' => 'fa fa-users', 'url' => ['/food/shop-staff/index'], 'visible' => Yii::$app->user->can('/food/shop-staff/index')],
+                            ['label' => '订单统计', 'icon' => 'fa fa-calendar-check-o ', 'url' => ['/food/order/index'], 'visible' => Yii::$app->user->can('/food/order/index')],
 
                         ],
                         'visible'=>Yii::$app->user->can('/activitys/relayactivity/index')

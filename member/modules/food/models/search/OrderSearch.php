@@ -18,8 +18,8 @@ class OrderSearch extends Order
     public function rules()
     {
         return [
-            [['id', 'user', 'orderno', 'text', 'created_time', 'updated_time'], 'safe'],
-            [['num', 'shop_id',  'status'], 'integer'],
+            [['id', 'user', 'orderno', 'text', 'phone', 'realname', 'people', 'total', 'table', 'created_time', 'updated_time'], 'safe'],
+            [['num', 'shop_id', 'total', 'status'], 'integer'],
         ];
     }
 
@@ -41,8 +41,14 @@ class OrderSearch extends Order
      */
     public function search($params)
     {
-        $query = Order::find();
 
+        $shop_id = Yii::$app->user->identity->shop_id;
+        $role = Yii::$app->user->identity->role;
+        if ($role == 2) {
+            $query = Order::find();
+        } else {
+            $query = Order::find()->where(['shop_id' => $shop_id]);
+        }
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -62,12 +68,19 @@ class OrderSearch extends Order
             'num' => $this->num,
             'shop_id' => $this->shop_id,
             'status' => $this->status,
+            'total' => $this->total,
             'created_time' => $this->created_time,
             'updated_time' => $this->updated_time,
+
         ]);
 
         $query->andFilterWhere(['like', 'id', $this->id])
             ->andFilterWhere(['like', 'user', $this->user])
+            ->andFilterWhere(['like', 'phone', $this->phone])
+            ->andFilterWhere(['like', 'realname', $this->realname])
+            ->andFilterWhere(['like', 'table', $this->table])
+            ->andFilterWhere(['like', 'people', $this->people])
+
             ->andFilterWhere(['like', 'orderno', $this->orderno])
             ->andFilterWhere(['like', 'text', $this->text]);
 

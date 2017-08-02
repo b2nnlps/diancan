@@ -54,18 +54,29 @@ class Order extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'num' => '今日订单号',
-            'user' => 'User',
+            'user' => 'OpenID',
             'shop_id' => '店家',
             'phone' => '手机号码',
             'realname' => '姓名',
             'table' => '桌号',
+            'people' => '就餐人数',
             'total' => '总价',
-            'orderno' => 'Orderno',
+            'orderno' => '订单编号',
             'text' => '备注',
-            'status' => '0待支付1已支付2已完成',
-            'created_time' => 'Created Time',
-            'updated_time' => 'Updated Time',
+            'status' => '状态',
+            'created_time' => '创建时间',
+            'updated_time' => '更新时间',
         ];
+    }
+
+    public static function status($key = null)
+    {
+        $arr = [
+            '0' => '待支付',
+            '1' => '已支付',
+            '2' => '已完成',
+        ];
+        return $key === null ? $arr : (isset($arr[$key]) ? $arr[$key] : '');
     }
     public static function newOrder($openid,$shop_id,$orderno,$realname,$phone,$table,$staff,$text){
         $order=new Order();

@@ -6,13 +6,12 @@ use yii\helpers\Html;
 /* @var $model member\modules\food\models\Classes */
 
 $this->title = '修改菜类: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Classes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '菜类列表', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="classes-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

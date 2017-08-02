@@ -13,29 +13,54 @@ use yii\helpers\ArrayHelper;
 <div class="food-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+        <div class="col-sm-6">
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'shop_id')->dropDownList(
+                \member\modules\food\models\Shop::getShopList(),
+                [
+                    'prompt' => '请选择商家',
+                    'onchange' => '
+                          $.post("lists&id=' . '"+$(this).val(),function(data){
+                            $("select#food-class_id").html(data);
+                          });',
+                ]
+            ) ?>
+            <?= $form->field($model, 'class_id')->dropDownList(
+                \member\modules\food\models\Classes::getClassesList(),
+                [
+                    'prompt' => '请选择菜品类别',
+                ]
+            ) ?>
 
-    <?= $form->field($model, 'head_img')->widget(\common\widgets\FileInput::className(),['dir'=>'upload/food','maxnum'=>1])->label('首页图片')?>
 
-    <?= $form->field($model, 'img')->widget(\common\widgets\FileInput::className(),['dir'=>'upload/food','maxnum'=>5])->label('菜品轮播图片')?>
+            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'class_id')->dropDownList(ArrayHelper::map($model->getCategory(),'id','name')) ?>
+            <?= $form->field($model, 'price')->textInput() ?>
 
-    <?= $form->field($model, 'price')->textInput() ?>
+            <?= $form->field($model, 'type')->textInput(['placeholder' => '多种请用|隔开'])->label('规格（多个用|隔开）') ?>
+            <button onclick="add();return false;">生成</button>
+            <div id="guige">
+                <?php
+                foreach ($foodInfo as $_info) {
+                    echo "<h4>$_info[title]</h4>价格：<input type=\"text\" id=\"food-price\" name=\"guigePrice[$_info[id]]\" value=\"$_info[price]\"/>";
+                    echo " 数量：<input type=\"text\" id=\"food-price\" name=\"guigeNumber[$_info[id]]\" value=\"$_info[number]\"/><br>";
+                }
+                ?>
+            </div>
+
+        </div>
 
 
-    <?= $form->field($model, 'type')->textInput(['placeholder'=>'多种请用|隔开'])->label('规格（多个用|隔开）') ?>
-    <button onclick="add();return false;">生成</button>
-    <div id="guige">
-        <?php
-            foreach ($foodInfo as $_info){
-                echo "<h4>$_info[title]</h4>价格<input type=\"text\" id=\"food-price\" name=\"guigePrice[$_info[id]]\" value=\"$_info[price]\"/>";
-                echo "数量<input type=\"text\" id=\"food-price\" name=\"guigeNumber[$_info[id]]\" value=\"$_info[number]\"/><br>";
-            }
-        ?>
+        <div class="col-sm-6">
+
+            <?= $form->field($model, 'head_img')->widget(\common\widgets\FileInput::className(), ['dir' => 'upload/food', 'maxnum' => 1])->label('首页图片') ?>
+
+            <?= $form->field($model, 'img')->widget(\common\widgets\FileInput::className(), ['dir' => 'upload/food', 'maxnum' => 5])->label('菜品轮播图片') ?>
+
+
+        </div>
     </div>
-
     <?= $form->field($model, 'description')->widget(\crazyfd\ueditor\Ueditor::className(),[]) ?>
 
 
