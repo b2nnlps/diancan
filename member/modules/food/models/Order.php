@@ -111,6 +111,7 @@ class Order extends \yii\db\ActiveRecord
             ->from('n_food_order a,n_food_order_info b')
             ->where('a.id=b.order_id AND a.shop_id=:shop_id'.$status,[':shop_id'=>$shop_id])
             ->orderBy('a.created_time')
+            ->limit(50)
             ->all();
         return $order;
     }
