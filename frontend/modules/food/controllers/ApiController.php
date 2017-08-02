@@ -18,6 +18,7 @@ use common\wechat\JSSDK;
 class ApiController extends BaseApiController
 {
     public function actionGetOrder($status=false){
+        $this->isLogin();
         $order=Order::getOrderInfo($this->shopId,$status);
         for($i=0;$i<count($order);$i++){
             $order[$i]['food_name']=Food::findOne($order[$i]['food_id'])['name'];
@@ -26,6 +27,7 @@ class ApiController extends BaseApiController
         return $this->response($order);
     }
     public function actionCheckOrder($info_id,$status){
+        $this->isLogin();
         $orderInfo=OrderInfo::findOne($info_id);
         $o=Order::findOne($orderInfo['order_id']);
         $return=false;
