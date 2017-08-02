@@ -121,13 +121,17 @@ class FoodController extends Controller
 //        $cookies = Yii::$app->request->cookies;
 //        $shop_id=$cookies->getValue('shop_id',false);
 //        if(!$shop_id)return self::actionIndex();
+        if ($role > 2) {
+            $model->shop_id = $shopId;
+        }
 
-//        $model->shop_id = $shopId;
 
         $model->created_time=date("Y-m-d H:i:s");
         $model->updated_time=date("Y-m-d H:i:s");
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+
             $guigePrice=Yii::$app->request->post('guigePrice',[]);
             $guigeNumber=Yii::$app->request->post('guigeNumber',[]);
             $guigeTitle=Yii::$app->request->post('guigeTitle',[]);
@@ -137,6 +141,8 @@ class FoodController extends Controller
                 }
             }
             return $this->redirect(['index', 'id' => $model->id]);
+
+
         } else {
             return $this->render('create', [
                 'model' => $model,
