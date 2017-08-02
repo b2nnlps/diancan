@@ -22,9 +22,9 @@ use yii\helpers\ArrayHelper;
                 [
                     'prompt' => '请选择商家',
                     'onchange' => '
-                          $.post("lists?id=' . '"+$(this).val(),function(data){
-                            $("select#food-class_id").html(data);
-                          });',
+                         $.post("lists?id=' . '"+$(this).val(),function(data){
+                           $("select#food-class_id").html(data);
+                     });',
                 ]
                 );
             }
