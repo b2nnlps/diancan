@@ -51,7 +51,7 @@ class OrderInfo extends \yii\db\ActiveRecord
             'num' => '数量',
             'info_id' => '规格id',
             'text' => '要求备注',
-            'status' => '0待上菜',
+            'status' => '状态',
         ];
     }
     public static function newOrderInfo($order_id,$food_id,$type,$price,$num,$text){

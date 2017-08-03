@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            ['class' => 'yii\grid\SerialColumn'],
 
             [
+                'headerOptions' => ["width" => "80"],
                 'format' => ['image', ['width' => '35', 'height' => '30']],
                 'value' => function ($model) {
                     return $model->img;

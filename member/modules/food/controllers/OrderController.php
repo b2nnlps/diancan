@@ -6,6 +6,7 @@ use member\modules\food\models\OrderInfo;
 use Yii;
 use member\modules\food\models\Order;
 use member\modules\food\models\search\OrderSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -52,9 +53,16 @@ class OrderController extends Controller
      */
     public function actionView($id)
     {
+        $query = OrderInfo::find()->where(['order_id' => $id]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider,
         ]);
+
     }
 
     public function actionCheck()
