@@ -17,14 +17,30 @@ use common\wechat\JSSDK;
  */
 class ApiController extends BaseApiController
 {
-    public function actionGetOrder($status=false){//获取不同状态的菜品订单
+    public function actionGetWaitOrder($status = false)
+    {//获取不同状态的菜品订单
         $this->isLogin();
-        $order=Order::getOrderInfo($this->shopId,$status);
+        $order = Order::getWaitOrderInfo($this->shopId, $status);
         for($i=0;$i<count($order);$i++){
             $order[$i]['food_name']=Food::findOne($order[$i]['food_id'])['name'];
             $order[$i]['food_info']=FoodInfo::findOne($order[$i]['info_id'])['title'];
         }
         return $this->response($order);
+    }
+
+    public function actionGetOrderList($status = 0)
+    {//拉取订单
+        $this->isLogin();
+        $order = Order::find()->where(['shop_id' => $this->shopId, 'status' => $status])->limit(50)->asArray()->all();
+        return $this->response($order);
+    }
+
+    public function actionGetOrderDetail($order_id)
+    {//获取订单菜品的详情信息
+        $this->isLogin();
+        $return['order'] = Order::find()->where(['shop_id' => $this->shopId, 'id' => $order_id])->asArray()->one();//获取该订单信息
+        $return['detail'] = OrderInfo::getOrderInfo($this->shopId, $order_id);//获取订单里的菜品信息
+        return $this->response($return);
     }
     public function actionCheckOrder($info_id,$status){//更新订单菜品状态
         $this->isLogin();
@@ -42,6 +58,13 @@ class ApiController extends BaseApiController
         }
 
         return $this->response($return);
+    }
+
+    public function actionPrintOrder($order_id)
+    {//打印该订单信息
+        $this->isLogin();
+        $o = Order::findOne(['shop_id' => $this->shopId, 'id' => $order_id]);
+        return $this->response(Order::printOrder($o));
     }
     public function actionUserInfo(){//获取店员信息
         $this->isLogin();
