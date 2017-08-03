@@ -35,7 +35,7 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['num', 'shop_id', 'status','print'], 'integer'],
+            [['num', 'shop_id', 'status', 'print', 'people'], 'integer'],
             [['shop_id', 'orderno', 'status', 'created_time', 'updated_time'], 'required'],
             [['text'], 'string'],
             [['created_time', 'updated_time'], 'safe'],
@@ -115,7 +115,9 @@ class Order extends \yii\db\ActiveRecord
             ->all();
         return $food;
     }
-    public static function getOrderInfo($shop_id,$status=false){
+
+    public static function getWaitOrderInfo($shop_id, $status = false)
+    {
         if($status===false)$status=''; else $status=' AND b.status='.$status;
         $order=(new \yii\db\Query())
             ->select(['a.text','a.table','b.id','b.food_id','b.info_id','b.num','b.status','a.created_time'])
@@ -125,5 +127,85 @@ class Order extends \yii\db\ActiveRecord
             ->limit(50)
             ->all();
         return $order;
+    }
+
+    public static function printOrder($o)
+    { //该函数只负责打印
+        $shop = Shop::findOne($o['shop_id']);
+        $info = OrderInfo::findAll(['order_id' => $o['id']]);
+        $text = self::charsetToGBK("\n#" . $o['num']) . "\n";
+        $text .= '================================';
+        $total = 0;
+        $i = 0;
+        foreach ($info as $_info) {
+            $food = Food::findOne($_info['food_id']);
+            $i++;
+            $text .= self::change($i . '.' . $food['name'], '￥' . $_info['price'], '  x' . $_info['num']);
+            $total += $food['price'] * $_info['num'];
+        }
+        $total = round($total, 2);
+        $text .= self::charsetToGBK("\n订单编号：" . $o['id']) . "\n";
+        $text .= self::charsetToGBK('联系电话：' . $o['phone']) . "\n";
+        $text .= self::charsetToGBK('订单备注：' . $o['text']) . "\n";
+        $text .= self::charsetToGBK('下单时间：' . date("Y-m-d H:i:s")) . "\n";
+        $text .= self::charsetToGBK("总消费：￥" . $total . "\n");
+        $text .= "================================";
+
+        Order::TcpSend($shop['device_id'], $o['id'], $text);
+
+        return true;
+    }
+
+    public static function charsetToGBK($mixed)
+    {
+        if (is_array($mixed)) {
+            foreach ($mixed as $k => $v) {
+                if (is_array($v)) {
+                    $mixed[$k] = self::charsetToGBK($v);
+                } else {
+                    $encode = mb_detect_encoding($v, array('ASCII', 'UTF-8', 'GB2312', 'GBK', 'BIG5'));
+                    if ($encode == 'UTF-8') {
+                        $mixed[$k] = iconv('UTF-8', 'GBK', $v);
+                    }
+                }
+            }
+        } else {
+            $encode = mb_detect_encoding($mixed, array('ASCII', 'UTF-8', 'GB2312', 'GBK', 'BIG5'));
+            //var_dump($encode);
+            if ($encode == 'UTF-8') {
+                $mixed = iconv('UTF-8', 'GBK', $mixed);
+            }
+        }
+        return $mixed;
+    }
+
+    public static function change($a, $b, $c)
+    {  //转换格式，对齐
+        $a = self::charsetToGBK($a);
+        $num = strlen($a) + strlen($b) + strlen($c);
+        return $a . str_repeat(' ', 31 - $num) . self::charsetToGBK($b) . $c . "\n";
+    }
+
+    public static function TcpSend($print_id, $order_id, $text, $end = '0')
+    {  //发送命令给打印机 打印机编号，订单编号，内容
+        $pass = false;
+        //  $host = "121.42.24.85";
+        $host = "127.0.0.1";
+        $port = 45613;
+
+        while ($pass == false) {
+            try {
+                $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+                $connection = socket_connect($socket, $host, $port);
+                socket_write($socket, $end . '-' . $print_id . '-' . $order_id . '-|' . $text);//十六进制
+                $pass = true;
+                socket_close($socket);
+                //  echo '下单成功';
+                //socket_shutdown($socket);
+            } catch (Exception $e) {
+                echo '失败';
+            }
+        }
+        return date("H:i:s");
     }
 }
