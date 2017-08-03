@@ -64,7 +64,7 @@ class Classes extends \yii\db\ActiveRecord
     {
         $shopId = Yii::$app->user->identity->shop_id;
         $role = Yii::$app->user->identity->role;
-        if ($role == 2) {
+        if ($role < 3) {
             $list = self::find()->all();
         } else {
             $list = self::find()->where(['shop_id' => $shopId])->all();

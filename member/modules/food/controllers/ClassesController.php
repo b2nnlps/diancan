@@ -67,15 +67,19 @@ class ClassesController extends Controller
     public function actionCreate()
     {
         $model = new Classes();
-        $cookies = Yii::$app->request->cookies;
-        $shop_id = $cookies->getValue('shop_id',false);
-
-        if(!$shop_id)return self::actionIndex();
+//        $cookies = Yii::$app->request->cookies;
+//        $shop_id = $cookies->getValue('shop_id',false);
+//
+//        if(!$shop_id)return self::actionIndex();
+        $shopId = Yii::$app->user->identity->shop_id;
+        $role = Yii::$app->user->identity->role;
+        if ($role > 2) {
+            $model->shop_id = $shopId;
+        }
 
         $model->created_time=date("Y-m-d H:i:s");
         $model->updated_time=date("Y-m-d H:i:s");
 
-        $model->shop_id = $shop_id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 

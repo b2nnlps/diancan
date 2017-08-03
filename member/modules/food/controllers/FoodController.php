@@ -50,17 +50,17 @@ class FoodController extends Controller
      * Lists all Food models.
      * @return mixed
      */
-    public function actionIndex($shop_id=0)
+    public function actionIndex()
     {
         $searchModel = new FoodSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$shop_id);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        if($shop_id) {
-            $shop = Shop::findOne($shop_id);
-            $cookies = Yii::$app->response->cookies;        //增加密文
-            $cookies->add(new \yii\web\Cookie(['name' => 'shop_id', 'value' => $shop_id, 'expire' => time() + 3600]));
-            $cookies->add(new \yii\web\Cookie(['name' => 'shop_name', 'value' => $shop['name'], 'expire' => time() + 3600]));
-        }
+//        if($shop_id) {
+//            $shop = Shop::findOne($shop_id);
+//            $cookies = Yii::$app->response->cookies;        //增加密文
+//            $cookies->add(new \yii\web\Cookie(['name' => 'shop_id', 'value' => $shop_id, 'expire' => time() + 3600]));
+//            $cookies->add(new \yii\web\Cookie(['name' => 'shop_name', 'value' => $shop['name'], 'expire' => time() + 3600]));
+//        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -121,13 +121,16 @@ class FoodController extends Controller
 //        $cookies = Yii::$app->request->cookies;
 //        $shop_id=$cookies->getValue('shop_id',false);
 //        if(!$shop_id)return self::actionIndex();
-
-        $model->shop_id = $shopId;
+        if ($role > 2) {
+            $model->shop_id = $shopId;
+        }
 
         $model->created_time=date("Y-m-d H:i:s");
         $model->updated_time=date("Y-m-d H:i:s");
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+
             $guigePrice=Yii::$app->request->post('guigePrice',[]);
             $guigeNumber=Yii::$app->request->post('guigeNumber',[]);
             $guigeTitle=Yii::$app->request->post('guigeTitle',[]);
@@ -137,6 +140,8 @@ class FoodController extends Controller
                 }
             }
             return $this->redirect(['index', 'id' => $model->id]);
+
+
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -148,15 +153,11 @@ class FoodController extends Controller
 
     public function actionLists($id)
     {
-        $countClasses = Classes::find()
-            ->where(['shop_id' => $id])
-            ->count();
-        $classes = Classes::find()
-            ->where(['shop_id' => $id])
-            ->all();
+        $countClasses = Classes::find()->where(['shop_id' => $id])->count();
+        $classes = Classes::find()->where(['shop_id' => $id])->all();
         if ($countClasses > 0) {
             foreach ($classes as $_v) {
-                echo "<option value='" . $_v->shop_id . "'>" . $_v->name . "</option>";
+                echo "<option value='" . $_v->id . "'>" . $_v->name . "</option>";
             }
         } else {
             echo "<option>-</option>";

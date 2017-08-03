@@ -44,7 +44,7 @@ class ClassesSearch extends Classes
 
         $shop_id = Yii::$app->user->identity->shop_id;
         $role = Yii::$app->user->identity->role;
-        if ($role == 2) {
+        if ($role < 3) {
             $query = Classes::find();
         } else {
             $query = Classes::find()->where(['shop_id' => $shop_id]);
@@ -62,11 +62,11 @@ class ClassesSearch extends Classes
             // $query->where('0=1');
             return $dataProvider;
         }
-        if(!$shop_id)$shop_id=$this->shop_id;
+//        if(!$shop_id)$shop_id=$this->shop_id;
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'shop_id' => $shop_id,
+            'shop_id' => $this->shop_id,
             'updated_time' => $this->updated_time,
             'created_time' => $this->created_time,
         ]);

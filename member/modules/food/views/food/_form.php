@@ -15,17 +15,21 @@ use yii\helpers\ArrayHelper;
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
         <div class="col-sm-6">
-
-            <?= $form->field($model, 'shop_id')->dropDownList(
-                \member\modules\food\models\Shop::getShopList(),
+            <?php
+            $role = Yii::$app->user->identity->role;
+            if ($role < 3) {
+                echo $form->field($model, 'shop_id')->dropDownList(\member\modules\food\models\Shop::getShopList(),
                 [
                     'prompt' => '请选择商家',
                     'onchange' => '
-                          $.post("lists&id=' . '"+$(this).val(),function(data){
-                            $("select#food-class_id").html(data);
-                          });',
+                         $.post("lists?id=' . '"+$(this).val(),function(data){
+                           $("select#food-class_id").html(data);
+                     });',
                 ]
-            ) ?>
+                );
+            }
+            ?>
+
             <?= $form->field($model, 'class_id')->dropDownList(
                 \member\modules\food\models\Classes::getClassesList(),
                 [
