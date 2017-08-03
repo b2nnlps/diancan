@@ -20,44 +20,6 @@ class DefaultController extends Controller
      * Renders the index view for the module
      * @return string
      */
-    public function actionIndex($shop=1,$table=1)
-    {die;
-        $shop=Shop::findOne($shop);
-        setcookie("table",$table,time()+86400*7,"/");
-        $food=Food::findAll(['menu_id'=>$shop['menu']]);
-        var_dump($food);
-
-        return $this->render('index');
-    }
-
-    function charsetToGBK($mixed)
-    {
-        if (is_array($mixed)) {
-            foreach ($mixed as $k => $v) {
-                if (is_array($v)) {
-                    $mixed[$k] = self::charsetToGBK($v);
-                } else {
-                    $encode = mb_detect_encoding($v, array('ASCII', 'UTF-8', 'GB2312', 'GBK', 'BIG5'));
-                    if ($encode == 'UTF-8') {
-                        $mixed[$k] = iconv('UTF-8', 'GBK', $v);
-                    }
-                }
-            }
-        } else {
-            $encode = mb_detect_encoding($mixed, array('ASCII', 'UTF-8', 'GB2312', 'GBK', 'BIG5'));
-            //var_dump($encode);
-            if ($encode == 'UTF-8') {
-                $mixed = iconv('UTF-8', 'GBK', $mixed);
-            }
-        }
-        return $mixed;
-    }
-
-    public function change($a,$b,$c){  //转换格式，对齐
-        $a=self::charsetToGBK($a);
-        $num=strlen($a)+strlen($b)+strlen($c);
-        return $a.str_repeat(' ',31-$num).self::charsetToGBK($b).$c."\n";
-    }
 
     public function actionPushMess($orderno){    //传TIME是为了检验码防止乱打印
         $session = Yii::$app->session;
@@ -69,32 +31,16 @@ class DefaultController extends Controller
                 $o['num']=$num+1;
                 $o->save();
             }
-            $shop=Shop::findOne($o['shop_id']);
-            $info=OrderInfo::findAll(['order_id'=>$o['id']]);
-            $text=self::charsetToGBK("\n#".$o['num'])."\n";
-            $text.='================================'; $total=0;$i=0;
-            foreach($info as $_info){
-                $food=Food::findOne($_info['food_id']);
-                $i++;
-                $text.=self::change($i.'.'.$food['name'],'￥'.$_info['price'],'  x'.$_info['num']);
-                $total+=$food['price']*$_info['num'];
-            }
-            $total=round($total,2);
-            $text.=self::charsetToGBK("\n订单编号：".$o['id'])."\n";
-            $text.=self::charsetToGBK('订单信息：'.$o['text'])."\n";
-            $text.=self::charsetToGBK('下单时间：'.date("Y-m-d H:i:s"))."\n";
-            $text.=self::charsetToGBK("总消费：￥".$total."\n");
-            $text.="================================\n\n";
+
+            Order::printOrder($o);//判断完后开始打印
 
             $session['orderno']=$orderno;
-
-            self::TcpSend($shop['device_id'],$o['id'],$text);
-
-            self::WechatMessage($o['user'],$o['id'],$total,$o['table'],$o['status']==1?'线上已支付':'现金待支付','出单中...');
+            self::WechatMessage($o['user'], $o['id'], $o['total'], $o['table'], $o['status'] == 1 ? '线上已支付' : '现金待支付', '出单中...');
 
         }
         return $this->renderPartial('success');
     }
+
     public  function actionGetPrint(){//获取有效期的订单 用软件定时触发的
         $o=Order::find()->where('(status = 1 OR status=3) AND print = 0 AND updated_time <= :time',[':time'=>date("Y-m-d H:i:s",time()+60)])->one();
         if($o) return self::actionPushMess($o['id']);
@@ -143,26 +89,6 @@ class DefaultController extends Controller
                 $pass=true;
                 socket_close($socket);
                 echo '下单成功 ';
-                //socket_shutdown($socket);
-            }catch(Exception $e){echo '失败';}
-        }
-        echo date("H:i:s");
-    }
-
-    public static function TcpSend($print_id,$order_id,$text){  //发送命令给打印机 打印机编号，订单编号，内容
-        $pass=false;
-        //  $host = "121.42.24.85";
-        $host = "127.0.0.1";
-        $port = 45613;
-
-        while($pass==false){
-            try{
-                $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-                $connection = socket_connect($socket, $host, $port);
-                socket_write($socket, '0-'.$print_id.'-'.$order_id.'-|'.$text);//十六进制
-                $pass=true;
-                socket_close($socket);
-                echo '下单成功';
                 //socket_shutdown($socket);
             }catch(Exception $e){echo '失败';}
         }
