@@ -44,9 +44,9 @@ class ShopStaffSearch extends ShopStaff
         $shop_id = Yii::$app->user->identity->shop_id;
         $role = Yii::$app->user->identity->role;
         if ($role == 2) {
-            $query = ShopStaff::find();
+            $query = ShopStaff::find()->orderBy('id desc');
         } else {
-            $query = ShopStaff::find()->where(['shop_id' => $shop_id]);
+            $query = ShopStaff::find()->where(['shop_id' => $shop_id])->orderBy('id desc');
         }
         // add conditions that should always apply here
 

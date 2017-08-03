@@ -45,9 +45,9 @@ class OrderSearch extends Order
         $shop_id = Yii::$app->user->identity->shop_id;
         $role = Yii::$app->user->identity->role;
         if ($role == 2) {
-            $query = Order::find();
+            $query = Order::find()->orderBy('id desc');
         } else {
-            $query = Order::find()->where(['shop_id' => $shop_id]);
+            $query = Order::find()->where(['shop_id' => $shop_id])->orderBy('id desc');
         }
         // add conditions that should always apply here
 
