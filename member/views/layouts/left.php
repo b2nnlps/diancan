@@ -32,11 +32,11 @@
                     ['label' => '控制面板', 'icon' => 'fa fa-dashboard',  'url' => ['/site/index'],'visible'=>Yii::$app->user->can('/site/index')],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
 
-                    [
-                        'label' => '餐饮系统',
-                        'icon' => 'fa fa-hourglass-end',
-                        'url' => '/food/food/index',
-                        'items' => [
+//                    [
+//                        'label' => '餐饮系统',
+//                        'icon' => 'fa fa-hourglass-end',
+//                        'url' => '/food/food/index',
+//                        'items' => [
 
                             ['label' => '菜品管理', 'icon' => 'fa fa-cubes', 'url' => ['/food/food/index'], 'visible' => Yii::$app->user->can('/food/food/index')],
                             ['label' => '菜品分类', 'icon' => 'fa fa-server', 'url' => ['/food/classes/index'], 'visible' => Yii::$app->user->can('/food/classes/index')],
@@ -45,9 +45,9 @@
                             ['label' => '员工信息', 'icon' => 'fa fa-users', 'url' => ['/food/shop-staff/index'], 'visible' => Yii::$app->user->can('/food/shop-staff/index')],
                             ['label' => '订单统计', 'icon' => 'fa fa-calendar-check-o ', 'url' => ['/food/order/index'], 'visible' => Yii::$app->user->can('/food/order/index')],
 
-                        ],
-                        'visible'=>Yii::$app->user->can('/activitys/relayactivity/index')
-                    ],
+//                        ],
+//                        'visible'=>Yii::$app->user->can('/activitys/relayactivity/index')
+//                    ],
 
                     [
                         'label' => '系统管理',
