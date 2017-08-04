@@ -10,6 +10,16 @@ use yii\helpers\ArrayHelper;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+<style type="text/css">
+    #guige {
+        margin: 10px 15px 15px 25px;
+    }
+
+    #guige li input {
+        width: 120px;
+        margin-right: 10px;
+    }
+</style>
 <div class="food-form">
 
     <?php $form = ActiveForm::begin(); ?>
@@ -40,14 +50,14 @@ use yii\helpers\ArrayHelper;
 
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-            <button style="margin: 10px 20px;" onclick="add();return false;">添加规格</button>
-            <div id="guige" style="margin: 10px;">
+            <button style="margin: 5px 10px 5px;" onclick="add();return false;">添加规格</button>
+            <div id="guige">
                 <?php
                 foreach ($foodInfo as $_info) {
                     $id = $_info['id'];
                     echo "<li>";
                     echo "规格：<input type=\"text\" id=\"guigeTitle$id\" name=\"guigeTitle[$id]\" value=\"$_info[title]\"/>";
-                    echo "价格：<input type=\"number\" id=\"guigePrice$id\" name=\"guigePrice[$id]\" value=\"$_info[price]\"/>";
+                    echo "价格：<input type=\"text\" id=\"guigePrice$id\" name=\"guigePrice[$id]\" value=\"$_info[price]\"/>";
                     echo "数量：<input type=\"number\" id=\"guigeNumber$id\" name=\"guigeNumber[$id]\" value=\"$_info[number]\"/><button onclick=\"del($id);return false;\">删除</button><br>";
                     echo "</li>";
                 }
@@ -80,8 +90,8 @@ use yii\helpers\ArrayHelper;
     var len = 0;
     function add(){
         var text;
-        text = ('<li style="margin-left: 15px;">规格：<input type="text" id="guigeTitle' + len + '" name="guigeTitle[' + len + ']"/>');
-        text += ('价格：<input type="number" id="guigePrice' + len + '" name="guigePrice[' + len + ']"/>');
+        text = ('<li>规格：<input type="text" id="guigeTitle' + len + '" name="guigeTitle[' + len + ']"/>');
+        text += ('价格：<input type="text" id="guigePrice' + len + '" name="guigePrice[' + len + ']"/>');
         text += ('数量：<input type="number" id="guigeNumber' + len + '" name="guigeNumber[' + len + ']"/><button onclick=\"del(' + len + ');return false;\">删除</button><br></li>');
         $("#guige").append(text);
         len++;
