@@ -26,17 +26,20 @@ class UserController extends BaseController
     public $enableCsrfValidation = false;
     public $layout=false;
 
-    public function actionIndex($shop=0,$table=0)
+    public function actionIndex($shop = 1, $table = 0)
     {
         if($shop && isset($_COOKIE['shop'])) if($shop!=$_COOKIE['shop']) setcookie('cart','',time()-1,'/');
 
         if($shop)setcookie("shop",$shop,time()+86400*7,"/");else $shop=$_COOKIE['shop'];
         if($table)setcookie("table",$table,time()+86400*7,"/");
 
-        $food = Food::getFoodList($shop);
-        $shop=Shop::findOne($shop);
-        $count=Food::getCartNumber();
-        return $this->render('index2',['food'=>$food,'shop'=>$shop,'count'=>$count]);
+        return $this->render('index');
+    }
+
+    public function actionDebug()
+    {
+        var_dump($_COOKIE);
+
     }
     public function actionJIndex($shop=1){
         if($shop)setcookie("shop",$shop,time()+86400*7,"/");
