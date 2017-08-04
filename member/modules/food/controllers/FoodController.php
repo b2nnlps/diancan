@@ -136,7 +136,7 @@ class FoodController extends Controller
             $guigeTitle=Yii::$app->request->post('guigeTitle',[]);
             foreach($guigePrice as $k=>$v){
                 if($v>=0){
-                    FoodInfo::newInfo($guigeTitle[$k],$guigePrice[$k],0,$guigeNumber[$k],$model->id);
+                    FoodInfo::newInfo($guigeTitle[$k], $guigePrice[$k], 0, $guigeNumber[$k], $model->shop_id, $model->id);
                 }
             }
             return $this->redirect(['index', 'id' => $model->id]);
@@ -176,22 +176,20 @@ class FoodController extends Controller
 
         $foodInfo=FoodInfo::find()->where(['food_id'=>$id,'status'=>0])->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $guigeTitle = Yii::$app->request->post('guigeTitle', []);
             $guigePrice=Yii::$app->request->post('guigePrice',[]);
             $guigeNumber=Yii::$app->request->post('guigeNumber',[]);
-            if(isset($guigePrice[-1])){//如果是新建规格
-                FoodInfo::updateAll(['status'=>1],['food_id'=>$id]);//停用之前的
-                $guigeTitle=Yii::$app->request->post('guigeTitle',[]);
+            //修改已有的规格信息
                 foreach($guigePrice as $k=>$v){
-                    if($v>=0){
-                        FoodInfo::newInfo($guigeTitle[$k],$guigePrice[$k],0,$guigeNumber[$k],$id);
+                    if ($v >= 0 && $v != null) {
+                        $info = FoodInfo::findOne($k);
+                        if ($info)
+                            FoodInfo::updateAll(['title' => $guigeTitle[$k], 'price' => $guigePrice[$k], 'number' => $guigeNumber[$k]], ['id' => $k]);
+                        else
+                            FoodInfo::newInfo($guigeTitle[$k], $guigePrice[$k], 0, $guigeNumber[$k], $model->shop_id, $id);
+                    } else {//如果删除了规格
+                        FoodInfo::updateAll(['status' => 1], ['id' => $k]);
                     }
-                }
-            }else{//修改已有的规格信息
-                foreach($guigePrice as $k=>$v){
-                    if($v>=0){
-                        FoodInfo::updateAll(['price'=>$guigePrice[$k],'number'=>$guigeNumber[$k]],['id'=>$k]);
-                    }
-                }
             }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
