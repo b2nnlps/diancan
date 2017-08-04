@@ -36,10 +36,10 @@ class ClassesController extends Controller
     public function actionIndex()
     {
         $cookies = Yii::$app->request->cookies;
-        $shop_id=$cookies->getValue('shop_id',false);
+//        $shop_id=$cookies->getValue('shop_id',false);
 
         $searchModel = new ClassesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,$shop_id);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

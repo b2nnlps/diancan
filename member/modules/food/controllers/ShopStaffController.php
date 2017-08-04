@@ -66,9 +66,9 @@ class ShopStaffController extends Controller
         $model = new ShopStaff();
         $model->created_time=date("Y-m-d H:i:s");
 
-        $shopId = Yii::$app->user->identity->shop_id;
-        $role = Yii::$app->user->identity->role;
-        if ($role > 2) {
+        $shopId = Yii::$app->user->identity->shop_id;//获取当前登录用户的商家ID
+        $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
+        if ($role > 2) {//如果权限为商家，则保存但当前登录用户的商家ID，否则保存系统管理员在页面选择的商家ID
             $model->shop_id = $shopId;
         }
         

@@ -25,10 +25,7 @@ use yii\widgets\ActiveForm;
 
         </div>
         <div class="col-sm-6">
-
-
             <?= $form->field($model, 'img')->widget(\common\widgets\FileInput::className(), ['dir' => 'upload/food', 'maxnum' => 1])->label('商家头像') ?>
-
 
         </div>
     </div>

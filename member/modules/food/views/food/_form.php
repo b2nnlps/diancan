@@ -40,8 +40,8 @@ use yii\helpers\ArrayHelper;
 
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-            <button onclick="add();return false;">添加</button>
-            <div id="guige">
+            <button style="margin: 10px 20px;" onclick="add();return false;">添加规格</button>
+            <div id="guige" style="margin: 10px;">
                 <?php
                 foreach ($foodInfo as $_info) {
                     $id = $_info['id'];
@@ -64,8 +64,10 @@ use yii\helpers\ArrayHelper;
 
         </div>
     </div>
+
     <?= $form->field($model, 'description')->widget(\crazyfd\ueditor\Ueditor::className(),[]) ?>
 
+    <?= $form->field($model, 'status')->dropDownList($model::status()) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? '新建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -78,7 +80,7 @@ use yii\helpers\ArrayHelper;
     var len = 0;
     function add(){
         var text;
-        text = ('<li>规格：<input type="text" id="guigeTitle' + len + '" name="guigeTitle[' + len + ']"/>');
+        text = ('<li style="margin-left: 15px;">规格：<input type="text" id="guigeTitle' + len + '" name="guigeTitle[' + len + ']"/>');
         text += ('价格：<input type="number" id="guigePrice' + len + '" name="guigePrice[' + len + ']"/>');
         text += ('数量：<input type="number" id="guigeNumber' + len + '" name="guigeNumber[' + len + ']"/><button onclick=\"del(' + len + ');return false;\">删除</button><br></li>');
         $("#guige").append(text);

@@ -39,15 +39,15 @@ class ClassesSearch extends Classes
      *
      * @return ActiveDataProvider
      */
-    public function search($params,$shop_id=0)
+    public function search($params)
     {
 
-        $shop_id = Yii::$app->user->identity->shop_id;
-        $role = Yii::$app->user->identity->role;
-        if ($role < 3) {
+        $shopId = Yii::$app->user->identity->shop_id;//获取当前登录用户的商家ID
+        $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
+        if ($role < 3) {//如果为系统管理员则显示全部信息，否则只显示当前商家信息
             $query = Classes::find();
         } else {
-            $query = Classes::find()->where(['shop_id' => $shop_id]);
+            $query = Classes::find()->where(['shop_id' => $shopId]);
         }
         // add conditions that should always apply here
 

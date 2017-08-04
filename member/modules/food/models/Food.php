@@ -69,7 +69,7 @@ class Food extends \yii\db\ActiveRecord
     public static function status($key = null)
     {
         $arr = [
-            '0' => '正常',
+            '0' => '上架',
             '1' => '售完',
             '2' => '下架',
         ];

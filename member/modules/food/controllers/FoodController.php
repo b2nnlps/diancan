@@ -114,14 +114,15 @@ class FoodController extends Controller
     public function actionCreate()
     {
         $model = new Food();
-        $shopId = Yii::$app->user->identity->shop_id;
-        $role = Yii::$app->user->identity->role;
+        $shopId = Yii::$app->user->identity->shop_id;//获取当前登录用户的商家ID
+        $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
 
 
 //        $cookies = Yii::$app->request->cookies;
 //        $shop_id=$cookies->getValue('shop_id',false);
 //        if(!$shop_id)return self::actionIndex();
-        if ($role > 2) {
+
+        if ($role > 2) {//如果权限为商家，则保存但当前登录用户的商家ID，否则保存系统管理员在页面选择的商家ID
             $model->shop_id = $shopId;
         }
 
@@ -150,7 +151,10 @@ class FoodController extends Controller
         }
     }
 
-
+    /**
+     * 获取系统管理员下拉商家联动的菜品分类信息
+     * @param $id
+     */
     public function actionLists($id)
     {
         $countClasses = Classes::find()->where(['shop_id' => $id])->count();

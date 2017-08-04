@@ -41,12 +41,12 @@ class ShopSearch extends Shop
      */
     public function search($params)
     {
-        $shop_id = Yii::$app->user->identity->shop_id;
-        $role = Yii::$app->user->identity->role;
-        if ($role == 2) {
+        $shopId = Yii::$app->user->identity->shop_id;//获取当前登录用户的商家ID
+        $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
+        if ($role < 3) {//如果为系统管理员则显示全部信息，否则只显示当前商家信息
             $query = Shop::find();
         } else {
-            $query = Shop::find()->where(['id' => $shop_id]);
+            $query = Shop::find()->where(['id' => $shopId]);
         }
 
 
