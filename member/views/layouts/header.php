@@ -7,7 +7,6 @@ use yii\helpers\Html;
 
 <header class="main-header">
 
-<!--    --><?//= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
     <!-- Logo -->
     <a href="<?=Yii::$app->homeUrl?>" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
