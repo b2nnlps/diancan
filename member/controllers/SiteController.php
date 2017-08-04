@@ -226,7 +226,7 @@ class SiteController extends Controller
                     $name = $key;
                     break;
                 }
-                $dir = isset($_REQUEST['dir']) ? $_REQUEST['dir'] : 'article';
+                $dir = isset($_REQUEST['dir']) ? $_REQUEST['dir'] : 'catering';
 //                $width = isset($_REQUEST['width']) ? $_REQUEST['width'] : 500;
 //                $height = isset($_REQUEST['height']) ? $_REQUEST['height'] :null;
                 $file = UploadedFile::getInstanceByName($name);
