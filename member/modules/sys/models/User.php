@@ -155,6 +155,7 @@ class User extends \common\models\User
             '2' => '系统管理员',
             '3' => '商家',
             '4' => '会员',
+            '10' => '一般用户',
         ];
         return $key === null ? $arr : (isset($arr[$key]) ? $arr[$key] : '');
     }

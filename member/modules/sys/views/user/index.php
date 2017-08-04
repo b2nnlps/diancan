@@ -63,10 +63,40 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             // 'updated_at',
 
+
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '操作',
                 'headerOptions' => ['width' => '80'],
+                'template' => '{view} {update} {delete}',
+                'buttons' => [
+                    'view' => function ($url, $model, $key) {
+                        $role = Yii::$app->user->identity->role;
+                        if ($role < 3) {
+                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['title' => '查看',]);
+                        } else {
+                            return '';
+                        }
+                    },
+                    'update' => function ($url, $model, $key) {
+                        $role = Yii::$app->user->identity->role;
+                        if ($role < 3) {
+                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['title' => '查看',]);
+                        } else {
+                            return '';
+                        }
+                    },
+                    'delete' => function ($url, $model, $key) {
+                        $role = Yii::$app->user->identity->role;
+                        if ($role < 3) {
+                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, ['title' => '查看',]);
+                        } else {
+                            return '';
+                        }
+                    },
+
+
+                ]
             ],
         ],
     ]); ?>
