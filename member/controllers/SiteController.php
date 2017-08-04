@@ -1,11 +1,10 @@
 <?php
 namespace member\controllers;
 
-use member\modules\eshop\models\Order;
+use member\modules\food\models\Order;
 use member\modules\sys\models\Loginlog;
 use member\modules\sys\models\User;
 use common\components\Mobile_Detect;
-use NamespaceCollision\A\B\Foo;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -121,11 +120,11 @@ class SiteController extends Controller
         $dataUser['thisYearCount'] = $result['count'];
 
         $login_log=Loginlog::find()->where(['u_id' =>$u_id])->limit(5)->asArray()->orderBy('id desc')->all();
-      //  $order=Order::find()->asArray()->limit(10)->orderBy('id desc')->all();
+        $order = Order::find()->asArray()->limit(10)->orderBy('id desc')->all();
         return $this->render('index',[
             'login_log'=>$login_log,
             'dataUser' => $dataUser,
-         //   'order' => $order,
+            'order' => $order,
         ] );
     }
 
@@ -227,7 +226,7 @@ class SiteController extends Controller
                     $name = $key;
                     break;
                 }
-                $dir = isset($_REQUEST['dir']) ? $_REQUEST['dir'] : 'article';
+                $dir = isset($_REQUEST['dir']) ? $_REQUEST['dir'] : 'catering';
 //                $width = isset($_REQUEST['width']) ? $_REQUEST['width'] : 500;
 //                $height = isset($_REQUEST['height']) ? $_REQUEST['height'] :null;
                 $file = UploadedFile::getInstanceByName($name);
