@@ -33,12 +33,11 @@ class Food extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name','img', 'price', 'shop_id','class_id','type'], 'required'],
-            [['price'], 'number'],
+            [['name', 'img', 'shop_id', 'class_id'], 'required'],
             [['shop_id', 'class_id','status'], 'integer'],
             [['created_time', 'updated_time','description'], 'safe'],
             [['name'], 'string', 'max' => 80],
-            [['type', 'head_img'], 'string', 'max' => 255],
+            [['head_img'], 'string', 'max' => 255],
         ];
     }
 
@@ -51,9 +50,7 @@ class Food extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => '菜名',
             'img' => '图片',
-            'price' => '价格',
             'sold_number' => '已售',
-            'type' => '款式',
             'description' => '详细描述',
             'shop_id' => '所属商店',
             'class_id' => '所属分类',
