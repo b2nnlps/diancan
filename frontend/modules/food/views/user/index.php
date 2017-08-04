@@ -10,7 +10,7 @@
 <div class="box"><!--头部：开始--->
     <div class="list_top"><a href="store.html">
             <dl class="clearfix">
-                <dt><img id="shop_img" src=""></dt>
+                <dt><img id="shop_img"/></dt>
                 <dd>
                     <h4 id="shop_name"></h4>
 
@@ -94,23 +94,12 @@
         <div class="cart_top">
             <dl class="clearfix">
                 <dt>购物车</dt>
-                <dd><a href="#"><img src="/static/84dc/icon/scicon.png" width="15" height="15"/>清除</a></dd>
+                <dd><a onclick="deleteCart()"><img src="/static/84dc/icon/scicon.png" width="15" height="15"/>清空</a>
+                </dd>
             </dl>
         </div>
+        <!--        购物车-->
         <div class="cart_box">
-            <dl class="clearfix">
-                <dt>香辣排骨</dt>
-                <dd>￥108</dd>
-                <div class="btn_v2">
-                    <button class="cart_minus">
-                        <strong></strong>
-                    </button>
-                    <i>1</i>
-                    <button class="cart_add">
-                        <strong></strong>
-                    </button>
-                </div>
-            </dl>
 
         </div>
     </div>
@@ -130,6 +119,7 @@
     layer.ready(function () {
         index = layer.load(0, {shade: false});
         getFoodList(shopId);
+        countTotal();
     });
 </script>
 </html>
