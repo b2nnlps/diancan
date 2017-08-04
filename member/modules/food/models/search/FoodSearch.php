@@ -20,7 +20,7 @@ class FoodSearch extends Food
         return [
             [['id', 'shop_id', 'status', 'class_id'], 'integer'],
             [['name', 'img', 'created_time', 'updated_time'], 'safe'],
-            [['price'], 'number'],
+            //   [['price'], 'number'],
         ];
     }
 
@@ -66,7 +66,7 @@ class FoodSearch extends Food
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'price' => $this->price,
+            //'price' => $this->price,
             'shop_id' => $this->shop_id,
             'class_id' => $this->class_id,
             'status' => $this->status,
