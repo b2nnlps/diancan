@@ -34,7 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'modules',
                 'value' =>User::modules($model->modules),
             ],
-            'role',
+            [
+                'label' => '商家',
+                'attribute' => 'shop_id',
+                'value' => \member\modules\food\models\Shop::getShopName($model->shop_id),
+            ],
+            [
+                'attribute' => 'role',
+                'value' => $model::role($model->role),
+            ],
             'email:email',
             'description',
 //            'auth_key',

@@ -2,6 +2,7 @@
 
 namespace member\modules\food\controllers;
 
+use member\modules\sys\models\User;
 use Yii;
 use member\modules\food\models\Shop;
 use member\modules\food\models\search\ShopSearch;
@@ -69,6 +70,16 @@ class ShopController extends Controller
         $model->created_time=date("Y-m-d H:i:s");
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $userId = Yii::$app->user->id;//获取当前登录用户的ID
+            $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
+            if ($role > 2) {//如果权限为商家，则保存但当前登录用户的商家ID
+                $user = User::findOne($userId);
+                $user->shop_id = $model->id;
+                $user->save();
+            }
+
+
             return $this->redirect(['index', 'id' => $model->id]);
         } else {
             return $this->render('create', [

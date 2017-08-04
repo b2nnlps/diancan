@@ -73,8 +73,8 @@ class User extends \common\models\User
     public function scenarios()
     {
         $scenarios = parent::scenarios();//本行必填，不写的话就会报unknown scenarios:default错误
-        $scenarios[ 'admin-create'] = ['id', 'username', 'email', 'password', 'repassword','realname', 'phone','module','role', 'status', 'creater', 'created_at',  'updated_at', 'description', ];
-        $scenarios[ 'admin-update'] =['id','username', 'email', 'password', 'repassword','realname', 'phone','module','role', 'status', 'creater', 'created_at', 'updated_at', 'description',];
+        $scenarios['admin-create'] = ['id', 'username', 'shop_id', 'email', 'password', 'repassword', 'realname', 'phone', 'module', 'role', 'status', 'creater', 'created_at', 'updated_at', 'description',];
+        $scenarios['admin-update'] = ['id', 'username', 'shop_id', 'email', 'password', 'repassword', 'realname', 'phone', 'module', 'role', 'status', 'creater', 'created_at', 'updated_at', 'description',];
         $scenarios[ 'admin-change-password'] = ['oldpassword', 'password', 'repassword'];
         return $scenarios;
     }
@@ -94,6 +94,7 @@ class User extends \common\models\User
             'modules' => '所属模块',
             'shop_id' => '商家ID',
             'role' => '角色等级',
+            'shop_id' => '商家ID',
             'email' => 'Email',
             'description' => '备注',
             'auth_key' => '自动登录key',
@@ -141,8 +142,8 @@ class User extends \common\models\User
     public static function modules($key = null)
     {
         $arr = [
-//            '1' => '通用',
-//            '2' => 'e-shop',
+            '1' => '通用',
+            '2' => 'e-shop',
             '3' => '餐饮模块',
 
         ];

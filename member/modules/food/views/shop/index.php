@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel member\modules\food\models\search\ShopSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '店家列表';
+$this->title = '商家列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="shop-index">
@@ -15,7 +15,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('新店家', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php
+        $userId = Yii::$app->user->id;//获取当前登录用户的ID
+        $user = \member\modules\sys\models\User::findOne($userId);
+        $shop_id = $user->shop_id;
+        $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
+        if ($role < 3 || $shop_id == '') {//如果权限为系统管理员或该商家用户表没绑定
+
+            echo Html::a('添加商家信息', ['create'], ['class' => 'btn btn-success']);
+        }
+
+        ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

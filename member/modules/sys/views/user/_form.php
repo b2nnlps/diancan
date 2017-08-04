@@ -27,14 +27,29 @@ use member\modules\sys\models\User;
 
             <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
+            <?php
+            $role = Yii::$app->user->identity->role;
+            if ($role < 3) {
+                echo $form->field($model, 'shop_id')->dropDownList(\member\modules\food\models\Shop::getShopList(),
+                    [
+                        'prompt' => '请选择商家',
+                        'onchange' => '
+                                 $.post("lists?id=' . '"+$(this).val(),function(data){
+                                   $("select#food-class_id").html(data);
+                             });',
+                    ]
+                )->label('所属商家');
+            }
+            ?>
+
             <?= $form->field($model, 'role')->dropDownList($model::role()) ?>
 
-            <?= $form->field($model, 'status')->dropDownList($model::status()) ?>
         </div>
     </div>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-    
+
+    <?= $form->field($model, 'status')->dropDownList($model::status()) ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
