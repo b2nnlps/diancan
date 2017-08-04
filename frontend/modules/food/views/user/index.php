@@ -10,11 +10,11 @@
 <div class="box"><!--头部：开始--->
     <div class="list_top"><a href="store.html">
             <dl class="clearfix">
-                <dt><img id="shop_img" src="icon/rh_logo.png"></dt>
+                <dt><img id="shop_img" src=""></dt>
                 <dd>
-                    <h4 id="shop_name">指留香美味馆</h4>
+                    <h4 id="shop_name"></h4>
 
-                    <p id="shop_description">经典粤菜，传统美味，来店点餐优惠多多！还有积分消费哦·~~~~</p>
+                    <p id="shop_description"></p>
                 </dd>
             </dl>
         </a>
@@ -38,7 +38,7 @@
     <div class="closing">
         <dl class="clearfix">
             <dt id="cartShow">
-            <div class="dt_box"><a><img src="images/gwc.png"/>
+            <div class="dt_box"><a><img src="/static/84dc/images/gwc.png"/>
 
                     <div class="data_box"><span id="totalcountshow">0</span></div>
                 </a></div>
@@ -58,10 +58,10 @@
         <div class="close_box"><img src="/static/84dc/images/close3.png"/></div>
         <div class="greens_box">
             <dl class="clearfix">
-                <dt><img id="cart_img" src="images/1.jpg"/></dt>
+                <dt><img id="cart_img"/></dt>
                 <dd>
-                    <h3 id="cart_name">指留香烤鸭</h3>
-                    <span id="cart_price" data-price="">￥58.50-68.00</span>
+                    <h3 id="cart_name"></h3>
+                    <span id="cart_price" data-price=""></span>
                 </dd>
             </dl>
         </div>
@@ -69,24 +69,6 @@
             <h4>规格</h4>
             <ul>
                 <div id="cart_info" class="select_btn clearfix">
-                    <div class="norm">
-                        <label for="norm1">
-                            <input type="radio" name="sex" id="norm1" value="1">大
-                        </label>
-                        <span class="btn">大</span>
-                    </div>
-                    <div class="norm">
-                        <label for="norm2">
-                            <input type="radio" name="sex" id="norm2" value="2" checked>大
-                        </label>
-                        <span class="btn active">中</span>
-                    </div>
-                    <div class="norm">
-                        <label for="norm3">
-                            <input type="radio" name="sex" id="norm3" value="3">大
-                        </label>
-                        <span class="btn">小</span>
-                    </div>
                 </div>
             </ul>
         </div>
@@ -112,7 +94,7 @@
         <div class="cart_top">
             <dl class="clearfix">
                 <dt>购物车</dt>
-                <dd><a href="#"><img src="icon/scicon.png" width="15" height="15"/>清除</a></dd>
+                <dd><a href="#"><img src="/static/84dc/icon/scicon.png" width="15" height="15"/>清除</a></dd>
             </dl>
         </div>
         <div class="cart_box">
@@ -143,7 +125,11 @@
 <script type="text/javascript" src="/static/84dc/js/index.js"></script>
 <script type="text/javascript" src="/static/84dc/js/index_api.js"></script>
 <script>
-    var shopId = 1;
-    getFoodList(shopId);
+    var index;
+    var shopId = <?=$shopId?>;
+    layer.ready(function () {
+        index = layer.load(0, {shade: false});
+        getFoodList(shopId);
+    });
 </script>
 </html>
