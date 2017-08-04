@@ -47,12 +47,15 @@ class FoodInfo extends \yii\db\ActiveRecord
             'food_id' => 'Food ID',
         ];
     }
-    public static function newInfo($title,$price,$score,$number,$food_id){
+
+    public static function newInfo($title, $price, $score, $number, $shop_id, $food_id)
+    {
         $info=new self();
         $info->title=$title;
         $info->price=$price;
         $info->score=$score;
         $info->number=$number;
+        $info->shop_id = $shop_id;
         $info->food_id=$food_id;
         $info->save();
     }
