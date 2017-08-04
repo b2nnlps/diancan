@@ -40,15 +40,16 @@ use yii\helpers\ArrayHelper;
 
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'price')->textInput() ?>
-
-            <?= $form->field($model, 'type')->textInput(['placeholder' => '多种请用|隔开'])->label('规格（多个用|隔开）') ?>
-            <button onclick="add();return false;">生成</button>
+            <button onclick="add();return false;">添加</button>
             <div id="guige">
                 <?php
                 foreach ($foodInfo as $_info) {
-                    echo "<h4>$_info[title]</h4>价格：<input type=\"text\" id=\"food-price\" name=\"guigePrice[$_info[id]]\" value=\"$_info[price]\"/>";
-                    echo " 数量：<input type=\"text\" id=\"food-price\" name=\"guigeNumber[$_info[id]]\" value=\"$_info[number]\"/><br>";
+                    $id = $_info['id'];
+                    echo "<li>";
+                    echo "规格：<input type=\"text\" id=\"guigeTitle$id\" name=\"guigeTitle[$id]\" value=\"$_info[title]\"/>";
+                    echo "价格：<input type=\"number\" id=\"guigePrice$id\" name=\"guigePrice[$id]\" value=\"$_info[price]\"/>";
+                    echo "数量：<input type=\"number\" id=\"guigeNumber$id\" name=\"guigeNumber[$id]\" value=\"$_info[number]\"/><button onclick=\"del($id);return false;\">删除</button><br>";
+                    echo "</li>";
                 }
                 ?>
             </div>
@@ -74,19 +75,19 @@ use yii\helpers\ArrayHelper;
 
 </div>
 <script>
+    var len = 0;
     function add(){
-        var type=$("#food-type").val();
-        var types=type.split("|"); //字符分割
-        var i;
-        $("#guige").html("<h4>请分别为规格输入价格、数量</h4>");
-        for(i=0;i<types.length;i++){
-            if(types[i].length!=0) {
-                $("#guige").append('<h4>'+types[i] + '</h4>价格<input type="text" id="food-price" name="guigePrice[' + i + ']" value=""/> ');
-                $("#guige").append('数量<input type="text" id="food-price" name="guigeNumber[' + i + ']" value=""/><br>');
-                $("#guige").append('<p><input type="hidden" id="food-price" name="guigeTitle[' + i + ']" value="' + types[i] + '"/></p>');
-            }
-        }
-        $("#guige").append('<p><input type="hidden" id="food-price" name="guigePrice[-1]" value="-1"/></p>');
-return false;
+        var text;
+        text = ('<li>规格：<input type="text" id="guigeTitle' + len + '" name="guigeTitle[' + len + ']"/>');
+        text += ('价格：<input type="number" id="guigePrice' + len + '" name="guigePrice[' + len + ']"/>');
+        text += ('数量：<input type="number" id="guigeNumber' + len + '" name="guigeNumber[' + len + ']"/><button onclick=\"del(' + len + ');return false;\">删除</button><br></li>');
+        $("#guige").append(text);
+        len++;
+//        $("#guige").append('<p><input type="hidden" id="food-price" name="guigePrice[-1]" value="-1"/></p>');
+        return false;
+    }
+    function del(id) {
+        $("#guigePrice" + id).val(-1).parent().hide();
+
     }
     </script>
