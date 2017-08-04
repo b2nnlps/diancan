@@ -39,9 +39,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'head_img',
             'img',
-            'price',
-            'type',
-
 
             [
                 'attribute' => 'status',
