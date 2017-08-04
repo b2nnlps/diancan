@@ -8,37 +8,6 @@ username = getQueryString("username");
 hash = getQueryString("hash");
 addUrl = "username=" + username + "&hash=" + hash;
 
-
-function getOrder(type, status) {//获取订单信息 type 0厨房 1传菜员
-    // 获取信息
-    $.ajax({
-        url: 'http://ms.n39.cn/food/api/get-order?status=' + status + "&" + addUrl,
-        dataType: 'jsonp',
-        data: '',
-        jsonp: 'callback',
-        timeout: 5000,
-        success: function (res) {
-            res = res.data;
-            //  console.log(res);
-
-            if (type == 0)
-                cpdl(res, status);
-            if (type == 1)
-                ccdl(res, status);
-
-        },
-        error: function () {
-            console.log('加载失败');
-        },
-        complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
-            if (status == 'timeout' || status == 'error') {//超时,status还有success,error等值的情况
-                console.log(status);
-            }
-            if (status == 'success') {
-            }
-        }
-    });
-}
 function ccdl(res, status) {
     var i, text = "", len = res.length;
     for (i = 0; i < len; i++) {
@@ -49,7 +18,8 @@ function ccdl(res, status) {
             text += "<h4>桌号：" + res[i].table + "桌</h4>";
             text += "<div><span>" + res[i].food_name + "</span>X" + res[i].num + "</div>";
             text += "<li>" + res[i].created_time + "</li>";
-            text += "<p>" + res[i].text + "</p>";
+            if (res[i].text.length > 0)
+                text += "<p>" + '<img src="images/tishi.png" width="15" height="15">' + res[i].text + "</p>";
             text += "<div class=\"pot_box\">";
             if (status == 1)
                 text += "<input type=\"checkbox\" id=\"checkbox_d" + res[i].id + "\" class=\"chk_4\" onclick=\"chuanCai(" + res[i].id + ")\"/><label for=\"checkbox_d" + res[i].id + "\"></label>";
@@ -89,12 +59,14 @@ function cpdl(res, status) {//出锅界面
             text += "<div class=\"clearfix\"><em>" + res[i].food_name + "</em><span>X" + res[i].num + "</span></div>";
             text += "<li>桌号" + res[i].table + "</li>";
             text += "<li>" + res[i].created_time + "</li>";
-            text += "<p>" + res[i].text + "</p>";
+            if (res[i].text.length > 0)
+                text += "<p>" + '<img src="images/tishi.png" width="15" height="15">' + res[i].text + "</p>";
+            //  text += "<p>" + res[i].text + "</p>";
             text += "<div class=\"pot_box\">";
             if (status == 0)
                 text += "<input type=\"checkbox\" id=\"checkbox_d" + res[i].id + "\" class=\"chk_4\" onclick=\"chuGuo(" + res[i].id + ")\" /><label for=\"checkbox_d" + res[i].id + "\"></label>";
             //if(status==1)
-            //text+="<input type=\"checkbox\" id=\"checkbox_y"+i+"\" class=\"chk_4\" checked=\"checked\" readonly=\"readonly\"/><label for=\"checkbox_y"+i+"\"></label>";
+
             text += "</div>";
             text += "</ul>";
             if (status == 0)
@@ -176,22 +148,23 @@ function hideChuanCaiOrder(id) {
     })
 }
 
-function checkOrder(info_id, status) {//出锅、传菜更新
-    var index = layer.load(0, {shade: false});
+function getOrder(type, status) {//获取订单信息 type 0厨房 1传菜员
+    // 获取信息
     $.ajax({
-        url: 'http://ms.n39.cn/food/api/check-order?info_id=' + info_id + '&status=' + status + "&" + addUrl,
+        url: 'http://ms.n39.cn/food/api/get-wait-order?status=' + status + "&" + addUrl,
         dataType: 'jsonp',
         data: '',
         jsonp: 'callback',
         timeout: 5000,
         success: function (res) {
             res = res.data;
-            console.log(res);
-            if (status == 1)
-                setTimeout("hideChuGuoOrder(" + info_id + ")", 2000);//提交后删除该元素
-            if (status == 2)
-                setTimeout("hideChuanCaiOrder(" + info_id + ")", 2000);//提交后删除该元素
-            index = layer.load(0, {shade: false, time: 1});
+            //  console.log(res);
+
+            if (type == 0)
+                cpdl(res, status);
+            if (type == 1)
+                ccdl(res, status);
+
         },
         error: function () {
             console.log('加载失败');
@@ -204,6 +177,121 @@ function checkOrder(info_id, status) {//出锅、传菜更新
             }
         }
     });
+}
+
+function checkOrder(info_id, status) {//出锅、传菜更新
+    var index = layer.load(0, {shade: false});
+    $.ajax({
+        url: 'http://ms.n39.cn/food/api/check-order?info_id=' + info_id + '&status=' + status + "&" + addUrl,
+        dataType: 'jsonp',
+        data: '',
+        jsonp: 'callback',
+        timeout: 5000,
+        success: function (res) {
+            res = res.data;
+            if (status == 1)
+                setTimeout("hideChuGuoOrder(" + info_id + ")", 2000);//提交后删除该元素
+            if (status == 2)
+                setTimeout("hideChuanCaiOrder(" + info_id + ")", 2000);//提交后删除该元素
+            layer.close(index);
+        },
+        error: function () {
+            console.log('加载失败');
+        },
+        complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
+            if (status == 'timeout' || status == 'error') {//超时,status还有success,error等值的情况
+                console.log(status);
+            }
+            if (status == 'success') {
+            }
+        }
+    });
+}
+
+function getOrderList(status) {//拉取订单
+    $.ajax({
+        url: 'http://ms.n39.cn/food/api/get-order-list?status=' + status + '&' + addUrl,
+        dataType: 'jsonp',
+        data: '',
+        jsonp: 'callback',
+        timeout: 5000,
+        success: function (res) {
+            res = res.data;
+            showList(res, status);
+        },
+        error: function () {
+            console.log('加载失败');
+        },
+        complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
+            if (status == 'timeout' || status == 'error') {//超时,status还有success,error等值的情况
+                console.log(status);
+            }
+            if (status == 'success') {
+            }
+        }
+    });
+}
+
+function getOrderDetail(order_id) {//获取订单详情信息
+    var index = layer.load(0, {shade: false});
+    $.ajax({
+        url: 'http://ms.n39.cn/food/api/get-order-detail?order_id=' + order_id + '&' + addUrl,
+        dataType: 'jsonp',
+        data: '',
+        jsonp: 'callback',
+        timeout: 5000,
+        success: function (res) {
+            layer.close(index);
+            res = res.data;
+            showDetail(res);
+        },
+        error: function () {
+            console.log('加载失败');
+        },
+        complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
+            if (status == 'timeout' || status == 'error') {//超时,status还有success,error等值的情况
+                console.log(status);
+            }
+            if (status == 'success') {
+            }
+        }
+    });
+}
+
+function printOrder(order_id) {//获取订单详情信息
+    layer.confirm('订单ID：' + order_id, {
+        title: '是否打印？',
+        closeBtn: 0,
+        btn: ['是', '否'] //按钮
+
+    }, function () {
+        var index = layer.load(0, {shade: false});
+        $.ajax({
+            url: 'http://ms.n39.cn/food/api/print-order?order_id=' + order_id + '&' + addUrl,
+            dataType: 'jsonp',
+            data: '',
+            jsonp: 'callback',
+            timeout: 5000,
+            success: function (res) {
+                layer.close(index);
+                layer.msg('打印成功', {icon: 1});
+            },
+            error: function () {
+                console.log('加载失败');
+                layer.close(index);
+            },
+            complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
+                if (status == 'timeout' || status == 'error') {//超时,status还有success,error等值的情况
+                    console.log(status);
+                }
+                if (status == 'success') {
+                }
+                layer.close(index);
+            }
+        });
+    }, function () {
+    });
+
 }
 
 function getUserInfo() {//获取店员信息

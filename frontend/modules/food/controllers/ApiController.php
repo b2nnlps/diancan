@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use member\modules\food\models\Food;
 use member\modules\food\models\FoodInfo;
+use member\modules\food\models\Classes;
 use member\modules\food\models\Shop;
 use member\modules\food\models\Order;
 use member\modules\food\models\OrderInfo;
@@ -21,9 +22,9 @@ class ApiController extends BaseApiController
     {//获取不同状态的菜品订单
         $this->isLogin();
         $order = Order::getWaitOrderInfo($this->shopId, $status);
-        for($i=0;$i<count($order);$i++){
-            $order[$i]['food_name']=Food::findOne($order[$i]['food_id'])['name'];
-            $order[$i]['food_info']=FoodInfo::findOne($order[$i]['info_id'])['title'];
+        for ($i = 0; $i < count($order); $i++) {
+            $order[$i]['food_name'] = Food::findOne($order[$i]['food_id'])['name'];
+            $order[$i]['food_info'] = FoodInfo::findOne($order[$i]['info_id'])['title'];
         }
         return $this->response($order);
     }
@@ -42,12 +43,14 @@ class ApiController extends BaseApiController
         $return['detail'] = OrderInfo::getOrderInfo($this->shopId, $order_id);//获取订单里的菜品信息
         return $this->response($return);
     }
-    public function actionCheckOrder($info_id,$status){//更新订单菜品状态
+
+    public function actionCheckOrder($info_id, $status)
+    {//更新订单菜品状态
         $this->isLogin();
-        $orderInfo=OrderInfo::findOne($info_id);
-        $o=Order::findOne($orderInfo['order_id']);
-        $return=false;
-        if($this->shopId==$o['shop_id']) {
+        $orderInfo = OrderInfo::findOne($info_id);
+        $o = Order::findOne($orderInfo['order_id']);
+        $return = false;
+        if ($this->shopId == $o['shop_id']) {
             $orderInfo->status = $status;
             $return = $orderInfo->save();
             $num = OrderInfo::find()->where('order_id=:order_id AND (status=0 or status=1)', [':order_id' => $orderInfo['order_id']])->count();
@@ -66,13 +69,29 @@ class ApiController extends BaseApiController
         $o = Order::findOne(['shop_id' => $this->shopId, 'id' => $order_id]);
         return $this->response(Order::printOrder($o));
     }
-    public function actionUserInfo(){//获取店员信息
+
+    public function actionUserInfo()
+    {//获取店员信息
         $this->isLogin();
-        $staff=$this->staff;
-        $return['role_id']=$staff['role_id'];
-        $return['shop_id']=$staff['shop_id'];
-        $return['realname']=$staff['realname'];
-        $return['status']=$staff['status'];
+        $staff = $this->staff;
+        $return['role_id'] = $staff['role_id'];
+        $return['shop_id'] = $staff['shop_id'];
+        $return['realname'] = $staff['realname'];
+        $return['status'] = $staff['status'];
+        return $this->response($return);
+    }
+
+    public function actionGetFoodList($shopId)
+    {
+        $shop = Shop::find()->select(['name', 'description', 'contact', 'address', 'begin_time', 'end_time'])->where(['id' => $shopId])->asArray()->all();
+        $food = Food::find()->where('shop_id=:shop_id AND (status=0 OR status=1)', [':shop_id' => $shopId])->orderBy('class_id ASC')->asArray()->all();
+        $foodInfo = FoodInfo::find()->where(['shop_id' => $shopId, 'status' => 0])->asArray()->all();
+        $class = Classes::find()->where(['shop_id' => $shopId])->orderBy('id ASC')->asArray()->all();
+        $return['shop'] = $shop;
+        $return['food'] = $food;
+        $return['foodInfo'] = $foodInfo;
+        $return['classes'] = $class;
+
         return $this->response($return);
     }
 }
