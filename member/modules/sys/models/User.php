@@ -141,8 +141,9 @@ class User extends \common\models\User
     public static function modules($key = null)
     {
         $arr = [
-            '1' => '通用',
-            '2' => 'e-shop',
+//            '1' => '通用',
+//            '2' => 'e-shop',
+            '3' => '餐饮模块',
 
         ];
         return $key === null ? $arr : (isset($arr[$key]) ? $arr[$key] : '');
@@ -150,9 +151,10 @@ class User extends \common\models\User
     public static function role($key = null)
     {
         $arr = [
-            '1' => '软件工程师',
-            '2' => '管理员',
-            '3' => '会员',
+            '1' => '超级管理员',
+            '2' => '系统管理员',
+            '3' => '商家',
+            '4' => '会员',
         ];
         return $key === null ? $arr : (isset($arr[$key]) ? $arr[$key] : '');
     }

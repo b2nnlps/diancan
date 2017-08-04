@@ -41,7 +41,14 @@ class LoginlogSearch extends Loginlog
      */
     public function search($params)
     {
-        $query = Loginlog::find()->orderBy('id desc');
+        $userId = Yii::$app->user->id;//获取当前登录用户的ID
+        $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
+        if ($role < 3) {//如果为系统管理员则显示全部信息，否则只显示当前商家信息
+            $query = Loginlog::find()->orderBy('id desc');
+        } else {
+            $query = Loginlog::find()->where(['u_id' => $userId]);
+        }
+
 
         // add conditions that should always apply here
 

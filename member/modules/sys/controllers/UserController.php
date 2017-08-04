@@ -7,6 +7,7 @@ use Yii;
 use member\modules\sys\models\user;
 use member\modules\sys\models\search\UserSearch;
 use yii\web\Controller;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -37,9 +38,15 @@ class UserController extends BaseController
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
+        if ($role < 3) {//如果是超级管理员或系统管理员才能访问
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        } else {
+            throw new HttpException(403, '对不起，您现在还没获此操作的权限！');
+        }
+
     }
 
     /**
@@ -49,15 +56,22 @@ class UserController extends BaseController
      */
     public function actionCreate()
     {
-        $model = new user(['scenario' => 'admin-create']);
-        $model->creater=Yii::$app->user->id;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
+        if ($role < 3) {//如果是超级管理员或系统管理员才能访问
+            $model = new user(['scenario' => 'admin-create']);
+            $model->creater = Yii::$app->user->id;
+            $model->modules = 3;
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            throw new HttpException(403, '对不起，您现在还没获此操作的权限！');
         }
+
     }
 
     /**
@@ -68,16 +82,22 @@ class UserController extends BaseController
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        $model->setScenario('admin-update');
-        $model->creater=Yii::$app->user->id;
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
+        if ($role < 3) {//如果是超级管理员或系统管理员才能访问
+            $model = $this->findModel($id);
+            $model->setScenario('admin-update');
+            $model->creater = Yii::$app->user->id;
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            throw new HttpException(403, '对不起，您现在还没获此操作的权限！');
         }
+
     }
 
     /**
@@ -88,12 +108,19 @@ class UserController extends BaseController
      */
     public function actionDelete($id)
     {
+        $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
+        if ($role < 3) {//如果是超级管理员或系统管理员才能访问
+
 //        $this->findModel($id)->delete();
-        $model = $this->findModel($id);
-        $model->setScenario('admin-update');
-        $model->status = Status::STATUS_DELETED;
-        $model->save();
-        return $this->redirect(['index']);
+            $model = $this->findModel($id);
+            $model->setScenario('admin-update');
+            $model->status = Status::STATUS_DELETED;
+            $model->save();
+            return $this->redirect(['index']);
+        } else {
+            throw new HttpException(403, '对不起，您现在还没获此操作的权限！');
+        }
+
     }
     /**
      * Batch delete existing Product models.
@@ -103,18 +130,25 @@ class UserController extends BaseController
      */
     public function actionBatchDelete()
     {
-        //if(!Yii::$app->user->can('deleteYourAuth')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
-        $ids = Yii::$app->request->post('ids');
-        if (is_array($ids)) {
-            foreach ($ids as $id) {
-                $this->findModel($id)->delete();
+
+        $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
+        if ($role < 3) {//如果是超级管理员或系统管理员才能访问
+            //if(!Yii::$app->user->can('deleteYourAuth')) throw new ForbiddenHttpException(Yii::t('app', 'No Auth'));
+            $ids = Yii::$app->request->post('ids');
+            if (is_array($ids)) {
+                foreach ($ids as $id) {
+                    $this->findModel($id)->delete();
 //                $model = $this->findModel($id);
 //                $model->setScenario('admin-update');
 //                $model->status = Status::STATUS_DELETED;
 //                $model->save();
+                }
             }
+            return $this->redirect(['index']);
+        } else {
+            throw new HttpException(403, '对不起，您现在还没获此操作的权限！');
         }
-        return $this->redirect(['index']);
+
     }
     /**
      * Finds the user model based on its primary key value.

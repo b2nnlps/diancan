@@ -2,7 +2,6 @@
 
 namespace member\modules\sys\controllers;
 
-use member\controllers\BaseController;
 use Yii;
 use member\modules\sys\models\Loginlog;
 use member\modules\sys\models\search\LoginlogSearch;

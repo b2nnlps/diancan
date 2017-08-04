@@ -27,9 +27,8 @@ use member\modules\sys\models\User;
 
             <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'modules')->dropDownList($model::modules()) ?>
+            <?= $form->field($model, 'role')->dropDownList($model::role()) ?>
 
-            <!--    --><?php //echo $form->field($model, 'role')->textInput() ?>
             <?= $form->field($model, 'status')->dropDownList($model::status()) ?>
         </div>
     </div>

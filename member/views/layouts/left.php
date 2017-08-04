@@ -49,24 +49,36 @@
 //                        'visible'=>Yii::$app->user->can('/activitys/relayactivity/index')
 //                    ],
 
+                    ['label' => '用户信息', 'icon' => 'fa fa-street-view', 'url' => ['/sys/user/index'], 'visible' => Yii::$app->user->can('/sys/user/index')],
+
+                ],
+            ]
+        );
+        ?>
+
+        <?php
+        $sys = dmstr\widgets\Menu::widget(
+            [
+                'options' => ['class' => 'sidebar-menu'],
+                'items' => [
                     [
                         'label' => '系统管理',
                         'icon' => 'fa fa-anchor',
                         'url' => '/sys/user/index',
                         'items' => [
 
-                            ['label' => '后台用户', 'icon' => 'fa fa-users', 'url' => ['/sys/user/index'],'visible'=>Yii::$app->user->can('/sys/user/index')],
+
                             ['label' => '微信用户', 'icon' => 'fa fa-weixin', 'url' => ['/sys/wechat/index'],'visible'=>Yii::$app->user->can('/sys/wechat/index')],
                             ['label' => '登录日志', 'icon' => 'fa fa-cloud', 'url' => ['/sys/loginlog/index'],'visible'=>Yii::$app->user->can('/sys/loginlog/index')],
-                            ['label' => '地区信息', 'icon' => 'fa fa-paper-plane', 'url' => ['/sys/district/index'],'visible'=>Yii::$app->user->can('/sys/district/index')],              
-                            ['label' => '站点设置', 'icon' => 'fa fa-cog', 'url' => ['/setting/default/index'],'visible'=>Yii::$app->user->can('/setting/default/index')],				
+                            ['label' => '地区信息', 'icon' => 'fa fa-paper-plane', 'url' => ['/sys/district/index'], 'visible' => Yii::$app->user->can('/sys/district/index')],
+                            ['label' => '站点设置', 'icon' => 'fa fa-cog', 'url' => ['/setting/default/index'], 'visible' => Yii::$app->user->can('/setting/default/index')],
                             [
                                 'label' => '权限设置',
                                 'icon' => 'fa fa-key',
                                 'url' => '/admin/assignment/index',
                                 'items' => [
                                     ['label' => '路由', 'icon' => 'fa fa-circle-o', 'url' => ['/admin/route/index'],'visible'=>Yii::$app->user->can('/admin/route/index')],
-                               //     ['label' => '权限', 'icon' => 'fa fa-circle-o', 'url' => ['/admin/permission/index'],'visible'=>Yii::$app->user->can('/admin/permission/index')],
+                                    //     ['label' => '权限', 'icon' => 'fa fa-circle-o', 'url' => ['/admin/permission/index'],'visible'=>Yii::$app->user->can('/admin/permission/index')],
                                     ['label' => '角色', 'icon' => 'fa fa-circle-o', 'url' =>['/admin/role/index'],'visible'=>Yii::$app->user->can('/admin/role/index')],
                                     ['label' => '分配', 'icon' => 'fa fa-circle-o', 'url' =>['/admin/assignment/index'],'visible'=>Yii::$app->user->can('/admin/assignment/index')],
 //                                    ['label' => '菜单', 'icon' => 'fa fa-circle-o', 'url' =>['/admin/menu/index'],'visible'=>Yii::$app->user->can('/admin/menu/index')],
@@ -74,20 +86,6 @@
                                 ],
                                 'visible'=>Yii::$app->user->can('/admin/assignment/index')
                             ],
-//
-//                            [
-//                                'label' => '权限设置',
-//                                'icon' => 'fa fa-key',
-//                                'url' => '#',
-//                                'items' => [
-//                                    ['label' => '路由', 'icon' => 'fa fa-circle-o', 'url' => ['/admin/route/index'],],
-//                                    ['label' => '权限', 'icon' => 'fa fa-circle-o', 'url' => ['/admin/permission/index'],],
-//                                    ['label' => '角色', 'icon' => 'fa fa-circle-o', 'url' =>['/admin/role/index'],],
-//                                    ['label' => '分配', 'icon' => 'fa fa-circle-o', 'url' =>['/admin/assignment/index'],],
-//                                    ['label' => '菜单', 'icon' => 'fa fa-circle-o', 'url' =>['/admin/menu/index'],],
-//
-//                                ],
-//                            ],
 
                         ],
                         'visible'=>Yii::$app->user->can('/sys/user/index')
@@ -111,9 +109,14 @@
                 ],
             ]
         );
-        ?>
 
-        <?php
+
+        $role = Yii::$app->user->identity->role;
+        if ($role < 3) {
+            echo $sys;
+        }
+
+        
             echo \yii\bootstrap\Nav::widget(
                 [
                     "encodeLabels" => false,

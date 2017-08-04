@@ -47,7 +47,7 @@ use yii\helpers\Html;
                           
                             <div class="pull-right">
                                 <?= Html::a(
-                                    '注销',
+                                    '退出',
                                     ['/site/logout'],
                                     ['data-method' => 'post', 'class' => 'btn btn-default bg-maroon btn-flat']
                                 ) ?>
