@@ -12,10 +12,14 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="box-body table-responsive no-padding">
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('创建用户', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php
+        $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
+        if ($role < 3) {
+            echo Html::a('创建用户', ['create'], ['class' => 'btn btn-success']);
+        }
+        ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -27,14 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'username',
             'realname',
             'phone',
-            [
-                'attribute' => 'modules',
-//                "headerOptions" => ["width" => "100"],
-                'filter' => User::modules(),
-                'value' => function ($model) {
-                    return $model->modules($model->modules);
-                },
-            ],
+//            [
+//                'attribute' => 'modules',
+////                "headerOptions" => ["width" => "100"],
+//                'filter' => User::modules(),
+//                'value' => function ($model) {
+//                    return $model->modules($model->modules);
+//                },
+//            ],
             // 'role',
             // 'email:email',
             // 'description',
@@ -59,10 +63,40 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             // 'updated_at',
 
+
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '操作',
                 'headerOptions' => ['width' => '80'],
+                'template' => '{view} {update} {delete}',
+                'buttons' => [
+                    'view' => function ($url, $model, $key) {
+                        $role = Yii::$app->user->identity->role;
+                        if ($role < 3) {
+                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, ['title' => '查看',]);
+                        } else {
+                            return '';
+                        }
+                    },
+                    'update' => function ($url, $model, $key) {
+                        $role = Yii::$app->user->identity->role;
+                        if ($role < 3) {
+                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['title' => '查看',]);
+                        } else {
+                            return '';
+                        }
+                    },
+                    'delete' => function ($url, $model, $key) {
+                        $role = Yii::$app->user->identity->role;
+                        if ($role < 3) {
+                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, ['title' => '查看',]);
+                        } else {
+                            return '';
+                        }
+                    },
+
+
+                ]
             ],
         ],
     ]); ?>

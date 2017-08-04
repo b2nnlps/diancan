@@ -2,7 +2,7 @@
 
 namespace member\modules\sys\controllers;
 
-use member\controllers\BaseController;
+
 use Yii;
 use member\modules\sys\models\Address;
 use member\modules\sys\models\search\AddressSearch;
