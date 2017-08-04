@@ -9,6 +9,12 @@ function showFoodList(res) {
     classes = res.classes;
     food = res.food;
     //=====处理商家信息=====//
+    if (shop == null) {
+        $("#shop_img").attr("src", "/static/84dc/images/rh_logo.png");
+        $("#shop_name").html("容合智能点餐");
+        $("#shop_description").html("欢迎使用");
+        layer.msg('该商家没有开通点餐哦~', {icon: 0, time: 60000});
+    }
     $("#shop_name").html(shop.name);
     $("#shop_img").attr("src", shop.img);
     $("#shop_description").html(shop.description);
@@ -94,7 +100,7 @@ function getInfoPrice(id) {//自动转化规格价格到主体
 function getFoodList(shopId) {//获取菜品信息
     // 获取信息
     $.ajax({
-        url: 'http://dev.ms.n39.cn/food/api/get-food-list?shopId=' + shopId,
+        url: 'http://ms.n39.cn/food/api/get-food-list?shopId=' + shopId,
         dataType: 'jsonp',
         data: '',
         jsonp: 'callback',
@@ -102,6 +108,7 @@ function getFoodList(shopId) {//获取菜品信息
         success: function (res) {
             res = res.data;
             console.log(res);
+            layer.close(index);
             showFoodList(res);
         },
         error: function () {
