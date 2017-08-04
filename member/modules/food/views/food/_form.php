@@ -57,7 +57,7 @@ use yii\helpers\ArrayHelper;
                     $id = $_info['id'];
                     echo "<li>";
                     echo "规格：<input type=\"text\" id=\"guigeTitle$id\" name=\"guigeTitle[$id]\" value=\"$_info[title]\"/>";
-                    echo "价格：<input type=\"text\" id=\"guigePrice$id\" name=\"guigePrice[$id]\" value=\"$_info[price]\"/>";
+                    echo "价格：<input type=\"text\" onblur=\"ischeckNum(this.value);\" id=\"guigePrice$id\" name=\"guigePrice[$id]\" value=\"$_info[price]\"/>";
                     echo "数量：<input type=\"number\" id=\"guigeNumber$id\" name=\"guigeNumber[$id]\" value=\"$_info[number]\"/><button onclick=\"del($id);return false;\">删除</button><br>";
                     echo "</li>";
                 }
@@ -91,7 +91,7 @@ use yii\helpers\ArrayHelper;
     function add(){
         var text;
         text = ('<li>规格：<input type="text" id="guigeTitle' + len + '" name="guigeTitle[' + len + ']"/>');
-        text += ('价格：<input type="text" id="guigePrice' + len + '" name="guigePrice[' + len + ']"/>');
+        text += ('价格：<input type="text" onblur="ischeckNum(this.value);" id="guigePrice' + len + '" name="guigePrice[' + len + ']"/>');
         text += ('数量：<input type="number" id="guigeNumber' + len + '" name="guigeNumber[' + len + ']"/><button onclick=\"del(' + len + ');return false;\">删除</button><br></li>');
         $("#guige").append(text);
         len++;
@@ -101,5 +101,18 @@ use yii\helpers\ArrayHelper;
     function del(id) {
         $("#guigePrice" + id).val(-1).parent().hide();
 
+    }
+
+    //判断当前价格是否为数字
+    function ischeckNum(num) {
+        if (num) {
+            if (isNaN(num)) {
+                alert('你输入的数据不是数字');
+                return false;
+            }
+        } else {
+            alert('价格不能为空！');
+            return false;
+        }
     }
     </script>
