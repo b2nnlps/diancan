@@ -22,35 +22,27 @@ $(document).ready(function () {
     });
 
     $("#cartShow").click(function () {
-        var num = $(".cart_box > dl").length;//如果购物车里面有条目才显示
-        if (num) {
-            $(".pop_box").slideToggle(500);
-            $('#fade').show();
+        updateCart();//更新购物车
+        if (!$("#fade").is(":visible")) {
+            var num = $(".cart_box > dl").length;//如果购物车里面有条目才显示
+            if (num) {
+                $(".pop_box").slideDown(500);
+                $("#fade").show();
+            }
+        } else {
+            $("#fade").hide();
+            $(".pop_box").slideUp(500);
         }
+
     });
+    $('#fade').click(function () {
+        if ($(this).is(":visible")) $(this).hide();
+    });
+
     $('#fade').click(function () {
         $('.pop_box').hide();
         $('#fade').hide();
     });
-
-    var clickNumber = 0;
-    $('#cartShow').click(function () {
-        if (clickNumber % 2 == 0) {
-            //他显示
-        } else {
-            $('#fade').hide();
-        }
-        clickNumber++;
-    });
-    $('#fade').click(function () {
-        if (clickNumber % 2 == 0) {
-            //他显示
-        } else {
-            $('#fade').hide();
-        }
-        clickNumber++;
-    });
-
 
     var winHeight = $(document).scrollTop();
 

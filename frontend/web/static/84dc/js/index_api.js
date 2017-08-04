@@ -124,6 +124,44 @@ function getFoodList(shopId) {//获取菜品信息
     });
 }
 
+function updateCart() {	//输入商品id,数量，价格即可
+    var data = $.cookie('cart');
+    var text = "", total_num = 0, total_price = 0;
+    if (data) {
+        data = JSON.parse(data);
+        for (var x = 0; x < 999; x++) {
+            if (data.cart[x] == undefined)break;
+            if (data.cart[x].num <= 0)continue;
+            text += '<dl class="clearfix" data-id="' + data.cart[x].id + '"><dt>' + data.cart[x].name + '</dt><dd>￥' + data.cart[x].price + '</dd>';
+            text += '<div class="btn_v2">';
+            text += '<button class="cart_minus"><strong></strong></button>';
+            text += '<i>' + data.cart[x].num + '</i>';
+            text += '<button class="cart_add"><strong></strong>';
+            text += '</button></div></dl>';
+            total_num += data.cart[x].num;
+            total_price += data.cart[x].num * data.cart[x].price;
+        }
+        $(".cart_box").html(text);
+        $("#totalcountshow").html(total_num);
+        $("#totalpriceshow").html((total_price).toFixed(2));//计算当前所选总价
+    }
+}
+function countTotal() {//计算总数,总价
+    var data = $.cookie('cart');
+    var total_num = 0, total_price = 0;
+    if (data) {
+        data = JSON.parse(data);
+        for (var x = 0; x < 999; x++) {
+            if (data.cart[x] == undefined)break;
+            if (data.cart[x].num <= 0)continue;
+            total_num += data.cart[x].num;
+            total_price += data.cart[x].num * data.cart[x].price;
+        }
+        $("#totalcountshow").html(total_num);
+        $("#totalpriceshow").html((total_price).toFixed(2));//计算当前所选总价
+    }
+}
+
 function updateCookie(id, num, price, name, text) {	//输入商品id,数量，价格即可
     var has = false;
     var data = $.cookie('cart');
@@ -132,8 +170,9 @@ function updateCookie(id, num, price, name, text) {	//输入商品id,数量，�
         for (var x = 0; x < 999; x++) {
             if (data.cart[x] == undefined)break;
             if (data.cart[x].id == id) {
-                data.cart[x].num += parseInt(num);
-                data.cart[x].text = text;
+                data.cart[x].num += parseInt(num);//修改数量
+                if (text.length > 0)
+                    data.cart[x].text = text;//修改备注
                 has = true;
             }
         }
@@ -148,4 +187,18 @@ function updateCookie(id, num, price, name, text) {	//输入商品id,数量，�
         }
     }
     $.cookie('cart', data, {expires: 1, path: '/'});
+    countTotal();
+}
+function deleteCart() {
+    layer.confirm('是否清空购物车？', {
+        btn: ['是', '否'] //按钮
+    }, function () {
+        $.cookie('cart', null, {expires: 0, path: '/'});
+        $('.pop_box').hide();
+        $('#fade').hide();
+        $("#totalcountshow").html(0);
+        $("#totalpriceshow").html("0");//计算当前所选总价
+        layer.msg('清空成功', {icon: 1});
+    }, function () {
+    });
 }

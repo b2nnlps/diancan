@@ -34,29 +34,34 @@ $(".list_box").on('click', '.plus a', function () {
     var info = foodInfo[id];
     text = "";
     for (i = 0; i < info.length; i++) {
-        text += '<div class="norm"><label for="norm' + i + '" data-price="' + info[i].price + '"><input type="radio" name="sex" id="norm' + info[i].id + '" value="' + info[i].id + '">' + info[i].title + '</label><span class="btn">' + info[i].title + '</span></div>';
+        text += '<div class="norm"><label for="norm' + info[i].id + '" data-price="' + info[i].price + '"><input type="radio" name="sex" id="norm' + info[i].id + '" value="' + info[i].id + '" data-title="' + info[i].title + '">' + info[i].title + ' </label><span class="btn">' + info[i].title + '</span></div>';
     }
     $("#cart_info").html(text);
 });
 //购物车操作
-$(".cart_add").click(function () {
+$(".cart_box").on('click', '.cart_add', function () {
     var n = $(this).prev().text();
     var num = parseInt(n) + 1;
     if (num == 0) {
         return;
     }
     $(this).prev().text(num);
+    var id = $(this).parent().parent().attr("data-id");
+    updateCookie(id, 1, "", "", "");
 });
 //减的效果
-$(".cart_minus").click(function () {
+$(".cart_box").on('click', '.cart_minus', function () {
     var n = $(this).next().text();
     var num = parseInt(n) - 1;
-    if (num == 0) {
+    var id = $(this).parent().parent().attr("data-id");
+    updateCookie(id, -1, "", "", "");
+    if (num <= 0) {
         $(this).parent().parent().remove();
         checkCart();//检测是否还有购物车元素，没有则关闭购物车
         return;
     }
     $(this).next().text(num);
+
 });
 
 //加的效果
@@ -69,11 +74,6 @@ $(".list_box").on('click', '.index_add', function () {
     }
     $(this).prev().text(num);
     var price = $(this).parent().attr("data-price");//获取单价
-    var total = $("#totalpriceshow").html();//获取当前所选总价
-
-    $("#totalpriceshow").html((total * 1 + price * 1).toFixed(2));//计算当前所选总价
-    var total_num = $("#totalcountshow").html();//获取数量
-    $("#totalcountshow").html(total_num * 1 + 1);
 
     var info_id = $(this).parent().attr("data-id");//获取的是food_id
     var name = $(this).parent().attr("data-name");
@@ -89,12 +89,8 @@ $(".list_box").on('click', '.index_minus', function () {
 
     $(this).next().text(num);//减1
 
-    var danjia = $(this).parent().attr("data-price");//获取单价
-    var total = $("#totalpriceshow").html();//获取当前所选总价
-    $("#totalpriceshow").html((total * 1 - danjia * 1).toFixed(2));//计算当前所选总价
+    var price = $(this).parent().attr("data-price");//获取单价
 
-    var total_num = $("#totalcountshow").html();//获取数量
-    $("#totalcountshow").html(total_num * 1 - 1);
     //如果数量小于或等于0则隐藏减号和数量
     if (num <= 0) {
         $(this).next().css("display", "none");
@@ -124,9 +120,11 @@ function checkCart() {//检测是否还有购物车元素，没有则关闭购�
 }
 
 $(".affirm_boxv1").click(function () {
-    var info_id = $('input:radio[name="sex"]:checked').val();//获取详情页的信息
+    var info = $('input:radio[name="sex"]:checked');//获取详情页的信息
+    var info_title = $(info).attr("data-title");
+    var info_id = $(info).val();
     if (info_id != undefined) {//如果有选中
-        var name = $('#cart_name').text();
+        var name = $('#cart_name').text() + "(" + info_title + ")";
         var price = $('#cart_price').attr("data-price");
         var num = $('#cart_num').val();
         var text = $('#cart_text').val();
@@ -134,6 +132,7 @@ $(".affirm_boxv1").click(function () {
         layer.msg('加入购物车成功', {icon: 1});
         $(".show_box").fadeOut(500);
         $(".fade").fadeOut(500);
+        countTotal();
     } else {
         layer.msg('请选择规格', {icon: 0});
     }
