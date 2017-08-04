@@ -6,11 +6,35 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model member\modules\food\models\Order */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
+$this->title = '桌号：' . $model->table;
+$this->params['breadcrumbs'][] = ['label' => '订单列表', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-view">
+    <div class="box-body table-responsive no-padding">
+        <?= \yii\grid\GridView::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => [
+//                    ['class' => 'yii\grid\SerialColumn'],
+
+                'id',
+                'order_id',
+                [
+                    'label' => '菜名',
+                    'attribute' => 'food_id',
+                    'value' => function ($model) {
+                        return \member\modules\food\models\Food::getFoodeName($model->food_id);
+                    },
+                ],
+                'info_id',
+                'price',
+                'num',
+                // 'text:ntext',
+                'status',
+
+            ],
+        ]); ?>
+    </div>
 
     <p>
         <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

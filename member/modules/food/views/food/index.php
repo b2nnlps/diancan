@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             [
-                'contentOptions'=>['style'=>'text-align:center;width:40px'],
+                'headerOptions' => ["width" => "80"],
                 'label' => '图像',
                 'format'=>'raw',
                 'value' => function ($model) {

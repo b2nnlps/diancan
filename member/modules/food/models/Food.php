@@ -63,6 +63,12 @@ class Food extends \yii\db\ActiveRecord
         ];
     }
 
+    public static function getFoodeName($id)
+    {
+        $model = self::findOne($id);
+        $name = $model['name'];
+        return $name ? $name : "暂无";
+    }
     public static function status($key = null)
     {
         $arr = [

@@ -54,10 +54,30 @@ class ShopStaff extends \yii\db\ActiveRecord
             'username' => '员工账户',
             'password' => '员工密码',
             'realname' => '员工姓名',
-            'shop_id' => 'Shop ID',
-            'role_id' => '0厨房1店员2经理3收银',
-            'status' => '0正常1停用',
-            'created_time' => 'Created Time',
+            'shop_id' => '所属商家',
+            'role_id' => '职务',
+            'status' => '状态',
+            'created_time' => '创建时间',
         ];
+    }
+
+    public static function role($key = null)
+    {
+        $arr = [
+            '0' => '厨房',
+            '1' => '店员',
+            '2' => '经理',
+            '3' => '收银',
+        ];
+        return $key === null ? $arr : (isset($arr[$key]) ? $arr[$key] : '');
+    }
+
+    public static function status($key = null)
+    {
+        $arr = [
+            '0' => '正常',
+            '1' => '停用',
+        ];
+        return $key === null ? $arr : (isset($arr[$key]) ? $arr[$key] : '');
     }
 }

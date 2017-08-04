@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 //            ['class' => 'yii\grid\SerialColumn'],
 
             [
+                'headerOptions' => ["width" => "80"],
                 'format' => ['image', ['width' => '35', 'height' => '30']],
                 'value' => function ($model) {
                     return $model->img;
@@ -38,26 +39,28 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'menu',
             'created_time',
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'contentOptions'=>['style'=>'text-align:center; width:100px;'],
-                'buttons'=>[
-                    'view' =>function ($url, $model, $key) {
-                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
-                            'title' =>'查看',
-                        ]);
-                    },
-                    'food' =>function ($url, $model, $key) {
-                        return Html::a('<span class="glyphicon glyphicon-cutlery"></span>', '/food/food/index?shop_id='.$model->id, [
-                            'title' =>'菜品',
-                        ]);
-                    },
+            ['class' => 'yii\grid\ActionColumn'],
 
-
-
-                ],
-                'template' => '{view}{food}'
-            ],
+//            [
+//                'class' => 'yii\grid\ActionColumn',
+//                'contentOptions'=>['style'=>'text-align:center; width:100px;'],
+//                'buttons'=>[
+//                    'view' =>function ($url, $model, $key) {
+//                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+//                            'title' =>'查看',
+//                        ]);
+//                    },
+//                    'food' =>function ($url, $model, $key) {
+//                        return Html::a('<span class="glyphicon glyphicon-cutlery"></span>', '/food/food/index?shop_id='.$model->id, [
+//                            'title' =>'菜品',
+//                        ]);
+//                    },
+//
+//
+//
+//                ],
+//                'template' => '{view}{food}'
+//            ],
         ],
     ]); ?>
 </div>

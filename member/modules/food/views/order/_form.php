@@ -11,29 +11,28 @@ use yii\widgets\ActiveForm;
 <div class="order-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <div class="row">
+        <div class="col-sm-6">
 
-    <?= $form->field($model, 'id')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'realname')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'num')->textInput() ?>
+            <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'user')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-sm-6">
 
-    <?= $form->field($model, 'shop_id')->textInput() ?>
+            <?= $form->field($model, 'people')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'orderno')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'total')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
+        </div>
+    </div>
+    <?= $form->field($model, 'table')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'type')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'created_time')->textInput() ?>
-
-    <?= $form->field($model, 'updated_time')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList($model::status()) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

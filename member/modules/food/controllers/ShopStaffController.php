@@ -66,6 +66,12 @@ class ShopStaffController extends Controller
         $model = new ShopStaff();
         $model->created_time=date("Y-m-d H:i:s");
 
+        $shopId = Yii::$app->user->identity->shop_id;
+        $role = Yii::$app->user->identity->role;
+        if ($role > 2) {
+            $model->shop_id = $shopId;
+        }
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

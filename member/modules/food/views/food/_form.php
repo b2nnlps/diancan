@@ -54,8 +54,6 @@ use yii\helpers\ArrayHelper;
             </div>
 
         </div>
-
-
         <div class="col-sm-6">
 
             <?= $form->field($model, 'head_img')->widget(\common\widgets\FileInput::className(), ['dir' => 'upload/food', 'maxnum' => 1])->label('首页图片') ?>

@@ -6,20 +6,18 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model member\modules\food\models\ShopStaff */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Shop Staff', 'url' => ['index']];
+$this->title = $model->realname;
+$this->params['breadcrumbs'][] = ['label' => '员工列表', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="shop-staff-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('删除', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '请确定要删除吗?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -34,9 +32,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'username',
             'password',
             'realname',
-            'shop_id',
-            'role_id',
-            'status',
+            [
+                'attribute' => 'shop_id',
+                'value' => \member\modules\food\models\Shop::getShopName($model->shop_id),
+            ],
+            [
+                'attribute' => 'role_id',
+                'value' => $model::role($model->role_id),
+            ],
+            [
+                'attribute' => 'status',
+                'value' => $model::status($model->status),
+            ],
+
             'created_time',
         ],
     ]) ?>
