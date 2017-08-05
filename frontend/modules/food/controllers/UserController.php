@@ -54,10 +54,9 @@ class UserController extends BaseController
         $shop=Shop::findOne($food['shop_id']);
         $stock=Food::getStock($id);
         $order=Order::getFoodOrder($id);
-        $foodInfo=FoodInfo::find()->where(['food_id'=>$id])->all();
-        $cartNum=Food::getCartNumber();
-        setcookie("shop",$food['shop_id'],time()+86400*7,"/");
-        return $this->render('detail2',['food'=>$food,'shop'=>$shop,'order'=>$order,'stock'=>$stock,'foodInfo'=>$foodInfo,'cartNum'=>$cartNum]);
+        $price = Food::getPrices($id);
+
+        return $this->render('detail', ['food' => $food, 'price' => $price, 'shop' => $shop, 'order' => $order, 'stock' => $stock]);
     }
     public function actionJDetail($id){
         $info=FoodInfo::findOne($id);
