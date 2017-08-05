@@ -8,16 +8,15 @@
 </head>
 <body>
 <div class="box"><!--头部：开始--->
-    <div class="list_top"><a href="store.html">
+    <div class="list_top">
             <dl class="clearfix">
-                <dt><img id="shop_img"/></dt>
+                <dt><a onclick="openShop()"><img id="shop_img"/></a></dt>
                 <dd>
                     <h4 id="shop_name"></h4>
 
                     <p id="shop_description"></p>
                 </dd>
             </dl>
-        </a>
     </div>
     <div class="main">
         <div class="list_relative" id="title1">
@@ -45,7 +44,7 @@
             <!--<div class="sum_box"><span>￥<i id="totalpriceshow">0</i></span> <em>另需配送费￥5</em> </div>-->
             <div class="sum_boxv1"><span>合计￥<i id="totalpriceshow">0.00</i></span></div>
             </dt>
-            <a href="Payment_order.html">
+            <a onclick="checkCart()">
                 <dd>结算</dd>
             </a>
         </dl>
@@ -120,13 +119,33 @@
         index = layer.load(0, {shade: false});
         getFoodList(shopId);
     });
-    function openDetail(id) {
+    function openDetail(id) {//打开菜品详情
         var index = layer.open({
             type: 2,
-            title: "菜品详情",
-            content: '/food/user/detail?id=' + id,
+            title: false,
+            closeBtn: 2,
+            scrollbar: false,
+            content: '/food/user/detail?id=' + id
         });
         layer.full(index);
+    }
+    function openShop() {//打开商家信息
+        var index = layer.open({
+            type: 2,
+            title: false,
+            closeBtn: 2,
+            scrollbar: false,
+            content: '/food/user/shop-info?shopId=' + shopId
+        });
+        layer.full(index);
+    }
+    function checkCart() {//结算
+        var num = $("#totalcountshow").text();
+        if (num * 1 > 0) {
+            window.location.href = '/food/user/order';
+        } else {
+            layer.msg("您的购物车为空", {icon: 5});
+        }
     }
 </script>
 </html>
