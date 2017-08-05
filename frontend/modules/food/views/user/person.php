@@ -78,11 +78,14 @@
         <!--个人中心：结束-->
     </div>
 </div>
+<div id="big" style="display: block; width: 10px;"></div>
 </body>
 </html>
 <script src="/static/food/js/jquery-1.11.2.js"></script>
 <script src="/js/layer/layer.js"></script>
 <script>
+
+    $("#big").css('height', $(window).height() - $(".box").height() + 1);
     $(function(){
         //正确文字提示
         $('.kf').click(function(){

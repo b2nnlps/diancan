@@ -141,16 +141,19 @@ EOD;
             </div>
             <div class="load_more"><a href="#">加载更多</a></div>
         </div>
-
         <?= $this->render('footer') ?>
 
     </div>
 </div>
+<div id="big" style="display: block;"></div>
 
 </body>
 </html>
 <script src="/static/627dc/js/jquery-1.8.3.min.js"></script>
 <script language="javascript">
+
+    $("#big").css('height', $(window).height() - $(".box").height() + 1);
+
     function woaicssq(num) {
         for (var id = 1; id <= 3; id++) {
             var MrJin = "woaicss_con" + id;

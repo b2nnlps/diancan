@@ -11,25 +11,9 @@
 
 <body>
 <div id="box"><!--头部：开始--->
-    <div class="Favorites">
-        <ul>
-            <li><a href="javascript:history.go(-1)"><img src="/static/84dc/images/fh.png" width="20" height="20"></a>
-            </li>
-            <p><?= $shop['name'] ?></p>
-            <li><a href="#"></a></li>
-            <div class="clear"></div>
-        </ul>
-    </div>
+
     <div class="main">
-        <div class="nav_box">
-            <ul class="clearfix">
-                <a href="index_v2.html">
-                    <li>菜品</li>
-                </a>
-                <li><span>店铺</span></li>
-                <li>评论</li>
-            </ul>
-        </div>
+
         <div style="background-color:#EDF1F1; height:10px;"></div>
         <div class="call_names">
             <dl class="clearfix">
@@ -48,8 +32,10 @@
                 <div class="bj_div"><img src="/static/84dc/icon/map1.png"><?= $shop['address'] ?></div>
             </a>
 
-            <div><img src="/static/84dc/icon/time12.png">营业时间：<?= $shop['begin_time'] . '-' . $shop['end_time'] ?></div>
-            <a href="tel:0898-62922223">
+            <div><img
+                    src="/static/84dc/icon/time12.png">营业时间：<?= substr($shop['begin_time'], 0, 5) . '-' . substr($shop['end_time'], 0, 5) ?>
+            </div>
+            <a href="tel:<?= $shop['contact'] ?>">
                 <div class="bj_div"><img src="/static/84dc/icon/dhimg.png">服务热线：<?= $shop['contact'] ?></div>
             </a>
         </div>
@@ -60,9 +46,32 @@
             </ul>
         </div>
 
-        <?= $this->render('footer') ?>
+        <div class="navigate">
+            <ul>
+                <a onclick="closeWin()">
+                    <li><img src="/static/84dc/icon/dcimg.png">点餐</li>
+                </a>
+                <!--        <a ><li><img src="/static/84dc/icon/yyimg.png">预约</li></a>-->
+                <a href="/food/user/my-order">
+                    <li><img src="/static/84dc/icon/ddimg.png">订单</li>
+                </a>
+                <a href="/food/user/person">
+                    <li><img src="/static/84dc/images/nav_3.png">个人中心</li>
+                </a>
+            </ul>
+        </div>
 
     </div>
 </div>
+<div id="big" style="display: block;"></div>
 </body>
 </html>
+<script type="text/javascript" src="/static/84dc/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/static/84dc/js/layer/layer.js"></script>
+<script>
+    $("#big").css('height', $(window).height() - $("#box").height() + 1);
+    function closeWin() {
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index); //再执行关闭
+    }
+</script>
