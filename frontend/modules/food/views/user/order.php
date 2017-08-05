@@ -23,7 +23,7 @@
             <div style=" background-color:#EDF1F1; height:10px;"></div>
             <h4><span>订单明细</span></h4>
             <?= $text ?>
-            <dl class="clearfix">
+            <dl class="clearfix" id="allot">
                 <dt>数量：<em style="color:#F32442;"><?= $total_number ?></em></dt>
                 <dd style=" text-align:right;">合计：<em style="color:#F32442; font-size:18px;">￥<?= $total_price ?></em>
                 </dd>
@@ -43,7 +43,7 @@
                         <em>
                             <div class="gw_num">
                                 <em class="jian">-</em>
-                                <input type="text" value="1" class="num"/>
+                                <input type="text" value="1" class="num" name="people"/>
                                 <em class="add">+</em>
                             </div>
                             <!--<a href="#">-</a><input value="1" type="text" /><a href="#">+</a>-->
@@ -53,7 +53,7 @@
                                                  required="required"
                                                  value="<?= isset($_COOKIE['table']) ? $_COOKIE['table'] : '' ?>"></li>
                     <li><span>需求备注：</span><input placeholder="输入其他需求" id="notic" name="notic" type="text"
-                                                 value="<?= $u['notic'] ?>"></li>
+                            ></li>
                     <input type="hidden" value="<?php echo Yii::$app->request->csrfToken; ?>" name="_csrf">
                 </ul>
             </div>
