@@ -64,7 +64,7 @@ class Shop extends \yii\db\ActiveRecord
         return $name ? $name : "暂无";
     }
 
-    public static function getShopList()
+    public static function getShopList()//获取商家列表
     {
         $shopId = Yii::$app->user->identity->shop_id;
         $role = Yii::$app->user->identity->role;
@@ -75,5 +75,14 @@ class Shop extends \yii\db\ActiveRecord
         }
         $model = ArrayHelper::map($list, 'id', 'name');
         return $model;
+    }
+    public static function getSold($shopId){//获取商家销量
+        $num = (new \yii\db\Query())
+            ->select(['b.num'])
+            ->from('n_food_order a,n_food_order_info b')
+            ->where('a.id=b.order_id AND shop_id=:shop_id',[':shop_id'=>$shopId])
+            ->sum('b.num');
+        if(!$num) $num=0;
+        return $num;
     }
 }
