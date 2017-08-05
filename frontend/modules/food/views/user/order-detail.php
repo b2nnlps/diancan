@@ -13,7 +13,6 @@
         <ul>
             <li><a href="javascript:history.go(-1)"><img src="/static/627dc/images/fh.png" width="20" height="20"></a></li>
             <p>订单详情</p>
-            <li><a href="checkout_success.html">去支付</a></li>
             <div class="clear"></div>
         </ul>
     </div>
@@ -39,8 +38,6 @@ EOD;
 
            }
            ?>
-
-
 
               <dl class="clearfix">
                   <dt>数量：<em style="color:#F32442;"><?=$total_number?></em></dt>
