@@ -159,6 +159,7 @@ function getOrder(type, status) {//获取订单信息 type 0厨房 1传菜员
         success: function (res) {
             res = res.data;
             //  console.log(res);
+            layer.close(index);
 
             if (type == 0)
                 cpdl(res, status);

@@ -1549,5 +1549,11 @@ a#btn_next {
     border-left: 1px solid #dbdbdb;
 }
 
+#allot dt {
+    width: 20%;
+}
 
+#allot dd {
+    width: 80%;
+}
 

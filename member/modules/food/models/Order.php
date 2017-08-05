@@ -78,7 +78,9 @@ class Order extends \yii\db\ActiveRecord
         ];
         return $key === null ? $arr : (isset($arr[$key]) ? $arr[$key] : '');
     }
-    public static function newOrder($openid,$shop_id,$orderno,$realname,$phone,$table,$staff,$text){
+
+    public static function newOrder($openid, $shop_id, $orderno, $realname, $phone, $table, $people, $staff, $text)
+    {
         $order=new Order();
         $order->user=$openid;
         $order->shop_id=$shop_id;
@@ -86,6 +88,7 @@ class Order extends \yii\db\ActiveRecord
         $order->realname=$realname;
         $order->phone=$phone;
         $order->table=$table;
+        $order->people = $people;
         $order->text=$text;
         if($staff)  //如果是服务员就直接当做付款
             $order->status=3;

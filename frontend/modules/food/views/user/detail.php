@@ -91,7 +91,7 @@
 </html>
 
 <script>
-    $("#big").css('height', $(window).height() - $("#box").height() + 1);
+    $("#big").css('height', $(window).height() - $("#box").height() + 10);
     function woaicssq(num) {
         for (var id = 1; id <= 2; id++) {
             var MrJin = "woaicss_con" + id;

@@ -1255,13 +1255,12 @@ a {
 
 .call_names dt {
     width: 100px;
-    height: 60px;
     float: left;
 }
 
 .call_names dt img {
     width: 90px;
-    height: 60px;
+    height: 90px;
 }
 
 .call_names dd {
@@ -1271,9 +1270,9 @@ a {
 
 .call_names dd h4 {
     line-height: 25px;
-    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .call_names dd div span {
@@ -1282,9 +1281,11 @@ a {
 
 .call_names dd em {
     display: block;
+    /*
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    */
 }
 
 .store_xq {

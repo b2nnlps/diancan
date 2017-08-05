@@ -78,6 +78,7 @@ textarea, button, select, input {
 }
 
 /* CSS Document */
+
 /*导航：开始*/
 .Favorites {
     width: 100%;
@@ -1364,7 +1365,6 @@ a#btn_next {
     display: block;
     width: 50%;
     margin: auto;
-    40px;
     line-height: 40px;
     background-color: #5CB85C;
     text-align: center;
