@@ -52,7 +52,7 @@ function showFoodList(res) {
     len = food.length;
     for (i = 0; i < len; i++) {
         text = '<div class="right_list clearfix">';
-        if ((food[i].img).length > 0) cli = 'onclick="openDetail(' + food[i].id + ')"'; else cli = "";
+        if ((food[i].head_img).length > 0) cli = 'onclick="openDetail(' + food[i].id + ')"'; else cli = "";
         if ((food[i].head_img).length > 0)
             text += '<div class="list_img"><a ' + cli + '><img src="' + food[i].head_img + '"></a></div>';
         text += '<div class="nopic_box1">';
