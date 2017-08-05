@@ -90,7 +90,7 @@ use yii\helpers\ArrayHelper;
     var len = 0;
     function add(){
         var text;
-        text = ('<li>规格：<input type="text" id="guigeTitle' + len + '" name="guigeTitle[' + len + ']"/>');
+        text = ('<li>规格：<input type="text" id="guigeTitle' + len + '" name="guigeTitle[' + len + ']" value="标准" />');
         text += ('价格：<input type="text" onblur="ischeckNum(this.value);" id="guigePrice' + len + '" name="guigePrice[' + len + ']"/>');
         text += ('数量：<input type="number" id="guigeNumber' + len + '" name="guigeNumber[' + len + ']"/><button onclick=\"del(' + len + ');return false;\">删除</button><br></li>');
         $("#guige").append(text);
