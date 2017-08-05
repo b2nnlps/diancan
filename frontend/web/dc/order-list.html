@@ -137,8 +137,10 @@
         $("#detail_info").html("");
         for (i = 0; i < len; i++) {
             text = '<dl class="clearfix">';
-            text += '<dt><h5>' + detail[i].name + '</h5><span>' + detail[i].type + '</span></dt>';
-            text += '<dd><span class="amount_box">X' + detail[i].num + '</span><span class="price_box">￥' + detail[i].price + '</span></dd></dl>';
+            text += '<dt><h5>' + detail[i].name + '</h5>';
+            if ((detail[i].type) != null)
+                text += '<span>' + detail[i].type + '</span>';
+            text += '</dt><dd><span class="amount_box">X' + detail[i].num + '</span><span class="price_box">￥' + (detail[i].price / 100) + '</span></dd></dl>';
             $("#detail_info").append(text);
         }
         $("#ddid").html("订单ID：" + order.id);
