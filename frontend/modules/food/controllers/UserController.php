@@ -114,8 +114,9 @@ class UserController extends BaseController
                 $food = $foods[$info['food_id']];
                 $total_number += $cart[$i]['num'];
                 $total_price += $info['price'] * $cart[$i]['num'];
+                $name = (strlen($info['title']) > 0) ? $food['name'] . '-' . $info['title'] : $food['name'];
                 $text .= '<dl class="clearfix"><dt>
-<h5>' . $food['name'] . '-' . $info['title'] . '</h5>
+<h5>' . $name . '</h5>
 <span>' . $cart[$i]['text'] . '</span></dt><dd>
 <span class="amount_box">X' . $cart[$i]['num'] . '</span>
 <span class="price_box">￥' . $info['price'] * $cart[$i]['num'] . '</span></dd></dl>';
@@ -162,11 +163,14 @@ class UserController extends BaseController
             }
         }
         $order->total = $total;
-        $order->save();
+
 
         if (1) {
 //        if($staff){
             setcookie('cart', '', time() - 1, '/');
+
+            $order->status = 1;
+            $order->save();
 
             $s = "http://ms.n39.cn/food/default/push-mess?orderno=$order->id";
             $s = str_replace(" ", "", $s);
@@ -174,9 +178,14 @@ class UserController extends BaseController
 
             return $this->render('shop-success', ['shop_id' => $order['shop_id']]);
             // header("Location: http://ms.n39.cn/food/default/push-mess?orderno=$order->id");
-        } else
-            // echo "Location: http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$order->id";
+        } else {
+
+            $order->save();
             header("Location: http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$order->id");
+        }
+        // echo "Location: http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$order->id";
+
+
         exit;
     }
 
