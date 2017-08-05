@@ -74,4 +74,17 @@ class OrderInfo extends \yii\db\ActiveRecord
             ->all();
         return $orderInfo;
     }
+
+    public static function getUserOrderInfo($user, $order_id)
+    {//获取订单的详情菜品信息
+        $order = Order::findOne(['user' => $user, 'id' => $order_id]);
+        if (!$order) return false;
+        $orderInfo = (new \yii\db\Query())
+            ->select(['b.text', 'b.price', 'b.num', 'a.name'])
+            ->from('n_food_food a,n_food_order_info b')
+            ->where('a.id=b.food_id AND order_id=:order_id', [':order_id' => $order_id])
+            ->orderBy('a.created_time')
+            ->all();
+        return $orderInfo;
+    }
 }
