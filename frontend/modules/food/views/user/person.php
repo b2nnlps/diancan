@@ -39,9 +39,9 @@
             </div>
             <!--功能列表-->
             <ul>
-                 <a href="/food/user/">
-                    <li><img src="/static/627dc/icon/sy.png"><em>店铺首页</em></li>
-                </a>
+                <!--                 <a href="/food/user/">-->
+                <!--                    <li><img src="/static/627dc/icon/sy.png"><em>店铺首页</em></li>-->
+                <!--                </a>-->
              <a href="/food/user/my-order">
                     <li><img src="/static/627dc/icon/dd.png"><em>我的订单</em></li>
                 </a>
@@ -74,6 +74,7 @@
 
             </ul>
         </div>
+        <?= $this->render('footer') ?>
         <!--个人中心：结束-->
     </div>
 </div>
