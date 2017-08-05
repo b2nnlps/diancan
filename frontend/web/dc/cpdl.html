@@ -41,7 +41,6 @@
     var index; //0代表加载的风格，支持0-2
     layer.ready(function () {
         index = layer.load(0, {shade: false});
-        getFoodList(shopId);
         getOrder(0, 0);
         getOrder(0, 1);
         setInterval("getOrder(0,0)", 10000)

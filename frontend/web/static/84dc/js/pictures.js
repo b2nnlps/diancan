@@ -14,6 +14,7 @@ $(document).ready(function () {
         speed: 50,
         btn_prev: $("#btn_prev"),
         btn_next: $("#btn_next"),
+        mouseTouch: false,
         paging: $(".flicking_con a"),
         counter: function (e) {
             $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
@@ -25,7 +26,7 @@ $(document).ready(function () {
     });
 
     $(".main_image").bind("dragstart", function () {
-        $dragBln = true;
+        $dragBln = false;
     });
 
     $(".main_image a").click(function () {
@@ -49,7 +50,7 @@ $(document).ready(function () {
     });
 
     $(".main_image").bind("touchstart", function () {
-        clearInterval(timer);
+        return false;
     }).bind("touchend", function () {
         if ($(".flicking_con").children().length > 1)
             timer = setInterval(function () {

@@ -208,6 +208,7 @@
         },
 
         touchstart: function (e) {
+            return false;
             if ((e.type == "touchstart" && e.originalEvent.touches.length <= 1) || e.type == "dragstart") {
                 this._startX = e.pageX || e.originalEvent.touches[0].pageX;
                 this._startY = e.pageY || e.originalEvent.touches[0].pageY;
@@ -221,6 +222,7 @@
         },
 
         touchmove: function (e) {
+            return false;
             if ((e.type == "touchmove" && e.originalEvent.touches.length <= 1) || e.type == "drag") {
                 this._left = (e.pageX || e.originalEvent.touches[0].pageX) - this._startX;
                 this._top = (e.pageY || e.originalEvent.touches[0].pageY) - this._startY;
@@ -264,6 +266,7 @@
         },
 
         touchend: function (e) {
+            return false;
             if ((e.type == "touchend" && e.originalEvent.touches.length <= 1) || e.type == "dragend") {
                 if (this._scroll) {
                     this._drag = false;

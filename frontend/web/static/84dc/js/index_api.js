@@ -52,9 +52,11 @@ function showFoodList(res) {
     len = food.length;
     for (i = 0; i < len; i++) {
         text = '<div class="right_list clearfix">';
-        text += '<div class="list_img"><a onclick="openDetail(' + food[i].id + ')"><img src="' + food[i].head_img + '"></a></div>';
+        if ((food[i].img).length > 0) cli = 'onclick="openDetail(' + food[i].id + ')"'; else cli = "";
+        if ((food[i].head_img).length > 0)
+            text += '<div class="list_img"><a ' + cli + '><img src="' + food[i].head_img + '"></a></div>';
         text += '<div class="nopic_box1">';
-        text += '<p><a onclick="openDetail(' + food[i].id + ')">' + food[i].name + '</a></p>';
+        text += '<p><a ' + cli + '>' + food[i].name + '</a></p>';
         a = getInfoPrice(food[i].id);
         text += '<div>已售' + food[i].sold_number + '份</div><div><b>￥' + a[1] + '</b></div>';
         if (food[i].status == 0 && a[1] != "售完") {
@@ -92,7 +94,7 @@ function getInfoPrice(id) {//自动转化规格价格到主体
     }
     if (info.length == 1) {//是否有多个规格
         a[0] = false;
-        a[1] = high;
+        a[1] = high + '/' + info[0].unit;
     } else {
         a[0] = true;
         a[1] = low + "-" + high;

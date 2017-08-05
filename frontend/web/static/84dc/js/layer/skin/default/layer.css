@@ -415,18 +415,21 @@ html #layuicss-skinlayercss {
 
 .layui-layer-setwin .layui-layer-close2 {
     position: absolute;
-    right: -5px;
-    top: -5px;
-    width: 30px;
-    height: 30px;
+    right: -10px;
+    top: -10px;
+    width: 50px;
+    height: 50px;
     margin-left: 0;
-    background-position: -149px -31px;
-    *right: -18px;
+    background: url(close_gray.png) no-repeat;
+    background-size: 30px 30px;
+    background-position: 10px 10px;
+    /*background-position: -139px -31px;*/
+    *right: -10px;
     _display: none
 }
 
 .layui-layer-setwin .layui-layer-close2:hover {
-    background-position: -180px -31px
+    background: url(close_blue.png) no-repeat;
 }
 
 .layui-layer-btn {
