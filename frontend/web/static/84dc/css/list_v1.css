@@ -921,6 +921,7 @@ a {
     border: 0;
     background: transparent;
     padding: 0;
+    outline: none;
 }
 
 .right_list .btn_v1 button strong {
@@ -1343,7 +1344,7 @@ a {
 }
 
 .navigate ul li {
-    width: 25%;
+    width: 33.3%;
     float: left;
     text-align: center;
     padding: 5px 0;

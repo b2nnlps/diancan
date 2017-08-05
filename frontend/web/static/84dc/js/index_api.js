@@ -87,8 +87,8 @@ function getInfoPrice(id) {//自动转化规格价格到主体
     }
 
     for (i = 0; i < info.length; i++) {
-        if (info[i].price > high) high = info[i].price;
-        if (info[i].price < low) low = info[i].price;
+        if ((info[i].price) * 1 > high) high = (info[i].price) * 1;
+        if ((info[i].price) * 1 < low) low = (info[i].price) * 1;
     }
     if (info.length == 1) {//是否有多个规格
         a[0] = false;
@@ -150,6 +150,7 @@ function updateIndex(del) { //更新首页的商品数量
 
 function updateCart() {	//更新购物车的商品数量
     var data = $.cookie('cart');
+    $(".cart_box").html("");
     var text = "", total_num = 0, total_price = 0;
     if (data) {
         data = JSON.parse(data);
