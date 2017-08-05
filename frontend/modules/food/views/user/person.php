@@ -82,7 +82,6 @@
 </body>
 </html>
 <script src="/static/food/js/jquery-1.11.2.js"></script>
-<script src="/js/layer/layer.js"></script>
 <script>
 
     $("#big").css('height', $(window).height() - $(".box").height() + 1);

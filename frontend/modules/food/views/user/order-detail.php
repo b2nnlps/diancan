@@ -25,11 +25,12 @@
                $total=$_o['num']*$_o['price']/100;
                $total_number+=$_o['num'];
                $total_price+=$total;
+               $name = (strlen($_o['title']) > 0) ? $_o['name'] . '-' . $_o['title'] : $_o['name'];
 
                echo <<<EOD
  <dl class="clearfix">
                   <dt>
-                  <h5>$_o[name]</h5>
+                  <h5>$name</h5>
                   <span>$_o[text]</span>
                   </dt>
                   <dd><span class="amount_box">X$_o[num]</span><span class="price_box">￥$total</span></dd>
@@ -38,8 +39,7 @@ EOD;
 
            }
            ?>
-
-              <dl class="clearfix">
+           <dl class="clearfix" id="allot">
                   <dt>数量：<em style="color:#F32442;"><?=$total_number?></em></dt>
                   <dd style=" text-align:right;">合计：<em style="color:#F32442; font-size:18px;">￥<?=$total_price?></em></dd>
               </dl>
@@ -65,6 +65,10 @@ EOD;
          </div>
     </div>
 </div>
-
+<div id="big" style="display: block; width: 10px;"></div>
 </body>
 </html>
+<script src="/static/food/js/jquery-1.11.2.js"></script>
+<script>
+    $("#big").css('height', $(window).height() - $(".box").height() + 1);
+</script>
