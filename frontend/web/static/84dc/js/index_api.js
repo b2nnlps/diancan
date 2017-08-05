@@ -52,18 +52,19 @@ function showFoodList(res) {
     len = food.length;
     for (i = 0; i < len; i++) {
         text = '<div class="right_list clearfix">';
-        text += '<div class="list_img"><a href="commodity_v2.html"><img src="' + food[i].head_img + '"></a></div>';
+        text += '<div class="list_img"><a onclick="openDetail(' + food[i].id + ')"><img src="' + food[i].head_img + '"></a></div>';
         text += '<div class="nopic_box1">';
-        text += '<p><a href="commodity_v2.html">' + food[i].name + '</a></p>';
+        text += '<p><a onclick="openDetail(' + food[i].id + ')">' + food[i].name + '</a></p>';
         a = getInfoPrice(food[i].id);
         text += '<div>已售' + food[i].sold_number + '份</div><div><b>￥' + a[1] + '</b></div>';
         if (food[i].status == 0 && a[1] != "售完") {
             if (a[0] == true)//是否有多个规格
                 text += '<div class="plus"><a data-id="' + food[i].id + '">选规格</a></div></div></div>';
             else {
+                var info = foodInfo[food[i].id];//查找规格
                 text += '<div class="btn_v1" data-id="' + food[i].id + '" data-name="' + food[i].name + '" data-price="' + a[1] + '">';
                 text += '<button class="index_minus"><strong></strong></button>';
-                text += '<li>0</li>';
+                text += '<li id="info_num' + info[0].id + '">0</li>';//第一个规格的ID
                 text += '<button class="index_add"><strong></strong></button>';
                 text += '</div></div>';
             }
@@ -72,7 +73,9 @@ function showFoodList(res) {
             text += '<div class="but">售完</div>';
         $("#body" + food[i].class_id).append(text);
     }
+    updateIndex(false);//更新首页的商品数量
 }
+
 
 function getInfoPrice(id) {//自动转化规格价格到主体
     var low = 99999, high = 0, a = [];
@@ -110,6 +113,7 @@ function getFoodList(shopId) {//获取菜品信息
             console.log(res);
             layer.close(index);
             showFoodList(res);
+
         },
         error: function () {
             console.log('加载失败');
@@ -124,7 +128,27 @@ function getFoodList(shopId) {//获取菜品信息
     });
 }
 
-function updateCart() {	//输入商品id,数量，价格即可
+function updateIndex(del) { //更新首页的商品数量
+    var data = $.cookie('cart');
+    var total_num = 0, total_price = 0;
+    if (data) {
+        data = JSON.parse(data);
+        for (var x = 0; x < 999; x++) {
+            if (data.cart[x] == undefined)break;
+            if (data.cart[x].num <= 0 || del) {
+                $("#info_num" + data.cart[x].id).css("display", "none").prev().css("display", "none");
+            } else {
+                $("#info_num" + data.cart[x].id).html(data.cart[x].num).parent().children().css("display", "inline-block");
+                total_num += data.cart[x].num;
+                total_price += data.cart[x].num * data.cart[x].price;
+            }
+        }
+        $("#totalcountshow").html(total_num);
+        $("#totalpriceshow").html((total_price).toFixed(2));//计算当前所选总价
+    }
+}
+
+function updateCart() {	//更新购物车的商品数量
     var data = $.cookie('cart');
     var text = "", total_num = 0, total_price = 0;
     if (data) {
@@ -188,16 +212,19 @@ function updateCookie(id, num, price, name, text) {	//输入商品id,数量，�
     }
     $.cookie('cart', data, {expires: 1, path: '/'});
     countTotal();
+    updateIndex(false);//更新首页
 }
 function deleteCart() {
     layer.confirm('是否清空购物车？', {
         btn: ['是', '否'] //按钮
     }, function () {
+        updateIndex(true);//清空首页
         $.cookie('cart', null, {expires: 0, path: '/'});
+        $("#totalcountshow").html(0);
+        $("#totalpriceshow").html("0.00");//计算当前所选总价
         $('.pop_box').hide();
         $('#fade').hide();
-        $("#totalcountshow").html(0);
-        $("#totalpriceshow").html("0");//计算当前所选总价
+
         layer.msg('清空成功', {icon: 1});
     }, function () {
     });
