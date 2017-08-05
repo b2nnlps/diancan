@@ -34,24 +34,27 @@ $(document).ready(function () {
         }
     });
 
-    timer = setInterval(function () {
-        $("#btn_next").click();
-    }, 5000);
+    if ($(".flicking_con").children().length > 1)
+        timer = setInterval(function () {
+            $("#btn_next").click();
+        }, 5000);
 
     $("#main_visual").hover(function () {
         clearInterval(timer);
     }, function () {
-        timer = setInterval(function () {
-            $("#btn_next").click();
-        }, 5000);
+        if ($(".flicking_con").children().length > 1)
+            timer = setInterval(function () {
+                $("#btn_next").click();
+            }, 5000);
     });
 
     $(".main_image").bind("touchstart", function () {
         clearInterval(timer);
     }).bind("touchend", function () {
-        timer = setInterval(function () {
-            $("#btn_next").click();
-        }, 5000);
+        if ($(".flicking_con").children().length > 1)
+            timer = setInterval(function () {
+                $("#btn_next").click();
+            }, 5000);
     });
 
 });
