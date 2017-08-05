@@ -138,10 +138,14 @@ class Order extends \yii\db\ActiveRecord
         $total = 0;
         $i = 0;
         foreach ($info as $_info) {
-            $food = Food::findOne($_info['food_id']);
+            $foodInfo = FoodInfo::findOne($_info['info_id']);
+            $food = Food::findOne($foodInfo['food_id']);
             $i++;
-            $text .= self::change($i . '.' . $food['name'], '￥' . $_info['price'], '  x' . $_info['num']);
-            $total += $food['price'] * $_info['num'];
+            if (strlen($foodInfo['title']) > 0)//是否有规格
+                $text .= self::change($i . '.' . $food['name'] . "(" . $foodInfo['title'] . ")", '￥' . $foodInfo['price'], '  x' . $_info['num']);
+            else
+                $text .= self::change($i . '.' . $food['name'], '￥' . $foodInfo['price'], '  x' . $_info['num']);
+            $total += $foodInfo['price'] * $_info['num'];
         }
         $total = round($total, 2);
         $text .= self::charsetToGBK("\n订单编号：" . $o['id']) . "\n";
@@ -183,7 +187,8 @@ class Order extends \yii\db\ActiveRecord
     {  //转换格式，对齐
         $a = self::charsetToGBK($a);
         $num = strlen($a) + strlen($b) + strlen($c);
-        return $a . str_repeat(' ', 31 - $num) . self::charsetToGBK($b) . $c . "\n";
+        $kong = (intval($num / 31) + 1) * 31;
+        return $a . str_repeat(' ', $kong - $num) . self::charsetToGBK($b) . $c . "\n";
     }
 
     public static function TcpSend($print_id, $order_id, $text, $end = '0')
