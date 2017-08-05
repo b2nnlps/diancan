@@ -69,7 +69,7 @@
             <div class="record">
                 <?php
                 foreach ($order as $_order) {
-                    echo " <dl>
+                    echo " <dl class='clearfix'>
                     <dt><img src=\"$_order[headimgurl]\"></dt>
                     <dd>
                         <h4>$_order[nickname]</h4>
@@ -83,22 +83,7 @@
             </div>
         </div>
     </div>
-    <div class="navigate">
-        <ul>
-            <a href="../home.html">
-                <li><img src="/static/84dc/icon/syimg.png">首页</li>
-            </a>
-            <a href="#">
-                <li><img src="/static/84dc/icon/yyimg.png">预约</li>
-            </a>
-            <a href="order-list.html">
-                <li><img src="/static/84dc/icon/ddimg.png">订单</li>
-            </a>
-            <a href="personal.html">
-                <li><img src="/static/84dc/images/nav_3.png">个人中心</li>
-            </a>
-        </ul>
-    </div>
+    <?= $this->render('footer') ?>
     <!--悬浮菜单：结束-->
 </div>
 </body>
