@@ -43,7 +43,7 @@
                     <div class="data_box"><span id="totalcountshow">0</span></div>
                 </a></div>
             <!--<div class="sum_box"><span>￥<i id="totalpriceshow">0</i></span> <em>另需配送费￥5</em> </div>-->
-            <div class="sum_boxv1"><span>合计￥<i id="totalpriceshow">0</i></span></div>
+            <div class="sum_boxv1"><span>合计￥<i id="totalpriceshow">0.00</i></span></div>
             </dt>
             <a href="Payment_order.html">
                 <dd>结算</dd>
@@ -119,7 +119,14 @@
     layer.ready(function () {
         index = layer.load(0, {shade: false});
         getFoodList(shopId);
-        countTotal();
     });
+    function openDetail(id) {
+        var index = layer.open({
+            type: 2,
+            title: "菜品详情",
+            content: '/food/user/detail?id=' + id,
+        });
+        layer.full(index);
+    }
 </script>
 </html>
