@@ -135,9 +135,11 @@
             title: false,
             closeBtn: 2,
             scrollbar: false,
+            fixed: true,
             content: '/food/user/shop-info?shopId=' + shopId
         });
         layer.full(index);
+
     }
     function checkCart() {//结算
         var num = $("#totalcountshow").text();
