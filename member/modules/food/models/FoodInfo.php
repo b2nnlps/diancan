@@ -28,10 +28,10 @@ class FoodInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'price', 'number', 'food_id', 'shop_id'], 'required'],
+            [['food_id', 'shop_id'], 'required'],
             [['price'], 'number'],
             [['shop_id', 'food_id', 'number', 'status'], 'integer'],
-            [['title'], 'string', 'max' => 255],
+            [['title', 'unit'], 'string', 'max' => 255],
         ];
     }
 
@@ -42,16 +42,18 @@ class FoodInfo extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'price' => 'Price',
-            'food_id' => 'Food ID',
+            'title' => '规格名称',
+            'unit' => '单位',
+            'price' => '价格',
+            'food_id' => '商品ID',
         ];
     }
 
-    public static function newInfo($title, $price, $score, $number, $shop_id, $food_id)
+    public static function newInfo($title, $unit, $price, $score, $number, $shop_id, $food_id)
     {
         $info=new self();
         $info->title=$title;
+        $info->unit = $unit;
         $info->price=$price;
         $info->score=$score;
         $info->number=$number;

@@ -16,7 +16,7 @@ use yii\helpers\ArrayHelper;
     }
 
     #guige li input {
-        width: 120px;
+        width: 90px;
         margin-right: 10px;
     }
 </style>
@@ -57,6 +57,7 @@ use yii\helpers\ArrayHelper;
                     $id = $_info['id'];
                     echo "<li>";
                     echo "规格：<input type=\"text\" id=\"guigeTitle$id\" name=\"guigeTitle[$id]\" value=\"$_info[title]\"/>";
+                    echo "单位：<input type=\"text\" id=\"unitName$id\" name=\"unitName[$id]\" value=\"$_info[unit]\"/>";
                     echo "价格：<input type=\"text\" onblur=\"ischeckNum(this.value);\" id=\"guigePrice$id\" name=\"guigePrice[$id]\" value=\"$_info[price]\"/>";
                     echo "数量：<input type=\"number\" id=\"guigeNumber$id\" name=\"guigeNumber[$id]\" value=\"$_info[number]\"/><button onclick=\"del($id);return false;\">删除</button><br>";
                     echo "</li>";
@@ -90,7 +91,8 @@ use yii\helpers\ArrayHelper;
     var len = 0;
     function add(){
         var text;
-        text = ('<li>规格：<input type="text" id="guigeTitle' + len + '" name="guigeTitle[' + len + ']" value="标准" />');
+        text = ('<li>规格：<input type="text" id="guigeTitle' + len + '" name="guigeTitle[' + len + ']"  placeholder="没有可不填"/>');
+        text += ('单位：<input type="text" id="unitName' + len + '" name="unitName[' + len + ']"  />');
         text += ('价格：<input type="text" onblur="ischeckNum(this.value);" id="guigePrice' + len + '" name="guigePrice[' + len + ']"/>');
         text += ('数量：<input type="number" id="guigeNumber' + len + '" name="guigeNumber[' + len + ']"/><button onclick=\"del(' + len + ');return false;\">删除</button><br></li>');
         $("#guige").append(text);
@@ -104,15 +106,15 @@ use yii\helpers\ArrayHelper;
     }
 
     //判断当前价格是否为数字
-    function ischeckNum(num) {
-        if (num) {
-            if (isNaN(num)) {
-                alert('你输入的数据不是数字');
-                return false;
-            }
-        } else {
-            alert('价格不能为空！');
-            return false;
-        }
-    }
+    //    function ischeckNum(num) {
+    //        if (num) {
+    //            if (isNaN(num)) {
+    //                alert('你输入的数据不是数字');
+    //                return false;
+    //            }
+    //        } else {
+    //            alert('价格不能为空！');
+    //            return false;
+    //        }
+    //    }
     </script>

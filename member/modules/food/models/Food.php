@@ -31,11 +31,12 @@ class Food extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'img', 'shop_id', 'class_id'], 'required'],
+            [['name', 'shop_id', 'class_id'], 'required'],
             [['shop_id', 'class_id','status'], 'integer'],
             [['created_time', 'updated_time','description'], 'safe'],
             [['name'], 'string', 'max' => 80],
             [['head_img'], 'string', 'max' => 255],
+            [['img'], 'string'],
         ];
     }
 

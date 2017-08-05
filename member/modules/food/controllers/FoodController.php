@@ -133,11 +133,12 @@ class FoodController extends Controller
 
 
             $guigePrice=Yii::$app->request->post('guigePrice',[]);
+            $unitName = Yii::$app->request->post('unitName', []);
             $guigeNumber=Yii::$app->request->post('guigeNumber',[]);
             $guigeTitle=Yii::$app->request->post('guigeTitle',[]);
             foreach($guigePrice as $k=>$v){
                 if($v>=0){
-                    FoodInfo::newInfo($guigeTitle[$k], $guigePrice[$k], 0, $guigeNumber[$k], $model->shop_id, $model->id);
+                    FoodInfo::newInfo($guigeTitle[$k], $unitName[$k], $guigePrice[$k], 0, $guigeNumber[$k], $model->shop_id, $model->id);
                 }
             }
             return $this->redirect(['index', 'id' => $model->id]);
@@ -181,6 +182,7 @@ class FoodController extends Controller
         $foodInfo=FoodInfo::find()->where(['food_id'=>$id,'status'=>0])->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $guigeTitle = Yii::$app->request->post('guigeTitle', []);
+            $unitName = Yii::$app->request->post('unitName', []);
             $guigePrice=Yii::$app->request->post('guigePrice',[]);
             $guigeNumber=Yii::$app->request->post('guigeNumber',[]);
             //修改已有的规格信息
@@ -188,14 +190,15 @@ class FoodController extends Controller
                     if ($v >= 0 && $v != null) {
                         $info = FoodInfo::findOne($k);
                         if ($info)
-                            FoodInfo::updateAll(['title' => $guigeTitle[$k], 'price' => $guigePrice[$k], 'number' => $guigeNumber[$k]], ['id' => $k]);
+                            FoodInfo::updateAll(['title' => $guigeTitle[$k], 'unit' => $unitName[$k], 'price' => $guigePrice[$k], 'number' => $guigeNumber[$k]], ['id' => $k]);
                         else
-                            FoodInfo::newInfo($guigeTitle[$k], $guigePrice[$k], 0, $guigeNumber[$k], $model->shop_id, $id);
+                            FoodInfo::newInfo($guigeTitle[$k], $unitName[$k], $guigePrice[$k], 0, $guigeNumber[$k], $model->shop_id, $id);
                     } else {//如果删除了规格
                         FoodInfo::updateAll(['status' => 1], ['id' => $k]);
                     }
             }
-            return $this->redirect(['view', 'id' => $model->id]);
+//            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

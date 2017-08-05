@@ -19,7 +19,7 @@ class FoodInfoSearch extends FoodInfo
     {
         return [
             [['id', 'food_id'], 'integer'],
-            [['title'], 'safe'],
+            [['title', 'unit'], 'safe'],
             [['price'], 'number'],
         ];
     }
@@ -67,6 +67,7 @@ class FoodInfoSearch extends FoodInfo
         $query->andFilterWhere([
             'id' => $this->id,
             'price' => $this->price,
+            'unit' => $this->unit,
             'food_id' => $this->food_id,
         ]);
 
