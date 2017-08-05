@@ -86,10 +86,12 @@
     <?= $this->render('footer') ?>
     <!--悬浮菜单：结束-->
 </div>
+<div id="big" style="display: block;"></div>
 </body>
 </html>
 
 <script>
+    $("#big").css('height', $(window).height() - $("#box").height() + 1);
     function woaicssq(num) {
         for (var id = 1; id <= 2; id++) {
             var MrJin = "woaicss_con" + id;
