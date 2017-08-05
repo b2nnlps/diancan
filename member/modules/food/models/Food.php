@@ -3,7 +3,6 @@
 namespace member\modules\food\models;
 
 use Yii;
-use member\modules\food\models\Classes;
 
 /**
  * This is the model class for table "n_food_food".
@@ -11,7 +10,6 @@ use member\modules\food\models\Classes;
  * @property integer $id
  * @property string $name
  * @property string $img
- * @property double $price
  * @property integer $shop_id
  * @property integer $class_id
  * @property string $created_time
@@ -94,9 +92,24 @@ class Food extends \yii\db\ActiveRecord
         return $food;
     }
     public static function getStock($food_id){//获取该商品所剩余的数量
-        $num = FoodInfo::find()->where(['food_id'=>$food_id])->sum('number');
+        $num = FoodInfo::find()->where(['food_id' => $food_id, 'status' => 0])->sum('number');
         if(!$num)$num=0;
         return $num;
+    }
+
+    public static function getPrices($food_id)
+    {//获取该商品的区间价格
+        $low = 99999;
+        $high = 0;
+        $info = FoodInfo::find()->where(['food_id' => $food_id, 'status' => 0])->all();
+        foreach ($info as $_info) {
+            if ($high < $_info['price']) $high = $_info['price'];
+            if ($low > $_info['price']) $low = $_info['price'];
+        }
+        if ($low == $high)
+            return $low;
+        else
+            return $low . '-' . $high;
     }
     public static function getCart(){//获取购物车内容
         if(!isset($_COOKIE['cart']))  return false;
