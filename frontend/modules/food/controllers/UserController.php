@@ -140,12 +140,13 @@ class UserController extends BaseController
         $name = $request->post('name', ' ');
         $phone = $request->post('phone', ' ');
         $notic = $request->post('notic', ' ');
+        $people = $request->post('people', 1);
         $table = $request->post('table', isset($_COOKIE['table']) ? $_COOKIE['table'] : '');
 
         User::newUser($this->openid, $name, $phone, $notic);
 
         $staff = ShopStaff::findOne(['shop_id' => $_COOKIE['shop'], 'openid' => $this->openid, 'status' => 0]);
-        $order = Order::newOrder($this->openid, $_COOKIE['shop'], '0', $name, $phone, $table, $staff, $notic);
+        $order = Order::newOrder($this->openid, $_COOKIE['shop'], '0', $name, $phone, $table, $people, $staff, $notic);
 
         $foods = [];
         $total = 0;
