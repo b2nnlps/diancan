@@ -1,77 +1,173 @@
-<?php
-use member\modules\food\models\OrderInfo;
-use member\modules\food\models\Food;
-?>
 <!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>点菜系统</title>
-    <link href="/static/food/css/style.css" rel="stylesheet" type="text/css">
-    <script src="/static/food/js/jquery-1.8.3.min.js"></script>
-    <script src="/static/food/js/index.js"></script>
+    <title>容合点餐系统</title>
+    <link href="/static/627dc/css/style.css" rel="stylesheet" type="text/css">
 </head>
 
-<body style="background-color:#EFEFF0;">
-<div class="box" style="background-color:#FFF;"><!--头部：开始--->
-
-    <div class="navigation">
-        <ul class="clearfix">
-            <li style="<?=$status==0?'border:1px solid #F5234A; background-color:#F5234A;':''?>"><a style="<?=$status==0?'color:#fff;':''?>" href="/food/user/my-order?status=0">进行中</a></li>
-            <li style="<?=$status==1?'border:1px solid #F5234A;background-color:#F5234A; color:#fff;':''?>"><a style="<?=$status==1?'color:#fff;':''?>" href="/food/user/my-order?status=1">已完成</a></li>
+<body>
+<div class="box">
+    <div class="Favorites">
+        <ul>
+            <li><a href="javascript:history.go(-1)"><img src="/static/627dc/images/fh.png" width="20" height="20"></a>
+            </li>
+            <p>订单列表</p>
+            <li><a href="#"></a></li>
+            <div class="clear"></div>
         </ul>
-        <dl class="clearfix">
-            <dt><a href="/food/user/index<?='?shop='.@$_COOKIE['shop']?>"><span>店内消费</span></a><img src="/static/food/images/right.png"></dt>
-            <dd></dd>
-        </dl>
     </div>
-
-    <?php
-    foreach($o as $_o){
-        $info=OrderInfo::findAll(['order_id'=>$_o['id']]);
-        $total=0;$text='';$i=0;
-        foreach($info as $_info) {$i++; $total+=$_info['num']*$_info['price'];$food=Food::findOne($_info['food_id']);$text.="<li class='clearfix'><span>$i.$food[name]</span><cite>￥$_info[price]</cite><em>x$_info[num]</em></li>";}
-        echo "
-  <div class='details' id='d$_o[id]'>
-            <dl class='clearfix'>
-            <dt>
-            <h4><span>订单：</span>$_o[id]</h4>
-            <time>$_o[created_time]</time>
-            <h4><span>$_o[text]</span></h4>
-            </dt>
-            <dd>
-                <h4>￥$total</h4>
-                <Span>在线支付</Span>
-            </dd>
-        </dl>
-        </div>
-         <div class='container'>
-            <div class='accordion'> <a><img src='/static/food/images/down.png'></a></div>
-        <div class='accordion-desc'>
-                <h3>订单详情</h3>
-                <ul>
-                    $text
-                </ul>
-                <ol>
-                    <li><span>订单号码：</span>$_o[id]</li>
-                    <li><span>订单信息：</span>$_o[text]</li>
-                    <li><span>总消费：</span>￥$total</li>
-                    <li><span>下单时间：</span>$_o[created_time]</li>
-
-                </ol>
+    <div class="main">
+        <!--        <div class="seek_box">-->
+        <!--              <div class="seek clearfix">-->
+        <!--               <input type="text" placeholder="请输入您查询订单ID">-->
+        <!--               <a href="#"><img src="/static/627dc/icon/ssimg.png"></a>-->
+        <!--              </div>-->
+        <!--         </div>-->
+        <div class="Chika">
+            <div class="Chikafusa">
+                <a href="#" onClick="woaicssq(1)" id="woaicsstitle" class="thisclass">待付款</a>
+                <a href="#" onClick="woaicssq(2)" id="woaicsstitle">进行中</a>
+                <a href="#" onClick="woaicssq(3)" id="woaicsstitle">已完成</a>
             </div>
         </div>
+        <div class="blank_box"></div>
+        <div id="woaicss_con1" style="display:block;">
 
-         <div class='operating_food clearfix'>
-         ";
-        if(!$status) echo "
-        <a style=' border-right:1px solid #000;' href='http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$_o[id]'>支付订单</a>
-                <a href='#'>追加菜品</a>
-    ";
-        echo "</div>";
-    }
-    ?>
+            <div class="indent">
+                <?php
+                $i = 0;
+                foreach ($o as $_o) {
+                    if ($_o['status'] == 0) {
+                        $i++;
+                        $hint = strlen($_o['text']) > 0 ? '<div class="hint_box"><img src="/static/627dc/images/tishi.png" width="15" height="15">' . $_o['text'] . '</div>' : "";
+                        echo <<<EOD
+    <a href="/food/user/order-detail?order_id=$_o[id]">
+                    <ul>
+                        <li class="clearfix"><h4>订单ID：$_o[id]</h4><span class="unpaid_box">待支付</span></li>
+                        <li class="clearfix" style="border:none; margin-bottom:-10px;"><h4>桌号：$_o[table]</h4><span class="consume_box">￥$_o[total]</span></li>
+                        <li class="clearfix"><h4 class="time_box">下单时间：$_o[created_time]</h4><span style="color:#A0A3A5; font-size:14px;"></span></li>
+                        $hint
+                    </ul>
+                </a>
+                <div class="blank_box"></div>
+EOD;
+                    }
+                }
+                if (!$i)
+                    echo '<div class="zw_box">
+                  <img src="/static/627dc/images/zwjlimg.png">
+                  <p>暂无记录！</p>
+                </div>';
+
+                ?>
+
+            </div>
+            <div class="load_more"><a href="#">加载更多</a></div>
+        </div>
+        <!---->
+        <div id="woaicss_con2" style="display:none;">
+            <div class="indent">
+
+                <?php
+                $i = 0;
+                foreach ($o as $_o) {
+                    if ($_o['status'] == 1) {
+                        $i++;
+                        if ($_o['type']) $str = '积分'; else $str = '￥';
+                        if ($_o['type']) $str2 = '待兑换'; else $str2 = '已支付';
+                        $hint = strlen($_o['text']) > 0 ? '<div class="hint_box"><img src="/static/627dc/images/tishi.png" width="15" height="15">' . $_o['text'] . '</div>' : "";
+                        echo <<<EOD
+    <a href="/food/user/order-detail?order_id=$_o[id]">
+                    <ul>
+                        <li class="clearfix"><h4>订单ID：$_o[id]</h4><span class="unpaid_box">$str2</span></li>
+                        <li class="clearfix" style="border:none; margin-bottom:-10px;"><h4>桌号：$_o[table]</h4><span class="consume_box">$str$_o[total]</span></li>
+                        <li class="clearfix"><h4 class="time_box">下单时间：$_o[created_time]</h4><span style="color:#A0A3A5; font-size:14px;"></span></li>
+                        $hint
+                    </ul>
+                </a>
+                <div class="blank_box"></div>
+EOD;
+                    }
+                }
+                if (!$i)
+                    echo '<div class="zw_box">
+                  <img src="/static/627dc/images/zwjlimg.png">
+                  <p>暂无记录！</p>
+                </div>';
+
+                ?>
+
+
+
+            </div>
+            <div class="load_more"><a href="#">加载更多</a></div>
+
+        </div>
+        <!---->
+        <div id="woaicss_con3" style="display:none;">
+            <div class="indent">
+
+                <?php
+                $i = 0;
+                foreach ($o as $_o) {
+                    if ($_o['status'] == 2) {
+                        $i++;
+                        if ($_o['type']) $str = '积分'; else $str = '￥';
+                        if ($_o['type']) $str2 = '已兑换'; else $str2 = '已完成';
+                        $hint = strlen($_o['text']) > 0 ? '<div class="hint_box"><img src="/static/627dc/images/tishi.png" width="15" height="15">' . $_o['text'] . '</div>' : "";
+                        echo <<<EOD
+    <a href="/food/user/order-detail?order_id=$_o[id]">
+                    <ul>
+                        <li class="clearfix"><h4>订单ID：$_o[id]</h4><span class="unpaid_box">$str2</span></li>
+                        <li class="clearfix" style="border:none; margin-bottom:-10px;"><h4>桌号：$_o[table]</h4><span class="consume_box">$str$_o[total]</span></li>
+                        <li class="clearfix"><h4 class="time_box">下单时间：$_o[created_time]</h4><span style="color:#A0A3A5; font-size:14px;"></span></li>
+                        $hint
+                    </ul>
+                </a>
+                <div class="blank_box"></div>
+EOD;
+                    }
+                }
+                if (!$i)
+                    echo '<div class="zw_box">
+                  <img src="/static/627dc/images/zwjlimg.png">
+                  <p>暂无记录！</p>
+                </div>';
+
+                ?>
+
+            </div>
+            <div class="load_more"><a href="#">加载更多</a></div>
+        </div>
+
+        <?= $this->render('footer') ?>
+
+    </div>
 </div>
+
 </body>
 </html>
+<script src="/static/627dc/js/jquery-1.8.3.min.js"></script>
+<script language="javascript">
+    function woaicssq(num) {
+        for (var id = 1; id <= 3; id++) {
+            var MrJin = "woaicss_con" + id;
+            if (id == num)
+                document.getElementById(MrJin).style.display = "block";
+            else
+                document.getElementById(MrJin).style.display = "none";
+        }
+        var zzsc = $(".Chikafusa a");
+        zzsc.click(function () {
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    }
+    $(function () {
+        var zzsc = $(".Chikafusa a");
+        zzsc.click(function () {
+            $(this).addClass("thisclass").siblings().removeClass("thisclass");
+        });
+    });
+</script>
