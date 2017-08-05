@@ -44,7 +44,7 @@
             <!--<div class="sum_box"><span>￥<i id="totalpriceshow">0</i></span> <em>另需配送费￥5</em> </div>-->
             <div class="sum_boxv1"><span>合计￥<i id="totalpriceshow">0.00</i></span></div>
             </dt>
-            <a onclick="checkCart()">
+            <a onclick="payCart();">
                 <dd>结算</dd>
             </a>
         </dl>
@@ -141,7 +141,7 @@
         layer.full(index);
 
     }
-    function checkCart() {//结算
+    function payCart() {//结算
         var num = $("#totalcountshow").text();
         if (num * 1 > 0) {
             window.location.href = '/food/user/order';
