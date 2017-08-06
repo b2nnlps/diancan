@@ -18,7 +18,7 @@ class ClassesSearch extends Classes
     public function rules()
     {
         return [
-            [['id', 'shop_id'], 'integer'],
+            [['id', 'shop_id', 'sort'], 'integer'],
             [['name', 'updated_time', 'created_time'], 'safe'],
         ];
     }
@@ -45,9 +45,9 @@ class ClassesSearch extends Classes
         $shopId = Yii::$app->user->identity->shop_id;//获取当前登录用户的商家ID
         $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
         if ($role < 3) {//如果为系统管理员则显示全部信息，否则只显示当前商家信息
-            $query = Classes::find();
+            $query = Classes::find()->orderBy('sort asc');
         } else {
-            $query = Classes::find()->where(['shop_id' => $shopId]);
+            $query = Classes::find()->where(['shop_id' => $shopId])->orderBy('sort asc');
         }
         // add conditions that should always apply here
 

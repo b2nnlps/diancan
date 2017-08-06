@@ -4,9 +4,70 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d02e78169b1a2adaaf6f4de2615eea46",
-    "content-hash": "a26614513d2f2bd20a09bec936287ca3",
+    "content-hash": "d8dcea31204628b1d7125590b8d2bbe1",
     "packages": [
+        {
+            "name": "2amigos/yii2-date-time-picker-widget",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2amigos/yii2-date-time-picker-widget.git",
+                "reference": "721a23e245b3b2a5ca2669e9a35a4ebdab321c8c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/2amigos/yii2-date-time-picker-widget/721a23e245b3b2a5ca2669e9a35a4ebdab321c8c.zip",
+                "reference": "721a23e245b3b2a5ca2669e9a35a4ebdab321c8c",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/smalot-bootstrap-datetimepicker": "2.4.4",
+                "yiisoft/yii2": "~2.0",
+                "yiisoft/yii2-bootstrap": "~2.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "asset-installer-paths": {
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dosamigos\\datetimepicker\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "2amigOS! Consulting Group",
+                    "email": "hola@2amigos.us",
+                    "homepage": "http://2amigos.us",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Bootstrap DateTimePicker widget for Yii2.",
+            "homepage": "http://yiiwheels.com/extension/bootstrap-datetimepicker",
+            "keywords": [
+                "2amigos",
+                "DateTimePicker",
+                "extension",
+                "widget",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2017-07-05 05:38:36"
+        },
         {
             "name": "almasaeed2010/adminlte",
             "version": "v2.3.5",
@@ -45,7 +106,7 @@
                 "theme",
                 "web"
             ],
-            "time": "2016-07-03 15:21:22"
+            "time": "2016-07-03T15:21:22+00:00"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -194,6 +255,31 @@
             ]
         },
         {
+            "name": "bower-asset/jquery-ui",
+            "version": "1.11.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/jqueryui.git",
+                "reference": "c34f8dbf3ba57b3784b93f26119f436c0e8288e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/jqueryui/zipball/c34f8dbf3ba57b3784b93f26119f436c0e8288e1",
+                "reference": "c34f8dbf3ba57b3784b93f26119f436c0e8288e1",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.6"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "jquery-ui.js"
+                ],
+                "bower-asset-ignore": []
+            }
+        },
+        {
             "name": "bower-asset/jquery.inputmask",
             "version": "3.2.7",
             "source": {
@@ -264,6 +350,39 @@
                     "Gruntfile.js",
                     "node_modules",
                     "package.json"
+                ]
+            }
+        },
+        {
+            "name": "bower-asset/smalot-bootstrap-datetimepicker",
+            "version": "2.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smalot/bootstrap-datetimepicker.git",
+                "reference": "32143c8b45575e51c92a8e29997cbe556d1bbba3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smalot/bootstrap-datetimepicker/zipball/32143c8b45575e51c92a8e29997cbe556d1bbba3",
+                "reference": "32143c8b45575e51c92a8e29997cbe556d1bbba3",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "js/bootstrap-datetimepicker.min.js",
+                    "css/bootstrap-datetimepicker.min.css"
+                ],
+                "bower-asset-ignore": [
+                    "build",
+                    "sample in bootstrap v2",
+                    "sample in bootstrap v3",
+                    "screenshot",
+                    "tests",
+                    ".gitattributes",
+                    ".gitignore",
+                    ".travis.yml",
+                    "minify.sh"
                 ]
             }
         },
@@ -359,7 +478,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2016-06-20 21:09:53"
+            "time": "2016-06-20T21:09:53+00:00"
         },
         {
             "name": "cebe/yii2-gravatar",
@@ -402,7 +521,7 @@
                 "gravatar",
                 "yii"
             ],
-            "time": "2013-12-10 17:49:58"
+            "time": "2013-12-10T17:49:58+00:00"
         },
         {
             "name": "crazyfd/yii2-ueditor",
@@ -443,7 +562,7 @@
                 "upload",
                 "yii"
             ],
-            "time": "2014-11-04 02:00:30"
+            "time": "2014-11-04T02:00:30+00:00"
         },
         {
             "name": "daixianceng/yii2-echarts",
@@ -488,7 +607,7 @@
                 "extension",
                 "yii2"
             ],
-            "time": "2016-05-05 04:04:07"
+            "time": "2016-05-05T04:04:07+00:00"
         },
         {
             "name": "dmstr/yii2-adminlte-asset",
@@ -542,7 +661,7 @@
                 "extension",
                 "yii2"
             ],
-            "time": "2016-05-31 15:42:01"
+            "time": "2016-05-31T15:42:01+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -586,7 +705,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2015-08-05 01:03:42"
+            "time": "2015-08-05T01:03:42+00:00"
         },
         {
             "name": "funson86/yii2-setting",
@@ -630,7 +749,7 @@
                 "setting",
                 "yii2"
             ],
-            "time": "2015-02-06 01:46:54"
+            "time": "2015-02-06T01:46:54+00:00"
         },
         {
             "name": "kartik-v/bootstrap-fileinput",
@@ -683,7 +802,7 @@
                 "progress",
                 "upload"
             ],
-            "time": "2016-07-11 09:07:59"
+            "time": "2016-07-11T09:07:59+00:00"
         },
         {
             "name": "kartik-v/bootstrap-star-rating",
@@ -727,7 +846,7 @@
                 "star",
                 "svg"
             ],
-            "time": "2016-07-05 08:55:54"
+            "time": "2016-07-05T08:55:54+00:00"
         },
         {
             "name": "kartik-v/dependent-dropdown",
@@ -769,7 +888,7 @@
                 "option",
                 "select"
             ],
-            "time": "2015-12-16 18:15:01"
+            "time": "2015-12-16T18:15:01+00:00"
         },
         {
             "name": "kartik-v/yii2-dialog",
@@ -821,7 +940,7 @@
                 "modal",
                 "yii2"
             ],
-            "time": "2016-07-12 06:27:34"
+            "time": "2016-07-12T06:27:34+00:00"
         },
         {
             "name": "kartik-v/yii2-grid",
@@ -871,7 +990,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-07-06 19:34:21"
+            "time": "2016-07-06T19:34:21+00:00"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -922,7 +1041,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-06-02 16:20:24"
+            "time": "2016-06-02T16:20:24+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-activeform",
@@ -974,7 +1093,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-04-27 18:38:05"
+            "time": "2016-04-27T18:38:05+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-affix",
@@ -1023,7 +1142,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-03-21 16:55:54"
+            "time": "2016-03-21T16:55:54+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-alert",
@@ -1073,7 +1192,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-04-21 15:32:57"
+            "time": "2015-04-21T15:32:57+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-colorinput",
@@ -1127,7 +1246,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-04-07 11:58:28"
+            "time": "2016-04-07T11:58:28+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-datepicker",
@@ -1181,7 +1300,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-07-01 11:15:25"
+            "time": "2016-07-01T11:15:25+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-datetimepicker",
@@ -1230,7 +1349,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-07-09 15:37:07"
+            "time": "2016-07-09T15:37:07+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-depdrop",
@@ -1279,7 +1398,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-01-10 17:30:48"
+            "time": "2016-01-10T17:30:48+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-fileinput",
@@ -1334,7 +1453,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-07-06 19:27:12"
+            "time": "2016-07-06T19:27:12+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-growl",
@@ -1383,7 +1502,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-05-03 08:23:04"
+            "time": "2015-05-03T08:23:04+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-rangeinput",
@@ -1432,7 +1551,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-11-22 06:52:44"
+            "time": "2015-11-22T06:52:44+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-rating",
@@ -1488,7 +1607,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-07-06 19:29:22"
+            "time": "2016-07-06T19:29:22+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-select2",
@@ -1541,7 +1660,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-06-14 13:48:39"
+            "time": "2016-06-14T13:48:39+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-sidenav",
@@ -1590,7 +1709,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-04-21 15:38:40"
+            "time": "2015-04-21T15:38:40+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-spinner",
@@ -1638,7 +1757,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-07-10 17:53:26"
+            "time": "2015-07-10T17:53:26+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-switchinput",
@@ -1688,7 +1807,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-01-10 16:47:35"
+            "time": "2016-01-10T16:47:35+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-timepicker",
@@ -1737,7 +1856,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-01-12 09:50:39"
+            "time": "2016-01-12T09:50:39+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-touchspin",
@@ -1787,7 +1906,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-01-10 17:10:39"
+            "time": "2016-01-10T17:10:39+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-typeahead",
@@ -1835,7 +1954,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-07-07 08:39:29"
+            "time": "2015-07-07T08:39:29+00:00"
         },
         {
             "name": "kartik-v/yii2-widgets",
@@ -1897,7 +2016,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-12-05 10:37:16"
+            "time": "2015-12-05T10:37:16+00:00"
         },
         {
             "name": "kucha/ueditor",
@@ -1930,7 +2049,7 @@
                 }
             ],
             "description": "desc",
-            "time": "2016-07-11 11:21:25"
+            "time": "2016-07-11T11:21:25+00:00"
         },
         {
             "name": "liyunfang/yii2-widget-linkpager",
@@ -1974,7 +2093,7 @@
                 "yii2",
                 "yii2-widget-linkpager"
             ],
-            "time": "2015-09-24 04:23:54"
+            "time": "2015-09-24T04:23:54+00:00"
         },
         {
             "name": "mdmsoft/yii2-admin",
@@ -2032,7 +2151,52 @@
                 "rbac",
                 "yii"
             ],
-            "time": "2016-05-20 23:38:13"
+            "time": "2016-05-20T23:38:13+00:00"
+        },
+        {
+            "name": "richardfan1126/yii2-sortable-gridview",
+            "version": "v0.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/richardfan1126/yii2-sortable-gridview.git",
+                "reference": "405061090b1d810146bf39cae521969ae56f22e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/richardfan1126/yii2-sortable-gridview/405061090b1d810146bf39cae521969ae56f22e5.zip",
+                "reference": "405061090b1d810146bf39cae521969ae56f22e5",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*",
+                "yiisoft/yii2-bootstrap": "~2.0.0",
+                "yiisoft/yii2-jui": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "richardfan\\sortable\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Richard Fan",
+                    "email": "richardfan1126@gmail.com",
+                    "homepage": "https://fancy-digital.com"
+                }
+            ],
+            "description": "Sortable GridView for Yii2",
+            "keywords": [
+                "extension",
+                "gridview",
+                "widget",
+                "yii2"
+            ],
+            "time": "2017-04-19T06:20:33+00:00"
         },
         {
             "name": "rmrevin/yii2-fontawesome",
@@ -2083,7 +2247,7 @@
                 "font",
                 "yii"
             ],
-            "time": "2016-05-28 21:18:32"
+            "time": "2016-05-28T21:18:32+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2136,7 +2300,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-07-09 18:06:48"
+            "time": "2016-07-09T18:06:48+00:00"
         },
         {
             "name": "xj/yii2-oauth",
@@ -2173,7 +2337,7 @@
                 }
             ],
             "description": "yii2-oauth",
-            "time": "2016-03-15 08:26:48"
+            "time": "2016-03-15T08:26:48+00:00"
         },
         {
             "name": "xj/yii2-uploadify-widget",
@@ -2209,7 +2373,7 @@
                 }
             ],
             "description": "yii2-uploadify-widget",
-            "time": "2015-09-11 15:27:53"
+            "time": "2015-09-11T15:27:53+00:00"
         },
         {
             "name": "yiisoft/yii2",
@@ -2303,7 +2467,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-07-15 18:46:14"
+            "time": "2016-07-15T18:46:14+00:00"
         },
         {
             "name": "yiisoft/yii2-authclient",
@@ -2350,7 +2514,7 @@
                 "oauth",
                 "yii2"
             ],
-            "time": "2016-07-15 15:18:08"
+            "time": "2016-07-15T15:18:08+00:00"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -2400,7 +2564,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2016-07-12 10:21:49"
+            "time": "2016-07-12T10:21:49+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -2447,7 +2611,7 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2016-06-05 20:34:32"
+            "time": "2016-06-05T20:34:32+00:00"
         },
         {
             "name": "yiisoft/yii2-httpclient",
@@ -2494,7 +2658,53 @@
                 "httpclient",
                 "yii2"
             ],
-            "time": "2016-07-15 12:33:20"
+            "time": "2016-07-15T12:33:20+00:00"
+        },
+        {
+            "name": "yiisoft/yii2-jui",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-jui.git",
+                "reference": "75e6f78010e9e9a60d7eecc58c8ad5655778535d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/yiisoft/yii2-jui/75e6f78010e9e9a60d7eecc58c8ad5655778535d.zip",
+                "reference": "75e6f78010e9e9a60d7eecc58c8ad5655778535d",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery-ui": "1.11.*@stable",
+                "yiisoft/yii2": "~2.0.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\jui\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com"
+                }
+            ],
+            "description": "The Jquery UI extension for the Yii framework",
+            "keywords": [
+                "jQuery UI",
+                "yii2"
+            ],
+            "time": "2017-08-01 19:29:58"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -2544,7 +2754,7 @@
                 "swiftmailer",
                 "yii2"
             ],
-            "time": "2016-04-14 08:50:13"
+            "time": "2016-04-14T08:50:13+00:00"
         }
     ],
     "packages-dev": [
@@ -2623,7 +2833,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-07-11 08:36:05"
+            "time": "2016-07-11T08:36:05+00:00"
         },
         {
             "name": "phpspec/php-diff",
@@ -2661,7 +2871,7 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2016-04-07 12:29:16"
+            "time": "2016-04-07T12:29:16+00:00"
         },
         {
             "name": "yiisoft/yii2-codeception",
@@ -2706,7 +2916,8 @@
                 "codeception",
                 "yii2"
             ],
-            "time": "2016-04-14 08:46:27"
+            "abandoned": "codeception/codeception",
+            "time": "2016-04-14T08:46:27+00:00"
         },
         {
             "name": "yiisoft/yii2-debug",
@@ -2753,7 +2964,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2016-06-06 19:17:49"
+            "time": "2016-06-06T19:17:49+00:00"
         },
         {
             "name": "yiisoft/yii2-faker",
@@ -2800,7 +3011,7 @@
                 "faker",
                 "yii2"
             ],
-            "time": "2016-04-14 08:47:34"
+            "time": "2016-04-14T08:47:34+00:00"
         },
         {
             "name": "yiisoft/yii2-gii",
@@ -2853,7 +3064,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2016-07-07 16:09:06"
+            "time": "2016-07-07T16:09:06+00:00"
         }
     ],
     "aliases": [],

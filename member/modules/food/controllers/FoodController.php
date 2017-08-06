@@ -5,6 +5,7 @@ namespace member\modules\food\controllers;
 use member\modules\food\models\Classes;
 use member\modules\food\models\FoodInfo;
 use member\modules\food\models\Shop;
+use richardfan\sortable\SortableAction;
 use Yii;
 use member\modules\food\models\Food;
 use member\modules\food\models\search\FoodSearch;
@@ -29,8 +30,13 @@ class FoodController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-
+            'sortItem' => [
+                'class' => SortableAction::className(),
+                'activeRecordClassName' => Food::className(),
+                'orderColumn' => 'sort',
+            ],
         ];
+
     }
     public function actions()
 {
@@ -54,13 +60,9 @@ class FoodController extends Controller
     {
         $searchModel = new FoodSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//        $dataProvider->pagination->pageSize =20;
+        $dataProvider->pagination = false;//显示全部数据，不显示分页
 
-//        if($shop_id) {
-//            $shop = Shop::findOne($shop_id);
-//            $cookies = Yii::$app->response->cookies;        //增加密文
-//            $cookies->add(new \yii\web\Cookie(['name' => 'shop_id', 'value' => $shop_id, 'expire' => time() + 3600]));
-//            $cookies->add(new \yii\web\Cookie(['name' => 'shop_name', 'value' => $shop['name'], 'expire' => time() + 3600]));
-//        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,

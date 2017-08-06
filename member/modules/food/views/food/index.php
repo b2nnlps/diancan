@@ -17,11 +17,25 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('新❤菜品', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
+    <!--    --><? //= GridView::widget([
+    //        'dataProvider' => $dataProvider,
+    //        'filterModel' => $searchModel,
+    //        'columns' => [
+    //
+    //
+    //        ],
+    //    ]); ?>
 
+    <?= \richardfan\sortable\SortableAction::widget([
+        'dataProvider' => $dataProvider,
+
+        // SortableGridView Configurations
+        'sortUrl' => \yii\helpers\Url::to(['sortItem']),
+        'sortingPromptText' => 'Loading...',
+        'failText' => 'Fail to sort',
+
+        'columns' => [
+            // Data Columns
             [
                 'headerOptions' => ["width" => "80"],
                 'label' => '图像',
@@ -76,11 +90,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->status($model->status);
                 },
             ],
-
+            'sort',
             'created_time',
             // 'updated_time',
 
             ['class' => 'yii\grid\ActionColumn'],
+
         ],
     ]); ?>
 </div>

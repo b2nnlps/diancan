@@ -2,13 +2,16 @@
 
 namespace member\modules\food\controllers;
 
+
+use oonne\sortablegrid\SortableGridAction;
+use oonne\sortablegrid\SortableGridBehavior;
 use Yii;
 use member\modules\food\models\Classes;
 use member\modules\food\models\search\ClassesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use richardfan\sortable\SortableAction;
 /**
  * ClassesController implements the CRUD actions for Classes model.
  */
@@ -26,9 +29,29 @@ class ClassesController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+
+//            'sort' => [
+//                'class' => SortableGridBehavior::className(),
+//                'sortableAttribute' => 'sort'
+//            ],
         ];
     }
 
+    public function actions()
+    {
+        return [
+            'sortItem' => [
+                'class' => SortableAction::className(),
+                'activeRecordClassName' => Classes::className(),
+                'orderColumn' => 'sort',
+            ],
+            // your other actions
+//            'sort' => [
+//                'class' =>SortableGridAction::className(),
+//                'modelName' => Classes::className(),
+//            ],
+        ];
+    }
     /**
      * Lists all Classes models.
      * @return mixed
@@ -40,7 +63,7 @@ class ClassesController extends Controller
 
         $searchModel = new ClassesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->pagination = false;
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

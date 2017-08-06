@@ -31,7 +31,7 @@ class Classes extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'shop_id', 'updated_time', 'created_time'], 'required'],
-            [['shop_id'], 'integer'],
+            [['shop_id', 'id', 'sort'], 'integer'],
             [['updated_time', 'created_time'], 'safe'],
             [['name'], 'string', 'max' => 80],
             [['img'], 'string', 'max' => 255],
@@ -47,6 +47,7 @@ class Classes extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => '分类名字',
             'img' => '分类图片',
+            'sort' => '自定义排序',
             'shop_id' => '所属商家',
             'updated_time' => '创建时间',
             'created_time' => '更新时间',

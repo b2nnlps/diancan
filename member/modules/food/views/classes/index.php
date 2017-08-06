@@ -16,10 +16,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('新菜类', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
+
+    <?=
+    \richardfan\sortable\SortableGridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+
+        // SortableGridView Configurations
+        'sortUrl' => \yii\helpers\Url::to(['sortItem']),
+        'sortingPromptText' => 'Loading...',
+        'failText' => 'Fail to sort',
+
         'columns' => [
+            // Data Columns
 //            ['class' => 'yii\grid\SerialColumn'],
 
             [
@@ -42,6 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 )
 
             ],
+            'sort',
             'updated_time',
             // 'created_time',
 
