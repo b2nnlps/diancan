@@ -1,9 +1,14 @@
+<?php
+$jssdk = new \common\wechat\JSSDK();
+$signPackage = $jssdk->GetSignPackage();
+
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>容合点餐系统</title>
+    <title><?= $shop['name'] ?></title>
     <link href="/static/84dc/css/list_v1.css" rel="stylesheet">
 </head>
 <body>
@@ -112,12 +117,34 @@
 <script type="text/javascript" src="/static/84dc/js/index_css.js"></script>
 <script type="text/javascript" src="/static/84dc/js/index.js"></script>
 <script type="text/javascript" src="/static/84dc/js/index_api.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    /**
+     * 转发封面及简介
+     * @returns {undefined}
+     */
+    var dataForShare = {
+        weixin_icon: "<?=$shop['img']?>",
+        weixin_url: "http://ms.n39.cn/food/user/index?shopId=<?=$shop['id']?>",
+        weibo_icon: "<?=$shop['img']?>",
+        url: "http://ms.n39.cn/food/user/index?shopId=<?=$shop['id']?>",
+        title: "<?=$shop['name']?>",
+        description: "<?=$shop['description']?>"
+    };
+    var appId = "<?=$signPackage["appId"]?>";
+    var timestamp = "<?=$signPackage["timestamp"]?>";
+    var nonceStr = "<?=$signPackage["nonceStr"]?>";
+    var signature = "<?=$signPackage["signature"]?>";
+
+</script>
+<script type="text/javascript" src="/static/84dc/js/wx_share.js"></script>
 <script>
     var index;
     var shopId = <?=$shopId?>;
     layer.ready(function () {
         index = layer.load(0, {shade: false});
         getFoodList(shopId);
+
     });
     function openDetail(id) {//打开菜品详情
         var index = layer.open({
