@@ -123,7 +123,7 @@ class Order extends \yii\db\ActiveRecord
     {
         if($status===false)$status=''; else $status=' AND b.status='.$status;
         $order=(new \yii\db\Query())
-            ->select(['a.text','a.table','b.id','b.food_id','b.info_id','b.num','b.status','a.created_time'])
+            ->select(['b.text', 'a.table', 'b.id', 'b.food_id', 'b.info_id', 'b.num', 'b.status', 'a.created_time'])
             ->from('n_food_order a,n_food_order_info b')
             ->where('a.id=b.order_id AND a.shop_id=:shop_id'.$status,[':shop_id'=>$shop_id])
             ->orderBy('a.created_time')
@@ -152,6 +152,7 @@ class Order extends \yii\db\ActiveRecord
         }
         $total = round($total, 2);
         $text .= self::charsetToGBK("\n订单编号：" . $o['id']) . "\n";
+        $text .= self::charsetToGBK("就餐桌号：" . $o['table']) . "\n";
         $text .= self::charsetToGBK('联系电话：' . $o['phone']) . "\n";
         $text .= self::charsetToGBK('订单备注：' . $o['text']) . "\n";
         $text .= self::charsetToGBK('下单时间：' . date("Y-m-d H:i:s")) . "\n";

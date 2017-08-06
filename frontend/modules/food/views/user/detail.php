@@ -24,6 +24,8 @@
                 for ($i = 0; $i < count($imgs); $i++) {
                     if (strlen($imgs[$i]) > 3) echo "<a href=\"#\">$i</a>";
                 }
+                if (!count($imgs))
+                    echo "<a href=\"#\">$food[head_img]</a>";
                 ?>
             </div>
             <div class="main_image">
@@ -32,9 +34,13 @@
                     foreach ($imgs as $img) {
                         if (strlen($img) > 3) echo "<li><span><img src='$img'></span></li>";
                     }
+                    if (!count($imgs))
+                        echo "<li><span><img src='$food[head_img]'></span></li>";
+                    if (count($imgs) > 1)
+                        echo '<a id="btn_prev"></a> <a id="btn_next"></a>';
                     ?>
                 </ul>
-                <a id="btn_prev"></a> <a id="btn_next"></a></div>
+            </div>
         </div>
         <!--效果html结束-->
         <div class="product">

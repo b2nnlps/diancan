@@ -33,7 +33,9 @@ class UserController extends BaseController
         if ($shopId) setcookie("shop", $shopId, time() + 86400 * 7, "/"); else $shopId = $_COOKIE['shop'];
         if ($table) setcookie("table", $table, time() + 86400 * 7, "/");
 
-        return $this->render('index', ['shopId' => $shopId]);
+        $shop = Shop::findOne($shopId);
+
+        return $this->render('index', ['shopId' => $shopId, 'shop' => $shop]);
     }
 
     public function actionDebug()
@@ -166,8 +168,8 @@ class UserController extends BaseController
         $order->total = $total;
 
 
-        if (1) {
-//        if($staff){
+//        if (1) {
+        if ($staff) {
             setcookie('cart', '', time() - 1, '/');
 
             $order->status = 1;
@@ -180,10 +182,11 @@ class UserController extends BaseController
             return $this->render('shop-success', ['shop_id' => $order['shop_id']]);
             // header("Location: http://ms.n39.cn/food/default/push-mess?orderno=$order->id");
         } else {
-
+            $order->status = 0;
             $order->save();
-            header("Location: http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$order->id");
+            header("Location: http://ms.n39.cn/wxpay/$order[shop_id]/n_food_pay.php?order_id=$order->id");
         }
+        //  }
         // echo "Location: http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$order->id";
 
 
