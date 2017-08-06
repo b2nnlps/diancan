@@ -1678,3 +1678,12 @@ a#btn_next {
     top: 102;
     z-index: 80;
 }
+
+.dishes {
+    width: 90%;
+}
+
+.dishes p {
+    width: 100%;
+    border: 1px solid #F00;
+}
