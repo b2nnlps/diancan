@@ -42,7 +42,7 @@ class DefaultController extends Controller
     }
 
     public  function actionGetPrint(){//获取有效期的订单 用软件定时触发的
-        $o = Order::find()->where('(status = 1 OR status=3) AND (print != 1) AND updated_time <= :time', [':time' => date("Y-m-d H:i:s", time() + 1800)])->one();
+        $o = Order::find()->where('(status = 1 OR status=3) AND (print = 0) AND updated_time <= :time', [':time' => date("Y-m-d H:i:s", time() - 1800)])->one();
         if($o) return self::actionPushMess($o['id']);
         return 0;
     }
