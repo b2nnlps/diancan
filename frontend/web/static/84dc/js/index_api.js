@@ -54,8 +54,11 @@ function showFoodList(res) {
         text = '<div class="right_list clearfix">';
         if ((food[i].head_img).length > 0) cli = 'onclick="openDetail(' + food[i].id + ')"'; else cli = "";
         if ((food[i].head_img).length > 0)
-            text += '<div class="list_img"><a ' + cli + '><img src="' + food[i].head_img + '"></a></div>';
-        text += '<div class="nopic_box1">';
+            text += '<div class="list_img"><a ' + cli + '><img class="lazy" data-original="' + food[i].head_img + '"></a></div>';
+        if ((food[i].head_img).length > 0)
+            text += '<div class="nopic_box1">';
+        else
+            text += '<div class="nopic_box1 dishes">';
         text += '<p><a ' + cli + '>' + food[i].name + '</a></p>';
         a = getInfoPrice(food[i].id);
         text += '<div>已售' + food[i].sold_number + '份</div><div><b>￥' + a[1] + a[2] + '</b></div>';
@@ -76,6 +79,7 @@ function showFoodList(res) {
         $("#body" + food[i].class_id).append(text);
     }
     updateIndex(false);//更新首页的商品数量
+    $("img.lazy").lazyload({threshold: 180});
 }
 
 
