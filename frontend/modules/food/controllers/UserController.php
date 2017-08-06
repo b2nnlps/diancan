@@ -182,7 +182,7 @@ class UserController extends BaseController
             return $this->render('shop-success', ['shop_id' => $order['shop_id']]);
             // header("Location: http://ms.n39.cn/food/default/push-mess?orderno=$order->id");
         } else {
-
+            $order->status = 0;
             $order->save();
             header("Location: http://ms.n39.cn/wxpay/$order[shop_id]/n_food_pay.php?order_id=$order->id");
         }
