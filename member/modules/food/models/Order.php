@@ -136,8 +136,8 @@ class Order extends \yii\db\ActiveRecord
     { //该函数只负责打印
         $shop = Shop::findOne($o['shop_id']);
         $info = OrderInfo::findAll(['order_id' => $o['id']]);
-        $text = self::charsetToGBK("\n#" . $o['num']) . "\n";
-        $text .= '================================';
+        // $text = self::charsetToGBK("\n#" . $o['num']) . "\n";
+        $text = '================================';
         $total = 0;
         $i = 0;
         foreach ($info as $_info) {
@@ -191,7 +191,7 @@ class Order extends \yii\db\ActiveRecord
     {  //转换格式，对齐
         $a = self::charsetToGBK($a);
         $num = strlen($a) + strlen($b) + strlen($c);
-        $kong = (intval($num / 31) + 1) * 31;
+        $kong = (intval($num / 32) + 1) * 32;
         return $a . str_repeat(' ', $kong - $num) . self::charsetToGBK($b) . $c . "\n";
     }
 
