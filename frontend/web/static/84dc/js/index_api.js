@@ -26,7 +26,7 @@ function showFoodList(res) {
         text2 += '<div class="list_cont"><div class="list_tile" id="list_title' + classes[i].id + '">' + classes[i].name + '</div><div class="list_right" id="body' + classes[i].id + '"></div></div>';//主体的分类
     }
     //侧边栏分类
-    text += '<div style=" padding-bottom:300px;"></div>';
+
     $(".list_menu").html(text);
     $(".list_menu>:first").addClass('on');	//第一个分类标红
     //主体分类
