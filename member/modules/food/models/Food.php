@@ -32,7 +32,7 @@ class Food extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'shop_id', 'class_id'], 'required'],
-            [['shop_id', 'class_id','status'], 'integer'],
+            [['shop_id', 'sort', 'class_id', 'status'], 'integer'],
             [['created_time', 'updated_time','description'], 'safe'],
             [['name'], 'string', 'max' => 80],
             [['head_img'], 'string', 'max' => 255],
@@ -49,6 +49,7 @@ class Food extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => '菜名',
             'img' => '图片',
+            'sort' => '自定义排序',
             'sold_number' => '已售',
             'description' => '详细描述',
             'shop_id' => '所属商店',

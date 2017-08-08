@@ -29,7 +29,9 @@
         "xj/yii2-uploadify-widget": "~2.0.0",
         "xj/yii2-oauth": "~1.0",
         "daixianceng/yii2-echarts": "*",
-		"2amigos/yii2-date-time-picker-widget": "~1.0"
+        "2amigos/yii2-date-time-picker-widget": "~1.0",
+        "richardfan1126/yii2-sortable-gridview": "*",
+        "oonne/yii2-sortable-grid-view-widget": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
