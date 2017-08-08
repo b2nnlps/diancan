@@ -14,6 +14,7 @@ use Yii;
  * @property integer $num
  * @property string $info_id
  * @property string $text
+ * @property string $operator
  * @property integer $status
  */
 class OrderInfo extends \yii\db\ActiveRecord
@@ -34,6 +35,7 @@ class OrderInfo extends \yii\db\ActiveRecord
         return [
             [['order_id', 'food_id', 'info_id', 'price', 'num'], 'required'],
             [['order_id', 'food_id', 'info_id', 'price', 'num', 'status'], 'integer'],
+            [['operator'], 'string', 'max' => 255],
             [['text'], 'string'],
         ];
     }
@@ -50,6 +52,7 @@ class OrderInfo extends \yii\db\ActiveRecord
             'price' => '价格（分）',
             'num' => '数量',
             'info_id' => '规格id',
+            'operator' => '操作人',
             'text' => '要求备注',
             'status' => '状态',
         ];
