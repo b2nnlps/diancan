@@ -2,6 +2,8 @@
 
 namespace member\modules\food\controllers;
 
+use dosamigos\qrcode\formats\Phone;
+use dosamigos\qrcode\QrCode;
 use member\modules\sys\models\User;
 use Yii;
 use member\modules\food\models\Shop;
@@ -46,6 +48,7 @@ class ShopController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
 
     /**
      * Displays a single Shop model.

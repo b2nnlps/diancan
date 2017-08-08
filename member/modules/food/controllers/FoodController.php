@@ -5,13 +5,13 @@ namespace member\modules\food\controllers;
 use member\modules\food\models\Classes;
 use member\modules\food\models\FoodInfo;
 use member\modules\food\models\Shop;
-use richardfan\sortable\SortableAction;
 use Yii;
 use member\modules\food\models\Food;
 use member\modules\food\models\search\FoodSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use richardfan\sortable\SortableAction;
 
 /**
  * FoodController implements the CRUD actions for Food model.
@@ -30,27 +30,28 @@ class FoodController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+
+        ];
+
+    }
+
+    public function actions()
+    {
+        return [
+            'ueditor' => [
+                'class' => 'crazyfd\ueditor\Upload',
+                'config' => [
+                    'uploadDir' => date('Y/m/d'),
+                    'url' => 'http://foodimg.n39.cn'
+                ],
+            ],
             'sortItem' => [
                 'class' => SortableAction::className(),
                 'activeRecordClassName' => Food::className(),
                 'orderColumn' => 'sort',
             ],
         ];
-
     }
-    public function actions()
-{
-    return [
-        'ueditor' => [
-            'class' => 'crazyfd\ueditor\Upload',
-            'config'=>[
-                'uploadDir'=>date('Y/m/d'),
-				'url'=>'http://foodimg.n39.cn'
-            ]
-
-        ],
-    ];
-}
 
     /**
      * Lists all Food models.
