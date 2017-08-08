@@ -430,6 +430,8 @@ html #layuicss-skinlayercss {
 
 .layui-layer-setwin .layui-layer-close2:hover {
     background: url(close_blue.png) no-repeat;
+    background-size: 30px 30px;
+    background-position: 10px 10px;
 }
 
 .layui-layer-btn {
