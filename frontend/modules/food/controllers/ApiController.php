@@ -86,9 +86,9 @@ class ApiController extends BaseApiController
     public function actionGetFoodList($shopId)
     {
         $shop = Shop::find()->select(['name', 'img', 'description', 'contact', 'address', 'begin_time', 'end_time'])->where(['id' => $shopId])->asArray()->one();
-        $food = Food::find()->where('shop_id=:shop_id AND (status=0 OR status=1)', [':shop_id' => $shopId])->orderBy('class_id ASC')->asArray()->all();
+        $food = Food::find()->where('shop_id=:shop_id AND (status=0 OR status=1)', [':shop_id' => $shopId])->orderBy('sort ASC')->asArray()->all();
         $foodInfo = FoodInfo::find()->where(['shop_id' => $shopId, 'status' => 0])->asArray()->all();
-        $class = Classes::find()->where(['shop_id' => $shopId])->orderBy('id ASC')->asArray()->all();
+        $class = Classes::find()->where(['shop_id' => $shopId])->orderBy('sort ASC')->asArray()->all();
         $return['shop'] = $shop;
         $return['food'] = $food;
         $return['foodInfo'] = $foodInfo;

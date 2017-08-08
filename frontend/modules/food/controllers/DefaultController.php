@@ -32,9 +32,13 @@ class DefaultController extends Controller
                 $o['num']=$num+1;
                 $o->save();
             }
-            $table=Table::find()->where(['table'=>$o['table']])->one();
-            if($table)
+            $table = Table::find()->where(['table' => $o['table'], 'shop_id' => $o['shop_id']])->one();
+            if ($table)//获取桌号对应的打印机
+                Order::printOrder($o, $table['device_id']);
+            else {//默认打印机
+                $table = Table::find()->where(['table' => '-1', 'shop_id' => $o['shop_id']])->one();
                 Order::printOrder($o,$table['device_id']);//判断完后开始打印
+            }
 
             $session['orderno']=$orderno;
             self::WechatMessage($o['user'], $o['id'], $o['total'], $o['table'], $o['status'] == 1 ? '线上已支付' : '现金待支付', '出单中...');
