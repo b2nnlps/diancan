@@ -59,7 +59,7 @@ EOD;
                if($o['status']){
                    echo '<div class="submit_box1"><button id="conf" style="background-color: #00bf00">已完成</button></div>';
                }else{
-                   echo '<a href="/wxpayapi/n_food_pay.php?order_id='.$o['id'].'"><div class="submit_box1"><button id="conf">去支付</button></div>';
+                   echo '<a href="/wxpay/' . $o['shop_id'] . '/n_food_pay.php?order_id=' . $o['id'] . '"><div class="submit_box1"><button id="conf">去支付</button></div>';
                }
                ?>
          </div>
