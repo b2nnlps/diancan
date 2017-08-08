@@ -18,7 +18,7 @@ class FoodSearch extends Food
     public function rules()
     {
         return [
-            [['id', 'shop_id', 'status', 'class_id'], 'integer'],
+            [['id', 'shop_id', 'sort', 'status', 'class_id'], 'integer'],
             [['name', 'img', 'created_time', 'updated_time'], 'safe'],
             //   [['price'], 'number'],
         ];
@@ -40,14 +40,14 @@ class FoodSearch extends Food
      *
      * @return ActiveDataProvider
      */
-    public function search($params,$shop_id=0)
+    public function search($params)
     {
         $shopId = Yii::$app->user->identity->shop_id;//获取当前登录用户的商家ID
         $role = Yii::$app->user->identity->role;//获取当前登录用户的权限ID
         if ($role < 3) {//如果为系统管理员则显示全部信息，否则只显示当前商家信息
-            $query = Food::find()->orderBy('id desc');
+            $query = Food::find()->orderBy('sort asc');
         } else {
-            $query = Food::find()->where(['shop_id' => $shopId])->orderBy('id desc');
+            $query = Food::find()->where(['shop_id' => $shopId])->orderBy('sort asc');
         }
         // add conditions that should always apply here
 

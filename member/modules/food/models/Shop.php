@@ -12,7 +12,6 @@ use yii\helpers\ArrayHelper;
  * @property string $name
  * @property string $contact
  * @property string $address
- * @property string $device_id
  * @property string $img
  * @property string $created_time
  */

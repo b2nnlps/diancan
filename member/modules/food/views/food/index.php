@@ -17,18 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('新❤菜品', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <!--    --><? //= GridView::widget([
-    //        'dataProvider' => $dataProvider,
-    //        'filterModel' => $searchModel,
-    //        'columns' => [
-    //
-    //
-    //        ],
-    //    ]); ?>
 
-    <?= \richardfan\sortable\SortableAction::widget([
+    <?= \richardfan\sortable\SortableGridView::widget([
         'dataProvider' => $dataProvider,
-
+        'filterModel' => $searchModel,
         // SortableGridView Configurations
         'sortUrl' => \yii\helpers\Url::to(['sortItem']),
         'sortingPromptText' => 'Loading...',

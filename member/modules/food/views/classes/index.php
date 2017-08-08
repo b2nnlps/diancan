@@ -17,10 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('新菜类', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?=
-    \richardfan\sortable\SortableGridView::widget([
+    <?= \richardfan\sortable\SortableGridView::widget([
         'dataProvider' => $dataProvider,
-
+        'filterModel' => $searchModel,
         // SortableGridView Configurations
         'sortUrl' => \yii\helpers\Url::to(['sortItem']),
         'sortingPromptText' => 'Loading...',

@@ -31,7 +31,14 @@
         "daixianceng/yii2-echarts": "*",
         "2amigos/yii2-date-time-picker-widget": "~1.0",
         "richardfan1126/yii2-sortable-gridview": "*",
-        "oonne/yii2-sortable-grid-view-widget": "*"
+        "bailangzhan/yii2-webuploader": "dev-master",
+        "2amigos/yii2-qrcode-helper": "~1.0",
+        "2amigos/yii2-switch-widget": "~1.0",
+        "2amigos/yii2-taggable-behavior": "~1.0",
+        "2amigos/yii2-grid-view-library": "~1.0",
+        "2amigos/yii2-selectize-widget": "~1.0",
+        "2amigos/yii2-file-upload-widget": "~1.0",
+        "kartik-v/yii2-checkbox-x": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -58,7 +58,7 @@ class ClassesController extends Controller
      */
     public function actionIndex()
     {
-        $cookies = Yii::$app->request->cookies;
+//        $cookies = Yii::$app->request->cookies;
 //        $shop_id=$cookies->getValue('shop_id',false);
 
         $searchModel = new ClassesSearch();
