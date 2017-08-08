@@ -10,8 +10,7 @@ use member\modules\food\models\Classes;
 use member\modules\food\models\Shop;
 use member\modules\food\models\Order;
 use member\modules\food\models\OrderInfo;
-use member\modules\food\models\ShopStaff;
-use member\modules\food\models\Table;
+use member\modules\food\models\Feedback;
 use common\wechat\JSSDK;
 
 /**
@@ -84,16 +83,23 @@ class ApiController extends BaseApiController
     }
 
     public function actionGetFoodList($shopId)
-    {
+    {//获取菜品列表
         $shop = Shop::find()->select(['name', 'img', 'description', 'contact', 'address', 'begin_time', 'end_time'])->where(['id' => $shopId])->asArray()->one();
         $food = Food::find()->where('shop_id=:shop_id AND (status=0 OR status=1)', [':shop_id' => $shopId])->orderBy('sort ASC')->asArray()->all();
-        $foodInfo = FoodInfo::find()->where(['shop_id' => $shopId, 'status' => 0])->asArray()->all();
+        $foodInfo = FoodInfo::find()->where(['shop_id' => $shopId, 'status' => 0])->orderBy('price ASC')->asArray()->all();
         $class = Classes::find()->where(['shop_id' => $shopId])->orderBy('sort ASC')->asArray()->all();
         $return['shop'] = $shop;
         $return['food'] = $food;
         $return['foodInfo'] = $foodInfo;
         $return['classes'] = $class;
 
+        return $this->response($return);
+    }
+
+    public function actionFeedback($text)
+    {//店员反馈
+        $text = urldecode($text);
+        $return = Feedback::newFeedback($this->staff['id'], $text, $this->shopId);
         return $this->response($return);
     }
 }
