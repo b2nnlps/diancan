@@ -49,4 +49,14 @@ class Feedback extends \yii\db\ActiveRecord
             'created_time' => '反馈时间',
         ];
     }
+
+    public static function newFeedback($user, $text, $shop_id = 1)
+    {
+        $f = new self();
+        $f->shop_id = $shop_id;
+        $f->user = $user;
+        $f->text = $text;
+        $f->created_time = date("Y-m-d H:i:s");
+        return $f->save();
+    }
 }
