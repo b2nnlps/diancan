@@ -39,6 +39,11 @@ $signPackage = $jssdk->GetSignPackage();
             </div>
         </div>
     </div>
+    <a href="/food/user/person">
+        <div class="centre_box">
+            <img src="/static/84dc/icon/grimg.png"/>
+        </div>
+    </a>
     <div class="closing">
         <dl class="clearfix">
             <dt id="cartShow">
