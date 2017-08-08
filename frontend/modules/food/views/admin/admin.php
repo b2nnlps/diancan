@@ -12,7 +12,8 @@
 <body>
 <div class="box"><!--头部：开始--->
   <div class="main">
-      <?php
+
+  <?php
       $cname="";
       foreach($food as $_food){
           if($cname!=$_food['cname']){if($cname!="")echo '</div>'; $cname=$_food['cname']; echo '<div class="list_title">'.$cname.'</div><div class="listbox">';}
