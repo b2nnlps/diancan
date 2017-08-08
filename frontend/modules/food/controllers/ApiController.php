@@ -11,6 +11,7 @@ use member\modules\food\models\Shop;
 use member\modules\food\models\Order;
 use member\modules\food\models\OrderInfo;
 use member\modules\food\models\ShopStaff;
+use member\modules\food\models\Table;
 use common\wechat\JSSDK;
 
 /**
@@ -63,11 +64,12 @@ class ApiController extends BaseApiController
         return $this->response($return);
     }
 
-    public function actionPrintOrder($order_id)
+    public function actionPrintOrder($order_id, $device_id)
     {//打印该订单信息
         $this->isLogin();
         $o = Order::findOne(['shop_id' => $this->shopId, 'id' => $order_id]);
-        return $this->response(Order::printOrder($o));
+        $return = Order::printOrder($o, $device_id);
+        return $this->response($return);
     }
 
     public function actionUserInfo()

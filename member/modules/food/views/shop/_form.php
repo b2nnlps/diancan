@@ -19,8 +19,6 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'device_id')->textInput() ?>
-
             <?= $form->field($model, 'description')->textarea(['row' => 4]) ?>
 
         </div>

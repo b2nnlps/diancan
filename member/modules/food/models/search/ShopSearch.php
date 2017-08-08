@@ -19,7 +19,7 @@ class ShopSearch extends Shop
     {
         return [
             [['id'], 'integer'],
-            [['name','device_id', 'contact', 'address', 'img', 'created_time'], 'safe'],
+            [['name', 'contact', 'address', 'img', 'created_time'], 'safe'],
         ];
     }
 
@@ -72,7 +72,6 @@ class ShopSearch extends Shop
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'contact', $this->contact])
-            ->andFilterWhere(['like', 'device_id', $this->device_id])
             ->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['like', 'img', $this->img]);
 
