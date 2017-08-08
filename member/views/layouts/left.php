@@ -44,7 +44,7 @@
 
                             ['label' => '员工信息', 'icon' => 'fa fa-users', 'url' => ['/food/shop-staff/index'], 'visible' => Yii::$app->user->can('/food/shop-staff/index')],
                             ['label' => '订单统计', 'icon' => 'fa fa-calendar-check-o ', 'url' => ['/food/order/index'], 'visible' => Yii::$app->user->can('/food/order/index')],
-
+                    ['label' => '用户反馈', 'icon' => 'fa fa-commenting-o ', 'url' => ['/food/feedback/index'],],
 //                        ],
 //                        'visible'=>Yii::$app->user->can('/activitys/relayactivity/index')
 //                    ],

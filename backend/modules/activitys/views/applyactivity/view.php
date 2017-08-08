@@ -13,16 +13,30 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="apply-activity-view">
 
 
-    <p>
-        <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('删除', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => '您确定要删除吗?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <div class="row">
+        <div class="col-sm-2" style=" height: 100px; line-height: 100px; padding-left: 50px;">
+            <?= Html::a('更新', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('删除', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => '您确定要删除吗?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        </div>
+        <div class="col-sm-6">
+
+            <div class="col-sm-3" style="text-align: center;">
+                <img src="<?= \yii\helpers\Url::to(['qrcode', 'aid' => $model->id]) ?>"/>
+                <p>手机扫描<br>查看活动详情</p>
+            </div>
+            <div class="col-sm-3" style="text-align: center;">
+                <img src="<?= \yii\helpers\Url::to(['hdgl', 'aid' => $model->id]) ?>"/>
+                <p>手机扫描<br>可管理活动</p>
+            </div>
+
+        </div>
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,

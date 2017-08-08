@@ -2,22 +2,15 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use member\modules\food\models\Shop;
 /* @var $this yii\web\View */
 /* @var $searchModel member\modules\food\models\search\FeedbackSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Feedbacks';
+$this->title = '反馈列表';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="feedback-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Feedback', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -25,9 +18,22 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'shop_id',
+            [
+                'label' => '商家名称',
+                'attribute' => 'shop_id',
+                'value' => function ($model) {
+                    return Shop::getShopName($model->shop_id);
+                },
+                'filter' => Html::activeDropDownList(
+                    $searchModel,
+                    'shop_id',
+                    Shop::getShopList($searchModel->shop_id),
+                    ['class' => 'form-control', 'prompt' => '请筛选']
+                )
+
+            ],
             'user',
-            'text:ntext',
+//            'text:ntext',
             'created_time:datetime',
 
             ['class' => 'yii\grid\ActionColumn'],

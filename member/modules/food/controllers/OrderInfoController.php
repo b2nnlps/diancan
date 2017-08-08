@@ -2,18 +2,17 @@
 
 namespace member\modules\food\controllers;
 
-use member\modules\sys\controllers\BaseController;
 use Yii;
-use member\modules\food\models\Feedback;
-use member\modules\food\models\search\FeedbackSearch;
+use member\modules\food\models\OrderInfo;
+use member\modules\food\models\search\OrderInfoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * FeedbackController implements the CRUD actions for Feedback model.
+ * OrderInfoController implements the CRUD actions for OrderInfo model.
  */
-class FeedbackController extends BaseController
+class OrderInfoController extends Controller
 {
     /**
      * @inheritdoc
@@ -31,12 +30,12 @@ class FeedbackController extends BaseController
     }
 
     /**
-     * Lists all Feedback models.
+     * Lists all OrderInfo models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new FeedbackSearch();
+        $searchModel = new OrderInfoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,7 +45,7 @@ class FeedbackController extends BaseController
     }
 
     /**
-     * Displays a single Feedback model.
+     * Displays a single OrderInfo model.
      * @param integer $id
      * @return mixed
      */
@@ -58,13 +57,13 @@ class FeedbackController extends BaseController
     }
 
     /**
-     * Creates a new Feedback model.
+     * Creates a new OrderInfo model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Feedback();
+        $model = new OrderInfo();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +75,7 @@ class FeedbackController extends BaseController
     }
 
     /**
-     * Updates an existing Feedback model.
+     * Updates an existing OrderInfo model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -95,7 +94,7 @@ class FeedbackController extends BaseController
     }
 
     /**
-     * Deletes an existing Feedback model.
+     * Deletes an existing OrderInfo model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -108,15 +107,15 @@ class FeedbackController extends BaseController
     }
 
     /**
-     * Finds the Feedback model based on its primary key value.
+     * Finds the OrderInfo model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Feedback the loaded model
+     * @return OrderInfo the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Feedback::findOne($id)) !== null) {
+        if (($model = OrderInfo::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

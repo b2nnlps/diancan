@@ -3,6 +3,8 @@
 namespace backend\modules\activitys\controllers;
 
 use backend\controllers\BaseController;
+use dosamigos\qrcode\formats\MeCard;
+use dosamigos\qrcode\QrCode;
 use Yii;
 use backend\modules\activitys\models\ApplyActivity;
 use backend\modules\activitys\models\search\ApplyactivitySearch;
@@ -45,6 +47,15 @@ class ApplyactivityController extends BaseController
         ]);
     }
 
+    public function actionQrcode($aid)
+    {
+        return QrCode::png('http://ms.n39.cn/activitys/default/apply?aid=' . $aid);    //调用二维码生成方法
+    }
+
+    public function actionHdgl($aid)
+    {
+        return QrCode::png('http://ms.n39.cn/activitys/apply/index?aid=' . $aid);    //调用二维码生成方法
+    }
     /**
      * Creates a new ApplyActivity model.
      * If creation is successful, the browser will be redirected to the 'view' page.

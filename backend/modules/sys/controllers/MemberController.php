@@ -3,6 +3,8 @@
 namespace backend\modules\sys\controllers;
 
 use backend\controllers\BaseController;
+use dosamigos\qrcode\formats\MeCard;
+use dosamigos\qrcode\QrCode;
 use Yii;
 use backend\modules\sys\models\Member;
 use backend\modules\sys\models\search\MemberSearch;
@@ -40,6 +42,26 @@ class MemberController extends BaseController
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    public function actionQrcode($uid)
+    {
+        $member = Member::findOne($uid);
+        $card = new MeCard();
+        $card->firstName = $member->realname;
+        $card->lastName = '';//姓氏
+        $card->nickName = $member->nickname;
+        $card->sound = 'docomotaro';
+        $card->phone = $member->phone;
+        $card->videoPhone = $member->realname;
+        $card->email = '1211210871@qq.com';
+        $card->note = '懂你所想，创你所意！-IT创客';
+        $card->birthday = '1991-10-21';
+        $card->address = $member->address;
+        $card->url = 'http://www.n39.cn';
+        return QrCode::png($card->getText());
+
+        // return QrCode::png('http://ms.n39.cn/activitys/default/apply?aid='.$aid);    //调用二维码生成方法
     }
 
     /**

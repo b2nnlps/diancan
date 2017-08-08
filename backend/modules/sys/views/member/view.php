@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <img src="<?= \yii\helpers\Url::to(['qrcode', 'uid' => $model->openid]) ?>"/>
     </p>
 
     <?= DetailView::widget([
