@@ -7,6 +7,7 @@ use yii\web\Controller;
 use member\modules\food\models\Food;
 use member\modules\food\models\Shop;
 use member\modules\food\models\Order;
+use member\modules\food\models\Table;
 use member\modules\food\models\OrderInfo;
 use member\modules\food\models\ShopStaff;
 use common\wechat\JSSDK;
@@ -31,8 +32,9 @@ class DefaultController extends Controller
                 $o['num']=$num+1;
                 $o->save();
             }
-
-            Order::printOrder($o);//判断完后开始打印
+            $table=Table::find()->where(['table'=>$o['table']])->one();
+            if($table)
+                Order::printOrder($o,$table['device_id']);//判断完后开始打印
 
             $session['orderno']=$orderno;
             self::WechatMessage($o['user'], $o['id'], $o['total'], $o['table'], $o['status'] == 1 ? '线上已支付' : '现金待支付', '出单中...');

@@ -34,7 +34,7 @@ class Shop extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['created_time'], 'safe'],
-            [['name','device_id'], 'string', 'max' => 60],
+            [['name'], 'string', 'max' => 60],
             [['contact', 'img','description'], 'string', 'max' => 255],
             [['address'], 'string', 'max' => 80],
         ];
@@ -52,7 +52,6 @@ class Shop extends \yii\db\ActiveRecord
             'address' => '地址',
             'description' => '商家简介',
             'img' => '店头像',
-            'device_id' => '打印机编号',
             'created_time' => '创建时间',
         ];
     }

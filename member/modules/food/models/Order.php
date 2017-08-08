@@ -132,9 +132,8 @@ class Order extends \yii\db\ActiveRecord
         return $order;
     }
 
-    public static function printOrder($o)
+    public static function printOrder($o,$device_id)
     { //该函数只负责打印
-        $shop = Shop::findOne($o['shop_id']);
         $info = OrderInfo::findAll(['order_id' => $o['id']]);
         // $text = self::charsetToGBK("\n#" . $o['num']) . "\n";
         $text = '================================';
@@ -159,7 +158,7 @@ class Order extends \yii\db\ActiveRecord
         $text .= self::charsetToGBK("总消费：￥" . $total . "\n");
         $text .= "================================";
 
-        Order::TcpSend($shop['device_id'], $o['id'], $text);
+        Order::TcpSend($device_id, $o['id'], $text);
 
         return true;
     }
