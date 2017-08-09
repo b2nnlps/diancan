@@ -10,59 +10,65 @@ device_id = getQueryString("device_id");
 addUrl = "username=" + username + "&hash=" + hash + "&device_id=" + device_id;
 
 function ccdl(res, status) {
+    firstOpen++;
     var i, text = "", len = res.length;
+    var dingDong = false;
     for (i = 0; i < len; i++) {
         if (orders.indexOf(res[i].id) == -1) {
             orders.push(res[i].id);
             newMess = true;
-            text += "<ul>";
+            text += "<ul id=\"ul" + res[i].id + "\">";
             text += "<h4>桌号：" + res[i].table + "桌</h4>";
             text += "<div><span>" + res[i].food_name + "</span>X" + res[i].num + "</div>";
-            text += "<li>" + res[i].created_time + "</li>";
+            text += "<li>" + res[i].updated_time + "</li>";
             if (res[i].text.length > 0)
                 text += "<p>" + '<img src="images/tishi.png" width="15" height="15">' + res[i].text + "</p>";
             text += "<div class=\"pot_box\">";
-            if (status == 1)
+            if (status == 1) //只有未传菜有信息时才响
                 text += "<input type=\"checkbox\" id=\"checkbox_d" + res[i].id + "\" class=\"chk_4\" onclick=\"chuanCai(" + res[i].id + ")\"/><label for=\"checkbox_d" + res[i].id + "\"></label>";
-            // if(status == 2)
-            //		text+='<div class="my_center"><i>'+res[i].+'</i></div>';
+
             text += "</div>";
+            if (status == 2 && (res[i].operator) != null) //如果是已传菜，且有操作人
+                text += '<div class="my_center"><img src="icon/grimg.png"><i>' + res[i].operator + '</i></div>';
             text += "</ul>";
         }
         if (res[i].status == 2) {//如果已传菜，但还在未传菜，则删除
-            o = $("#dcc").find('#checkbox_d' + res[i].id).html();
+            o = $("#dcc").find('#ul' + res[i].id).html();
             if (o != undefined) {
-                setTimeout("hideChuanCaiOrder(" + res[i].id + ")", 2000);//更新移动该元素
+                hideChuanCaiOrder(res[i].id, res[i].operator);//更新移动该元素
             }
         }
 
     }
     if (newMess) {
-        if (status == 1)
+        console.log("新消息");
+        if (status == 1) {
             $("#dcc").append(text);
+            dingDong = true;
+        }
         if (status == 2)
             $("#ycc").append(text);
-        console.log("新消息");
-        if (firstOpen > 1)
+        if (firstOpen > 1 && dingDong)
             playSound();
     } else console.log("无消息");
-    firstOpen++;
     newMess = false;
+
 }
-function cpdl(res, status) {//出锅界面
+function cfdl(res, status) {//出锅界面
     var i, text = "", len = res.length;
     var o;
+    var dingDong = false;
+    firstOpen++;
     for (i = 0; i < len; i++) {
         if (orders.indexOf(res[i].id) == -1) {
             orders.push(res[i].id);
             newMess = true;
-            text = "<ul>";
+            text += "<ul id=\"ul" + res[i].id + "\">";
             text += "<div class=\"clearfix\"><em>" + res[i].food_name + "</em><span>X" + res[i].num + "</span></div>";
             text += "<li>桌号" + res[i].table + "</li>";
-            text += "<li>" + res[i].created_time + "</li>";
+            text += "<li>" + res[i].updated_time + "</li>";
             if (res[i].text.length > 0)
                 text += "<p>" + '<img src="images/tishi.png" width="15" height="15">' + res[i].text + "</p>";
-            //  text += "<p>" + res[i].text + "</p>";
             text += "<div class=\"pot_box\">";
             if (status == 0)
                 text += "<input type=\"checkbox\" id=\"checkbox_d" + res[i].id + "\" class=\"chk_4\" onclick=\"chuGuo(" + res[i].id + ")\" /><label for=\"checkbox_d" + res[i].id + "\"></label>";
@@ -70,36 +76,40 @@ function cpdl(res, status) {//出锅界面
 
             text += "</div>";
             text += "</ul>";
-            if (status == 0)
-                $("#wcg").append(text);
-            if (status == 1)
-                $("#ycg").append(text);
         }
         if (res[i].status == 1) {//如果已出锅，但还在未出锅里，则删除
-            o = $("#wcg").find('#checkbox_d' + res[i].id).html();
+            o = $("#wcg").find('#ul' + res[i].id).html();
             if (o != undefined) {
-                setTimeout("hideChuGuoOrder(" + res[i].id + ")", 2000);//更新移动该元素
+                hideChuGuoOrder(res[i].id);//更新移动该元素
             }
         }
         if (res[i].status == 2) {//如果已传菜，但还在已出锅里，则删除
-            o = $("#ycg").find('#checkbox_d' + res[i].id).html();
+            o = $("#ycg").find('#ul' + res[i].id).html();
             if (o != undefined) {
-                $("#checkbox_d" + res[i].id).parent().parent().remove();
+                $("#ul" + res[i].id).remove();
             }
         }
     }
 
+    console.log(firstOpen + " " + dingDong);
     if (newMess) {
-        if (firstOpen > 1)
+        console.log(status + " 新消息");
+        if (status == 0)//只有未出锅有信息时才响
+        {
+            dingDong = true;
+            $("#wcg").append(text);
+        }
+        if (status == 1) {
+            $("#ycg").append(text);
+        }
+        if (firstOpen > 2 && dingDong)
             playSound();
-        console.log("新消息");
     } else console.log("无消息");
-    firstOpen++;
     newMess = false;
 }
 
 function chuGuo(id) {
-    var name = $("#checkbox_d" + id).parent().parent().find("em").html();
+    var name = $("#ul" + id).find("em").html();
     layer.confirm('<' + name + '>', {
         title: '出锅确认',
         closeBtn: 0,
@@ -114,17 +124,17 @@ function chuGuo(id) {
 }
 
 function hideChuGuoOrder(id) {
-    var parent = $("#checkbox_d" + id).parent().parent();
+    var parent = $("#ul" + id);
     $(parent).slideUp(800, function () {
         $(parent).find("label").remove();
-        var html = "<ul>" + $(parent).html() + "</ul>" + $("#ycg").html();//转到隔壁
+        var html = "<ul id=\"ul" + id + "\">" + $(parent).html() + "</ul>" + $("#ycg").html();//转到隔壁
         $("#ycg").html(html);
         $(this).remove();
     })
 }
 
 function chuanCai(id) {
-    var name = $("#checkbox_d" + id).parent().parent().find("span").html();
+    var name = $("#ul" + id).find("span").html();
     layer.confirm('<' + name + '>', {
         title: '传菜确认',
         closeBtn: 0,
@@ -139,20 +149,29 @@ function chuanCai(id) {
     });
 }
 
-function hideChuanCaiOrder(id) {
-    var parent = $("#checkbox_d" + id).parent().parent();
+function hideChuanCaiOrder(id, operator) {
+    var parent = $("#ul" + id);
+    var ycc = $("#ycc");
     $(parent).slideUp(800, function () {
         $(parent).find("label").remove();
-        var html = "<ul>" + $(parent).html() + "</ul>" + $("#ycc").html();//转到隔壁
-        $("#ycc").html(html);
-        $(this).remove();
+        $(parent).append('<div class="my_center"><img src="icon/grimg.png"><i>' + operator + '</i></div>');
+        var html = "<ul>" + $(parent).html() + "</ul>" + $(ycc).html();//转到隔壁头部
+        $(ycc).html(html);
+        $(this).remove();//删除未传菜里面的信息
+        if ($(ycc).children('ul').length > 50) {//如果已传菜超过了50个，则删除后面的
+            var i = 0;
+            $("#ycc ul").each(function () {
+                i++;
+                if (i > 50) $(this).remove();
+            })
+        }
     })
 }
 
-function getOrder(type, status) {//获取订单信息 type 0厨房 1传菜员
+function getOrder(type, status, sort) {//获取订单信息 type 0厨房 1传菜员 排序方式
     // 获取信息
     $.ajax({
-        url: 'http://ms.n39.cn/food/api/get-wait-order?status=' + status + "&" + addUrl,
+        url: 'http://ms.n39.cn/food/api/get-wait-order?status=' + status + "&sort=" + sort + "&" + addUrl,
         dataType: 'jsonp',
         data: '',
         jsonp: 'callback',
@@ -163,7 +182,7 @@ function getOrder(type, status) {//获取订单信息 type 0厨房 1传菜员
             layer.close(index);
 
             if (type == 0)
-                cpdl(res, status);
+                cfdl(res, status);
             if (type == 1)
                 ccdl(res, status);
 
@@ -181,7 +200,7 @@ function getOrder(type, status) {//获取订单信息 type 0厨房 1传菜员
     });
 }
 
-function checkOrder(info_id, status) {//出锅、传菜更新
+function checkOrder(info_id, status) {//出锅、传菜状态更新
     var index = layer.load(0, {shade: false});
     $.ajax({
         url: 'http://ms.n39.cn/food/api/check-order?info_id=' + info_id + '&status=' + status + "&" + addUrl,
@@ -192,9 +211,9 @@ function checkOrder(info_id, status) {//出锅、传菜更新
         success: function (res) {
             res = res.data;
             if (status == 1)
-                setTimeout("hideChuGuoOrder(" + info_id + ")", 2000);//提交后删除该元素
+                setTimeout("hideChuGuoOrder(" + info_id + ",'我自己')", 2000);//提交后删除该元素
             if (status == 2)
-                setTimeout("hideChuanCaiOrder(" + info_id + ")", 2000);//提交后删除该元素
+                setTimeout("hideChuanCaiOrder(" + info_id + ",'我自己')", 2000);//提交后删除该元素
             layer.close(index);
         },
         error: function () {
