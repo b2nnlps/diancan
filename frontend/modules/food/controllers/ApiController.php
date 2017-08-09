@@ -18,10 +18,10 @@ use common\wechat\JSSDK;
  */
 class ApiController extends BaseApiController
 {
-    public function actionGetWaitOrder($status = false)
+    public function actionGetWaitOrder($status = false, $sort = "DESC")
     {//获取不同状态的菜品订单
         $this->isLogin();
-        $order = Order::getWaitOrderInfo($this->shopId, $status);
+        $order = Order::getWaitOrderInfo($this->shopId, $status, $sort);
         for ($i = 0; $i < count($order); $i++) {
             $order[$i]['food_name'] = Food::findOne($order[$i]['food_id'])['name'];
             $order[$i]['food_info'] = FoodInfo::findOne($order[$i]['info_id'])['title'];
