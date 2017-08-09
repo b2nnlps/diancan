@@ -104,4 +104,23 @@ class ApiController extends BaseApiController
         $return = Feedback::newFeedback($this->staff['id'], $text, $this->shopId);
         return $this->response($return);
     }
+
+    public function actionAdminFoodList()
+    {//获取管理的商品列表
+        $food = Food::find()->where(['shop_id' => $this->shopId])->orderBy('sort ASC')->asArray()->all();
+        $foodInfo = FoodInfo::find()->where(['shop_id' => $this->shopId, 'status' => 0])->orderBy('price ASC')->asArray()->all();
+        $return['food'] = $food;
+        $return['foodInfo'] = $foodInfo;
+        return $this->response($return);
+    }
+
+    public function actionAdminFoodView($food_id)
+    {//浏览商品的信息
+        $food = Food::find()->where(['id' => $food_id, 'shop_id' => $this->shopId])->orderBy('sort ASC')->asArray()->one();
+        $foodInfo = FoodInfo::find()->where(['food_id' => $food_id, 'shop_id' => $this->shopId, 'status' => 0])->orderBy('price ASC')->asArray()->all();
+        $return['food'] = $food;
+        $return['foodInfo'] = $foodInfo;
+        return $this->response($return);
+    }
+
 }
