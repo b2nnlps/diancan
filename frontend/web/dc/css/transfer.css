@@ -235,3 +235,24 @@ textarea, button, select, input {
     color: #616B72;
 }
 
+/**右边的传菜员**/
+.my_center {
+    position: absolute;
+    right: 10px;
+    top: 35px;
+    height: 25px;
+}
+
+.my_center img {
+    width: 25px;
+    height: 25px;
+    border-radius: 100px;
+    margin-top: -8px;
+}
+
+.my_center i {
+    text-align: center;
+    font-size: 14px;
+    padding: 0 5px;
+    color: #666;
+}
