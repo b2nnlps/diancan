@@ -50,8 +50,9 @@ class ApiController extends BaseApiController
         $orderInfo = OrderInfo::findOne($info_id);
         $o = Order::findOne($orderInfo['order_id']);
         $return = false;
-        if ($this->shopId == $o['shop_id']) {
+        if ($this->shopId == $o['shop_id'] && $orderInfo && $o) {
             $orderInfo->status = $status;
+            $orderInfo->operator = $orderInfo['operator'] . $this->staff['realname'];
             $return = $orderInfo->save();
             $num = OrderInfo::find()->where('order_id=:order_id AND (status=0 or status=1)', [':order_id' => $orderInfo['order_id']])->count();
             if ($num == 0) {        //如果订单菜品已经出完
