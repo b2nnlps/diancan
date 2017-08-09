@@ -15,6 +15,7 @@ use Yii;
  * @property string $info_id
  * @property string $text
  * @property string $operator
+ * @property string $updated_time
  * @property integer $status
  */
 class OrderInfo extends \yii\db\ActiveRecord
@@ -37,6 +38,7 @@ class OrderInfo extends \yii\db\ActiveRecord
             [['order_id', 'food_id', 'info_id', 'price', 'num', 'status'], 'integer'],
             [['operator'], 'string', 'max' => 255],
             [['text'], 'string'],
+            [['updated_time'], 'safe'],
         ];
     }
 
@@ -55,6 +57,7 @@ class OrderInfo extends \yii\db\ActiveRecord
             'operator' => '操作人',
             'text' => '要求备注',
             'status' => '状态',
+            'updated_time' => '上菜时间',
         ];
     }
     public static function newOrderInfo($order_id,$food_id,$type,$price,$num,$text){
@@ -65,6 +68,7 @@ class OrderInfo extends \yii\db\ActiveRecord
         $info->num=$num;
         $info->info_id=$type;
         $info->text=$text;
+        $info->updated_time = date("Y-m-d H:i:s");
         if(!$info->save())var_dump($info->getErrors());
         return $info;
     }
