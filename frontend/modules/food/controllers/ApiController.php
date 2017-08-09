@@ -52,7 +52,8 @@ class ApiController extends BaseApiController
         $return = false;
         if ($this->shopId == $o['shop_id'] && $orderInfo && $o) {
             $orderInfo->status = $status;
-            $orderInfo->operator = $orderInfo['operator'] . $this->staff['realname'];
+            $orderInfo->operator = $this->staff['realname'];
+            $orderInfo->updated_time = date("Y-m-d H:i:s");
             $return = $orderInfo->save();
             $num = OrderInfo::find()->where('order_id=:order_id AND (status=0 or status=1)', [':order_id' => $orderInfo['order_id']])->count();
             if ($num == 0) {        //如果订单菜品已经出完
