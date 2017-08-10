@@ -27,7 +27,7 @@ class DefaultController extends Controller
        if($session->has('orderno') && $session['orderno']==$orderno) return '该订单打印过.';
         $o = Order::find()->where('id = :id AND (status = 1 OR status=3)', [':id' => $orderno])->one();//已支付或者店员下单的现金支付
         if($o){
-            $table = Table::find()->where(['table' => $o['table'], 'shop_id' => $o['shop_id']])->one();
+            $table = Table::find()->where('shop_id = :shop_id AND table like :table', [':shop_id' => $o['shop_id'], ':table' => $o['table']])->one();
             if ($table)//获取桌号对应的打印机
                 Order::printOrder($o, $table['device_id']);
             else {//默认打印机
