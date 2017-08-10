@@ -105,9 +105,9 @@ class DefaultController extends Controller
 
         $content=array("touser"=>$touser,
             "template_id"=>"MEMt4lAYBITWFHKfWdqspY2O6bSw3EOAGu9tqdOIFNU",
-            "url"=>'http://ms.n39.cn/food/user/shop-order#'.$a1,    //打开跳转到那个标签
+            "url" => 'http://ms.n39.cn/food/user/order-detail?id=' . $a1,
             "topcolor"=>"#FF0000",
-            "data"=>array("first"=>array("value"=>'新订单',"color"=>"#CD453B"),
+            "data" => array("first" => array("value" => '欢迎光临', "color" => "#CD453B"),
                 "keyword1"=>array("value"=>$a1,"color"=>"#2B9F65"),
                 "keyword2"=>array("value"=>$a2,"color"=>"#5785CF"),
                 "keyword3"=>array("value"=>$a3,"color"=>"#5785CF"),
