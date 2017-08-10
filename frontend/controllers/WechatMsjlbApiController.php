@@ -44,16 +44,6 @@ class WechatMsjlbApiController extends Controller
                                                 'url' => 'http://mp.weixin.qq.com/mp/homepage?__biz=MzA3NTc1NzM5OQ==&hid=1&sn=d45bf00f0e7d3905f8898bf6914aac18&uin=MjI5ODI2OTg2MQ%3D%3D&key=c3acc508db720376d6cbca6d5f7813f4b38abff3145557000d3611adabefe34e2eb4e4cd3a120f18f486327b6760ed99&devicetype=android-23&version=26031b31&lang=zh_CN&nettype=WIFI&wx_header=1&scene=1',
 											//  'url' => 'http://micro.n39.cn/microsite?uid=df2c82c41a0bf173542deb691cb66099',
                                             ),
-                                            1 => array (
-                                                'type' => 'view',
-                                                'name' => '容合社区',
-                                                'url' => 'http://vzan.cc/f/s-18785',
-                                            ),
-                                            2 => array(
-                                                'type' => 'view',
-                                                'name' => '堂内点餐',
-                                                'url' => 'http://ms.n39.cn/food/user/index?shopId=2',
-                                            ),
                                         ),
                                     ),
                                     1 => array (
@@ -73,6 +63,16 @@ class WechatMsjlbApiController extends Controller
                                                 'type' => 'view',
                                                 'name' => '休闲娱乐',
                                                 'url' => 'http://jj.5jy.cn',
+                                            ),
+                                            2 => array(
+                                                'type' => 'view',
+                                                'name' => '容合社区',
+                                                'url' => 'http://vzan.cc/f/s-18785',
+                                            ),
+                                            3 => array(
+                                                'type' => 'view',
+                                                'name' => '堂内点餐',
+                                                'url' => 'http://ms.n39.cn/food/user/index?shopId=2',
                                             ),
                                         ),
                                     ),
