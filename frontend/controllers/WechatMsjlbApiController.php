@@ -51,29 +51,34 @@ class WechatMsjlbApiController extends Controller
                                             ),
                                             2 => array(
                                                 'type' => 'view',
-                                                'name' => '容合点餐',
-                                                'url' => 'http://ms.n39.cn/food/user/index?shopId=1',
-                                            ),
-                                            3 => array(
-                                                'type' => 'view',
-                                                'name' => '指留香点餐',
+                                                'name' => '堂内点餐',
                                                 'url' => 'http://ms.n39.cn/food/user/index?shopId=2',
                                             ),
                                         ),
                                     ),
                                     1 => array (
-                                        'name' => '我的订单',
+                                        'name' => '容合商行',
                                         'type' => 'view',
                                         'url' => 'http://ms.n39.cn/eshop/good/index',
                                     ),
                                     2 => array (
-                                        'name' => '蝌蚪城市',
-                                        'type' => 'view',
-                                        'url' => 'http://jj.5jy.cn',
+                                        'name' => '系统帮助',
+                                        'sub_button' => array(
+                                            0 => array(
+                                                'type' => 'view',
+                                                'name' => '点餐演示',
+                                                'url' => 'http://ms.n39.cn/food/user/index?shopId=1',
+                                            ),
+                                            1 => array(
+                                                'type' => 'view',
+                                                'name' => '休闲娱乐',
+                                                'url' => 'http://jj.5jy.cn',
+                                            ),
+                                        ),
                                     ),
                                 ),
                             );
-                            $wechat->createMenu($data);
+                            $text = json_encode($wechat->createMenu($data));
                             break;
                         case '客服' :
                             $text = $this->replyText();
