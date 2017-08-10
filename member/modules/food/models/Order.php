@@ -139,7 +139,7 @@ class Order extends \yii\db\ActiveRecord
     public static function printOrder($o,$device_id)
     { //该函数只负责打印
         $info = OrderInfo::findAll(['order_id' => $o['id']]);
-        $text = self::charsetToGBK("#" . $o['num']) . "\n";
+        $text = self::charsetToGBK("# " . $o['num']) . "\n";
         $text .= '================================';
         $total = 0;
         $i = 0;
