@@ -48,7 +48,17 @@ class WechatMsjlbApiController extends Controller
                                                 'type' => 'view',
                                                 'name' => '容合社区',
                                                 'url' => 'http://vzan.cc/f/s-18785',
-                                            )
+                                            ),
+                                            2 => array(
+                                                'type' => 'view',
+                                                'name' => '容合点餐',
+                                                'url' => 'http://ms.n39.cn/food/user/index?shopId=1',
+                                            ),
+                                            3 => array(
+                                                'type' => 'view',
+                                                'name' => '指留香点餐',
+                                                'url' => 'http://ms.n39.cn/food/user/index?shopId=2',
+                                            ),
                                         ),
                                     ),
                                     1 => array (
