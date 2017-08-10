@@ -28,9 +28,9 @@ class UserController extends BaseController
 
     public function actionIndex($shopId = 1, $table = 0)
     {
-        if ($shopId && isset($_COOKIE['shop'])) if ($shopId != $_COOKIE['shop']) setcookie('cart', '', time() - 1, '/');
+        if ($shopId && isset($_COOKIE['shopId'])) if ($shopId != $_COOKIE['shopId']) setcookie('cart', '', time() - 1, '/');
 
-        if ($shopId) setcookie("shop", $shopId, time() + 86400 * 7, "/"); else $shopId = $_COOKIE['shop'];
+        if ($shopId) setcookie("shopId", $shopId, time() + 86400 * 7, "/"); else $shopId = $_COOKIE['shopId'];
         if ($table) setcookie("table", $table, time() + 86400 * 7, "/");
 
         $shop = Shop::findOne($shopId);
