@@ -1365,7 +1365,6 @@ a#btn_next {
     display: block;
     width: 50%;
     margin: auto;
-    40px;
     line-height: 40px;
     background-color: #5CB85C;
     text-align: center;
@@ -1615,4 +1614,202 @@ a#btn_next {
 }
 
 .timebox input {
+}
+
+/**反馈页面**/
+.nav_boxx p {
+    width: 100%;
+}
+
+.tic_box {
+    width: 100%;
+    margin-top: 52px;
+}
+
+.tic_box ul {
+    width: 95%;
+    margin: auto;
+}
+
+.tic_box ul li {
+    padding: 10px 0;
+}
+
+.tic_box ul li label {
+    display: block;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    text-align: right;
+    font-size: 14px;
+    color: #333;
+}
+
+.tic_box ul li input {
+    width: 72%;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #999;
+    display: block;
+    float: left;
+    border-radius: 5px;
+    text-indent: 5px;
+    color: #666;
+    font-size: 14px;
+}
+
+.tic_box ul li textarea {
+    width: 72%;
+    height: 100px;
+    display: block;
+    float: left;
+    border-radius: 5px;
+    line-height: 20px;
+    text-indent: 5px;
+    color: #666;
+    font-size: 14px;
+}
+
+.div_inline {
+    font-size: 14px;
+}
+
+/**商家首页**/
+.store_box {
+    background: url(../images/qq.png);
+}
+
+.store_box dl {
+    padding: 10px 0;
+}
+
+.store_box dl dt {
+    width: 120px;
+    float: left;
+}
+
+.store_box dl dt img {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: auto;
+}
+
+.store_box dl dd {
+    padding-top: 5px;
+}
+
+.store_box dl dd h4 {
+    font-size: 14px;
+    color: #FFF;
+}
+
+.store_box dl dd span {
+    font-size: 14px;
+    color: #FFF;
+}
+
+.list_box {
+}
+
+.list_box ul {
+    margin-top: 20px;
+}
+
+.list_box ul li {
+    float: left;
+    width: 50%;
+}
+
+.list_box ul li img {
+    width: 40px;
+    display: block;
+    margin: 10px auto;
+}
+
+.list_box ul li span {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    padding-bottom: 5px;
+    color: #666;
+}
+
+.company {
+    width: 100%;
+}
+
+.company h4 {
+    padding: 10px 2.5%;
+    font-size: 14px;
+    background-color: #EDEDED;
+    color: #666;
+}
+
+.image_text {
+    width: 95%;
+    margin: 10px auto;
+}
+
+.image_text p {
+    font-size: 13px;
+    color: #999;
+    text-indent: 30px;
+    line-height: 20px;
+}
+
+/**联系我们**/
+
+.call_names {
+    width: 100%;
+}
+
+.call_names img {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 20px auto 10px;
+}
+
+.call_names h4 {
+    font-size: 16px;
+    text-align: center;
+    color: #333;
+}
+
+.call_names em {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    padding-top: 5px;
+    color: #666;
+}
+
+.call_names span {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 0;
+    color: #333;
+}
+
+.store_xq {
+    width: 95%;
+    margin: auto;
+    margin-top: 10px;
+    border: 1px solid #ededed;
+    border-radius: 5px;
+}
+
+.store_xq div {
+    font-size: 14px;
+    padding: 5px 0;
+    color: #333;
+}
+
+.store_xq div img {
+    width: 20px;
+    height: 20px;
+    padding: 0 5px;
 }
