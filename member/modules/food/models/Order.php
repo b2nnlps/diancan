@@ -155,7 +155,8 @@ class Order extends \yii\db\ActiveRecord
         $text .= self::charsetToGBK('联系电话：' . $o['phone']) . "\n";
         $text .= self::charsetToGBK('订单备注：' . $o['text']) . "\n";
         $text .= self::charsetToGBK('下单时间：' . date("Y-m-d H:i:s")) . "\n";
-        $text .= self::charsetToGBK("总消费：￥" . $total . "\n");
+        $text .= self::charsetToGBK("消费金额：￥" . $total . "\n");
+        $text .= self::charsetToGBK("支付状态：（" . self::status($o['status']) . "）\n");
         $text .= "================================";
 
         Order::TcpSend($device_id, $o['id'], $text);
