@@ -77,10 +77,12 @@ class ApiController extends BaseApiController
     {//获取店员信息
         $this->isLogin();
         $staff = $this->staff;
+        $shop = Shop::find()->select(['name', 'img', 'description', 'contact', 'address', 'begin_time', 'end_time'])->where(['id' => $staff['shop_id']])->asArray()->one();
         $return['role_id'] = $staff['role_id'];
         $return['shop_id'] = $staff['shop_id'];
         $return['realname'] = $staff['realname'];
         $return['status'] = $staff['status'];
+        $return['shop'] = $shop;
         return $this->response($return);
     }
 
@@ -121,6 +123,13 @@ class ApiController extends BaseApiController
         $return['food'] = $food;
         $return['foodInfo'] = $foodInfo;
         return $this->response($return);
+    }
+
+    public function actionAdminFoodInfo($info, $data)
+    {
+        if ($info == 0) {//增加新规格
+
+        }
     }
 
 }
