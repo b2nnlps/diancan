@@ -1677,7 +1677,8 @@ a#btn_next {
 
 /**商家首页**/
 .store_box {
-    background: url(../images/qq.png);
+    background: url(../images/qq.png) no-repeat;
+    background-size: cover;
 }
 
 .store_box dl {
