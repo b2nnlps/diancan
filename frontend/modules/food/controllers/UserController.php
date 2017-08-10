@@ -166,7 +166,7 @@ class UserController extends BaseController
             }
         }
         $order->total = $total;
-
+        $order->save();
 
         if ($staff) {
             setcookie('cart', '', time() - 1, '/');
