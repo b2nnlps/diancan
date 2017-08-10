@@ -11,7 +11,7 @@
 <div class="box">
     <div class="Favorites">
         <ul>
-            <li><a href="javascript:history.go(-1)"><img src="/static/627dc/images/fh.png" width="20" height="20"></a>
+            <li><a href="/food/user/person"><img src="/static/627dc/images/fh.png" width="20" height="20"></a>
             </li>
             <p>订单列表</p>
             <li><a href="#"></a></li>
