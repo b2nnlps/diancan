@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "n_food_order".
  *
- * @property integer $id
+ * @property string $id
  * @property integer $num
  * @property string $user
  * @property integer $shop_id
@@ -40,7 +40,7 @@ class Order extends \yii\db\ActiveRecord
             [['text'], 'string'],
             [['created_time', 'updated_time'], 'safe'],
             [['user'], 'string', 'max' => 255],
-            [['orderno','table'], 'string', 'max' => 100],
+            [['orderno', 'table', 'id'], 'string', 'max' => 100],
             [['phone','realname'], 'string', 'max' => 20],
             [['total'], 'number'],
         ];
@@ -75,6 +75,7 @@ class Order extends \yii\db\ActiveRecord
             '0' => '待支付',
             '1' => '已支付',
             '2' => '已完成',
+            '3' => '现金支付',
         ];
         return $key === null ? $arr : (isset($arr[$key]) ? $arr[$key] : '');
     }
@@ -90,10 +91,13 @@ class Order extends \yii\db\ActiveRecord
         $order->table=$table;
         $order->people = $people;
         $order->text=$text;
-        if($staff)  //如果是服务员就直接当做付款
+        if ($staff)  //如果是服务员就直接现金支付
             $order->status=3;
         else
             $order->status=0;
+        $num = Order::find()->where('status !=0  AND updated_time LIKE :updated_time', [':updated_time' => '%' . date("Y-m-d") . '%'])->count();
+        $order->num = $num + 1; //今日订单数
+        $order->id = $shop_id . date("ymdHis") . rand(11, 99);
 
         $order->created_time=date("Y-m-d H:i:s");
         $order->updated_time=date("Y-m-d H:i:s");
