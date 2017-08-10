@@ -25,13 +25,8 @@ class DefaultController extends Controller
     public function actionPushMess($orderno){    //传TIME是为了检验码防止乱打印
         $session = Yii::$app->session;
        if($session->has('orderno') && $session['orderno']==$orderno) return '该订单打印过.';
-        $o=Order::find()->where('id = :id AND (status = 1 OR status=3)',[':id'=>$orderno])->one();
+        $o = Order::find()->where('id = :id AND (status = 1 OR status=3)', [':id' => $orderno])->one();//已支付或者店员下单的现金支付
         if($o){
-            if($o['num']==null){
-                $num=Order::find()->where('(status = 1 OR status = 3) AND updated_time LIKE :updated_time',[':updated_time'=>'%'.date("Y-m-d").'%'])->count();
-                $o['num']=$num+1;
-                $o->save();
-            }
             $table = Table::find()->where(['table' => $o['table'], 'shop_id' => $o['shop_id']])->one();
             if ($table)//获取桌号对应的打印机
                 Order::printOrder($o, $table['device_id']);
