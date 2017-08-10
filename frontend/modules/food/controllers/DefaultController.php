@@ -105,7 +105,7 @@ class DefaultController extends Controller
 
         $content=array("touser"=>$touser,
             "template_id"=>"MEMt4lAYBITWFHKfWdqspY2O6bSw3EOAGu9tqdOIFNU",
-            "url" => 'http://ms.n39.cn/food/user/order-detail?id=' . $a1,
+            "url" => 'http://ms.n39.cn/food/user/order-detail?order_id=' . $a1,
             "topcolor"=>"#FF0000",
             "data" => array("first" => array("value" => '欢迎光临', "color" => "#CD453B"),
                 "keyword1"=>array("value"=>$a1,"color"=>"#2B9F65"),
