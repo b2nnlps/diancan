@@ -1,3 +1,8 @@
+<?php
+$jssdk = new \common\wechat\JSSDK();
+$signPackage = $jssdk->GetSignPackage();
+
+?>
 <!doctype html>
 <html>
 <head>
@@ -68,6 +73,27 @@
 </html>
 <script type="text/javascript" src="/static/84dc/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="/static/84dc/js/layer/layer.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    /**
+     * 转发封面及简介
+     * @returns {undefined}
+     */
+    var dataForShare = {
+        weixin_icon: "<?=$shop['img']?>",
+        weixin_url: "http://ms.n39.cn/food/user/shop-info?shopId=<?=$shop['id']?>",
+        weibo_icon: "<?=$shop['img']?>",
+        url: "http://ms.n39.cn/food/user/shop-info?shopId=<?=$shop['id']?>",
+        title: "<?=$shop['name']?>",
+        description: "<?=$shop['description']?>"
+    };
+    var appId = "<?=$signPackage["appId"]?>";
+    var timestamp = "<?=$signPackage["timestamp"]?>";
+    var nonceStr = "<?=$signPackage["nonceStr"]?>";
+    var signature = "<?=$signPackage["signature"]?>";
+
+</script>
+<script type="text/javascript" src="/static/84dc/js/wx_share.js"></script>
 <script>
     $("#big").css('height', $(window).height() - $("#box").height() + 1);
     function closeWin() {
