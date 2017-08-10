@@ -325,9 +325,15 @@ function getUserInfo() {//获取店和店员信息
         success: function (res) {
             res = res.data;
             shop = res.shop;
-            $("#shopImg").attr("src", shop.img);
-            $("#shopName").text(shop.name);
-            $("#shopDescription").text(shop.description);
+            if (shop != undefined) {
+                $("#shopImg").attr("src", shop.img);
+                $("#shopName").text(shop.name);
+                $("#shopDescription").text(shop.description);
+            } else {
+                $("#shopImg").attr("src", "images/rh_logo.png");
+                $("#shopName").text("容合软件");
+                $("#shopDescription").text("专门针对中小型商家而制作专业的点餐系统.");
+            }
 
         },
         error: function () {
