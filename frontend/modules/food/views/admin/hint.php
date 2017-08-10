@@ -24,8 +24,8 @@
         </div>
         <div class="butt_box">
            <dl class="clearfix">
-              <dt><a href="index.html">返回首页</a></dt>
-              <dd><a href="personal.html">个人中心</a></dd>
+               <dt><a href="/food/user/index">返回首页</a></dt>
+               <dd><a href="/food/user/person">个人中心</a></dd>
            </dl>
         </div>
         <div class="clue_box"><span>温馨提示：</span>绑定成功后将拥有管理商家的相关权限！</div>
