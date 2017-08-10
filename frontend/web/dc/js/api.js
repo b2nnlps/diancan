@@ -315,7 +315,7 @@ function printOrder(order_id) {//获取订单详情信息
 
 }
 
-function getUserInfo() {//获取店员信息
+function getUserInfo() {//获取店和店员信息
     $.ajax({
         url: 'http://ms.n39.cn/food/api/user-info?' + addUrl,
         dataType: 'jsonp',
@@ -324,7 +324,10 @@ function getUserInfo() {//获取店员信息
         timeout: 5000,
         success: function (res) {
             res = res.data;
-            console.log(res);
+            shop = res.shop;
+            $("#shopImg").attr("src", shop.img);
+            $("#shopName").text(shop.name);
+            $("#shopDescription").text(shop.description);
 
         },
         error: function () {
