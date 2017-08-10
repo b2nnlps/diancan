@@ -34,9 +34,10 @@ class OrderInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'food_id', 'info_id', 'price', 'num'], 'required'],
-            [['order_id', 'food_id', 'info_id', 'price', 'num', 'status'], 'integer'],
+            [['food_id', 'info_id', 'price', 'num'], 'required'],
+            [['food_id', 'info_id', 'price', 'num', 'status'], 'integer'],
             [['operator'], 'string', 'max' => 255],
+            [['order_id'], 'string', 'max' => 100],
             [['text'], 'string'],
             [['updated_time'], 'safe'],
         ];
