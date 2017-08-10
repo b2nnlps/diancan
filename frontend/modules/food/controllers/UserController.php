@@ -213,8 +213,9 @@ class UserController extends BaseController
         return $this->render('person', ['u' => $u, 'staff' => $staff]);
     }
 
-    public function actionShopInfo($shopId = 1)
+    public function actionShopInfo($shopId = 0)
     {//商家详情
+        if ($shopId) setcookie("shopId", $shopId, time() + 86400 * 7, "/"); else $shopId = $_COOKIE['shopId'];
         $shop = Shop::findOne($shopId);
         $sold = Shop::getSold($shopId);//获取商家销量
         return $this->render('shop-detail', ['shop' => $shop, 'sold' => $sold]);
