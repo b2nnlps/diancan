@@ -95,7 +95,7 @@ class Order extends \yii\db\ActiveRecord
             $order->status=3;
         else
             $order->status=0;
-        $num = Order::find()->where('shop_id=:shop_id AND status !=0  AND updated_time LIKE :updated_time', [':shop_id' => $shop_id, ':updated_time' => '%' . date("Y-m-d") . '%'])->count();
+        $num = Order::find()->where('shop_id=:shop_id AND updated_time LIKE :updated_time', [':shop_id' => $shop_id, ':updated_time' => '%' . date("Y-m-d") . '%'])->count();
         $order->num = $num + 1; //今日订单数
         $order->id = $shop_id . date("ymd") . str_pad($order->num, 3, '0', STR_PAD_LEFT);
 
