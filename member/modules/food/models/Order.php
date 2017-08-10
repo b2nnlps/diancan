@@ -129,7 +129,7 @@ class Order extends \yii\db\ActiveRecord
         $order=(new \yii\db\Query())
             ->select(['b.text', 'a.table', 'b.id', 'b.food_id', 'b.info_id', 'b.num', 'b.status', 'b.operator', 'b.updated_time'])
             ->from('n_food_order a,n_food_order_info b')
-            ->where('a.id=b.order_id AND a.shop_id=:shop_id'.$status,[':shop_id'=>$shop_id])
+            ->where('a.id=b.order_id AND (a.status=1 OR a.status=3) AND a.shop_id=:shop_id' . $status, [':shop_id' => $shop_id])//已支付或者现金支付才出现
             ->orderBy("b.updated_time $sort")
             ->limit(50)
             ->all();
