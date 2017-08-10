@@ -187,7 +187,7 @@ class UserController extends BaseController
     {
         Order::deleteAll('user=:openid AND status=0 AND created_time<=:time', [':openid' => $this->openid, ':time' => date("Y-m-d H:i:s", time() - 86400)]);
         //删除过期未支付订单
-        $o = Order::find()->where(['user' => $this->openid])->orderBy("id desc")->all();
+        $o = Order::find()->where(['user' => $this->openid])->orderBy("created_time desc")->all();
         return $this->render('my-order', ['o' => $o]);
     }
 
