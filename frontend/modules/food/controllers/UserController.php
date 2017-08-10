@@ -147,8 +147,8 @@ class UserController extends BaseController
 
         User::newUser($this->openid, $name, $phone, $notic);
 
-        $staff = ShopStaff::findOne(['shop_id' => $_COOKIE['shop'], 'openid' => $this->openid, 'status' => 0]);
-        $order = Order::newOrder($this->openid, $_COOKIE['shop'], '0', $name, $phone, $table, $people, $staff, $notic);
+        $staff = ShopStaff::findOne(['shop_id' => $_COOKIE['shopId'], 'openid' => $this->openid, 'status' => 0]);
+        $order = Order::newOrder($this->openid, $_COOKIE['shopId'], '0', $name, $phone, $table, $people, $staff, $notic);
 
         $foods = [];
         $total = 0;
