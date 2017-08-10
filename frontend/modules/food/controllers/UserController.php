@@ -168,27 +168,17 @@ class UserController extends BaseController
         $order->total = $total;
 
 
-//        if (1) {
         if ($staff) {
             setcookie('cart', '', time() - 1, '/');
-
-            $order->status = 1;
-            $order->save();
 
             $s = "http://ms.n39.cn/food/default/push-mess?orderno=$order->id";
             $s = str_replace(" ", "", $s);
             $text2 = file_get_contents($s);
 
             return $this->render('shop-success', ['shop_id' => $order['shop_id']]);
-            // header("Location: http://ms.n39.cn/food/default/push-mess?orderno=$order->id");
         } else {
-            $order->status = 0;
-            $order->save();
             header("Location: http://ms.n39.cn/wxpay/$order[shop_id]/n_food_pay.php?order_id=$order->id");
         }
-        //  }
-        // echo "Location: http://ms.n39.cn/wxpayapi/n_food_pay.php?order_id=$order->id";
-
 
         exit;
     }
