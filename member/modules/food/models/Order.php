@@ -163,7 +163,7 @@ class Order extends \yii\db\ActiveRecord
         $text .= self::charsetToGBK("支付状态：（" . self::status($o['status']) . "）\n");
         $text .= "================================";
 
-        Order::TcpSend($device_id, $o['id'], $text);
+        Order::TcpSend($device_id, $o['num'], $text);
 
         return true;
     }
