@@ -34,7 +34,7 @@
                 <div class="recharge clearfix">
                     <a class="kf" href="#"><span><img src="/static/627dc/icon/djq.png">代金券</span></a>
                     |
-                    <a class="" href="/food/user/j-index"><span><img src="/static/627dc/icon/jfsc.png">积分商城</span></a>
+                    <a class="" href="#"><span><img src="/static/627dc/icon/jfsc.png">积分商城</span></a>
                 </div>
             </div>
             <!--功能列表-->
