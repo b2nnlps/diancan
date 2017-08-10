@@ -329,6 +329,10 @@ function getUserInfo() {//获取店和店员信息
                 $("#shopImg").attr("src", shop.img);
                 $("#shopName").text(shop.name);
                 $("#shopDescription").text(shop.description);
+                $("#ddck").attr("href", $("#ddck").attr("href") + addUrl);
+                $("#cfdd").attr("href", $("#cfdd").attr("href") + addUrl);
+                $("#ccdd").attr("href", $("#ccdd").attr("href") + addUrl);
+                $("#zxfk").attr("href", $("#zxfk").attr("href") + addUrl);
             } else {
                 $("#shopImg").attr("src", "images/rh_logo.png");
                 $("#shopName").text("容合软件");
