@@ -26,7 +26,7 @@ class UserController extends BaseController
     public $enableCsrfValidation = false;
     public $layout = false;
 
-    public function actionIndex($shopId = 1, $table = 0)
+    public function actionIndex($shopId = 0, $table = 0)
     {
         if ($shopId && isset($_COOKIE['shopId'])) if ($shopId != $_COOKIE['shopId']) setcookie('cart', '', time() - 1, '/');
 
