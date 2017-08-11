@@ -25,10 +25,15 @@
         <?php
         if ($o['status'] == 0)
             echo ' <a href="/wxpay/' . $o['shop_id'] . '/n_food_pay.php?order_id=' . $o['id'] . '">前往支付</a>';
-        if ($o['status'] == 1)
+        if ($o['status'] == 1) {
+            setcookie('cart', '', time() - 1, '/');
             echo '<a href="/food/user/my-order">查看我的订单</a>';
-        if ($o['status'] == 3)
+        }
+        if ($o['status'] == 3) {
             echo '<a href="/food/user/index">返回首页</a>';
+            setcookie('cart', '', time() - 1, '/');
+        }
+
 
         ?>
     </div>
