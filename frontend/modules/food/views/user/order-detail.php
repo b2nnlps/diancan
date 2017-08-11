@@ -49,7 +49,11 @@ EOD;
                <li>下单人：<?=$o['realname']?></li>
                <li>联系电话：<?=$o['phone']?></li>
                <li>就餐桌号：<?=$o['table']?></li>
-               <li>订单状态：<?=$o['status']?'已完成':'未支付'?></li>
+               <li>订单状态：<?php
+                   if ($o['status'] == 0) echo '未支付';
+                   if ($o['status'] == 1) echo '已支付';
+                   if ($o['status'] == 2) echo '已完成';
+                   if ($o['status'] == 3) echo '现金支付'; ?></li>
                <li>下单时间：<?=$o['created_time']?></li>
                <li>备注：<?=$o['text']?></li>
               </ul>
