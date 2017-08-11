@@ -142,11 +142,11 @@ class UserController extends BaseController
         $phone = $request->post('phone', ' ');
         $notic = $request->post('notic', ' ');
         $people = $request->post('people', 1);
-        $table = $request->post('table', isset($_COOKIE['table']) ? $_COOKIE['table'] : '');
+        $table = $request->post('table', isset($_COOKIE['table']) ? $_COOKIE['table'] : '无');
         $_csrf = $request->post('_csrf', '');//防止重复提交
         $session = Yii::$app->session;
         if ($session->has('csrf') && $session['csrf'] == $_csrf)
-            return $this->render('shop-success', ['shop_id' => $_COOKIE['shopId']]);
+            return $this->render('success-order', ['shop_id' => $_COOKIE['shopId'], 'o' => Order::findOne($session['order_id'])]);
 
         User::newUser($this->openid, $name, $phone, $notic);
 
@@ -171,6 +171,7 @@ class UserController extends BaseController
         $order->total = $total;
         $order->save();
         $session['csrf'] = $_csrf;//防止重复提交
+        $session['id'] = $order['id'];//防止重复提交
 
         if ($staff) {
             setcookie('cart', '', time() - 1, '/');
