@@ -28,7 +28,7 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['openid', 'phone', 'realname', 'notic'], 'required'],
+            [['openid'], 'required'],
             [['openid'], 'string', 'max' => 80],
             [['phone', 'realname', 'notic'], 'string', 'max' => 100],
         ];
@@ -52,6 +52,9 @@ class User extends \yii\db\ActiveRecord
         $u->realname=$realname;
         $u->phone=$phone;
         $u->notic=$notic;
-        return $u->save();
+        if (!$a = $u->save()) {
+            file_put_contents('user_error.txt', json_encode($u->getErrors()), FILE_APPEND);
+        }
+        return $a;
     }
 }
