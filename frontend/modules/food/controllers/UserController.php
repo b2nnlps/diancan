@@ -171,7 +171,7 @@ class UserController extends BaseController
         $order->total = $total;
         $order->save();
         $session['csrf'] = $_csrf;//防止重复提交
-        $session['id'] = $order['id'];//防止重复提交
+        $session['order_id'] = $order['id'];//防止重复提交
 
         if ($staff) {
             setcookie('cart', '', time() - 1, '/');
