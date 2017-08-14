@@ -98,6 +98,7 @@
 </body>
 </html>
 <script type="text/javascript" src="/static/627dc/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/static/84dc/js/layer/layer.js"></script>
 <script>
 
     $(document).ready(function () {
@@ -123,6 +124,11 @@
 </script>
 <script>
     function post() {
+        <?php
+        if(!$staff)
+            if(!is_dir("wxpay/".$_COOKIE['shopId'])) echo 'undo();return;';//商家未开通微信支付
+ ?>
+
         var name = $("#name");
         var phone = $("#phone");
         var table = $("#table");
@@ -143,5 +149,8 @@
         }
 
         $("form").submit();
+    }
+    function undo() {
+        layer.msg("十分抱歉，该商家并未开通微信支付，请呼叫服务员为您下单。");
     }
 </script>
