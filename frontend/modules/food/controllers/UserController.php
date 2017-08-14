@@ -126,7 +126,9 @@ class UserController extends BaseController
         }
 
         $u = User::findOne($this->openid);
-        return $this->render('order', ['text' => $text, 'total_price' => $total_price, 'total_number' => $total_number, 'u' => $u]);
+        $staff = ShopStaff::findOne(['shop_id' => $_COOKIE['shopId'], 'openid' => $this->openid, 'status' => 0]);
+        return $this->render('order', ['text' => $text, 'total_price' => $total_price,
+            'total_number' => $total_number, 'u' => $u, 'staff' => $staff]);
     }
 
     public function actionPayOrder()
@@ -181,7 +183,11 @@ class UserController extends BaseController
 
             return $this->render('shop-success', ['shop_id' => $order['shop_id']]);
         } else {
-            header("Location: http://ms.n39.cn/wxpay/$order[shop_id]/n_food_pay.php?order_id=$order->id");
+            if (is_dir("wxpay/" . $order['shop_id'])) {//如果开通了微信支付
+                header("Location: http://ms.n39.cn/wxpay/$order[shop_id]/n_food_pay.php?order_id=$order->id");
+            } else {
+                return '商家未开通微信支付';
+            }
         }
 
         exit;
