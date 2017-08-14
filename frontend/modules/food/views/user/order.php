@@ -123,11 +123,18 @@
     })
 </script>
 <script>
+    var pass = true;
+    <?php
+            if(!$staff)
+                if(!is_dir("wxpay/".$_COOKIE['shopId'])) echo 'pass = false;'; //商家未开通微信支付
+     ?>
+    if (!pass)
+        undo();
     function post() {
-        <?php
-        if(!$staff)
-            if(!is_dir("wxpay/".$_COOKIE['shopId'])) echo 'undo();return;';//商家未开通微信支付
- ?>
+        if (!pass) {
+            undo();
+            return;
+        }
 
         var name = $("#name");
         var phone = $("#phone");
