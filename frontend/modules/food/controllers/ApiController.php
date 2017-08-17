@@ -109,7 +109,8 @@ class ApiController extends BaseApiController
 
     public function actionAdminFoodList()
     {//获取管理的商品列表
-        $food = Food::find()->where(['shop_id' => $this->shopId])->orderBy('sort ASC')->asArray()->all();
+        $this->isLogin();
+        $food = Food::find()->where('shop_id=:shop_id AND (status=0 OR status=1)', [':shop_id' => $this->shopId])->orderBy('sort ASC')->asArray()->all();
         $foodInfo = FoodInfo::find()->where(['shop_id' => $this->shopId, 'status' => 0])->orderBy('price ASC')->asArray()->all();
         $return['food'] = $food;
         $return['foodInfo'] = $foodInfo;
@@ -118,18 +119,24 @@ class ApiController extends BaseApiController
 
     public function actionAdminFoodView($food_id)
     {//浏览商品的信息
+        $this->isLogin();
         $food = Food::find()->where(['id' => $food_id, 'shop_id' => $this->shopId])->orderBy('sort ASC')->asArray()->one();
         $foodInfo = FoodInfo::find()->where(['food_id' => $food_id, 'shop_id' => $this->shopId, 'status' => 0])->orderBy('price ASC')->asArray()->all();
+        $classes = Classes::find()->select(['id', 'name'])->where(['shop_id' => $this->shopId])->orderBy('sort ASC')->asArray()->all();
         $return['food'] = $food;
         $return['foodInfo'] = $foodInfo;
+        $return['classes'] = $classes;
         return $this->response($return);
     }
 
-    public function actionAdminFoodInfo($info, $data)
+    public function actionAdminFoodInfo($data)
     {
-        if ($info == 0) {//增加新规格
+        $this->isLogin();
+        $data = json_decode($data, true);
+        $data_food = $data['food'];
+        $data_info = $data['info'];
 
-        }
+
     }
 
 }
