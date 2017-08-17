@@ -1,13 +1,8 @@
 /*
  API公共库
  */
-var username, hash, device_id, addUrl, newMess = false, firstOpen = 0;
+var newMess = false, firstOpen = 0;
 var orders = [];
-
-username = getQueryString("username");
-hash = getQueryString("hash");
-device_id = getQueryString("device_id");
-addUrl = "username=" + username + "&hash=" + hash + "&device_id=" + device_id;
 
 function ccdl(res, status) {
     firstOpen++;
@@ -229,129 +224,6 @@ function checkOrder(info_id, status) {//出锅、传菜状态更新
     });
 }
 
-function getOrderList(status) {//拉取订单
-    $.ajax({
-        url: 'http://ms.n39.cn/food/api/get-order-list?status=' + status + '&' + addUrl,
-        dataType: 'jsonp',
-        data: '',
-        jsonp: 'callback',
-        timeout: 5000,
-        success: function (res) {
-            res = res.data;
-            showList(res, status);
-        },
-        error: function () {
-            console.log('加载失败');
-        },
-        complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
-            if (status == 'timeout' || status == 'error') {//超时,status还有success,error等值的情况
-                console.log(status);
-            }
-            if (status == 'success') {
-            }
-        }
-    });
-}
-
-function getOrderDetail(order_id) {//获取订单详情信息
-    var index = layer.load(0, {shade: false});
-    $.ajax({
-        url: 'http://ms.n39.cn/food/api/get-order-detail?order_id=' + order_id + '&' + addUrl,
-        dataType: 'jsonp',
-        data: '',
-        jsonp: 'callback',
-        timeout: 5000,
-        success: function (res) {
-            layer.close(index);
-            res = res.data;
-            showDetail(res);
-        },
-        error: function () {
-            console.log('加载失败');
-        },
-        complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
-            if (status == 'timeout' || status == 'error') {//超时,status还有success,error等值的情况
-                console.log(status);
-            }
-            if (status == 'success') {
-            }
-        }
-    });
-}
-
-function printOrder(order_id) {//获取订单详情信息
-    layer.confirm('订单ID：' + order_id, {
-        title: '是否打印？',
-        closeBtn: 0,
-        btn: ['是', '否'] //按钮
-
-    }, function () {
-        var index = layer.load(0, {shade: false});
-        $.ajax({
-            url: 'http://ms.n39.cn/food/api/print-order?order_id=' + order_id + '&' + addUrl,
-            dataType: 'jsonp',
-            data: '',
-            jsonp: 'callback',
-            timeout: 5000,
-            success: function (res) {
-                layer.close(index);
-                layer.msg('打印成功', {icon: 1});
-            },
-            error: function () {
-                console.log('加载失败');
-                layer.close(index);
-            },
-            complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
-                if (status == 'timeout' || status == 'error') {//超时,status还有success,error等值的情况
-                    console.log(status);
-                }
-                if (status == 'success') {
-                }
-                layer.close(index);
-            }
-        });
-    }, function () {
-    });
-
-}
-
-function getUserInfo() {//获取店和店员信息
-    $.ajax({
-        url: 'http://ms.n39.cn/food/api/user-info?' + addUrl,
-        dataType: 'jsonp',
-        data: '',
-        jsonp: 'callback',
-        timeout: 5000,
-        success: function (res) {
-            res = res.data;
-            shop = res.shop;
-            if (shop != undefined) {
-                $("#shopImg").attr("src", shop.img);
-                $("#shopName").text(shop.name);
-                $("#shopDescription").text(shop.description);
-                $("#ddck").attr("href", $("#ddck").attr("href") + addUrl);
-                $("#cfdd").attr("href", $("#cfdd").attr("href") + addUrl);
-                $("#ccdd").attr("href", $("#ccdd").attr("href") + addUrl);
-                $("#zxfk").attr("href", $("#zxfk").attr("href") + addUrl);
-            } else {
-                $("#shopImg").attr("src", "images/rh_logo.png");
-                $("#shopName").text("容合软件");
-                $("#shopDescription").text("专门针对中小型商家而制作专业的点餐系统.");
-            }
-
-        },
-        error: function () {
-            console.log('加载失败');
-        },
-        complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
-            if (status == 'timeout' || status == 'error') {//超时,status还有success,error等值的情况
-                console.log(status);
-            }
-            if (status == 'success') {
-            }
-        }
-    });
-}
 
 function playSound()//播放提示音
 {
@@ -363,10 +235,3 @@ function playSound()//播放提示音
     //浏览器支持 audion
     audio.play();
 }
-
-function getQueryString(name) { //获取get传过来的用户信息
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]);
-    return null;
-} 
