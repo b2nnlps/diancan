@@ -53,6 +53,7 @@ class DefaultController extends Controller
         if($o){
             $o['print']=$print;
             $o->save();
+            return 1;
             switch($print){
                 case 1: //1 服务器发送成功
                     //self::WechatMessage($o['user'],$o['num'],'','1号','','服务器发送成功');

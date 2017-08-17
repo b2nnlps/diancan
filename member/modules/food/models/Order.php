@@ -129,7 +129,7 @@ class Order extends \yii\db\ActiveRecord
         $order=(new \yii\db\Query())
             ->select(['b.text', 'a.table', 'b.id', 'b.food_id', 'b.info_id', 'b.num', 'b.status', 'b.operator', 'b.updated_time'])
             ->from('n_food_order a,n_food_order_info b')
-            ->where('a.id=b.order_id AND a.shop_id=:shop_id'.$status,[':shop_id'=>$shop_id])
+            ->where('a.id=b.order_id AND (a.status=1 OR a.status=3) AND a.shop_id=:shop_id' . $status, [':shop_id' => $shop_id])//已支付或者现金支付才出现
             ->orderBy("b.updated_time $sort")
             ->limit(50)
             ->all();
@@ -156,6 +156,7 @@ class Order extends \yii\db\ActiveRecord
         $total = round($total, 2);
         $text .= self::charsetToGBK("\n订单编号：" . $o['id']) . "\n";
         $text .= self::charsetToGBK("就餐桌号：" . $o['table']) . "\n";
+        $text .= self::charsetToGBK('下单人：' . $o['realname']) . "\n";
         $text .= self::charsetToGBK('联系电话：' . $o['phone']) . "\n";
         $text .= self::charsetToGBK('订单备注：' . $o['text']) . "\n";
         $text .= self::charsetToGBK('下单时间：' . date("Y-m-d H:i:s")) . "\n";

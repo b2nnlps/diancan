@@ -125,9 +125,10 @@ class UserController extends BaseController
             }
         }
 
-        //  if($food)setcookie("shop",$food['shop_id'],time()+86400*7,"/"); else return self::actionIndex();
         $u = User::findOne($this->openid);
-        return $this->render('order', ['text' => $text, 'total_price' => $total_price, 'total_number' => $total_number, 'u' => $u]);
+        $staff = ShopStaff::findOne(['shop_id' => $_COOKIE['shopId'], 'openid' => $this->openid, 'status' => 0]);
+        return $this->render('order', ['text' => $text, 'total_price' => $total_price,
+            'total_number' => $total_number, 'u' => $u, 'staff' => $staff]);
     }
 
     public function actionPayOrder()
@@ -143,7 +144,11 @@ class UserController extends BaseController
         $phone = $request->post('phone', ' ');
         $notic = $request->post('notic', ' ');
         $people = $request->post('people', 1);
-        $table = $request->post('table', isset($_COOKIE['table']) ? $_COOKIE['table'] : '');
+        $table = $request->post('table', isset($_COOKIE['table']) ? $_COOKIE['table'] : '无');
+        $_csrf = $request->post('_csrf', '');//防止重复提交
+        $session = Yii::$app->session;
+        if ($session->has('csrf') && $session['csrf'] == $_csrf)
+            return $this->render('success-order', ['shop_id' => $_COOKIE['shopId'], 'o' => Order::findOne($session['order_id'])]);
 
         User::newUser($this->openid, $name, $phone, $notic);
 
@@ -167,17 +172,22 @@ class UserController extends BaseController
         }
         $order->total = $total;
         $order->save();
+        $session['csrf'] = $_csrf;//防止重复提交
+        $session['order_id'] = $order['id'];//防止重复提交
 
         if ($staff) {
             setcookie('cart', '', time() - 1, '/');
-
             $s = "http://ms.n39.cn/food/default/push-mess?orderno=$order->id";
             $s = str_replace(" ", "", $s);
             $text2 = file_get_contents($s);
 
             return $this->render('shop-success', ['shop_id' => $order['shop_id']]);
         } else {
-            header("Location: http://ms.n39.cn/wxpay/$order[shop_id]/n_food_pay.php?order_id=$order->id");
+            if (is_dir("wxpay/" . $order['shop_id'])) {//如果开通了微信支付
+                header("Location: http://ms.n39.cn/wxpay/$order[shop_id]/n_food_pay.php?order_id=$order->id");
+            } else {
+                return '商家未开通微信支付';
+            }
         }
 
         exit;

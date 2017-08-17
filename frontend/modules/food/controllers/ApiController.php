@@ -32,7 +32,10 @@ class ApiController extends BaseApiController
     public function actionGetOrderList($status = 0)
     {//拉取订单
         $this->isLogin();
-        $order = Order::find()->where(['shop_id' => $this->shopId, 'status' => $status])->limit(50)->asArray()->all();
+        if ($status == 1) {//已支付或者店员下单
+            $order = Order::find()->where('shop_id=:shop_id AND (status=1 OR status=3)', [':shop_id' => $this->shopId])->limit(50)->asArray()->all();
+        } else
+            $order = Order::find()->where(['shop_id' => $this->shopId, 'status' => $status])->limit(50)->asArray()->all();
         return $this->response($order);
     }
 
