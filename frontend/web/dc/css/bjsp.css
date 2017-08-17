@@ -38,6 +38,19 @@ body {
     font-family: "微软雅黑";
 }
 
+input {
+    /*padding: 5px 5px;*/
+    margin: 0px;
+    border: 1px solid #aaa;
+    box-sizing: border-box;
+    border-radius: 5px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -webkit-border-radius: 5px;
+}
+
+
+
 textarea, button, select, input {
     outline: none;
 }
@@ -177,7 +190,6 @@ textarea, button, select, input {
 }
 
 .compile_box dl dd select {
-    width: 31%;
     height: 25px;
     line-height: 25px;
     margin-right: 5px;
@@ -315,4 +327,19 @@ textarea, button, select, input {
     background-color: #FF8854;
     color: #FFF;
     border: none;
+}
+
+.show_text ul li span {
+    width: 75px;
+    display: inline-block;
+}
+
+.show_text ul li input {
+    width: 60%;
+    border: none;
+
+}
+
+.button_box ul input {
+    padding: 5px 5px;
 }
