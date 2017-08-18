@@ -8,7 +8,7 @@ food_id = getQueryString("food_id");
 function AdminFoodView() {//获取菜品信息
     // 获取信息
     $.ajax({
-        url: 'http://dev.ms.n39.cn/food/api/admin-food-view?food_id=' + food_id + "&" + addUrl,
+        url: 'http://ms.n39.cn/food/api/admin-food-view?food_id=' + food_id + "&" + addUrl,
         dataType: 'jsonp',
         data: '',
         jsonp: 'callback',
@@ -65,7 +65,7 @@ function updateInfo() {
     }).get().join("&");//拼接INPUT表单
     str_data += '&food[id]=' + food_id + '&food[name]=' + $("#food_name").val() + '&food[class_id]=' + $("#food_class").val() + '&food[status]=' + $("#food_status").val();
     $.ajax({
-        url: 'http://dev.ms.n39.cn/food/api/admin-food-update?' + addUrl,
+        url: 'http://ms.n39.cn/food/api/admin-food-update?' + addUrl,
         dataType: 'jsonp',
         data: str_data,
         jsonp: 'callback',

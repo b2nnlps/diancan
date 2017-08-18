@@ -1,6 +1,6 @@
 function getShop() {//获取店铺信息
     $.ajax({
-        url: 'http://dev.ms.n39.cn/food/api/user-info?' + addUrl,
+        url: 'http://ms.n39.cn/food/api/user-info?' + addUrl,
         dataType: 'jsonp',
         data: '',
         jsonp: 'callback',
@@ -31,7 +31,7 @@ function getShop() {//获取店铺信息
 function updateShop() {
     var str = 'Shop[name]=' + $("#name").val() + '&Shop[address]=' + $("#address").val() + '&Shop[contact]=' + $("#contact").val() + '&Shop[description]=' + $("#description").val();
     $.ajax({
-        url: 'http://dev.ms.n39.cn/food/api/admin-shop-setting?' + addUrl,
+        url: 'http://ms.n39.cn/food/api/admin-shop-setting?' + addUrl,
         dataType: 'jsonp',
         data: str,
         jsonp: 'callback',

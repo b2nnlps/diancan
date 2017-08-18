@@ -16,6 +16,7 @@ function getUserInfo() {//获取店和店员信息
                 $("#cfdd").attr("href", $("#cfdd").attr("href") + addUrl);
                 $("#ccdd").attr("href", $("#ccdd").attr("href") + addUrl);
                 $("#zxfk").attr("href", $("#zxfk").attr("href") + addUrl);
+                $("#spgl").attr("href", $("#spgl").attr("href") + addUrl);
             } else {
                 $("#shopImg").attr("src", "images/rh_logo.png");
                 $("#shopName").text("容合软件");

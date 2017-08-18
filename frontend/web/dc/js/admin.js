@@ -71,7 +71,7 @@ function getInfoPrice(id) {//自动转化规格价格到主体
 function getFoodList() {//获取菜品信息
     // 获取信息
     $.ajax({
-        url: 'http://dev.ms.n39.cn/food/api/admin-food-list?' + addUrl,
+        url: 'http://ms.n39.cn/food/api/admin-food-list?' + addUrl,
         dataType: 'jsonp',
         data: '',
         jsonp: 'callback',
