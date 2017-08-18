@@ -45,15 +45,18 @@
             </div>
             <div class="blank"></div>
             <div class="standard_box">
+                <form>
                 <div id="gg_box">
 
                 </div>
+                </form>
                 <div id="sub" class="add_box"><img src="icon/tjimg.png">添加规格</div>
                 <div class="blank"></div>
                 <div class="button_box">
                     <ul class="clearfix">
                         <li><input type="submit" value="重置" onclick="AdminFoodView()"></li>
-                        <li><input style=" background-color:#FE4543; " type="submit" value="保存"></li>
+                        <li><input style=" background-color:#FE4543; " type="submit" value="保存" onclick="updateInfo()">
+                        </li>
                     </ul>
 
                 </div>
@@ -64,24 +67,35 @@
 </body>
 </html>
 <script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/layer/layer.js"></script>
 <script src="js/base.js"></script>
 <script src="js/update.js"></script>
 
 <script language="javascript">
-    info_i = 1;
+    info_i = 0;
     document.getElementById("sub").onclick = function () {
+        add();
         info_i = info_i + 1;
-        document.getElementById("gg_box").innerHTML += '<div class="standard_centre" id="gg_box_' + info_i + '">  <dl class="clearfix"><dt>规格' + info_i + '：</dt><dd><input  placeholder="可输入颜色，大小，尺寸" type="text" value="" ></dd></dl><dl class="clearfix"><dt>价格：</dt><dd><input placeholder="零售价格" type="text" ></dd></dl><dl class="clearfix"><dt>库存：</dt><dd><input placeholder="真实库存" type="text" ></dd></dl><div class="delete_box" onclick="del(' + info_i + ')"><img src="icon/scimg.png"></div></div>';
     }
     function del(o) {
-        document.getElementById("gg_box").removeChild(document.getElementById("gg_box_" + o));
-
+        $("#gg_box_" + o).remove();
         var number = document.getElementById("gg_box").getElementsByTagName("div").length;
-        if (number == 0) {
-            info_i = 1;
-            document.getElementById("gg_box").innerHTML += '<div class="standard_centre" id="gg_box_' + info_i + '">  <dl class="clearfix"><dt>规格' + info_i + '：</dt><dd><input  placeholder="可输入颜色，大小，尺寸" type="text" value="" ></dd></dl><dl class="clearfix"><dt>价格：</dt><dd><input placeholder="零售价格" type="text" ></dd></dl><dl class="clearfix"><dt>库存：</dt><dd><input placeholder="真实库存" type="text" ></dd></dl><div class="delete_box" onclick="del(' + info_i + ')"><img src="icon/scimg.png"></div></div>';
+        if (number <= 0) {
+            info_i = 0;
+            add();
         }
 
+    }
+    function add() {
+        var text;
+        i = info_i;
+        text = '<div class="standard_centre" id="gg_box_' + i + '"><dl class="clearfix"><dt>规格' + (i + 1) + '：</dt>';
+        text += '<dd><input name="info_id[' + i + ']" type="hidden" value="0"><input name="info_title[' + i + ']" placeholder="可输入颜色，大小，尺寸" type="text"></dd></dl>';
+        text += '<dl class="clearfix"><dt>价格：</dt><dd><input name="info_price[' + i + ']"  placeholder="零售价格" type="text"></dd></dl>';
+        text += '<dl class="clearfix"><dt>单位：</dt><dd><input name="info_unit[' + i + ']"   placeholder="商品单位" type="text"></dd></dl>';
+        text += '<dl class="clearfix"><dt>库存：</dt><dd><input name="info_number[' + i + ']" placeholder="真实库存" type="text"></dd></dl>';
+        text += '<div class="delete_box" onclick="del(' + i + ')"><img src="icon/scimg.png"></div></div>';
+        $("#gg_box").append(text);
     }
     AdminFoodView();
 </script>
