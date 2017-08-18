@@ -41,7 +41,7 @@ use member\modules\food\models\Food;
         $total=0;$text='';$i=0;
         foreach($info as $_info) {
             $i++;
-            $total+=$_info['num']*$_info['price'];
+            $total += $_info['num'] * $_info['price'] / 100;
             $food=Food::findOne($_info['food_id']);
             $class=$_info['status']?' class="del"':'class="f"  onclick="HideDiv('.$_o[id].','.$_info[id].')"'; if($status==2){$class='';}
             $text.="<li class='clearfix'><span><a id='f$_info[id]' $class>$i.$food[name]</a></span><cite>￥$_info[price]</cite><em>x$_info[num]</em></li>";
