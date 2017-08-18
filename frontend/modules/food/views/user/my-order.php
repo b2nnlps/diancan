@@ -112,7 +112,7 @@ EOD;
                 <?php
                 $i = 0;
                 foreach ($o as $_o) {
-                    if ($_o['status'] == 2) {
+                    if ($_o['status'] == 2 || $_o['status'] == 3) {
                         $i++;
                         if ($_o['type']) $str = '积分'; else $str = '￥';
                         if ($_o['type']) $str2 = '已兑换'; else $str2 = '已完成';
