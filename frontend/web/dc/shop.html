@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>容合商圈</title>
+    <link href="css/shop.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="box"><!--头部：开始--->
+    <div class="Favorites">
+        <ul>
+            <li><a href="javascript:history.go(-1)"><img src="icon/return1.png" width="30" height="30"></a></li>
+            <p>店管理</p>
+            <li id="save" style=" font-size:14px; color:#FF4A83; "></li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="main">
+        <div class="shop_updtate_box">
+            <div class="shop_updtate clearfix">
+                <span>店名称</span>
+                <em><input type="text" id="name" placeholder="请输入店名称" value=""></em>
+            </div>
+            <div class="shop_updtate clearfix">
+                <span>店地址</span>
+                <em><input type="text" id="address" placeholder="请输入店地址" value=""></em>
+            </div>
+            <div class="shop_updtate clearfix">
+                <span>联系电话</span>
+                <em><input type="text" id="contact" placeholder="请输入联系电话" value=""></em>
+            </div>
+            <div class="shop_updtate clearfix">
+                <span>简&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述</span>
+                <em><textarea id="description"></textarea></em>
+            </div>
+        </div>
+        <input type="hidden" name="originator" id="originator" value="645722">
+
+        <div class="submit">
+            <button onclick="updateShop()">提交</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/layer/layer.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript" src="js/shop.js"></script>
+
+<script>
+    getShop();
+</script>
