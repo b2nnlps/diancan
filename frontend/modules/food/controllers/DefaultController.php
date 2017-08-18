@@ -2,6 +2,7 @@
 
 namespace frontend\modules\food\controllers;
 
+use member\modules\food\models\FoodInfo;
 use Yii;
 use yii\web\Controller;
 use member\modules\food\models\Food;
@@ -38,6 +39,15 @@ class DefaultController extends Controller
             $session['orderno']=$orderno;
             self::WechatMessage($o['user'], $o['id'], $o['total'], $o['table'], $o['status'] == 1 ? '线上已支付' : '现金待支付', '出单中...');
 
+            $orderInfo = OrderInfo::find()->where(['order_id' => $o['id']])->all();//更新销量和库存
+            foreach ($orderInfo as $_info) {
+                $food = Food::findOne($_info['food_id']);
+                $food['sold_number'] = $food['sold_number'] + $_info['num'];
+                $food->save();
+                $foodInfo = FoodInfo::findOne($_info['info_id']);
+                $foodInfo['number'] = $food['number'] - $_info['num'];
+                $foodInfo->save();
+            }
         }
         return $this->renderPartial('success');
     }
