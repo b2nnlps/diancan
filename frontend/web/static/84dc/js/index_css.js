@@ -4,7 +4,8 @@ $(document).ready(function () {
         $(this).siblings("span").addClass("active");
         $(this).parent().siblings("div").find("span").removeClass("active");
         var price = $(this).attr("data-price");
-        $("#cart_price").html("￥" + price).attr("data-price", price);
+        var unit = $(this).attr("data-unit");
+        $("#cart_price").html("￥" + price + "/" + unit).attr("data-price", price);
     });
 
     $(".list_menu").on('click', '.li', function () {

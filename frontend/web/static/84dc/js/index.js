@@ -34,7 +34,7 @@ $(".list_box").on('click', '.plus a', function () {
     var info = foodInfo[id];
     text = "";
     for (i = 0; i < info.length; i++) {
-        text += '<div class="norm"><label for="norm' + info[i].id + '" data-price="' + info[i].price + '"><input type="radio" name="sex" id="norm' + info[i].id + '" value="' + info[i].id + '" data-title="' + info[i].title + '">' + info[i].title + ' </label><span class="btn">' + info[i].title + '</span></div>';
+        text += '<div class="norm"><label for="norm' + info[i].id + '" data-price="' + info[i].price + '" data-unit="' + info[i].unit + '"><input type="radio" name="sex" id="norm' + info[i].id + '" value="' + info[i].id + '" data-title="' + info[i].title + '">' + info[i].title + ' </label><span class="btn">' + info[i].title + '</span></div>';
     }
     $("#cart_info").html(text);
 });
