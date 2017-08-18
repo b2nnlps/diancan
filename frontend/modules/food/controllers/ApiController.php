@@ -132,14 +132,48 @@ class ApiController extends BaseApiController
         return $this->response($return);
     }
 
-    public function actionAdminFoodInfo($data)
+    public function actionAdminFoodUpdate()
+    {//修改规格
+        $this->isLogin();
+        if ($this->staff['role_id'] != 9) return $this->errorResponse(-1, 403, "您没有权限修改商品");
+        $info_food = Yii::$app->request->get('food');
+        $info_id = Yii::$app->request->get('info_id');
+        $info_title = Yii::$app->request->get('info_title');
+        $info_price = Yii::$app->request->get('info_price');
+        $info_unit = Yii::$app->request->get('info_unit');
+        $info_number = Yii::$app->request->get('info_number');
+        $food = Food::findOne(['id' => $info_food['id'], 'shop_id' => $this->shopId]);
+        $food->name = $info_food['name'];
+        $food->class_id = $info_food['class_id'];
+        $food->status = $info_food['status'];
+        $food->save();
+        $return = FoodInfo::updateAll(['status' => 1], ['food_id' => $food['id']]);
+        foreach ($info_id as $k => $_info_id) {
+            if ($_info_id)
+                $info = FoodInfo::findOne(['id' => $_info_id, 'food_id' => $food['id']]);
+            else
+                $info = new FoodInfo();
+            $info->title = $info_title[$k];
+            $info->price = $info_price[$k];
+            $info->unit = $info_unit[$k];
+            $info->number = $info_number[$k];
+            $info->shop_id = $food['shop_id'];
+            $info->food_id = $food['id'];
+            $info->status = 0;
+            $info->save();
+        }
+        return $this->response($return);
+    }
+
+    public function actionAdminShopSetting()
     {
         $this->isLogin();
-        $data = json_decode($data, true);
-        $data_food = $data['food'];
-        $data_info = $data['info'];
-
-
+        if ($this->staff['role_id'] != 9) return $this->errorResponse(-1, 403, "您没有权限修改店铺信息");
+        $shop = Shop::findOne($this->staff['shop_id']);
+        $get = Yii::$app->request->get();
+        $shop->load($get);
+        if ($shop->save()) $return = 0; else $return = -1;
+        return $this->response($return);
     }
 
 }
