@@ -29,10 +29,7 @@ use member\modules\food\models\Food;
             <li style="<?=$status==1?'border:1px solid #F5234A; background-color:#F5234A;':''?>"><a style="<?=$status==1?'color:#fff;':''?>" href="/food/admin/shop-order?status=1">进行中</a></li>
             <li style="<?=$status==2?'border:1px solid #F5234A;background-color:#F5234A; color:#fff;':''?>"><a style="<?=$status==2?'color:#fff;':''?>" href="/food/admin/shop-order?status=2">已完成</a></li>
         </ul>
-        <dl class="clearfix">
-            <dt><a href="/food/admin/admin"><span>菜品设置</span></a><img src="/static/food/images/right.png"></dt>
-            <dd></dd>
-        </dl>
+
     </div>
 
     <?php
