@@ -142,8 +142,13 @@ class WechatMsjlbApiController extends Controller
                  return $wechat->news($newsData)->reply();
             } elseif ($modules == 'food') {
                 $shop = Shop::findOne($pieces[1]);
-                $text = "[可爱]欢迎光临【$shop[name]】[可爱],您的桌号是$pieces[2]，<a href='http://ms.n39.cn/food/user/index?shopId=" . $pieces[1] . "&table=" . $pieces[2] . "'>开始点餐</a>";
-                $wechat->text($text)->reply();
+                $newsData[0] = array(
+                    'Title' => "欢迎光临【$shop[name]】",
+                    'Description' => "您的桌号是$pieces[2]，点我点餐.\n" . $shop['description'],
+                    'PicUrl' => $shop['img'],
+                    'Url' => "http://ms.n39.cn/food/user/index?shopId=" . $pieces[1] . "&table=" . $pieces[2]
+                );
+                return $wechat->news($newsData)->reply();
             } else {
                 $text = "获取到的模块ID为：" . $modules . "场景值为：" . $sceneId;
                 $wechat->text($text)->reply();
