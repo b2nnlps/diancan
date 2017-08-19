@@ -6,6 +6,7 @@ use backend\modules\sys\models\Teletext;
 use common\models\User;
 use Yii;
 use common\wechat\Wechat;
+use member\modules\food\models\Shop;
 use yii\web\Controller;
 /**
  * Class WechatController
@@ -139,8 +140,12 @@ class WechatMsjlbApiController extends Controller
                     'Url'=>'http://ms.n39.cn/eshop/personal/add?openid='.$openid.'&sceneid='.$sceneId
                 );
                  return $wechat->news($newsData)->reply();
-            }  else {
-                $text ="获取到的模块ID为：".$modules."场景值为：".$sceneId;
+            } elseif ($modules == 'food') {
+                $shop = Shop::findOne($pieces[1]);
+                $text = "[可爱]欢迎光临【$shop[name]】[可爱],您的桌号是$pieces[2]，<a href='http://ms.n39.cn/food/user/index?shopId=" . $pieces[1] . "&table=" . $pieces[2] . "'>开始点餐</a>";
+                $wechat->text($text)->reply();
+            } else {
+                $text = "获取到的模块ID为：" . $modules . "场景值为：" . $sceneId;
                 $wechat->text($text)->reply();
             }
         }else{
@@ -161,6 +166,7 @@ class WechatMsjlbApiController extends Controller
             return $wechat->news($newsData)->reply();
         }
     }
+
 
     protected function tsText()
     {
