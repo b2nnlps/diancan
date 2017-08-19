@@ -52,6 +52,7 @@
                     </li>
                     <li><span>就餐桌号：</span><input placeholder="输入桌号" id="table" name="table" type="text"
                                                  required="required"
+                            <?= isset($_COOKIE['table']) ? 'readonly="readonly"' : '' ?>
                                                  value="<?= isset($_COOKIE['table']) ? $_COOKIE['table'] : '' ?>"></li>
                     <li><span>需求备注：</span><input placeholder="输入其他需求" id="notic" name="notic" type="text"
                             ></li>
