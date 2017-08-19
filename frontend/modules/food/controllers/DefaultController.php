@@ -169,16 +169,18 @@ class DefaultController extends Controller
         return $response;
     }
 
-    public function actionQr($str)
+    public function actionQr($str, $a, $b)
     {
-        $scene_id = $str;//场景值
-        $params = Yii::$app->params['wechat_hnyj'];
-        $wechat = new Wechat($params);
-        $access_token_2 = new JSSDK();
-        $access_token = $access_token_2->getAccessToken();
-        $QRCode = $wechat->getQRCode($scene_id, $type = 1, $expire = 2592000, $access_token);//微信创建永久二维码ticket
-        $ticket = $QRCode['ticket'];//创建二维码ticket
-        $QRUrl = $wechat->getQRUrl($ticket);//获取二维码图片地址
-        return $QRUrl;
+        for ($i = $a; $i <= $b; $i++) {
+            $scene_id = $str . $i;//场景值
+            $params = Yii::$app->params['wechat_hnyj'];
+            $wechat = new Wechat($params);
+            $access_token_2 = new JSSDK();
+            $access_token = $access_token_2->getAccessToken();
+            $QRCode = $wechat->getQRCode($scene_id, $type = 1, $expire = 2592000, $access_token);//微信创建永久二维码ticket
+            $ticket = $QRCode['ticket'];//创建二维码ticket
+            $QRUrl = $wechat->getQRUrl($ticket);//获取二维码图片地址
+            echo "<img src='$QRUrl'>$scene_id <br>";
+        }
     }
 }
