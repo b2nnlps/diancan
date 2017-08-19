@@ -12,6 +12,7 @@ use member\modules\food\models\Table;
 use member\modules\food\models\OrderInfo;
 use member\modules\food\models\ShopStaff;
 use common\wechat\JSSDK;
+use common\wechat\Wechat;
 
 /**
  * Default controller for the `food` module
@@ -166,5 +167,18 @@ class DefaultController extends Controller
             // throw new Exception("Problem reading data from $url, $php_errormsg");
         }
         return $response;
+    }
+
+    public function actionQr()
+    {
+        $scene_id = '666';//场景值
+        $params = Yii::$app->params['wechat_hnyj'];
+        $wechat = new Wechat($params);
+        $access_token_2 = new JSSDK();
+        $access_token = $access_token_2->getAccessToken();
+        $QRCode = $wechat->getQRCode($scene_id, $type = 1, $expire = 2592000, $access_token);//微信创建永久二维码ticket
+        $ticket = $QRCode['ticket'];//创建二维码ticket
+        $QRUrl = $wechat->getQRUrl($ticket);//获取二维码图片地址
+        return $QRUrl;
     }
 }
