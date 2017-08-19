@@ -169,9 +169,9 @@ class DefaultController extends Controller
         return $response;
     }
 
-    public function actionQr()
+    public function actionQr($str)
     {
-        $scene_id = '666';//场景值
+        $scene_id = $str;//场景值
         $params = Yii::$app->params['wechat_hnyj'];
         $wechat = new Wechat($params);
         $access_token_2 = new JSSDK();
