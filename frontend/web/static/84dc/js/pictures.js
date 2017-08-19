@@ -9,7 +9,7 @@ $(document).ready(function () {
 
     $dragBln = false;
 
-    $(".main_image").touchSlider({
+    $(".main_image ul").touchSlider({
         flexible: true,
         speed: 50,
         btn_prev: $("#btn_prev"),
