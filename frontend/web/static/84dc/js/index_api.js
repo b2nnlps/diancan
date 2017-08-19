@@ -65,7 +65,7 @@ function showFoodList(res) {
         if (food[i].status == 0 && a[1] != "售完") {
             if (a[0] == true)//是否有多个规格
                 text += '<div class="plus"><a data-id="' + food[i].id + '">选规格</a></div></div></div>';
-            //   text += '<div class="picker"> <div class="pickerListen">数量</div></div>';
+            //  text += '<div class="picker"> <div class="pickerListen">称斤</div></div>';
             else {
                 var info = foodInfo[food[i].id];//查找规格
                 text += '<div class="btn_v1" data-id="' + food[i].id + '" data-name="' + food[i].name + '" data-price="' + a[1] + '">';
@@ -81,6 +81,15 @@ function showFoodList(res) {
     }
     updateIndex(false);//更新首页的商品数量
     $("img.lazy").lazyload({threshold: 180});
+    /* var mobileSelect2 = new MobileSelect({
+     trigger: '.pickerListen',
+     title: '麻辣口味虾',
+     wheels: [
+     {data: weekdayArr},
+     {data: timeArr}
+     ],
+     position:[1, 2]
+     });*/
 }
 
 
