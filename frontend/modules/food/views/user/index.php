@@ -163,6 +163,8 @@ $signPackage = $jssdk->GetSignPackage();
             content: '/food/user/detail?id=' + id
         });
         layer.full(index);
+        dataForShare.title = id + "我只是看一下能不能动态修改标题";
+        onBridgeReady_new();
     }
     function openShop() {//打开商家信息
         var index = layer.open({
@@ -174,7 +176,6 @@ $signPackage = $jssdk->GetSignPackage();
             content: '/food/user/shop-info?shopId=' + shopId
         });
         layer.full(index);
-
     }
     function payCart() {//结算
         var num = $("#totalcountshow").text();

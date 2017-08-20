@@ -84,5 +84,5 @@ wx.ready(function () {
             }
         });
     }
-    onBridgeReady_new();
+
 });
