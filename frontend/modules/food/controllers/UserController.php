@@ -26,7 +26,7 @@ class UserController extends BaseController
     public $enableCsrfValidation = false;
     public $layout = false;
 
-    public function actionIndex($shopId = 0, $table = 0)
+    public function actionIndex($shopId = 0, $table = 0, $food_id = 0)
     {
         if ($shopId && isset($_COOKIE['shopId'])) if ($shopId != $_COOKIE['shopId']) setcookie('cart', '', time() - 1, '/');
 
@@ -35,7 +35,7 @@ class UserController extends BaseController
 
         $shop = Shop::findOne($shopId);
 
-        return $this->render('index', ['shopId' => $shopId, 'shop' => $shop]);
+        return $this->render('index', ['shopId' => $shopId, 'shop' => $shop, 'food_id' => $food_id]);
     }
 
     public function actionDebug()

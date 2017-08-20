@@ -152,7 +152,7 @@ $signPackage = $jssdk->GetSignPackage();
     layer.ready(function () {
         index = layer.load(0, {shade: false});
         getFoodList(shopId);
-
+        <?=$food_id?"openDetail($food_id)":""?> //如果是分享来的，调用弹出层
     });
     function openDetail(id) {//打开菜品详情
         var index = layer.open({
@@ -198,6 +198,7 @@ $signPackage = $jssdk->GetSignPackage();
             callBackJin(indexArr);
         }
     });
+
 </script>
 
 </html>
