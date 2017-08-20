@@ -153,8 +153,12 @@ function getFoodView(food_id) {//获取菜品信息,主要用来更新分享
             dataForShare.weibo_icon = res.head_img;
             dataForShare.weixin_url = dataForShare.weixin_url + "&food_id=" + food_id;
             dataForShare.title = res.name;
-            var reTag = /<(?:.|\s)*?>/g;
-            dataForShare.description = (res.description).replace(reTag, ""); //去掉html标签
+            if (res.description != null) {
+                var reTag = /<(?:.|\s)*?>/g;
+                dataForShare.description = (res.description).replace(reTag, ""); //去掉html标签
+            } else {
+                dataForShare.description = dataForShare2.description;
+            }
             onBridgeReady_new();
         },
         error: function () {
