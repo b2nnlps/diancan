@@ -65,14 +65,17 @@ function showFoodList(res) {
         if (food[i].status == 0 && a[1] != "售完") {
             if (a[0] == true)//是否有多个规格
                 text += '<div class="plus"><a data-id="' + food[i].id + '">选规格</a></div></div></div>';
-            //  text += '<div class="picker"> <div class="pickerListen">称斤</div></div>';
             else {
                 var info = foodInfo[food[i].id];//查找规格
-                text += '<div class="btn_v1" data-id="' + food[i].id + '" data-name="' + food[i].name + '" data-price="' + a[1] + '">';
-                text += '<button class="index_minus"><strong></strong></button>';
-                text += '<li id="info_num' + info[0].id + '">0</li>';//第一个规格的ID
-                text += '<button class="index_add"><strong></strong></button>';
-                text += '</div></div>';
+                if (info[0].unit == "斤") {
+                    text += '<div class="picker"> <div class="pickerListen" id="picker' + info[0].id + '" data-id="' + food[i].id + '" data-name="' + food[i].name + '" data-price="' + a[1] + '">称斤</div></div>';
+                } else {
+                    text += '<div class="btn_v1" data-id="' + food[i].id + '" data-name="' + food[i].name + '" data-price="' + a[1] + '">';
+                    text += '<button class="index_minus"><strong></strong></button>';
+                    text += '<li id="info_num' + info[0].id + '">0</li>';//第一个规格的ID
+                    text += '<button class="index_add"><strong></strong></button>';
+                    text += '</div></div>';
+                }
             }
         }
         if (food[i].status == 1 || a[1] == "售完")
@@ -81,17 +84,7 @@ function showFoodList(res) {
     }
     updateIndex(false);//更新首页的商品数量
     $("img.lazy").lazyload({threshold: 180});
-    /* var mobileSelect2 = new MobileSelect({
-     trigger: '.pickerListen',
-     title: '麻辣口味虾',
-     wheels: [
-     {data: weekdayArr},
-     {data: timeArr}
-     ],
-     position:[1, 2]
-     });*/
 }
-
 
 function getInfoPrice(id) {//自动转化规格价格到主体
     var low = 99999, high = 0, a = [];
@@ -154,11 +147,13 @@ function updateIndex(del) { //更新首页的商品数量
         data = JSON.parse(data);
         for (var x = 0; x < 999; x++) {
             if (data.cart[x] == undefined)break;
-            if (data.cart[x].num <= 0 || del) {
+            if (data.cart[x].num <= 0 || del) { //del为是否全部清空
                 $("#info_num" + data.cart[x].id).css("display", "none").prev().css("display", "none");
+                $("#picker" + data.cart[x].id).html("称斤");
             } else {
                 $("#info_num" + data.cart[x].id).html(data.cart[x].num).parent().children().css("display", "inline-block");
-                total_num += data.cart[x].num;
+                $("#picker" + data.cart[x].id).html((data.cart[x].num).toFixed(1) + "斤");
+                total_num += parseInt(data.cart[x].num);
                 total_price += data.cart[x].num * data.cart[x].price;
             }
         }
@@ -179,10 +174,10 @@ function updateCart() {	//更新购物车的商品数量
             text += '<dl class="clearfix" data-id="' + data.cart[x].id + '"><dt>' + data.cart[x].name + '</dt><dd>￥' + data.cart[x].price + '</dd>';
             text += '<div class="btn_v2">';
             text += '<button class="cart_minus"><strong></strong></button>';
-            text += '<i>' + data.cart[x].num + '</i>';
+            text += '<i>' + Math.round((data.cart[x].num) * 10) / 10 + '</i>';
             text += '<button class="cart_add"><strong></strong>';
             text += '</button></div></dl>';
-            total_num += data.cart[x].num;
+            total_num += parseInt(data.cart[x].num);
             total_price += data.cart[x].num * data.cart[x].price;
         }
         $(".cart_box").html(text);
@@ -198,7 +193,7 @@ function countTotal() {//计算总数,总价
         for (var x = 0; x < 999; x++) {
             if (data.cart[x] == undefined)break;
             if (data.cart[x].num <= 0)continue;
-            total_num += data.cart[x].num;
+            total_num += parseInt(data.cart[x].num);
             total_price += data.cart[x].num * data.cart[x].price;
         }
         $("#totalcountshow").html(total_num);
@@ -214,7 +209,7 @@ function updateCookie(id, num, price, name, text) {	//输入商品id,数量，�
         for (var x = 0; x < 999; x++) {
             if (data.cart[x] == undefined)break;
             if (data.cart[x].id == id) {
-                data.cart[x].num += parseInt(num);//修改数量
+                data.cart[x].num += (num * 1);//修改数量,支持小数点
                 if (text.length > 0)
                     data.cart[x].text = text;//修改备注
                 has = true;
@@ -234,6 +229,37 @@ function updateCookie(id, num, price, name, text) {	//输入商品id,数量，�
     countTotal();
     updateIndex(false);//更新首页
 }
+
+function updateSetCookie(id, num, price, name, text) {	//输入商品id,数量，价格 直接设置对应的数量而不是累加
+    var has = false;
+    var data = $.cookie('cart');
+    if (data) {
+        data = JSON.parse(data);
+        for (var x = 0; x < 999; x++) {
+            if (data.cart[x] == undefined)break;
+            if (data.cart[x].id == id) {
+                data.cart[x].num = (num * 1);//修改数量,支持小数点
+                if (text.length > 0)
+                    data.cart[x].text = text;//修改备注
+                has = true;
+            }
+        }
+        data = JSON.stringify(data);
+    }
+    if (!has && data == null) {
+        data = '{\"cart\":[{\"id\":' + id + ',\"num\":' + num + ',\"price\":' + price + ',\"name\":\"' + name + '\",\"text\":\"' + text + '\"}]}';
+    } else {
+        if (!has) {
+            temp = ',{\"id\":' + id + ',\"num\":' + num + ',\"price\":' + price + ',\"name\":\"' + name + '\",\"text\":\"' + text + '\"}]}';  //从后面插入位移两位
+            data = data.replace("]}", temp);
+        }
+    }
+    $.cookie('cart', data, {expires: 1, path: '/'});
+    countTotal();
+    updateIndex(false);//更新首页
+}
+
+
 function deleteCart() {
     layer.confirm('是否清空购物车？', {
         btn: ['是', '否'] //按钮

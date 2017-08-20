@@ -38,11 +38,43 @@ $(".list_box").on('click', '.plus a', function () {
     }
     $("#cart_info").html(text);
 });
+
+var selectbt;
+//监听称斤按钮
+$(".list_box").on('click', '.pickerListen', function () {
+    $("#selectJin").click();//弹出选择称斤的界面
+    // $(".mobileSelect .title").html($(this).data("name"));
+    JinSelect.setTitle($(this).data("name")); //修改选择器标题
+    var jin = ($(this).text());//对应选择器的值
+    if (jin.indexOf(".") > 0) {//如果有.则证明有数据,如果没有就默认1斤
+        jin = jin.replace("斤", "");
+        jin = jin.split(".");//分割数字的左右边
+        JinSelect.locatePostion(0, jin[0]);//对应拨盘
+        JinSelect.locatePostion(1, jin[1]);
+    } else {
+        JinSelect.locatePostion(0, 1);//对应拨盘
+        JinSelect.locatePostion(1, 0);
+    }
+    selectbt = $(this);
+});
+//称斤后返回
+function callBackJin(data) {
+    console.log(data[0] + " " + data[1]);
+    $(selectbt).html(data[0] + "." + data[1] + "斤")
+
+    var food_id = $(selectbt).data("id");//获取的是food_id
+    var price = $(selectbt).data("price");//获取单价
+    var name = $(selectbt).data("name");
+    var info = foodInfo[food_id];//查找规格
+    var num = data[0] + data[1] / 10; //计算选择的斤数
+    updateSetCookie(info[0].id, num, price, name, "");
+}
+
 //购物车操作
 $(".cart_box").on('click', '.cart_add', function () {
     var n = $(this).prev().text();
-    var num = parseInt(n) + 1;
-    if (num == 0) {
+    var num = (n * 1) + 1;
+    if (num <= 0) {
         return;
     }
     $(this).prev().text(num);
@@ -52,7 +84,7 @@ $(".cart_box").on('click', '.cart_add', function () {
 //减的效果
 $(".cart_box").on('click', '.cart_minus', function () {
     var n = $(this).next().text();
-    var num = parseInt(n) - 1;
+    var num = (n * 1) - 1;
     var id = $(this).parent().parent().attr("data-id");
     updateCookie(id, -1, "", "", "");
     if (num <= 0) {
@@ -60,7 +92,7 @@ $(".cart_box").on('click', '.cart_minus', function () {
         checkCart();//检测是否还有购物车元素，没有则关闭购物车
         return;
     }
-    $(this).next().text(num);
+    $(this).next().text(Math.round(num * 10) / 10);
 
 });
 
@@ -75,9 +107,9 @@ $(".list_box").on('click', '.index_add', function () {
     $(this).prev().text(num);
     var price = $(this).parent().attr("data-price");//获取单价
 
-    var info_id = $(this).parent().attr("data-id");//获取的是food_id
+    var food_id = $(this).parent().attr("data-id");//获取的是food_id
     var name = $(this).parent().attr("data-name");
-    info = foodInfo[info_id];//查找规格
+    info = foodInfo[food_id];//查找规格
     updateCookie(info[0].id, 1, price, name, "");
 });
 //减的效果
@@ -127,3 +159,5 @@ $(".affirm_boxv1").click(function () {
     }
 
 });
+
+

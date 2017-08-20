@@ -10,6 +10,7 @@ $signPackage = $jssdk->GetSignPackage();
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title><?= $shop['name'] ?></title>
     <link href="/static/84dc/css/list_v1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/84dc/css/mobileSelect.css">
 </head>
 <body>
 <div class="box"><!--头部：开始--->
@@ -113,11 +114,12 @@ $signPackage = $jssdk->GetSignPackage();
         </div>
     </div>
 </div>
-
+<div id="selectJin" style="display:none"></div>
 </body>
 <script type="text/javascript" src="/static/84dc/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="/static/84dc/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="/static/84dc/js/jquery.lazyload.js?v=1.9.1"></script>
+<script type="text/javascript" src="/static/84dc/js/mobileSelect.js"></script>
 <script type="text/javascript" src="/static/84dc/js/layer/layer.js"></script>
 <script type="text/javascript" src="/static/84dc/js/index_css.js"></script>
 <script type="text/javascript" src="/static/84dc/js/index.js"></script>
@@ -181,5 +183,20 @@ $signPackage = $jssdk->GetSignPackage();
             layer.msg("您的购物车为空", {icon: 5});
         }
     }
+
+    var JinSelect = new MobileSelect({
+        trigger: '#selectJin',
+        title: '',
+        wheels: [
+            {data: ['0斤', '1斤', '2斤', '3斤', '4斤', '5斤', '6斤', '7斤', '8斤', '9斤', '10斤']},
+            {data: ['0两', '1两', '2两', '3两', '4两', '5两', '6两', '7两', '8两', '9两']}
+        ],
+        position: [1, 0],
+        callback: function (indexArr, data) {
+            console.log(indexArr + " " + data);
+            callBackJin(indexArr);
+        }
+    });
 </script>
+
 </html>
