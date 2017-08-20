@@ -88,7 +88,8 @@ $signPackage = $jssdk->GetSignPackage();
                 <dd>
                     <div class="gw_num">
                         <em class="gw_minus">-</em>
-                        <input id="cart_num" type="text" value="1" class="num"/>
+                        <input id="cart_num" type="text" value="1" class="num"
+                               onkeyup="this.value=this.value.replace(/\D/g,'')" maxlength="2"/>
                         <em class="gw_add">+</em>
                     </div>
                 </dd>
