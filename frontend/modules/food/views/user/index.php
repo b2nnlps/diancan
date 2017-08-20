@@ -164,6 +164,7 @@ $signPackage = $jssdk->GetSignPackage();
         });
         layer.full(index);
         dataForShare.title = id + "我只是看一下能不能动态修改标题";
+        dataForShare.description = id + "我只是看一下能不能动态修改标题";
         onBridgeReady_new();
     }
     function openShop() {//打开商家信息

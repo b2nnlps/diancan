@@ -20,6 +20,7 @@ wx.config(wx_config_t);
 var onBridgeReady_new;
 wx.ready(function () {
     onBridgeReady_new = function () {
+        console.log(4444444444);
         wx.onMenuShareAppMessage({
             title: dataForShare.title,
             desc: dataForShare.description,
@@ -84,5 +85,5 @@ wx.ready(function () {
             }
         });
     }
-
+    // onBridgeReady_new();
 });
