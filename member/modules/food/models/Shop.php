@@ -81,6 +81,6 @@ class Shop extends \yii\db\ActiveRecord
             ->where('a.id=b.order_id AND shop_id=:shop_id',[':shop_id'=>$shopId])
             ->sum('b.num');
         if(!$num) $num=0;
-        return $num;
+        return intval($num);//取整
     }
 }
