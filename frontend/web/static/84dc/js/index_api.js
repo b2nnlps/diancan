@@ -112,7 +112,7 @@ function getInfoPrice(id) {//自动转化规格价格到主体
     return a;
 }
 
-function getFoodList(shopId) {//获取菜品信息
+function getFoodList(shopId) {//获取菜品信息列表
     // 获取信息
     $.ajax({
         url: 'http://ms.n39.cn/food/api/get-food-list?shopId=' + shopId,
@@ -122,10 +122,39 @@ function getFoodList(shopId) {//获取菜品信息
         timeout: 5000,
         success: function (res) {
             res = res.data;
-            console.log(res);
             layer.close(index);
             showFoodList(res);
 
+        },
+        error: function () {
+            console.log('加载失败');
+        },
+        complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
+            if (status == 'timeout' || status == 'error') {//超时,status还有success,error等值的情况
+                console.log(status);
+            }
+            if (status == 'success') {
+            }
+        }
+    });
+}
+
+function getFoodView(food_id) {//获取菜品信息,主要用来更新分享
+    // 获取信息
+    $.ajax({
+        url: 'http://ms.n39.cn/food/api/get-food-view?food_id=' + food_id,
+        dataType: 'jsonp',
+        data: '',
+        jsonp: 'callback',
+        timeout: 5000,
+        success: function (res) {
+            res = res.data;
+            dataForShare.weixin_icon = res.head_img;
+            dataForShare.weibo_icon = res.head_img;
+            dataForShare.weixin_url = dataForShare.weixin_url + "&food_id=" + food_id;
+            dataForShare.title = res.name;
+            dataForShare.description = res.description;
+            onBridgeReady_new();
         },
         error: function () {
             console.log('加载失败');
