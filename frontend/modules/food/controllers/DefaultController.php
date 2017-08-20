@@ -38,7 +38,7 @@ class DefaultController extends Controller
             }
 
             $session['orderno']=$orderno;
-            self::WechatMessage($o['user'], $o['id'], $o['total'], $o['table'], $o['status'] == 1 ? '线上已支付' : '现金待支付', '出单中...');
+            self::WechatMessage($o['user'], $o['id'], round($o['total'], 2), $o['table'], $o['status'] == 1 ? '线上已支付' : '现金待支付', '出单中...');
 
             $orderInfo = OrderInfo::find()->where(['order_id' => $o['id']])->all();//更新销量和库存
             foreach ($orderInfo as $_info) {
