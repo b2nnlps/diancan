@@ -139,6 +139,7 @@ $signPackage = $jssdk->GetSignPackage();
         title: "<?=$shop['name']?>",
         description: "<?=$shop['description']?>"
     };
+    var dataForShare2 = dataForShare; //新建副本
     var appId = "<?=$signPackage["appId"]?>";
     var timestamp = "<?=$signPackage["timestamp"]?>";
     var nonceStr = "<?=$signPackage["nonceStr"]?>";
@@ -163,6 +164,10 @@ $signPackage = $jssdk->GetSignPackage();
             content: '/food/user/detail?id=' + id
         });
         layer.full(index);
+        $('.layui-layer-close').click(function () {//如果弹出层关闭，恢复副本
+            dataForShare = dataForShare2;
+            onBridgeReady_new();
+        });
         getFoodView(id);//获取商品详情用于分享
     }
     function openShop() {//打开商家信息
