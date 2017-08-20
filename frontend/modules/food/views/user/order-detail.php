@@ -1,3 +1,7 @@
+<?php
+use member\modules\food\models\FoodInfo;
+
+?>
 <!doctype html>
 <html>
 <head>
@@ -25,7 +29,8 @@
                $total=$_o['num']*$_o['price']/100;
                $total_number+=$_o['num'];
                $total_price+=$total;
-               $name = (strlen($_o['title']) > 0) ? $_o['name'] . '-' . $_o['title'] : $_o['name'];
+               $title = FoodInfo::FindOne($_o['info_id'])['title'];
+               $name = (strlen($title) > 0) ? $_o['name'] . '-' . $title : $_o['name'];
 
                echo <<<EOD
  <dl class="clearfix">

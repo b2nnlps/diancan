@@ -120,7 +120,7 @@ class UserController extends BaseController
                 $text .= '<dl class="clearfix"><dt>
 <h5>' . $name . '</h5>
 <span>' . $cart[$i]['text'] . '</span></dt><dd>
-<span class="amount_box">X' . $cart[$i]['num'] . '</span>
+<span class="amount_box">X' . $cart[$i]['num'] . $info['unit'] . '</span>
 <span class="price_box">￥' . $info['price'] * $cart[$i]['num'] . '</span></dd></dl>';
             }
         }
