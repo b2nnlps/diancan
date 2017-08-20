@@ -35,9 +35,10 @@ class OrderInfo extends \yii\db\ActiveRecord
     {
         return [
             [['food_id', 'info_id', 'price', 'num'], 'required'],
-            [['food_id', 'info_id', 'price', 'num', 'status'], 'integer'],
+            [['food_id', 'info_id', 'price', 'status'], 'integer'],
             [['operator'], 'string', 'max' => 255],
             [['order_id'], 'string', 'max' => 100],
+            [['num'], 'number'],
             [['text'], 'string'],
             [['updated_time'], 'safe'],
         ];
@@ -88,7 +89,7 @@ class OrderInfo extends \yii\db\ActiveRecord
         $order = Order::findOne(['user' => $user, 'id' => $order_id]);
         if (!$order) return false;
         $orderInfo = (new \yii\db\Query())
-            ->select(['b.text', 'b.price', 'b.num', 'a.name'])
+            ->select(['b.text', 'b.price', 'b.num', 'b.info_id', 'a.name'])
             ->from('n_food_food a,n_food_order_info b')
             ->where('a.id=b.food_id AND order_id=:order_id', [':order_id' => $order_id])
             ->orderBy('a.created_time')
