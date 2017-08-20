@@ -103,6 +103,13 @@ class ApiController extends BaseApiController
         return $this->response($return);
     }
 
+    public function actionGetFoodView($food_id)
+    {//获取商品详情
+        $food = Food::findOne($food_id);
+        $return['food'] = $food;
+        return $this->response($return);
+    }
+
     public function actionFeedback($text)
     {//店员反馈
         $text = urldecode($text);
@@ -123,7 +130,7 @@ class ApiController extends BaseApiController
     public function actionAdminFoodView($food_id)
     {//浏览商品的信息
         $this->isLogin();
-        $food = Food::find()->where(['id' => $food_id, 'shop_id' => $this->shopId])->orderBy('sort ASC')->asArray()->one();
+        $food = Food::find()->where(['id' => $food_id, 'shop_id' => $this->shopId])->one();
         $foodInfo = FoodInfo::find()->where(['food_id' => $food_id, 'shop_id' => $this->shopId, 'status' => 0])->orderBy('price ASC')->asArray()->all();
         $classes = Classes::find()->select(['id', 'name'])->where(['shop_id' => $this->shopId])->orderBy('sort ASC')->asArray()->all();
         $return['food'] = $food;
