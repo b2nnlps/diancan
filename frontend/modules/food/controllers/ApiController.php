@@ -105,7 +105,7 @@ class ApiController extends BaseApiController
 
     public function actionGetFoodView($food_id)
     {//获取商品详情
-        $food = Food::findOne($food_id);
+        $food = Food::find()->where(['id' => $food_id])->asArray()->one();
         return $this->response($food);
     }
 
