@@ -30,6 +30,7 @@ $(".list_box").on('click', '.plus a', function () {
     $("#cart_img").attr('src', img);
     $("#cart_name").html(name);
     $("#cart_price").html(price);
+    $("#cart_num").val(1);
     var id = $(this).attr("data-id");
     var info = foodInfo[id];
     text = "";
