@@ -11,6 +11,7 @@ use member\modules\food\models\Order;
 use member\modules\food\models\Table;
 use member\modules\food\models\OrderInfo;
 use member\modules\food\models\ShopStaff;
+use member\modules\food\models\Device;
 use common\wechat\JSSDK;
 use common\wechat\Wechat;
 
@@ -37,6 +38,10 @@ class DefaultController extends Controller
                 Order::printOrder($o,$table['device_id']);//判断完后开始打印
             }
 
+            $device = explode(',', $table['device_id']);//加入打印机等待状态队列
+            foreach ($device as $_device)
+                if (strlen($_device) > 0) Device::newDevice($_device, $o['id']);
+
             $session['orderno']=$orderno;
             self::WechatMessage($o['user'], $o['id'], round($o['total'], 2), $o['table'], $o['status'] == 1 ? '线上已支付' : '现金待支付', '出单中...');
 
@@ -53,10 +58,26 @@ class DefaultController extends Controller
         return $this->renderPartial('success');
     }
 
-    public  function actionGetPrint(){//获取有效期的订单 用软件定时触发的
-        $o = Order::find()->where('(status = 1 OR status=3) AND (print = 0) AND updated_time >= :time', [':time' => date("Y-m-d H:i:s", time() - 1800)])->one();
-        if($o) return self::actionPushMess($o['id']);
-        return 0;
+    public function actionGetPrint()
+    {//获取打印等待队列并自动打印 用软件定时触发的
+        $device = Device::find()->where('(status = 0 OR status=2) AND updated_time >= :time', [':time' => date("Y-m-d H:i:s", time() - 1800)])->all();
+        foreach ($device as $_device) {//遍历所有待打印队列中的信息
+            $o = Order::findOne($_device['order_id']);
+            if ($o)
+                Order::printOrder($o, $_device['device_id']);//推送给打印机打印信息
+        }
+        if ($device)
+            return "SUCCESS";
+        else
+            return 0;
+    }
+
+    public function actionCheckPrinter($order_id, $device_id, $status)
+    {  //提交订单打印机的打印状态
+        $o = Device::findOne(['order_id' => $order_id, 'device_id' => $device_id]);
+        $o['status'] = $status;
+        $o['updated_time'] = date("Y-m-d H:i:s");
+        $o->save();
     }
 
     public function actionCheckOrder($id,$print){  //提交订单是否打印状态
