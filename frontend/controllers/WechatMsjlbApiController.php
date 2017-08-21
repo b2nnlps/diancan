@@ -27,7 +27,7 @@ class WechatMsjlbApiController extends Controller
             $params = Yii::$app->params['wechat_msjlb'];
             // file_put_contents('txt.txt','params=='.$params."",FILE_APPEND);
             $wechat = new Wechat($params);
-        //  $wechat->valid();//明文或兼容模式可以在接口验证通过后注释此句，但加密模式一定不能注释，否则会验证失败
+            //  $wechat->valid();//明文或兼容模式可以在接口验证通过后注释此句，但加密模式一定不能注释，否则会验证失败
             $type = $wechat->getRev()->getRevType();
             switch ($type) {
                 case Wechat::MSGTYPE_TEXT:
@@ -43,7 +43,7 @@ class WechatMsjlbApiController extends Controller
                                                 'type' => 'view',
                                                 'name' => '最新动态',
                                                 'url' => 'http://mp.weixin.qq.com/mp/homepage?__biz=MzA3NTc1NzM5OQ==&hid=1&sn=d45bf00f0e7d3905f8898bf6914aac18&uin=MjI5ODI2OTg2MQ%3D%3D&key=c3acc508db720376d6cbca6d5f7813f4b38abff3145557000d3611adabefe34e2eb4e4cd3a120f18f486327b6760ed99&devicetype=android-23&version=26031b31&lang=zh_CN&nettype=WIFI&wx_header=1&scene=1',
-											//  'url' => 'http://micro.n39.cn/microsite?uid=df2c82c41a0bf173542deb691cb66099',
+                                                //  'url' => 'http://micro.n39.cn/microsite?uid=df2c82c41a0bf173542deb691cb66099',
                                             ),
                                         ),
                                     ),
@@ -87,7 +87,7 @@ class WechatMsjlbApiController extends Controller
                         default :
                             $text='';
                             if($text=='') {
-                              // $text = $this->defaultText();
+                                // $text = $this->defaultText();
                                 $wechat->transfer_customer_service('shejianshn@163.com')->reply();//消息转接到多客服
                             }
                             break;
@@ -100,7 +100,7 @@ class WechatMsjlbApiController extends Controller
                     if ($event ['event'] == 'subscribe') {
                         $this->Teletext($scene,$wechat);
                     }elseif($event ['event'] == 'SCAN') {
-                           $this->Teletext($scene,$wechat);
+                        $this->Teletext($scene, $wechat);
 //                        $text = "您好，欢迎来到美食俱乐部！。\n";
 //                        $text .= "您之前已关注过该公众号！^_^^_^，场景值为：".$scene;
 //                        $wechat->text($text)->reply();
@@ -127,7 +127,7 @@ class WechatMsjlbApiController extends Controller
          */
         if($scene!=null){//如果通过带场景值的二维码扫描关注
             $openid =$wechat->getRevFrom();//获取微信消息发送者OpenID
-            $pieces = explode(",", $scene); 
+            $pieces = explode(",", $scene);
             $modules=$pieces[0];//所属模块ID  
             $sceneId=$pieces[1];//场景值的OpenId 
             if($modules=='eshop'){
@@ -139,16 +139,19 @@ class WechatMsjlbApiController extends Controller
                     "PicUrl" =>$model['picurl'],
                     'Url'=>'http://ms.n39.cn/eshop/personal/add?openid='.$openid.'&sceneid='.$sceneId
                 );
-                 return $wechat->news($newsData)->reply();
+                return $wechat->news($newsData)->reply();
             } elseif ($modules == 'food') {
                 $shop = Shop::findOne($pieces[1]);
+                $url = "http://ms.n39.cn/food/user/index?shopId=" . $pieces[1] . "&table=" . $pieces[2];
                 $newsData[0] = array(
                     'Title' => "欢迎光临【$shop[name]】",
                     'Description' => "您的桌号是$pieces[2]，点我点餐.\n" . $shop['description'],
                     'PicUrl' => $shop['img'],
-                    'Url' => "http://ms.n39.cn/food/user/index?shopId=" . $pieces[1] . "&table=" . $pieces[2]
+                    'Url' => $url
                 );
-                return $wechat->news($newsData)->reply();
+                $wechat->news($newsData)->reply();//发送图文消息
+                $text = "[愉快]欢迎光临【$shop[name]】[愉快]\n" . "您的桌号是$pieces[2]，" . '<a href="' . $url . '">点我点餐</a>';
+                $wechat->text($text)->reply();
             } else {
                 $text = "获取到的模块ID为：" . $modules . "场景值为：" . $sceneId;
                 $wechat->text($text)->reply();
