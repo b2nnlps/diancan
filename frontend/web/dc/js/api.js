@@ -198,7 +198,7 @@ function getOrder(type, status, sort) {//获取订单信息 type 0厨房 1传菜
 function checkOrder(info_id, status) {//出锅、传菜状态更新
     var index = layer.load(0, {shade: false});
     $.ajax({
-        url: 'http://ms.n39.cn/food/api/check-order?info_id=' + info_id + '&status=' + status + "&" + addUrl,
+        url: 'http://ms.n39.cn/food/api/check-order-info?info_id=' + info_id + '&status=' + status + "&" + addUrl,
         dataType: 'jsonp',
         data: '',
         jsonp: 'callback',
