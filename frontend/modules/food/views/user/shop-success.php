@@ -14,7 +14,7 @@
         <h3>下单成功</h3>
         <h4>厨房正在出单...</h4>
     </div>
-    <div class="examine"><a href="/food/user/index?shop=<?=$shop_id?>">返回首页</a></div>
+    <div class="examine"><a href="/food/user/index?shopId=<?= $shop_id ?>">返回首页</a></div>
     <div class="footer"><p>©琼海玲珑软件有限公司 版权所有</p><p>联系电话：<a href="tel:089862922223">0898-62922223</a></p></div>
 </div>
 </body>
