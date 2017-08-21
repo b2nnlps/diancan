@@ -31,9 +31,9 @@ class Device extends \yii\db\ActiveRecord
     {
         return [
             [['device_id', 'order_id', 'created_time'], 'required'],
-            [['order_id', 'status'], 'integer'],
+            [['status'], 'integer'],
             [['updated_time', 'created_time'], 'safe'],
-            [['device_id'], 'string', 'max' => 50],
+            [['device_id', 'order_id'], 'string', 'max' => 50],
         ];
     }
 
