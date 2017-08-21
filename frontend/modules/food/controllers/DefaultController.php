@@ -60,7 +60,7 @@ class DefaultController extends Controller
 
     public function actionGetPrint()
     {//获取打印等待队列并自动打印 用软件定时触发的
-        $device = Device::find()->where('(status = 0 OR status=2) AND updated_time >= :time', [':time' => date("Y-m-d H:i:s", time() - 1800)])->all();
+        $device = Device::find()->where('(status = 0 OR status=2) AND created_time >= :time', [':time' => date("Y-m-d H:i:s", time() - 1800)])->all();
         foreach ($device as $_device) {//遍历所有待打印队列中的信息
             $o = Order::findOne($_device['order_id']);
             if ($o)
