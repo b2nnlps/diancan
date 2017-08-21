@@ -29,13 +29,17 @@ class ApiController extends BaseApiController
         return $this->response($order);
     }
 
-    public function actionGetOrderList($status = 0)
+    public function actionGetOrderList($status = 0, $page = 0, $id = false)
     {//拉取订单
         $this->isLogin();
-        if ($status == 1) {//已支付或者店员下单
-            $order = Order::find()->where('shop_id=:shop_id AND (status=1 OR status=3)', [':shop_id' => $this->shopId])->orderBy('created_time ASC')->limit(100)->asArray()->all();
-        } else
-            $order = Order::find()->where(['shop_id' => $this->shopId, 'status' => $status])->orderBy('created_time ASC')->limit(100)->asArray()->all();
+        if ($id) {//搜索订单号
+            $order = Order::find()->where('id LIKE :id AND shop_id = :shop_id', [':id' => "%$id", ':shop_id' => $this->shopId])->orderBy('created_time DESC')->asArray()->all();
+        } else {
+            if ($status == 1) {//已支付或者店员下单
+                $order = Order::find()->where('shop_id=:shop_id AND (status=1 OR status=3)', [':shop_id' => $this->shopId])->orderBy('created_time DESC')->offset($page * 30)->limit(30)->asArray()->all();
+            } else
+                $order = Order::find()->where(['shop_id' => $this->shopId, 'status' => $status])->orderBy('created_time DESC')->offset($page * 30)->limit(30)->asArray()->all();
+        }
         return $this->response($order);
     }
 
@@ -47,7 +51,16 @@ class ApiController extends BaseApiController
         return $this->response($return);
     }
 
-    public function actionCheckOrder($info_id, $status)
+    public function actionCheckOrder($order_id, $status)
+    {//更新订单状态
+        $this->isLogin();
+        $order = Order::findOne(['id' => $order_id, 'shop_id' => $this->shopId]);
+        $order['status'] = $status;
+
+        return $this->response($order->save());
+    }
+
+    public function actionCheckOrderInfo($info_id, $status)
     {//更新订单菜品状态
         $this->isLogin();
         $orderInfo = OrderInfo::findOne($info_id);
