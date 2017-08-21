@@ -38,7 +38,7 @@ function searchOrder() {//搜索订单
             timeout: 5000,
             success: function (res) {
                 res = res.data;
-                searchList(res, status);
+                searchList(res);
             },
             error: function () {
                 console.log('加载失败');
