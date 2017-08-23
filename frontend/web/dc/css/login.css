@@ -1,0 +1,162 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+    background: #f1f1f1
+}
+
+.box {
+    max-width: 640px;
+    min-width: 320px;
+    margin: auto;
+}
+
+.logo {
+
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    margin: 20px auto;
+    border-radius: 100px;
+    overflow: hidden; /* 圆形 */
+}
+
+.logo img {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+
+#login_form {
+    padding: 0 16px 0 16px;
+    font-size: 1.4rem;
+    overflow: hidden;
+}
+
+.input_div {
+    padding: 0 1rem 0 8rem;
+    margin-top: 10px;
+    height: 50px;
+    line-height: 43px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    background: #fff;
+    position: relative;
+}
+
+.input_div label {
+    position: absolute;
+    left: 0.5rem;
+    top: 5px;
+}
+
+.input_text {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    color: #333;
+    border: 0 none;
+    font-size: 16px;
+}
+
+.btn {
+    color: #fff;
+    border: 0 none;
+    border-radius: 4px
+}
+
+#loginBtn {
+    width: 100%;
+    background: #FE4543;
+    margin: 1rem 0;
+    font-size: 16px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 0.3rem
+}
+
+#box_form {
+    font-size: 1.4rem;
+    background: #fff;
+    padding-top: 1rem;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+}
+
+#box_form .input_div {
+    margin-top: 0;
+    box-shadow: none;
+    padding-left: 7.5rem;
+    padding-right: 0;
+}
+
+#box_form .input_div label {
+    left: 0
+}
+
+.input_div {
+    padding-left: 12rem;
+}
+
+.error {
+    display: none;
+    font-size: 1.3rem;
+    color: red;
+    text-align: right;
+    line-height: 2.4rem;
+    border: 1px solid #F00;
+}
+
+#login_form .input_div label, #register_form .input_div label {
+    font-size: 2.2rem;
+    padding-left: 0.5rem;
+    color: #707070
+}
+
+#login_form .input_div {
+    padding-left: 4.5rem
+}
+
+#forget_regi {
+    position: relative;
+}
+
+#forget_regi a {
+    color: #666;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+#forget_a {
+    position: absolute;
+    right: 0;
+    margin-top: 10px;
+}
+
+.error_err, .error_ok {
+    /*	height: 3rem;*/
+    /*	background: #FD5583;*/
+    font-size: 14px;
+    color: #FD5583;
+    line-height: 24px;
+    text-indent: 1rem;
+    border-radius: 4px;
+    /*	margin-top:10px;*/
+    /*border: 1px #0000aa solid;*/
+}
+
+.error_ok {
+    background: #28B779
+}
+
+.codeImg, #codeImg {
+    position: absolute;
+    right: 0rem;
+    top: 0rem;
+    width: 80px;
+    text-align: center;
+    height: 40px;
+    margin-top: 5px;
+    margin-right: 5px;
+    border-radius: 4px;
+    box-shadow: -1px 0 1px rgba(0, 0, 0, 0.1);
+}

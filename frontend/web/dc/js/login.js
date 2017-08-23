@@ -19,7 +19,8 @@ function loginUser(username, password) {
                 res = res.data;
                 console.log(res);
                 layer.msg("登录成功,如需打印请设置打印机.");
-                window.location.href = 'http://ms.n39.cn/dc/index.html?' + addUrl;
+                // window.location.href = 'http://ms.n39.cn/dc/index.html?' + addUrl;
+                window.wx.JsMoveToIndex(username, password);//调用系统函数
             }
         },
         error: function () {
