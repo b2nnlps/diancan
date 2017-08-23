@@ -1,7 +1,7 @@
 /*
  本文件为获取商品API使用
  */
-var shop, classes, food, foodInfo = [];
+var shop, classes, food, foodInfo = [], food_store = [];
 
 function showFoodList(res) {
     var i, text = "", text2 = "";
@@ -23,6 +23,11 @@ function showFoodList(res) {
             a.push(Info[i]);
             foodInfo[Info[i].food_id] = a;
         }
+        if (food_store[Info[i].food_id] == undefined) {
+            food_store[Info[i].food_id] = Info[i].number;
+        } else {
+            food_store[Info[i].food_id] += Info[i].number;
+        }
     }
     console.log(foodInfo);
     //处理结果foodInfo的键值为food_id，内容为规格的对象
@@ -31,7 +36,7 @@ function showFoodList(res) {
     for (i = 0; i < len; i++) {
         text = '<dl data-name="' + food[i].name + '"><dt><a><img class="lazy" data-original="' + food[i].head_img + '" alt="只"></a></dt>';
         text += '<dd><h3><a>' + food[i].name + '</a></h3>';
-        text += '<span>销售量：' + food[i].sold_number + '只</span><span>库存:<em class="stock">' + food[i].sold_number + '</em>只</span>';
+        text += '<span>销售量：' + food[i].sold_number + '只</span><span>库存:<em class="stock">' + food_store[food[i].id] + '</em>只</span>';
         a = getInfoPrice(food[i].id);
         text += '<h5>￥<em class="price">' + a[1] + a[2] + '</em></h5></dd>';
         text += '<div class="clear"></div><div class="alterdiv"><a href="update.html?food_id=' + food[i].id + '&' + addUrl + '"><img src="icon/bj.png"></a></div></dl>';
