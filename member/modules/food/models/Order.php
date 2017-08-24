@@ -140,6 +140,9 @@ class Order extends \yii\db\ActiveRecord
     { //该函数只负责打印
         $info = OrderInfo::findAll(['order_id' => $o['id']]);
         $text = self::charsetToGBK("# " . $o['num']) . "\n";
+        $text .= self::charsetToGBK("桌号：" . $o['table']) . "\n";
+        $text .= self::charsetToGBK('姓名：' . $o['realname']) . "\n";
+        $text .= self::charsetToGBK('电话：' . $o['phone']) . "\n";
         $text .= '================================';
         $total = 0;
         $i = 0;
@@ -155,9 +158,6 @@ class Order extends \yii\db\ActiveRecord
         }
         $total = round($total, 2);
         $text .= self::charsetToGBK("\n订单编号：" . $o['id']) . "\n";
-        $text .= self::charsetToGBK("就餐桌号：" . $o['table']) . "\n";
-        $text .= self::charsetToGBK('下单人：' . $o['realname']) . "\n";
-        $text .= self::charsetToGBK('联系电话：' . $o['phone']) . "\n";
         $text .= self::charsetToGBK('订单备注：' . $o['text']) . "\n";
         $text .= self::charsetToGBK('下单时间：' . date("Y-m-d H:i:s")) . "\n";
         $text .= self::charsetToGBK("消费金额：￥" . $total . "\n");
