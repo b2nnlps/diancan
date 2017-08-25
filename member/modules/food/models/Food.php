@@ -54,7 +54,7 @@ class Food extends \yii\db\ActiveRecord
             'description' => '详细描述',
             'shop_id' => '所属商店',
             'class_id' => '所属分类',
-            'is_attach' => '是否是附加商品',
+            'is_attach' => '附加商品',
             'status' => '状态',
             'created_time' => '创建时间',
             'updated_time' => '更新时间',
