@@ -32,7 +32,7 @@ class Food extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'shop_id', 'class_id'], 'required'],
-            [['shop_id', 'sort', 'class_id', 'status'], 'integer'],
+            [['shop_id', 'sort', 'class_id', 'status', 'is_attach'], 'integer'],
             [['created_time', 'updated_time','description'], 'safe'],
             [['name'], 'string', 'max' => 80],
             [['head_img'], 'string', 'max' => 255],
@@ -54,6 +54,7 @@ class Food extends \yii\db\ActiveRecord
             'description' => '详细描述',
             'shop_id' => '所属商店',
             'class_id' => '所属分类',
+            'is_attach' => '是否是附加商品',
             'status' => '状态',
             'created_time' => '创建时间',
             'updated_time' => '更新时间',
@@ -72,6 +73,15 @@ class Food extends \yii\db\ActiveRecord
             '0' => '上架',
             '1' => '售完',
             '2' => '下架',
+        ];
+        return $key === null ? $arr : (isset($arr[$key]) ? $arr[$key] : '');
+    }
+
+    public static function is_attach($key = null)
+    {
+        $arr = [
+            '0' => '否',
+            '1' => '是',
         ];
         return $key === null ? $arr : (isset($arr[$key]) ? $arr[$key] : '');
     }
