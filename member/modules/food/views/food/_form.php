@@ -78,6 +78,8 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'description')->widget(\crazyfd\ueditor\Ueditor::className(),[]) ?>
 
+    <?= $form->field($model, 'is_attach')->dropDownList($model::is_attach()) ?>
+
     <?= $form->field($model, 'status')->dropDownList($model::status()) ?>
 
     <div class="form-group">
