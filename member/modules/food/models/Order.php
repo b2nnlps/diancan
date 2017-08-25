@@ -170,7 +170,7 @@ class Order extends \yii\db\ActiveRecord
             $total += $foodInfo['price'] * $_info['num'];
         }
         if ($text_attach) {//附加商品添加
-            $text_attach = "             附加\n" . $text_attach;
+            $text_attach = self::charsetToGBK("             附加") . "\n" . $text_attach;
             $text .= $text_attach;
         }
         $total = round($total, 2);
