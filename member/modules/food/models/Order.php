@@ -139,22 +139,39 @@ class Order extends \yii\db\ActiveRecord
     public static function printOrder($o,$device_id)
     { //该函数只负责打印
         $info = OrderInfo::findAll(['order_id' => $o['id']]);
+        $text_attach = "";
         $text = self::charsetToGBK("# " . $o['num']) . "\n";
         $text .= self::charsetToGBK("桌号：" . $o['table']) . "\n";
         $text .= self::charsetToGBK('姓名：' . $o['realname']) . "\n";
         $text .= self::charsetToGBK('电话：' . $o['phone']) . "\n";
-        $text .= '================================';
+        $text .= '================================' . "\n";
         $total = 0;
         $i = 0;
+        $j = 0;
         foreach ($info as $_info) {
             $foodInfo = FoodInfo::findOne($_info['info_id']);
             $food = Food::findOne($foodInfo['food_id']);
-            $i++;
+            if ($food['is_attach']) {//如果是附加商品，重新计数
+                $j++;
+                $k = $j;
+            } else {
+                $i++;
+                $k = $i;
+            }
             if (strlen($foodInfo['title']) > 0)//是否有规格
-                $text .= self::change($i . '.' . $food['name'] . "(" . $foodInfo['title'] . ")", '￥' . $foodInfo['price'], '  x' . $_info['num']);
+                $temp = self::change($k . '.' . $food['name'] . "(" . $foodInfo['title'] . ")", '￥' . $foodInfo['price'], '  x' . $_info['num']);
             else
-                $text .= self::change($i . '.' . $food['name'], '￥' . $foodInfo['price'], '  x' . $_info['num']);
+                $temp = self::change($k . '.' . $food['name'], '￥' . $foodInfo['price'], '  x' . $_info['num']);
+            if ($food['is_attach'])//附加商品，放新变量
+                $text_attach .= $temp;
+            else
+                $text .= $temp;
+
             $total += $foodInfo['price'] * $_info['num'];
+        }
+        if ($text_attach) {//附加商品添加
+            $text_attach = "             附加\n" . $text_attach;
+            $text .= $text_attach;
         }
         $total = round($total, 2);
         $text .= self::charsetToGBK("\n订单编号：" . $o['id']) . "\n";
