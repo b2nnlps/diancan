@@ -51,7 +51,7 @@ class DefaultController extends Controller
                 $food['sold_number'] = $food['sold_number'] + $_info['num'];
                 $food->save();
                 $foodInfo = FoodInfo::findOne($_info['info_id']);
-                $foodInfo['number'] = $food['sold_number'] - $_info['num'];
+                $foodInfo['number'] = $foodInfo['number'] - $_info['num'];
                 $foodInfo->save();
             }
         }
