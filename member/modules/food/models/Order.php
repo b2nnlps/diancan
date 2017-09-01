@@ -98,7 +98,6 @@ class Order extends \yii\db\ActiveRecord
         $num = Order::find()->where('shop_id=:shop_id AND updated_time LIKE :updated_time', [':shop_id' => $shop_id, ':updated_time' => '%' . date("Y-m-d") . '%'])->count();
         $order->num = $num + 1; //今日订单数
         $order->id = $shop_id . date("ymd") . str_pad($order->num, 3, '0', STR_PAD_LEFT);
-
         $order->created_time=date("Y-m-d H:i:s");
         $order->updated_time=date("Y-m-d H:i:s");
         if(!$order->save())var_dump($order->getErrors());
