@@ -43,7 +43,8 @@ class DefaultController extends Controller
                 if (strlen($_device) > 0) Device::newDevice($_device, $o['id']);
 
             $session['orderno']=$orderno;
-            self::WechatMessage($o['user'], $o['id'], round($o['total'], 2), $o['table'], $o['status'] == 1 ? '线上已支付' : '现金待支付', '出单中...');
+            $shop=Shop::findOne($o['shop_id']);
+            self::WechatMessage($o['user'], $shop['name'] ,$o['id'], '￥'.(string)(round($o['total'], 2)), $o['table'], $o['status'] == 1 ? '线上已支付' : '现金待支付', '出单中...');
 
             $orderInfo = OrderInfo::find()->where(['order_id' => $o['id']])->all();//更新销量和库存
             foreach ($orderInfo as $_info) {
@@ -129,7 +130,7 @@ class DefaultController extends Controller
         echo date("H:i:s");
     }
 
-    public static function WechatMessage($openid,$a1,$a2,$a3,$a4,$remark)
+    public static function WechatMessage($openid,$a0,$a1,$a2,$a3,$a4,$remark)
     {
         $access_token_2=new JSSDK();
         $access_token=$access_token_2->getAccessToken('wechat');
@@ -140,11 +141,11 @@ class DefaultController extends Controller
             "template_id"=>"MEMt4lAYBITWFHKfWdqspY2O6bSw3EOAGu9tqdOIFNU",
             "url" => 'http://ms.n39.cn/food/user/order-detail?order_id=' . $a1,
             "topcolor"=>"#FF0000",
-            "data" => array("first" => array("value" => '欢迎光临', "color" => "#CD453B"),
-                "keyword1"=>array("value"=>$a1,"color"=>"#2B9F65"),
-                "keyword2"=>array("value"=>$a2,"color"=>"#5785CF"),
-                "keyword3"=>array("value"=>$a3,"color"=>"#5785CF"),
-                "keyword4"=>array("value"=>$a4,"color"=>"#5785CF"),
+            "data" => array("first" => array("value" => '欢迎光临【'.$a0.'】', "color" => "#CD453B"),
+                "keyword1"=>array("value"=>$a1,"color"=>"#000000"),
+                "keyword2"=>array("value"=>$a2,"color"=>"#990000"),
+                "keyword3"=>array("value"=>$a3,"color"=>"#66CC33"),
+                "keyword4"=>array("value"=>$a4,"color"=>"#000000"),
                 "remark"=>array("value"=>$remark,"color"=>"#D19B43"))
         );
         $data = json_encode($content);
