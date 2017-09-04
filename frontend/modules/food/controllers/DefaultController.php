@@ -137,16 +137,26 @@ class DefaultController extends Controller
         $url  = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=$access_token";
         $touser=$openid;
 
-        $content=array("touser"=>$touser,
-            "template_id"=>"MEMt4lAYBITWFHKfWdqspY2O6bSw3EOAGu9tqdOIFNU",
-            "url" => 'http://ms.n39.cn/food/user/order-detail?order_id=' . $a1,
-            "topcolor"=>"#FF0000",
-            "data" => array("first" => array("value" => '欢迎光临【'.$a0.'】', "color" => "#CD453B"),
-                "keyword1"=>array("value"=>$a1,"color"=>"#000000"),
-                "keyword2"=>array("value"=>$a2,"color"=>"#990000"),
-                "keyword3"=>array("value"=>$a3,"color"=>"#66CC33"),
-                "keyword4"=>array("value"=>$a4,"color"=>"#000000"),
-                "remark"=>array("value"=>$remark,"color"=>"#D19B43"))
+        $content=array("touser"      =>$touser,
+                       "template_id" =>"MEMt4lAYBITWFHKfWdqspY2O6bSw3EOAGu9tqdOIFNU",
+                       "url"         => 'http://ms.n39.cn/food/user/order-detail?order_id=' . $a1,
+                       "topcolor"    =>"#FF0000",
+                       "data"        => array(
+                           "first"    => array(
+                               "value" => '欢迎光临【' . $a0 . '】',
+                               "color" => "#990000"
+                           ),
+                           "keyword1" =>array("value"=>$a1,"color"=>"#000000"),
+                           "keyword2" => array(
+                               "value" => $a2,
+                               "color" => "#CD453B"
+                           ),
+                           "keyword3" => array(
+                               "value" => $a3,
+                               "color" => "#000000"
+                           ),
+                           "keyword4" =>array("value"=>$a4,"color"=>"#000000"),
+                           "remark"   =>array("value"=>$remark,"color"=>"#D19B43"))
         );
         $data = json_encode($content);
         return  self::do_post_request($url, $data);
