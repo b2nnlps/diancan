@@ -1,0 +1,96 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+ul, li {
+    list-style: none;
+}
+
+.clear {
+    clear: both;
+}
+
+img {
+    vertical-align: middle;
+    border: none;
+}
+
+body {
+    font-family: "微软雅黑";
+    background-color: #FE4543;
+}
+
+.code_box {
+    max-width: 640px;
+    min-width: 320px;
+    margin: auto;
+}
+
+/* CSS Document */
+.code_content {
+    width: 86%;
+    margin: 70px auto 0;
+    background-color: #FFF;
+    padding-bottom: 20px;
+}
+
+.code_content dl {
+    padding: 15px 10px 15px 15px;
+}
+
+.code_content dl dt {
+    width: 80px;
+    height: 80px;
+    float: left;
+}
+
+.code_content dl dt img {
+    width: 70px;
+    height: 70px;
+}
+
+.code_content dl dd {
+    width: 100%;
+    padding-top: 10px;
+}
+
+.code_content dl dd p {
+    font-size: 15px;
+    line-height: 25px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.code_content dl dd span {
+    font-size: 13px;
+    color: #B7B7B7;
+}
+
+.img {
+    width: 95%;
+    margin: 5px auto 0;
+}
+
+.img img {
+    width: 85%;
+    display: block;
+    margin: auto;
+}
+
+.img p {
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+}
+
+.p_box p {
+    width: 100%;
+    margin: auto;
+    font-size: 12px;
+    color: #B7B7B7;
+    text-align: center;
+}

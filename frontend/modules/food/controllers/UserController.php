@@ -13,6 +13,8 @@ use frontend\controllers\BaseController;
 use member\modules\food\models\ShopStaff;
 use member\modules\food\models\User;
 use member\modules\sys\models\WechatUser;
+use common\wechat\Wechat;
+use common\wechat\JSSDK;
 
 /**
  * Default controller for the `food` module
@@ -229,6 +231,30 @@ class UserController extends BaseController
         $shop = Shop::findOne($shopId);
         $sold = Shop::getSold($shopId);//获取商家销量
         return $this->render('shop-detail', ['shop' => $shop, 'sold' => $sold]);
+    }
+
+    public function actionShopQr($shop_id, $table = -1)
+    {//扫码，商家和桌号
+        $params   = Yii::$app->params['wechat_msjlb'];
+        $wechat   = new Wechat($params);
+        $userInfo = $wechat->getUserinfos($this->openid);//获取用户信息
+        if ($userInfo['subscribe'] == 1) {//如果已关注直接跳转
+            return self::actionIndex($shop_id, $table);
+        } else {
+            $shop = Shop::findOne($shop_id);
+            if ($shop) {
+                $access_token_2 = new JSSDK();
+                $access_token   = $access_token_2->getAccessToken();
+                $QRCode         = $wechat->getQRCode('food,' . $shop_id . ','
+                    . $table, $type = 1, $expire = 2592000,
+                    $access_token);//微信创建永久二维码ticket
+                $ticket         = $QRCode['ticket'];//创建二维码ticket
+                $QRUrl          = $wechat->getQRUrl($ticket);//获取二维码图片地址
+
+                return $this->render('shop-qr',
+                    ['shop' => $shop, 'qrurl' => $QRUrl]);
+            }
+        }
     }
 
 
