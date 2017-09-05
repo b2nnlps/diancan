@@ -14,7 +14,7 @@
         <dl>
             <dt><img src="<?= $shop['img'] ?>"></dt>
             <dd>
-                <p><?= $shop['name'] ?></p>
+                <p><?= $shop['name'] . ($table ? "($table)桌" : "") ?></p>
                 <span><?= $shop['address'] ?></span>
             </dd>
             <div class="clear"></div>

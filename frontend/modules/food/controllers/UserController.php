@@ -233,7 +233,7 @@ class UserController extends BaseController
         return $this->render('shop-detail', ['shop' => $shop, 'sold' => $sold]);
     }
 
-    public function actionShopQr($shop_id, $table = -1)
+    public function actionShopQr($shop_id, $table = 0)
     {//扫码，商家和桌号
         $params   = Yii::$app->params['wechat_msjlb'];
         $wechat   = new Wechat($params);
@@ -252,7 +252,7 @@ class UserController extends BaseController
                 $QRUrl          = $wechat->getQRUrl($ticket);//获取二维码图片地址
 
                 return $this->render('shop-qr',
-                    ['shop' => $shop, 'qrurl' => $QRUrl]);
+                    ['shop' => $shop, 'qrurl' => $QRUrl, 'table' => $table]);
             }
         }
     }
