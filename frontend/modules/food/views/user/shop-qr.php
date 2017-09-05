@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>点餐二维码</title>
+    <title>关注公众号后点餐</title>
     <link href="/static/95gx/css/style.css" rel="stylesheet" type="text/css">
 </head>
 
