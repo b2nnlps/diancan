@@ -19,7 +19,7 @@
     <div class="main">
         <div class="payment_success">
             <img src="/static/627dc/images/jfimg.png">
-            <h3>恭喜您获得<span><?=$o['total']?></span>积分</h3>
+            <h3>恭喜您获得<span><?= $score ?></span>积分</h3>
         </div>
         <div class="butt_box">
             <dl class="clearfix">

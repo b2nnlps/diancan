@@ -210,11 +210,11 @@ class UserController extends BaseController
         return $this->render('order-detail', ['orderInfo' => $orderInfo, 'o' => $o]);
     }
 
-    public function actionPaySuccess($order_id)
+    public function actionPaySuccess($score)
     {//支付完毕
         setcookie('cart', '', time() - 1, '/');
-        $o = Order::findOne($order_id);
-        return $this->render('success', ['o' => $o]);
+
+        return $this->render('success', ['score' => $score]);
     }
 
     public function actionPerson()
