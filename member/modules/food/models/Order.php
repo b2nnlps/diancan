@@ -82,22 +82,26 @@ class Order extends \yii\db\ActiveRecord
 
     public static function newOrder($openid, $shop_id, $orderno, $realname, $phone, $table, $people, $staff, $text)
     {
-        $order=new Order();
-        $order->user=$openid;
-        $order->shop_id=$shop_id;
-        $order->orderno=$orderno;
-        $order->realname=$realname;
-        $order->phone=$phone;
-        $order->table=$table;
-        $order->people = $people;
-        $order->text=$text;
-        if ($staff)  //如果是服务员就直接现金支付
-            $order->status=3;
-        else
-            $order->status=0;
-        $num = Order::find()->where('shop_id=:shop_id AND updated_time LIKE :updated_time', [':shop_id' => $shop_id, ':updated_time' => '%' . date("Y-m-d") . '%'])->count();
-        $order->num = $num + 1; //今日订单数
-        $order->id = $shop_id . date("ymd") . str_pad($order->num, 3, '0', STR_PAD_LEFT);
+        $order           =new Order();
+        $order->user     =$openid;
+        $order->shop_id  =$shop_id;
+        $order->orderno  =$orderno;
+        $order->realname =$realname;
+        $order->phone    =$phone;
+        $order->table    =$table;
+        $order->people   = $people;
+        $order->text     =$text;
+        $num             = Order::find()->where('shop_id=:shop_id AND status!=0 AND updated_time LIKE :updated_time',
+            [':shop_id' => $shop_id, ':updated_time' => '%' . date("Y-m-d") . '%'])->count();
+        $order->num      = $num + 1; //今日订单数
+        if ($staff) { //如果是服务员就直接现金支付
+            $order->status = 3;
+            $order->id     = $shop_id . date("ymd") . str_pad($order->num, 3, '0', STR_PAD_LEFT);
+        } else {
+            $order->status = 0;
+            $order->id     = $shop_id . date("ymdHis") . rand(1000, 9999);
+        }
+
         $order->created_time=date("Y-m-d H:i:s");
         $order->updated_time=date("Y-m-d H:i:s");
         if(!$order->save())var_dump($order->getErrors());
