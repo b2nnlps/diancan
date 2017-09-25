@@ -67,7 +67,7 @@ class BaseController extends Controller
             $params = Yii::$app->params[$gzh];
             $wechat = new Wechat($params);
 
-            $redirect = Yii::$app->urlManager->createAbsoluteUrl(['base/auth-redirect']).'?URL='.($_SERVER['REQUEST_URI']);
+            $redirect = Yii::$app->urlManager->createAbsoluteUrl(['base/auth-redirect']) . '?URL=' . (base64_encode($_SERVER['REQUEST_URI']));
 
             $url = $wechat->getOauthRedirect($redirect);
 			 
@@ -172,10 +172,9 @@ class BaseController extends Controller
 
         }
         $url = Yii::$app->request->get('URL','');
-        $url = $url ? $url : '/';
+        $url = $url ? base64_decode($url) : '/';
 		
         $this->redirect([$url]);
-        $url1 = Yii::$app->request->get('URL','');
     }
 
 
