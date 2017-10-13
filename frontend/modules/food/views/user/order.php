@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>容合点餐系统</title>
+    <title>订单确认</title>
     <link href="/static/627dc/css/style.css" rel="stylesheet" type="text/css">
     <link href="/static/627dc/css/demo.css" rel="stylesheet" type="text/css">
 </head>
