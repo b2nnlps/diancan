@@ -185,7 +185,7 @@ class ApiController extends BaseApiController
     }
 
     public function actionAdminShopSetting()
-    {
+    {//管理员的店铺设置
         $this->isLogin();
         if ($this->staff['role_id'] != 9) return $this->errorResponse(-1, 403, "您没有权限修改店铺信息");
         $shop = Shop::findOne($this->staff['shop_id']);
@@ -193,6 +193,27 @@ class ApiController extends BaseApiController
         $shop->load($get);
         if ($shop->save()) $return = 0; else $return = -1;
         return $this->response($return);
+    }
+
+    public function actionRefund($order_info_id, $fee)
+    {//退款代码
+        $this->isLogin();
+        $order_info = OrderInfo::findOne($order_info_id);
+        if ($order_info) {
+            $order = Order::findOne(['shop_id' => $this->shopId, 'id' => $order_info['order_id']]);
+            if ($order) {//安全措施，只能退款自己店的
+                if (strlen($order['orderno']) < 3) {
+                    $return['result_code'] = 'FAIL';
+                    $return['err_code_des'] = '该笔订单是店员操作下单的';
+                    return $this->response($return);
+                }
+                $fee = $fee * 100;
+                $total = $order['total'] * 100;
+                $s = "http://ms.n39.cn/wxpay/$this->shopId/refund.php?transaction_id=$order[orderno]&total_fee=$total&refund_fee=$fee";
+                $s = file_get_contents($s);
+                return $this->response(json_decode($s));
+            }
+        }
     }
 
 }
