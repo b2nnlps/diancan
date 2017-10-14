@@ -239,7 +239,7 @@ function showDetail(res) {
         text += '<dt><h5>' + detail[i].name + '</h5>';
         if ((detail[i].type) != null)
             text += '<span>' + detail[i].type + '</span>';
-        text += '</dt><dd><span class="amount_box">X' + detail[i].num + '</span><span class="price_box">￥' + (detail[i].price / 100) + '</span></dd></dl>';
+        text += '</dt><dd><span class="amount_box">X' + detail[i].num + '</span><span class="price_box" onclick="refund(' + detail[i].id + ',' + (detail[i].price / 100) + ')">￥' + (detail[i].price / 100) + '</span></dd></dl>';
         $("#detail_info").append(text);
     }
     $("#ddid").html("订单ID：" + order.id);
@@ -252,6 +252,46 @@ function showDetail(res) {
     $("#bz").html("订单备注：" + order.text);
     $("#conf").attr("onClick", 'printOrder(' + order.id + ")");
     $("#finish").attr("onClick", 'confirmCheckOrder(' + order.id + ")");
+}
+
+function refund(order_info_id, total_fee) {
+    layer.prompt({title: '输要退款的金额,最大(' + total_fee + ')', value: total_fee, formType: 0}, function (fee, index) {
+        layer.close(index);
+        if (/^\d+(\.\d{1,2})?$/.test(fee)) {
+            fee = fee * 1;
+            if (fee > total_fee) return layer.msg('不能超过' + total_fee);
+            if (fee <= 0) return layer.msg('必须大于0');
+            $.ajax({
+                url: 'http://ms.n39.cn/food/api/refund?order_info_id=' + order_info_id + '&fee=' + fee + '&' + addUrl,
+                dataType: 'jsonp',
+                data: '',
+                jsonp: 'callback',
+                timeout: 5000,
+                success: function (res) {
+                    res = res.data;
+                    layer.close(index);
+                    if (res.result_code == 'SUCCESS') {
+                        layer.msg('发起退款成功！', {icon: 1});
+                    } else
+                        layer.msg(res.err_code_des, {icon: 2});
+                },
+                error: function () {
+                    console.log('加载失败');
+                    layer.close(index);
+                },
+                complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
+                    if (status == 'timeout' || status == 'error') {//超时,status还有success,error等值的情况
+                        console.log(status);
+                    }
+                    if (status == 'success') {
+                    }
+                    layer.close(index);
+                }
+            });
+        } else {
+            layer.msg('输入不规范');
+        }
+    });
 }
 
 function hideOrderList(id) {
@@ -274,6 +314,7 @@ function detail(table, orderId) {
     });
     layer.full(detailIndex);
 }
+
 function woaicssq(num) {
     for (var id = 1; id <= 3; id++) {
         var MrJin = "woaicss_con" + id;
@@ -287,6 +328,7 @@ function woaicssq(num) {
         $(this).addClass("thisclass").siblings().removeClass("thisclass");
     });
 }
+
 $(function () {
     var zzsc = $(".Chikafusa a");
     zzsc.click(function () {

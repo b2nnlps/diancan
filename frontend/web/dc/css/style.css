@@ -332,7 +332,8 @@ textarea, button, select, input {
 }
 
 .price_box {
-    color: #616B72;
+    color: #FF0000;
+    /*color: #616B72;*/
     float: right;
     line-height: 25px;
     font-size: 12px;
