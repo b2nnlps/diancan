@@ -173,8 +173,13 @@ class BaseController extends Controller
         }
         $url = Yii::$app->request->get('URL','');
         $url = $url ? base64_decode($url) : '/';
-		
-        $this->redirect([$url]);
+        if (strpos($url, 'http') === false)
+            $this->redirect([$url]);
+        else {
+            header("Location: " . $url);
+            exit;
+        }
+
     }
 
 
